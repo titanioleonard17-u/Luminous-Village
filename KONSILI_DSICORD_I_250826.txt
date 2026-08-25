@@ -1,0 +1,19 @@
+Judul: Luminous Village
+
+Pengenalan:
+Menerangi desa di setiap level
+
+Mekanisme:
+-. Mengarahkan sumber cahaya melewati cermin-cermin yang ada pada setiap desa.
+-. Semua rumah harus terkena cahaya untuk bisa next level.
+
+Komponen:
+-. Emitter — sumber sinar.
+-. Mirror — memantulkan sinar 90° / sudut tertentu.
+-. Prism — membelah satu sinar menjadi beberapa warna.
+-. Absorber — menyerap sinar, jadi semacam jalan buntu.
+
+Referensi:
+-. Gameplay: https://www.instagram.com/reel/DcOwJgBRq1a/?utm_source=ig_web_copy_link&igsi=MzRlODBiNWFlZA==
+-. Squish Animation: https://youtu.be/iJx6uKqufJo?si=L1Lr_Wl14F063JZk
+-. Time transition: https://youtu.be/HjwWe-V3nHs?si=9V3Zv9nwZqRt2Y_w
