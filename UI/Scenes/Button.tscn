@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://cjlsahlt272ww"]
+
+[ext_resource type="Script" uid="uid://dycmi5uv8nc0n" path="res://UI/Scripts/Button.gd" id="1_0uqna"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0uqna"]
+
+[node name="ButtonCmpt" type="PanelContainer" unique_id=673696917]
+custom_minimum_size = Vector2(256, 32)
+offset_right = 256.0
+offset_bottom = 88.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_0uqna")
+script = ExtResource("1_0uqna")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1010377701]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="." unique_id=1862224156]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "Text"
+horizontal_alignment = 1
+
+[node name="TextButton" type="TextureButton" parent="." unique_id=303234484]
+layout_mode = 2
