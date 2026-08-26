@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://dw8ulw0qohbq3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0uqna"]
+
+[node name="LevelBox" type="PanelContainer" unique_id=673696917]
+custom_minimum_size = Vector2(256, 88)
+offset_left = -128.0
+offset_top = -44.0
+offset_right = 128.0
+offset_bottom = 44.0
+pivot_offset = Vector2(128, 44)
+theme_override_styles/panel = SubResource("StyleBoxEmpty_0uqna")
+
+[node name="TextButton" type="TextureButton" parent="." unique_id=303234484]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="TextButton" unique_id=1010377701]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -44.0
+offset_right = 128.0
+offset_bottom = 44.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(128, 44)
+
+[node name="Label" type="Label" parent="TextButton" unique_id=1862224156]
+layout_mode = 1
+offset_right = 256.0
+offset_bottom = 88.0
+pivot_offset = Vector2(128, 44)
+theme_override_font_sizes/font_size = 64
+text = "Num"
+horizontal_alignment = 1
