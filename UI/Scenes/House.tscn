@@ -28,6 +28,15 @@ colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
 gradient = SubResource("Gradient_a37bq")
 fill_to = Vector2(1, 0.95787543)
 
+[sub_resource type="Gradient" id="Gradient_xfo04"]
+offsets = PackedFloat32Array(0, 0.44471154, 0.6995192)
+colors = PackedColorArray(1, 1, 1, 1, 0.27491403, 0.27491403, 0.27491403, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_nsk4d"]
+gradient = SubResource("Gradient_xfo04")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
 [node name="House" type="AnimatedSprite2D" unique_id=1421699112]
 position = Vector2(26, -40)
 scale = Vector2(0.5, 0.5)
@@ -39,9 +48,28 @@ script = ExtResource("2_a37bq")
 position = Vector2(228, 102)
 
 [node name="Polygon2D" type="Polygon2D" parent="WindowLight" unique_id=1733977985]
+visible = false
 material = SubResource("ShaderMaterial_4qex0")
 position = Vector2(-16, 40)
 color = Color(1, 1, 1, 0.21568628)
 texture = SubResource("GradientTexture2D_ge5sq")
 polygon = PackedVector2Array(-3.7599835, -31.005362, 49.68234, 232.28622, 236.24002, 82.99463, 24.240017, -47.005363)
 uv = PackedVector2Array(-0.8000183, 1.2000046, 68, 61.200005, 53.599976, -14)
+
+[node name="PointLight2D" type="PointLight2D" parent="WindowLight" unique_id=824164535]
+position = Vector2(-2, -2)
+scale = Vector2(2, 2)
+color = Color(1, 1, 0.47843137, 1)
+texture = SubResource("GradientTexture2D_nsk4d")
+
+[node name="PointLight2D3" type="PointLight2D" parent="WindowLight" unique_id=749594801]
+position = Vector2(-6, -6)
+scale = Vector2(4, 4)
+color = Color(1, 1, 0.47843137, 1)
+texture = SubResource("GradientTexture2D_nsk4d")
+
+[node name="PointLight2D2" type="PointLight2D" parent="WindowLight" unique_id=1453345663]
+position = Vector2(-46, -214)
+scale = Vector2(3, 3)
+color = Color(1, 1, 0.47843137, 1)
+texture = SubResource("GradientTexture2D_nsk4d")
