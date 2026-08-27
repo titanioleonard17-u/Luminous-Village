@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cgshjlx3ntwmh"]
 
 [ext_resource type="PackedScene" uid="uid://dw8ulw0qohbq3" path="res://UI/Scenes/LevelBox.tscn" id="1_1hfgf"]
+[ext_resource type="Script" uid="uid://b1mrdlepo3a1i" path="res://UI/Scripts/LevelSelection.gd" id="1_7a4f5"]
 
 [node name="LevelSelection" type="Control" unique_id=714932231]
 layout_mode = 3
@@ -9,6 +10,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_7a4f5")
 
 [node name="Background" type="TextureRect" parent="." unique_id=9043168]
 layout_mode = 1
@@ -18,25 +20,74 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=972181510]
+[node name="LevelBoxNode" type="VBoxContainer" parent="." unique_id=275556741]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -388.0
-offset_top = -20.0
-offset_right = 388.0
-offset_bottom = 20.0
+offset_left = -408.0
+offset_top = -244.0
+offset_right = 408.0
+offset_bottom = 244.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 32
 
-[node name="LevelBox" parent="HBoxContainer" unique_id=673696917 instance=ExtResource("1_1hfgf")]
+[node name="Row1" type="HBoxContainer" parent="LevelBoxNode" unique_id=566024319]
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="LevelBox1" parent="LevelBoxNode/Row1" unique_id=975431960 instance=ExtResource("1_1hfgf")]
 layout_mode = 2
 
-[node name="LevelBox2" parent="HBoxContainer" unique_id=1304656769 instance=ExtResource("1_1hfgf")]
+[node name="LevelBox2" parent="LevelBoxNode/Row1" unique_id=596972694 instance=ExtResource("1_1hfgf")]
 layout_mode = 2
 
-[node name="LevelBox3" parent="HBoxContainer" unique_id=1193801352 instance=ExtResource("1_1hfgf")]
+[node name="LevelBox3" parent="LevelBoxNode/Row1" unique_id=669716889 instance=ExtResource("1_1hfgf")]
+layout_mode = 2
+
+[node name="LevelBox4" parent="LevelBoxNode/Row1" unique_id=1165371491 instance=ExtResource("1_1hfgf")]
+layout_mode = 2
+
+[node name="LevelBox5" parent="LevelBoxNode/Row1" unique_id=790075900 instance=ExtResource("1_1hfgf")]
+layout_mode = 2
+
+[node name="Row2" type="HBoxContainer" parent="LevelBoxNode" unique_id=619838184]
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="LevelBox1" parent="LevelBoxNode/Row2" unique_id=525517524 instance=ExtResource("1_1hfgf")]
+layout_mode = 2
+
+[node name="LevelBox2" parent="LevelBoxNode/Row2" unique_id=1646028576 instance=ExtResource("1_1hfgf")]
+layout_mode = 2
+
+[node name="LevelBox3" parent="LevelBoxNode/Row2" unique_id=2106463470 instance=ExtResource("1_1hfgf")]
+layout_mode = 2
+
+[node name="LevelBox4" parent="LevelBoxNode/Row2" unique_id=1625361429 instance=ExtResource("1_1hfgf")]
+layout_mode = 2
+
+[node name="LevelBox5" parent="LevelBoxNode/Row2" unique_id=191624269 instance=ExtResource("1_1hfgf")]
+layout_mode = 2
+
+[node name="Row3" type="HBoxContainer" parent="LevelBoxNode" unique_id=1663193472]
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="LevelBox1" parent="LevelBoxNode/Row3" unique_id=628892897 instance=ExtResource("1_1hfgf")]
+layout_mode = 2
+
+[node name="LevelBox2" parent="LevelBoxNode/Row3" unique_id=2055654410 instance=ExtResource("1_1hfgf")]
+layout_mode = 2
+
+[node name="LevelBox3" parent="LevelBoxNode/Row3" unique_id=1262385190 instance=ExtResource("1_1hfgf")]
+layout_mode = 2
+
+[node name="LevelBox4" parent="LevelBoxNode/Row3" unique_id=76315188 instance=ExtResource("1_1hfgf")]
+layout_mode = 2
+
+[node name="LevelBox5" parent="LevelBoxNode/Row3" unique_id=962734347 instance=ExtResource("1_1hfgf")]
 layout_mode = 2

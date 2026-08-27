@@ -1,20 +1,19 @@
 [gd_scene format=3 uid="uid://dw8ulw0qohbq3"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0uqna"]
+[ext_resource type="Script" uid="uid://k7vntx0s44d7" path="res://UI/Scripts/LevelBox.gd" id="1_ais6w"]
+[ext_resource type="Texture2D" uid="uid://b0qo0mcus6dut" path="res://Asset/LevelSelection/Button - Level.png" id="1_msdgj"]
 
-[node name="LevelBox" type="PanelContainer" unique_id=673696917]
-custom_minimum_size = Vector2(256, 256)
-offset_left = -128.0
-offset_top = -126.0
+[sub_resource type="SystemFont" id="SystemFont_7a4f5"]
+font_names = PackedStringArray("Berlin Sans FB")
+
+[node name="LevelBox" type="TextureButton" unique_id=975431960]
+custom_minimum_size = Vector2(173, 170)
 offset_right = 128.0
-offset_bottom = 130.0
-pivot_offset = Vector2(128, 128)
-theme_override_styles/panel = SubResource("StyleBoxEmpty_0uqna")
+offset_bottom = 128.0
+scale = Vector2(0.3, 0.3)
+script = ExtResource("1_ais6w")
 
-[node name="TextButton" type="TextureButton" parent="." unique_id=303234484]
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="TextButton" unique_id=1010377701]
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1010377701]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 1
 anchors_preset = 8
@@ -22,20 +21,29 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -128.0
-offset_top = -44.0
-offset_right = 128.0
-offset_bottom = 44.0
+offset_left = -109.0
+offset_top = -108.0
+offset_right = 111.0
+offset_bottom = 112.0
 grow_horizontal = 2
 grow_vertical = 2
-pivot_offset = Vector2(128, 44)
+mouse_filter = 2
+texture = ExtResource("1_msdgj")
+expand_mode = 1
+stretch_mode = 4
 
-[node name="Label" type="Label" parent="TextButton" unique_id=1862224156]
+[node name="Label" type="Label" parent="." unique_id=1862224156]
 layout_mode = 1
-offset_top = 81.0
-offset_right = 256.0
-offset_bottom = 169.0
-pivot_offset = Vector2(128, 44)
-theme_override_font_sizes/font_size = 64
-text = "Num"
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = SubResource("SystemFont_7a4f5")
+theme_override_font_sizes/font_size = 80
+text = "00"
 horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

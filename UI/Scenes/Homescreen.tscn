@@ -33,11 +33,14 @@ theme_override_constants/separation = 18
 
 [node name="StartButton" parent="VBoxContainer" unique_id=1684093443 instance=ExtResource("1_hff1m")]
 layout_mode = 2
+destinationImage = "uid://bsbvkhttvkpyv"
 
 [node name="OptionsButton" parent="VBoxContainer" unique_id=840314220 instance=ExtResource("1_hff1m")]
 layout_mode = 2
-destination_image = "uid://dkan4fc25jtpk"
+destinationImage = "uid://dkan4fc25jtpk"
 
 [node name="ExitButton" parent="VBoxContainer" unique_id=1913790668 instance=ExtResource("1_hff1m")]
 layout_mode = 2
-destination_image = "uid://6eiqw3iuio4c"
+destinationImage = "uid://6eiqw3iuio4c"
+
+[connection signal="mouse_entered" from="VBoxContainer/ExitButton" to="VBoxContainer/StartButton" method="_on_exit_button_mouse_entered"]

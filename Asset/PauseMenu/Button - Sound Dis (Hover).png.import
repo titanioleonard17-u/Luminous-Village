@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dlkuuwuxef83a"
-path="res://.godot/imported/Button - Sound Dis.png-2d192116b0836165a2718d9c27f1df47.ctex"
+uid="uid://clfg6sio0ub06"
+path="res://.godot/imported/Button - Sound Dis (Hover).png-53e6baf8dbd4e0dac2a30d1c8052d4b8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Asset/Button - Sound Dis.png"
-dest_files=["res://.godot/imported/Button - Sound Dis.png-2d192116b0836165a2718d9c27f1df47.ctex"]
+source_file="res://Asset/PauseMenu/Button - Sound Dis (Hover).png"
+dest_files=["res://.godot/imported/Button - Sound Dis (Hover).png-53e6baf8dbd4e0dac2a30d1c8052d4b8.ctex"]
 
 [params]
 
