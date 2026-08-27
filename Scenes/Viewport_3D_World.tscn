@@ -36,7 +36,7 @@ update_mode = 1
 size = Vector3(4, 4, 4)
 
 [node name="Laser_Emitter" parent="Sub_Viewport" unique_id=341683510 instance=ExtResource("2_6ouy4")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -35, 0, 0)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -35, -10, 0)
 laser_length = 105.0
 laser_width = 1.0
 
