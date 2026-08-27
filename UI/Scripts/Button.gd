@@ -1,10 +1,16 @@
-extends PanelContainer
+extends TextureButton
 
+@export_file(".png") var destination_image: String
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	$TextButton/Label.text = name.trim_suffix('Button')
-	$TextButton.pressed.connect(__OnButtonPressed)
+	if destination_image.is_empty():
+		$Label.text = name.trim_suffix('Button')
+	else:
+		$TextureRect.texture = load(destination_image)
+		$Label.visible = false
+	
+	print(name.trim_suffix("Button").to_lower())
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
