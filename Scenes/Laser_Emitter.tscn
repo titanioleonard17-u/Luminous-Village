@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://qwmvkwtyc3n8"]
+
+[ext_resource type="Script" uid="uid://dvmj2sml80t51" path="res://Scenes/Laser_Emitter.gd" id="1_onobg"]
+
+[node name="Laser_Emitter" type="Node3D" unique_id=341683510]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -3, 0, 0)
+script = ExtResource("1_onobg")

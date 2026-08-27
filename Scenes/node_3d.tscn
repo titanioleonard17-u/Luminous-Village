@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://j72lcxgmq24m"]
+
+[ext_resource type="PackedScene" uid="uid://qwmvkwtyc3n8" path="res://Scenes/Laser_Emitter.tscn" id="1_bi5fs"]
+[ext_resource type="PackedScene" uid="uid://2cy5qgibxrgp" path="res://Scenes/Mirror.tscn" id="2_okq71"]
+
+[node name="Node3D" type="Node3D" unique_id=1059665829]
+
+[node name="Laser_Emitter" parent="." unique_id=299760007 instance=ExtResource("1_bi5fs")]
+
+[node name="Mirror" parent="." unique_id=922215321 instance=ExtResource("2_okq71")]
+transform = Transform3D(0.8660254, 0, -0.5, 0, 1, 0, 0.5, 0, 0.8660254, 0, 0, 0)
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1266522988]
+transform = Transform3D(1, 0, 0, 0, -0.258819, 0.9659258, 0, -0.9659258, -0.258819, 0, 4, 0)
