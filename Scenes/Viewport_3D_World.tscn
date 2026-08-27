@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://bpjprw43b1sbg"]
 
-[ext_resource type="Script" uid="uid://blndvi7e8bcto" path="res://Scenes/Viewport_3d_World.gd" id="1_8qarm"]
+[ext_resource type="Script" uid="uid://blndvi7e8bcto" path="res://Script/Viewport_3d_World.gd" id="1_8qarm"]
 [ext_resource type="PackedScene" uid="uid://qwmvkwtyc3n8" path="res://Scenes/Laser_Emitter.tscn" id="2_6ouy4"]
-[ext_resource type="Script" uid="uid://bsovkrpuy2e70" path="res://Scenes/Glass_Spawner.gd" id="2_grb55"]
+[ext_resource type="Script" uid="uid://bsovkrpuy2e70" path="res://Script/Glass_Spawner.gd" id="2_grb55"]
 [ext_resource type="PackedScene" uid="uid://pflnwawytlms" path="res://Scenes/Spawnable_Glass.tscn" id="4_grb55"]
 
 [sub_resource type="Environment" id="Environment_sinmp"]
