@@ -15,6 +15,7 @@ func __OnButtonPressed():
 	match action.to_lower():
 		"start":
 			print("Start")
+			get_tree().change_scene_to_file('res://UI/Scenes/LevelSelection.tscn')
 		"options":
 			print("Options")
 		"exit":
