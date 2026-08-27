@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://pflnwawytlms"]
+
+[ext_resource type="Script" uid="uid://drbieunrthmvx" path="res://Scenes/Spawnable_Glass_Body.gd" id="1_2c7k5"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ka4k5"]
+size = Vector3(1, 1, 0.2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_frivr"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.09803922)
+roughness = 0.05
+refraction_enabled = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_amr3a"]
+material = SubResource("StandardMaterial3D_frivr")
+size = Vector3(1, 1, 0.2)
+
+[node name="Spawnable_Glass" type="Node3D" unique_id=1320828252]
+
+[node name="Glass_Body" type="RigidBody3D" parent="." unique_id=2030962097]
+script = ExtResource("1_2c7k5")
+
+[node name="Collision_Shape_3D" type="CollisionShape3D" parent="Glass_Body" unique_id=725387840]
+shape = SubResource("BoxShape3D_ka4k5")
+
+[node name="Mesh_Instance_3D" type="MeshInstance3D" parent="Glass_Body" unique_id=283862073]
+mesh = SubResource("BoxMesh_amr3a")

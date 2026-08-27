@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://c81mhho2s8b24"]
+
+[ext_resource type="PackedScene" uid="uid://onluolbsekmh" path="res://Scenes/Background.tscn" id="1_idj7w"]
+[ext_resource type="PackedScene" uid="uid://c2btio5eh2yls" path="res://Scenes/Tile_Map.tscn" id="2_kln2b"]
+[ext_resource type="PackedScene" uid="uid://bpjprw43b1sbg" path="res://Scenes/Viewport_3D_World.tscn" id="3_kln2b"]
+
+[node name="Main" type="Node2D" unique_id=736054422]
+
+[node name="Sprite2D" parent="." unique_id=2739051 instance=ExtResource("1_idj7w")]
+
+[node name="TileMapLayer" parent="." unique_id=1347672717 instance=ExtResource("2_kln2b")]
+
+[node name="Sub_Viewport_Container" parent="." unique_id=2092862269 instance=ExtResource("3_kln2b")]
