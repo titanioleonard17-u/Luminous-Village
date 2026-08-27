@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c7ttgj0cm5u1u"
-path="res://.godot/imported/Button  - Resume.png-e4c9222162934b24fde812490d3ac43d.ctex"
+uid="uid://dmexcrax7bjlk"
+path="res://.godot/imported/Button  - Option (Hover).png-76fd23cf58add4b57764acca420872e9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Asset/Button  - Resume.png"
-dest_files=["res://.godot/imported/Button  - Resume.png-e4c9222162934b24fde812490d3ac43d.ctex"]
+source_file="res://Asset/Homescreen/Button  - Option (Hover).png"
+dest_files=["res://.godot/imported/Button  - Option (Hover).png-76fd23cf58add4b57764acca420872e9.ctex"]
 
 [params]
 
