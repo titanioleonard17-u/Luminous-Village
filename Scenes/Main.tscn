@@ -2,12 +2,34 @@
 
 [ext_resource type="PackedScene" uid="uid://onluolbsekmh" path="res://Scenes/Background.tscn" id="1_idj7w"]
 [ext_resource type="PackedScene" uid="uid://c2btio5eh2yls" path="res://Scenes/Tile_Map.tscn" id="2_kln2b"]
+[ext_resource type="PackedScene" uid="uid://bcq5n0oormmhn" path="res://Scenes/Solid_InvisB.tscn" id="2_rgh2o"]
 [ext_resource type="PackedScene" uid="uid://bpjprw43b1sbg" path="res://Scenes/Viewport_3D_World.tscn" id="3_kln2b"]
+[ext_resource type="PackedScene" uid="uid://88dyuxsmwgjc" path="res://Scenes/Door.tscn" id="5_pbw6q"]
+[ext_resource type="PackedScene" uid="uid://lh0lwwnfqk10" path="res://Scenes/Glass_Prop.tscn" id="6_v1gob"]
 
 [node name="Main" type="Node2D" unique_id=736054422]
 
 [node name="Sprite2D" parent="." unique_id=2739051 instance=ExtResource("1_idj7w")]
 
+[node name="StaticBody3D" parent="." unique_id=1739080902 instance=ExtResource("2_rgh2o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+
 [node name="TileMapLayer" parent="." unique_id=1347672717 instance=ExtResource("2_kln2b")]
 
 [node name="Sub_Viewport_Container" parent="." unique_id=2092862269 instance=ExtResource("3_kln2b")]
+
+[node name="Sub_Viewport" parent="Sub_Viewport_Container" index="0" unique_id=1014403433]
+size = Vector2i(2, 2)
+
+[node name="Door" parent="Sub_Viewport_Container/Sub_Viewport" index="6" unique_id=1088823071 instance=ExtResource("5_pbw6q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -2)
+
+[node name="Glass_Prop" parent="Sub_Viewport_Container/Sub_Viewport" index="7" unique_id=930995927 instance=ExtResource("6_v1gob")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -6)
+
+[node name="Glass_Body" parent="Sub_Viewport_Container/Sub_Viewport/Glass_Prop" index="0" unique_id=960558630]
+door_path = NodePath("../../Door/Door_Body")
+
+[editable path="Sub_Viewport_Container"]
+[editable path="Sub_Viewport_Container/Sub_Viewport/Door"]
+[editable path="Sub_Viewport_Container/Sub_Viewport/Glass_Prop"]
