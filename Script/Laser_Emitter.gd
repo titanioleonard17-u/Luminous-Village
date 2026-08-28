@@ -20,7 +20,6 @@ func _physics_process(_delta):
 	cast_laser()
 
 func cast_laser():
-	# hapus segment lama
 	for seg in segment_meshes:
 		seg.queue_free()
 	segment_meshes.clear()
@@ -44,6 +43,10 @@ func cast_laser():
 			_draw_segment(origin, end_point)
 
 			var collider = result.collider
+
+			if collider.is_in_group("laser_switch"):
+				collider.activate()
+
 			if collider.is_in_group("reflector"):
 				var normal = result.normal
 				direction = direction.bounce(normal)

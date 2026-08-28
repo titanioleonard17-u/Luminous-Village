@@ -9,6 +9,7 @@
 glow_enabled = true
 glow_intensity = 0.8
 glow_bloom = 0.15
+glow_hdr_threshold = 0.5
 
 [node name="Sub_Viewport_Container" type="SubViewportContainer" unique_id=2092862269]
 anchors_preset = 15
@@ -29,7 +30,7 @@ render_target_update_mode = 4
 environment = SubResource("Environment_sinmp")
 
 [node name="Directional_Light_3D" type="DirectionalLight3D" parent="Sub_Viewport" unique_id=1694523092]
-transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 0.34202015, 0.9396926, 0, -0.9396926, 0.34202015, 0, 10, 0)
 
 [node name="Camera_3D" type="Camera3D" parent="Sub_Viewport" unique_id=2023421564]
 transform = Transform3D(1, 0, 0, 0, 0.34202015, 0.9396926, 0, -0.9396926, 0.34202015, 0, 10, 0)
