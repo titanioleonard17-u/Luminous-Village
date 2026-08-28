@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://cip0gmnccnt8e"]
+
+[ext_resource type="Script" uid="uid://bdr8gxowwb12b" path="res://UI/Scripts/Button.gd" id="1_5flae"]
+[ext_resource type="Texture2D" uid="uid://b0qo0mcus6dut" path="res://Asset/LevelSelection/Button - Level.png" id="2_7l3oq"]
+
+[node name="Button" type="TextureButton" unique_id=1699704292]
+offset_right = 97.0
+offset_bottom = 97.0
+script = ExtResource("1_5flae")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=612136597]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -48.5
+offset_top = -48.5
+offset_right = 15.5
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_7l3oq")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="." unique_id=942495503]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://vl51ne7n0cco"]
 
-[ext_resource type="PackedScene" uid="uid://cqwqoel3lmvi7" path="res://UI/Scenes/BtnText.tscn" id="1_hff1m"]
+[ext_resource type="Script" uid="uid://blikuphi207os" path="res://UI/Scripts/HomeScreen.gd" id="1_d7fbi"]
+[ext_resource type="PackedScene" uid="uid://cip0gmnccnt8e" path="res://UI/Scenes/Button.tscn" id="2_ox04f"]
 
 [node name="Homescreen" type="Control" unique_id=165318869]
 layout_mode = 3
@@ -9,6 +10,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_d7fbi")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=593829725]
 layout_mode = 1
@@ -18,7 +20,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1881286714]
+[node name="ButtonNode" type="VBoxContainer" parent="." unique_id=1881286714]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -31,16 +33,20 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 18
 
-[node name="StartButton" parent="VBoxContainer" unique_id=1684093443 instance=ExtResource("1_hff1m")]
+[node name="StartButton" parent="ButtonNode" unique_id=1699704292 instance=ExtResource("2_ox04f")]
 layout_mode = 2
 destinationImage = "uid://bsbvkhttvkpyv"
+typeButton = 1
+sizeButton = 1
 
-[node name="OptionsButton" parent="VBoxContainer" unique_id=840314220 instance=ExtResource("1_hff1m")]
+[node name="OptionsButton" parent="ButtonNode" unique_id=157524004 instance=ExtResource("2_ox04f")]
 layout_mode = 2
 destinationImage = "uid://dkan4fc25jtpk"
+typeButton = 1
+sizeButton = 1
 
-[node name="ExitButton" parent="VBoxContainer" unique_id=1913790668 instance=ExtResource("1_hff1m")]
+[node name="ExitButton" parent="ButtonNode" unique_id=1231602618 instance=ExtResource("2_ox04f")]
 layout_mode = 2
 destinationImage = "uid://6eiqw3iuio4c"
-
-[connection signal="mouse_entered" from="VBoxContainer/ExitButton" to="VBoxContainer/StartButton" method="_on_exit_button_mouse_entered"]
+typeButton = 1
+sizeButton = 1

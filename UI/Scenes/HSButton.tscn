@@ -1,13 +1,13 @@
 [gd_scene format=3 uid="uid://cqwqoel3lmvi7"]
 
-[ext_resource type="Script" uid="uid://dycmi5uv8nc0n" path="res://UI/Scripts/HomescreenButton.gd" id="1_2uv6m"]
-[ext_resource type="Texture2D" uid="uid://bsbvkhttvkpyv" path="res://Asset/Homescreen/Button  - Play.png" id="2_4oeph"]
+[ext_resource type="Script" uid="uid://dycmi5uv8nc0n" path="res://UI/Scripts/HSButton.gd" id="1_a4t06"]
+[ext_resource type="Texture2D" uid="uid://bsbvkhttvkpyv" path="res://Asset/Homescreen/Button  - Play.png" id="2_jryp2"]
 
 [node name="Button" type="TextureButton" unique_id=1684093443]
 custom_minimum_size = Vector2(373, 153)
 offset_right = 373.0
 offset_bottom = 153.0
-script = ExtResource("1_2uv6m")
+script = ExtResource("1_a4t06")
 
 [node name="Label" type="Label" parent="." unique_id=160208154]
 layout_mode = 1
@@ -33,15 +33,16 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -186.0
-offset_top = -77.5
-offset_right = 186.0
-offset_bottom = 77.5
+offset_left = -150.0
+offset_top = -150.0
+offset_right = 150.0
+offset_bottom = 150.0
 grow_horizontal = 2
 grow_vertical = 2
-pivot_offset = Vector2(250, 250)
 mouse_filter = 2
-texture = ExtResource("2_4oeph")
+texture = ExtResource("2_jryp2")
+expand_mode = 1
+stretch_mode = 5
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

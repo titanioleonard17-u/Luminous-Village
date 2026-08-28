@@ -30,7 +30,7 @@ grow_vertical = 2
 mouse_filter = 2
 texture = ExtResource("1_msdgj")
 expand_mode = 1
-stretch_mode = 4
+stretch_mode = 5
 
 [node name="Label" type="Label" parent="." unique_id=1862224156]
 layout_mode = 1
