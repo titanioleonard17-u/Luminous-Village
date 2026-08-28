@@ -44,9 +44,11 @@ layout_mode = 2
 destinationImage = "uid://dkan4fc25jtpk"
 typeButton = 1
 sizeButton = 1
+purpose = 1
 
 [node name="ExitButton" parent="ButtonNode" unique_id=1231602618 instance=ExtResource("2_ox04f")]
 layout_mode = 2
 destinationImage = "uid://6eiqw3iuio4c"
 typeButton = 1
 sizeButton = 1
+purpose = 2

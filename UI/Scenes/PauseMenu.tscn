@@ -22,6 +22,7 @@ destinationImage = "uid://n2ngtinar1tu"
 [node name="PauseButton" parent="PauseNavigation" unique_id=1995370032 instance=ExtResource("6_5tk2c")]
 layout_mode = 2
 destinationImage = "uid://wk16j6xbgwkn"
+purpose = 1
 
 [node name="PauseMenuContainer" type="Control" parent="." unique_id=2140800717]
 layout_mode = 3
@@ -60,6 +61,7 @@ layout_mode = 2
 destinationImage = "uid://c7ttgj0cm5u1u"
 typeButton = 1
 sizeButton = 1
+purpose = 2
 
 [node name="RetryButton" parent="PauseMenuContainer/VBoxContainer" unique_id=1683427197 instance=ExtResource("6_5tk2c")]
 layout_mode = 2
@@ -72,6 +74,7 @@ layout_mode = 2
 destinationImage = "uid://olgm5cqpljy8"
 typeButton = 1
 sizeButton = 1
+purpose = 2
 
 [connection signal="pressed" from="PauseNavigation/PauseButton" to="." method="_on_pause_button_pressed"]
 [connection signal="pressed" from="PauseMenuContainer/VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]

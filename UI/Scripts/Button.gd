@@ -9,10 +9,16 @@ enum SizeBtn {
 	MEDIUM,
 	LARGE
 }
+enum PurposeBtn {
+	DEFAULT,
+	OPEN,
+	CLOSE
+}
 
 @export_file("*.png") var destinationImage: String
 @export var typeButton: TypeBtn
 @export var sizeButton: SizeBtn
+@export var purpose: PurposeBtn = PurposeBtn.DEFAULT
 
 @export_category("Advance")
 @export var text: String
@@ -68,9 +74,16 @@ func _process(delta: float) -> void:
 	pass
 
 func _on_mouse_entered() -> void:
+	AudioManager.playSFX("hover")
 	var path = normalTexture.resource_path
 	$TextureRect.texture = load(path.get_basename() + " (Hover)." + path.get_extension())
 
 
 func _on_mouse_exited() -> void:
 	$TextureRect.texture = load(normalTexture.resource_path)
+
+
+func _on_pressed() -> void:
+	print("click" + PurposeBtn.keys()[purpose].to_lower().capitalize())
+	AudioManager.playSFX("click" + PurposeBtn.keys()[purpose].to_lower().capitalize())
+		
