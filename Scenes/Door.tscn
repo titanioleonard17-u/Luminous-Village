@@ -4,16 +4,16 @@
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_frivr"]
 transparency = 1
-albedo_color = Color(1, 1, 1, 0.09803922)
+albedo_color = Color(0, 1, 1, 1)
 roughness = 0.05
 refraction_enabled = true
 
 [sub_resource type="BoxMesh" id="BoxMesh_7mbvs"]
 material = SubResource("StandardMaterial3D_frivr")
-size = Vector3(1, 1, 0.2)
+size = Vector3(3, 3, 0.2)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_mw28t"]
-size = Vector3(1, 1, 0.2)
+size = Vector3(3, 3, 0.2)
 
 [node name="Door" type="Node3D" unique_id=1088823071]
 
