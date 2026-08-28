@@ -21,7 +21,7 @@ AudioManager="*uid://c1ya2v5kcqjse"
 
 [display]
 
-window/stretch/mode="canvas_items"
+window/stretch/mode="viewport"
 window/stretch/aspect="expand"
 
 [input]

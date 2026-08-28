@@ -2,27 +2,26 @@
 
 [ext_resource type="Script" uid="uid://dpfwdwsk6kocr" path="res://Scenes/Door_Body.gd" id="1_38ogf"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_mw28t"]
-size = Vector3(1, 1, 0.2)
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_frivr"]
 transparency = 1
-albedo_color = Color(1, 1, 1, 0.09803922)
+albedo_color = Color(0, 1, 1, 1)
 roughness = 0.05
 refraction_enabled = true
 
 [sub_resource type="BoxMesh" id="BoxMesh_7mbvs"]
 material = SubResource("StandardMaterial3D_frivr")
-size = Vector3(1, 1, 0.2)
+size = Vector3(3, 3, 0.2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mw28t"]
+size = Vector3(3, 3, 0.2)
 
 [node name="Door" type="Node3D" unique_id=1088823071]
 
-[node name="Door_Body" type="RigidBody3D" parent="." unique_id=1789166775]
-gravity_scale = 0.0
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=57109836]
 script = ExtResource("1_38ogf")
 
-[node name="Collision_Shape_3D" type="CollisionShape3D" parent="Door_Body" unique_id=291964044]
-shape = SubResource("BoxShape3D_mw28t")
-
-[node name="Mesh_Instance_3D" type="MeshInstance3D" parent="Door_Body" unique_id=722989446]
+[node name="Mesh_Instance_3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=722989446]
 mesh = SubResource("BoxMesh_7mbvs")
+
+[node name="Collision_Shape_3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=291964044]
+shape = SubResource("BoxShape3D_mw28t")
