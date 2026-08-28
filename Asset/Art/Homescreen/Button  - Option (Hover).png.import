@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://6eiqw3iuio4c"
-path="res://.godot/imported/Button  - Exit.png-f236908ce74440fe664365e1d3e92dc8.ctex"
+uid="uid://dmexcrax7bjlk"
+path="res://.godot/imported/Button  - Option (Hover).png-716110adb38fc38b3b1d5711b0378dbd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Asset/Homescreen/Button  - Exit.png"
-dest_files=["res://.godot/imported/Button  - Exit.png-f236908ce74440fe664365e1d3e92dc8.ctex"]
+source_file="res://Asset/Art/Homescreen/Button  - Option (Hover).png"
+dest_files=["res://.godot/imported/Button  - Option (Hover).png-716110adb38fc38b3b1d5711b0378dbd.ctex"]
 
 [params]
 

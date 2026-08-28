@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cip0gmnccnt8e"]
 
 [ext_resource type="Script" uid="uid://bdr8gxowwb12b" path="res://UI/Scripts/Button.gd" id="1_5flae"]
-[ext_resource type="Texture2D" uid="uid://b0qo0mcus6dut" path="res://Asset/LevelSelection/Button - Level.png" id="2_7l3oq"]
+[ext_resource type="Texture2D" uid="uid://b0qo0mcus6dut" path="res://Asset/Art/LevelSelection/Button - Level.png" id="2_7l3oq"]
 
 [node name="Button" type="TextureButton" unique_id=1699704292]
 offset_right = 97.0

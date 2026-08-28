@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://dbtdqlu1a5pcc"
-path="res://.godot/imported/Mirror.blend-34ede950445ae88fecea8b11fd7524e3.scn"
+uid="uid://dap8qh6lj5s87"
+path="res://.godot/imported/Pagar.blend-77f499d797d0655f1d1f0f598a5afbd3.scn"
 
 [deps]
 
-source_file="res://Asset/Mirror.blend"
-dest_files=["res://.godot/imported/Mirror.blend-34ede950445ae88fecea8b11fd7524e3.scn"]
+source_file="res://Asset/Art/Pagar.blend"
+dest_files=["res://.godot/imported/Pagar.blend-77f499d797d0655f1d1f0f598a5afbd3.scn"]
 
 [params]
 

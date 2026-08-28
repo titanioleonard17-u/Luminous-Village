@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dw8ulw0qohbq3"]
 
 [ext_resource type="Script" uid="uid://k7vntx0s44d7" path="res://UI/Scripts/LevelBox.gd" id="1_ais6w"]
-[ext_resource type="Texture2D" uid="uid://b0qo0mcus6dut" path="res://Asset/LevelSelection/Button - Level.png" id="1_msdgj"]
+[ext_resource type="Texture2D" uid="uid://b0qo0mcus6dut" path="res://Asset/Art/LevelSelection/Button - Level.png" id="1_msdgj"]
 
 [sub_resource type="SystemFont" id="SystemFont_7a4f5"]
 font_names = PackedStringArray("Berlin Sans FB")

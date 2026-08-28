@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://olgm5cqpljy8"
-path="res://.godot/imported/Button  - Retry.png-db0922bee0b673567053dd4b4a0b7e18.ctex"
+uid="uid://ncxwnmw2itre"
+path="res://.godot/imported/Button  - Retry (Hover).png-cbb705bb5697550af01ae5c895653a46.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Asset/PauseMenu/Button  - Retry.png"
-dest_files=["res://.godot/imported/Button  - Retry.png-db0922bee0b673567053dd4b4a0b7e18.ctex"]
+source_file="res://Asset/Art/PauseMenu/Button  - Retry (Hover).png"
+dest_files=["res://.godot/imported/Button  - Retry (Hover).png-cbb705bb5697550af01ae5c895653a46.ctex"]
 
 [params]
 

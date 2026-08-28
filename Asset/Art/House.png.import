@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c0rmhssq16w2u"
-path="res://.godot/imported/Button  - Play (Hover).png-e420455902e7629b966f4111172a7e53.ctex"
+uid="uid://biwo1xnrgwu6j"
+path="res://.godot/imported/House.png-015cc0dc062fe2bbdb8878ea2355c37a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Asset/Homescreen/Button  - Play (Hover).png"
-dest_files=["res://.godot/imported/Button  - Play (Hover).png-e420455902e7629b966f4111172a7e53.ctex"]
+source_file="res://Asset/Art/House.png"
+dest_files=["res://.godot/imported/House.png-015cc0dc062fe2bbdb8878ea2355c37a.ctex"]
 
 [params]
 

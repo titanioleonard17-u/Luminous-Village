@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bsbvkhttvkpyv"
-path="res://.godot/imported/Button  - Play.png-745e1ab2603a2fb3b90fc241a936bf79.ctex"
+uid="uid://cmxp71rfpgngy"
+path="res://.godot/imported/Button - Pause (Hover).png-eb5e7624a16d35f83589be983273e5a9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Asset/Homescreen/Button  - Play.png"
-dest_files=["res://.godot/imported/Button  - Play.png-745e1ab2603a2fb3b90fc241a936bf79.ctex"]
+source_file="res://Asset/Art/PauseMenu/Button - Pause (Hover).png"
+dest_files=["res://.godot/imported/Button - Pause (Hover).png-eb5e7624a16d35f83589be983273e5a9.ctex"]
 
 [params]
 

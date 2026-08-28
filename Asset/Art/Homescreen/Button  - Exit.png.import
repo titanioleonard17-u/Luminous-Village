@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://csg68s5lundr5"
-path="res://.godot/imported/Button - Level (Hover).png-1f4d0f909be3d962914fcbe3b636f5a3.ctex"
+uid="uid://6eiqw3iuio4c"
+path="res://.godot/imported/Button  - Exit.png-54d8ac334dab50d758c3175bb0659a0d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Asset/LevelSelection/Button - Level (Hover).png"
-dest_files=["res://.godot/imported/Button - Level (Hover).png-1f4d0f909be3d962914fcbe3b636f5a3.ctex"]
+source_file="res://Asset/Art/Homescreen/Button  - Exit.png"
+dest_files=["res://.godot/imported/Button  - Exit.png-54d8ac334dab50d758c3175bb0659a0d.ctex"]
 
 [params]
 
