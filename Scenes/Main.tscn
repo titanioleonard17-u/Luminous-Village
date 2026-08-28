@@ -28,7 +28,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -2)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -6)
 
 [node name="Glass_Body" parent="Sub_Viewport_Container/Sub_Viewport/Glass_Prop" index="0" unique_id=960558630]
-door_path = NodePath("../../Door/Door_Body")
+door_path = NodePath("../../Door/StaticBody3D")
 
 [editable path="Sub_Viewport_Container"]
 [editable path="Sub_Viewport_Container/Sub_Viewport/Door"]
