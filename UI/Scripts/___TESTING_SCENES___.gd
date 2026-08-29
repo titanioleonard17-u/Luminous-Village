@@ -1,9 +1,10 @@
-extends Control
+extends CanvasLayer
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	AudioManager.playAudio("", AudioManager.AudioType.RANDOM_VIBE)
+	$AnimationPlayer.play("transition")
+	#AudioManager.playAudio("", AudioManager.AudioType.RANDOM_VIBE)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

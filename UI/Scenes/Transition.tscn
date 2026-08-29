@@ -1,9 +1,341 @@
 [gd_scene format=3 uid="uid://dnefawufp7ebx"]
 
-[node name="Transition" type="Control" unique_id=179465974]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[ext_resource type="Texture2D" uid="uid://dlnjngchunl2c" path="res://Asset/Art/Transition.png" id="1_qxecj"]
+[ext_resource type="Script" uid="uid://brmbrv68snlhw" path="res://UI/Scripts/Transition.gd" id="1_s5qj0"]
+
+[sub_resource type="Animation" id="Animation_5gfbr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Kiri:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-77, -158)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Kanan:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(386, -146)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Kiri2:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-92, 79)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Kanan2:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(708, 241)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Kiri3:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-57, 120)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Kanan3:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(202, 352)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Kiri4:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-223, 386)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Kanan4:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(807, 415)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Kiri5:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(145, 560)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Kanan5:position")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(599, 503)]
+}
+
+[sub_resource type="Animation" id="Animation_s5qj0"]
+resource_name = "Transition"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Kiri:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-864.00006, -158), Vector2(-77, -158)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Kanan:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1152, -146), Vector2(386, -146)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Kiri2:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-576, 79), Vector2(-92, 79)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Kanan2:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1152, 241), Vector2(708, 241)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Kiri3:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-921.99994, 120), Vector2(-57, 120)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Kanan3:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1152, 352), Vector2(202, 352)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Kiri4:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-692, 386), Vector2(-223, 386)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Kanan4:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1152, 415), Vector2(807, 415)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Kiri5:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-461, 560), Vector2(145, 560)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Kanan5:position")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1152, 503), Vector2(599, 503)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_b0f6i"]
+_data = {
+&"RESET": SubResource("Animation_5gfbr"),
+&"Transition": SubResource("Animation_s5qj0")
+}
+
+[node name="Transition" type="CanvasLayer" unique_id=1483636045]
+script = ExtResource("1_s5qj0")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=110703503]
+libraries/ = SubResource("AnimationLibrary_b0f6i")
+
+[node name="Kiri" type="TextureRect" parent="." unique_id=1219289867]
+offset_left = -77.0
+offset_top = -158.0
+offset_right = 1075.0
+offset_bottom = 490.0
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("1_qxecj")
+
+[node name="Kanan" type="TextureRect" parent="." unique_id=359132816]
+offset_left = 386.0
+offset_top = -146.0
+offset_right = 1538.002
+offset_bottom = 502.0
+texture = ExtResource("1_qxecj")
+
+[node name="Kiri2" type="TextureRect" parent="." unique_id=2144357230]
+offset_left = -92.0
+offset_top = 79.0
+offset_right = 1060.0
+offset_bottom = 727.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_qxecj")
+
+[node name="Kanan2" type="TextureRect" parent="." unique_id=610712834]
+offset_left = 708.0
+offset_top = 241.0
+offset_right = 1860.002
+offset_bottom = 889.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_qxecj")
+
+[node name="Kiri3" type="TextureRect" parent="." unique_id=849014926]
+offset_left = -57.0
+offset_top = 120.0
+offset_right = 1095.0
+offset_bottom = 768.0
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("1_qxecj")
+
+[node name="Kanan3" type="TextureRect" parent="." unique_id=13005400]
+offset_left = 202.0
+offset_top = 352.0
+offset_right = 1354.0
+offset_bottom = 1000.0
+scale = Vector2(0.65, 0.65)
+texture = ExtResource("1_qxecj")
+
+[node name="Kiri4" type="TextureRect" parent="." unique_id=1890316299]
+offset_left = -223.0
+offset_top = 386.0
+offset_right = 929.0
+offset_bottom = 1034.0
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("1_qxecj")
+
+[node name="Kanan4" type="TextureRect" parent="." unique_id=1759916511]
+offset_left = 807.0
+offset_top = 415.0
+offset_right = 1959.002
+offset_bottom = 1063.0
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("1_qxecj")
+
+[node name="Kiri5" type="TextureRect" parent="." unique_id=1707008610]
+offset_left = 145.0
+offset_top = 560.0
+offset_right = 1297.0002
+offset_bottom = 1208.0
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("1_qxecj")
+
+[node name="Kanan5" type="TextureRect" parent="." unique_id=939564157]
+offset_left = 599.0
+offset_top = 503.0
+offset_right = 1751.0039
+offset_bottom = 1151.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_qxecj")
