@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://75dj0o45j0if"]
 
+[ext_resource type="Script" uid="uid://dubhnu45kwgbr" path="res://UI/Scripts/___TESTING_SCENES___.gd" id="1_5gfbr"]
 [ext_resource type="PackedScene" uid="uid://cip0gmnccnt8e" path="res://UI/Scenes/Button.tscn" id="1_pn41m"]
 
 [node name="Node2D" type="Control" unique_id=1833856974]
@@ -11,6 +12,7 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_5gfbr")
 
 [node name="Button" parent="." unique_id=1699704292 instance=ExtResource("1_pn41m")]
 layout_mode = 1

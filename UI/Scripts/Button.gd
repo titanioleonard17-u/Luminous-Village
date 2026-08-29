@@ -75,7 +75,7 @@ func _process(delta: float) -> void:
 	pass
 
 func _on_mouse_entered() -> void:
-	AudioManager.playSFX("Hover")
+	AudioManager.playAudio("Hover", AudioManager.AudioType.SFX)
 	var path = normalTexture.resource_path
 	$TextureRect.texture = load(path.get_basename() + " (Hover)." + path.get_extension())
 
@@ -86,5 +86,5 @@ func _on_mouse_exited() -> void:
 
 func _on_pressed() -> void:
 	print("Click" + PurposeBtn.keys()[purpose].to_lower().capitalize())
-	AudioManager.playSFX("Click" + PurposeBtn.keys()[purpose].to_lower().capitalize())
+	AudioManager.playAudio("Click" + PurposeBtn.keys()[purpose].to_lower().capitalize(), AudioManager.AudioType.SFX)
 		

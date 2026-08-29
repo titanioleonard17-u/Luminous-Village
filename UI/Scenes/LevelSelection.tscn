@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dw8ulw0qohbq3" path="res://UI/Scenes/LevelBox.tscn" id="1_1hfgf"]
 [ext_resource type="Script" uid="uid://b1mrdlepo3a1i" path="res://UI/Scripts/LevelSelection.gd" id="1_7a4f5"]
+[ext_resource type="Texture2D" uid="uid://cqnp8fqr4yls6" path="res://Asset/Art/LevelSelection/Level BG.png" id="2_uo3a4"]
 
 [node name="LevelSelection" type="Control" unique_id=714932231]
 layout_mode = 3
@@ -19,6 +20,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+texture = ExtResource("2_uo3a4")
 
 [node name="LevelBoxNode" type="VBoxContainer" parent="." unique_id=275556741]
 layout_mode = 1
