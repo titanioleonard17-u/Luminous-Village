@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://brmbrv68snlhw" path="res://UI/Scripts/Transition.gd" id="1_s5qj0"]
 
 [sub_resource type="Animation" id="Animation_5gfbr"]
-length = 0.001
+length = 1.0666667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -256,6 +256,7 @@ _data = {
 }
 
 [node name="Transition" type="CanvasLayer" unique_id=1483636045]
+visible = false
 script = ExtResource("1_s5qj0")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=110703503]

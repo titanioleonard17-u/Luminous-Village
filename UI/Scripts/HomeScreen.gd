@@ -10,7 +10,8 @@ func _ready() -> void:
 func _on_button_pressed(button: BaseButton) -> void:
 	match button.name.trim_suffix("Button").to_lower():
 		"start":
-			get_tree().change_scene_to_file("res://UI/Scenes/LevelSelection.tscn")
+			Transition.play("res://UI/Scenes/LevelSelection.tscn")
+			#get_tree().change_scene_to_file("res://UI/Scenes/LevelSelection.tscn")
 
 		"options":
 			print("Options")
