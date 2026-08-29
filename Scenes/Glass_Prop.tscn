@@ -1,19 +1,10 @@
 [gd_scene format=3 uid="uid://lh0lwwnfqk10"]
 
 [ext_resource type="Script" uid="uid://tnp0vdq1pasd" path="res://Script/Glass_Body.gd" id="1_2uaa3"]
+[ext_resource type="PackedScene" uid="uid://ce7ji2sq4t7vc" path="res://Asset/Art/Button - Mirror.blend" id="2_uu0vf"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_yp1ec"]
-size = Vector3(3, 3, 0.2)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_frivr"]
-transparency = 1
-albedo_color = Color(1, 0, 1, 1)
-roughness = 0.05
-refraction_enabled = true
-
-[sub_resource type="BoxMesh" id="BoxMesh_fjrjh"]
-material = SubResource("StandardMaterial3D_frivr")
-size = Vector3(3, 3, 0.2)
+size = Vector3(2, 3.2, 0.2)
 
 [node name="Glass_Prop" type="Node3D" unique_id=930995927]
 
@@ -23,5 +14,4 @@ script = ExtResource("1_2uaa3")
 [node name="Collision_Shape_3D" type="CollisionShape3D" parent="Glass_Body" unique_id=137435384]
 shape = SubResource("BoxShape3D_yp1ec")
 
-[node name="Mesh_Instance_3D" type="MeshInstance3D" parent="Glass_Body" unique_id=1918149411]
-mesh = SubResource("BoxMesh_fjrjh")
+[node name="Button - Mirror" parent="Glass_Body" unique_id=981309385 instance=ExtResource("2_uu0vf")]

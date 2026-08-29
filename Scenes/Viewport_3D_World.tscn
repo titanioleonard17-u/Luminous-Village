@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bpjprw43b1sbg"]
 
 [ext_resource type="Script" uid="uid://blndvi7e8bcto" path="res://Script/Viewport_3d_World.gd" id="1_8qarm"]
-[ext_resource type="Texture2D" uid="uid://cpstvep2a3dye" path="res://Asset/testing.png" id="2_0j3p3"]
+[ext_resource type="Script" uid="uid://y1fjbien2n6k" path="res://Script/TileMap_Collision_Baker.gd" id="2_0j3p3"]
 [ext_resource type="PackedScene" uid="uid://qwmvkwtyc3n8" path="res://Scenes/Laser_Emitter.tscn" id="2_6ouy4"]
 [ext_resource type="Script" uid="uid://bsovkrpuy2e70" path="res://Script/Glass_Spawner.gd" id="2_grb55"]
 [ext_resource type="PackedScene" uid="uid://pflnwawytlms" path="res://Scenes/Spawnable_Glass.tscn" id="4_grb55"]
@@ -11,13 +11,6 @@ glow_enabled = true
 glow_intensity = 0.8
 glow_bloom = 0.15
 glow_hdr_threshold = 0.5
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fjrjh"]
-shading_mode = 0
-albedo_texture = ExtResource("2_0j3p3")
-
-[sub_resource type="QuadMesh" id="QuadMesh_sinmp"]
-size = Vector2(34.78, 20)
 
 [node name="Sub_Viewport_Container" type="SubViewportContainer" unique_id=2092862269]
 anchors_preset = 15
@@ -37,19 +30,17 @@ render_target_update_mode = 4
 [node name="World_Environment" type="WorldEnvironment" parent="Sub_Viewport" unique_id=2056211827]
 environment = SubResource("Environment_sinmp")
 
+[node name="Level_Colliders" type="Node3D" parent="Sub_Viewport" unique_id=85227628]
+script = ExtResource("2_0j3p3")
+
 [node name="Directional_Light_3D" type="DirectionalLight3D" parent="Sub_Viewport" unique_id=1694523092]
-transform = Transform3D(1, 0, 0, 0, 0.34202015, 0.9396926, 0, -0.9396926, 0.34202015, 0, 10, 0)
+sky_mode = 2
 
 [node name="Camera_3D" type="Camera3D" parent="Sub_Viewport" unique_id=2023421564]
 transform = Transform3D(1, 0, 0, 0, 0.34202015, 0.9396926, 0, -0.9396926, 0.34202015, 0, 10, 0)
 projection = 1
 current = true
 size = 20.0
-
-[node name="Editor_Background" type="MeshInstance3D" parent="Sub_Viewport" unique_id=796647286]
-transform = Transform3D(2, 0, 0, 0, -8.742278e-08, 2, 0, -2, -8.742278e-08, 0, 0, 0)
-material_override = SubResource("StandardMaterial3D_fjrjh")
-mesh = SubResource("QuadMesh_sinmp")
 
 [node name="Reflection_Probe" type="ReflectionProbe" parent="Sub_Viewport" unique_id=153525662]
 update_mode = 1
