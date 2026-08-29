@@ -62,6 +62,7 @@ func _ready() -> void:
 
 	if config:
 		custom_minimum_size = config.button_size
+		#size = config.button_size
 		$TextureRect.size = config.texture_size
 		$TextureRect.position = config.texture_position
 	else:
@@ -74,7 +75,7 @@ func _process(delta: float) -> void:
 	pass
 
 func _on_mouse_entered() -> void:
-	AudioManager.playSFX("hover")
+	AudioManager.playSFX("Hover")
 	var path = normalTexture.resource_path
 	$TextureRect.texture = load(path.get_basename() + " (Hover)." + path.get_extension())
 
@@ -84,6 +85,6 @@ func _on_mouse_exited() -> void:
 
 
 func _on_pressed() -> void:
-	print("click" + PurposeBtn.keys()[purpose].to_lower().capitalize())
-	AudioManager.playSFX("click" + PurposeBtn.keys()[purpose].to_lower().capitalize())
+	print("Click" + PurposeBtn.keys()[purpose].to_lower().capitalize())
+	AudioManager.playSFX("Click" + PurposeBtn.keys()[purpose].to_lower().capitalize())
 		

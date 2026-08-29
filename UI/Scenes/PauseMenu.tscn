@@ -79,3 +79,4 @@ purpose = 2
 [connection signal="pressed" from="PauseNavigation/PauseButton" to="." method="_on_pause_button_pressed"]
 [connection signal="pressed" from="PauseMenuContainer/VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
 [connection signal="pressed" from="PauseMenuContainer/VBoxContainer/RetryButton" to="." method="_on_retry_button_pressed"]
+[connection signal="pressed" from="PauseMenuContainer/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
