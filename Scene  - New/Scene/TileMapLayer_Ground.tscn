@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://co2d8js0nkj26"]
+
+[ext_resource type="Texture2D" uid="uid://bxktms8uk0wnt" path="res://Asset/Art/Tilemap - 2D.png" id="1_weym8"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ef470"]
+texture = ExtResource("1_weym8")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+5:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+4:2/0 = 0
+5:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+4:3/0 = 0
+0:4/0 = 0
+1:4/0 = 0
+2:4/0 = 0
+3:4/0 = 0
+4:4/0 = 0
+5:4/0 = 0
+0:5/0 = 0
+1:5/0 = 0
+2:5/0 = 0
+3:5/0 = 0
+4:5/0 = 0
+5:5/0 = 0
+0:6/0 = 0
+1:6/0 = 0
+2:6/0 = 0
+3:6/0 = 0
+4:6/0 = 0
+5:6/0 = 0
+0:7/0 = 0
+1:7/0 = 0
+2:7/0 = 0
+3:7/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_bn75j"]
+sources/0 = SubResource("TileSetAtlasSource_ef470")
+
+[node name="Ground_Tile" type="TileMapLayer" unique_id=240078724]
+scale = Vector2(2, 2)
+tile_set = SubResource("TileSet_bn75j")
