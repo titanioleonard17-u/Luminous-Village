@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://dmeb4l46ogrj2"
-path="res://.godot/imported/Hover_0dB.wav-0860c7ca00a15b88003ceae5cbb6f509.sample"
+path="res://.godot/imported/Hover_-5dB.wav-344f7927708e42569670c26df1988a2d.sample"
 
 [deps]
 
-source_file="res://Asset/Sound/SFX/Hover_0dB.wav"
-dest_files=["res://.godot/imported/Hover_0dB.wav-0860c7ca00a15b88003ceae5cbb6f509.sample"]
+source_file="res://Asset/Sound/SFX/Hover_-5dB.wav"
+dest_files=["res://.godot/imported/Hover_-5dB.wav-344f7927708e42569670c26df1988a2d.sample"]
 
 [params]
 
