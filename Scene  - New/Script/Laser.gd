@@ -25,6 +25,7 @@ func _calculate_laser_path() -> Array[Vector2]:
 	var current_dir: Vector2 = start_direction.normalized().rotated(rotation)
 
 	var space_state := get_world_2d().direct_space_state
+	var exclude_rids: Array[RID] = []
 
 	for bounce_i in range(max_bounces):
 		var query := PhysicsRayQueryParameters2D.create(
@@ -33,6 +34,7 @@ func _calculate_laser_path() -> Array[Vector2]:
 		)
 		query.collide_with_areas = true
 		query.collide_with_bodies = true
+		query.exclude = exclude_rids
 
 		var result := space_state.intersect_ray(query)
 
@@ -43,6 +45,7 @@ func _calculate_laser_path() -> Array[Vector2]:
 		var hit_point: Vector2 = result.position
 		var hit_normal: Vector2 = result.normal
 		var collider: Object = result.collider
+		var collider_rid: RID = result.rid
 
 		points.append(hit_point)
 
@@ -62,6 +65,12 @@ func _calculate_laser_path() -> Array[Vector2]:
 				current_pos = hit_point + hit_normal * 4.0
 			else:
 				break
+		elif collider.is_in_group("house"):
+			if collider.has_method("mark_hit"):
+				collider.mark_hit()
+			# House SELALU tembus lurus, tidak pernah mantul
+			exclude_rids.append(collider_rid)
+			current_pos = hit_point + current_dir * 2.0
 		elif collider.is_in_group("mirror"):
 			var is_front_side: bool = true
 			if collider.has_method("get_reflect_normal"):
@@ -75,4 +84,4 @@ func _calculate_laser_path() -> Array[Vector2]:
 		else:
 			break
 
-	return points
+	return points	

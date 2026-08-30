@@ -1,0 +1,55 @@
+[gd_scene format=4 uid="uid://bi8ksbgs25ncn"]
+
+[ext_resource type="Script" uid="uid://dnkya1u3tc0yu" path="res://LevelManager.gd" id="1_nfdql"]
+[ext_resource type="PackedScene" uid="uid://co2d8js0nkj26" path="res://Scene  - New/Scene/TileMapLayer_Ground.tscn" id="2_475u7"]
+[ext_resource type="PackedScene" uid="uid://p3itxxvyp673" path="res://Scene  - New/Scene/Laser.tscn" id="2_eyogd"]
+[ext_resource type="PackedScene" uid="uid://csbxlqkujg113" path="res://Scene  - New/Scene/Trigger.tscn" id="3_71hr5"]
+[ext_resource type="PackedScene" uid="uid://v723peurkr7k" path="res://Scene  - New/Scene/TileMaLayer_Collision.tscn" id="3_svelw"]
+[ext_resource type="PackedScene" uid="uid://cgyj6fdtpekif" path="res://Scene  - New/Scene/Door_ToRight.tscn" id="4_m3m5b"]
+[ext_resource type="PackedScene" uid="uid://crly0ntp87wu6" path="res://Scene  - New/Scene/Mirror_Spawner.tscn" id="7_4sx61"]
+[ext_resource type="PackedScene" uid="uid://k5b0y2snplf3" path="res://Scene  - New/Scene/Mirror.tscn" id="8_qpd75"]
+[ext_resource type="PackedScene" uid="uid://bi2fm2hx85yl" path="res://Scene  - New/Scene/House.tscn" id="9_svelw"]
+
+[node name="Main" type="Node2D" unique_id=1451308095]
+script = ExtResource("1_nfdql")
+win_label_path = NodePath("Label")
+
+[node name="Ground_Tile" parent="." unique_id=240078724 instance=ExtResource("2_475u7")]
+
+[node name="Ground_Tile2" parent="." unique_id=1096621312 instance=ExtResource("2_475u7")]
+scale = Vector2(4, 4)
+
+[node name="Solid_Tile" parent="." unique_id=1907145580 instance=ExtResource("3_svelw")]
+scale = Vector2(4, 4)
+
+[node name="Solid_Tile2" parent="." unique_id=153871858 instance=ExtResource("3_svelw")]
+tile_map_data = PackedByteArray("AAAjABUAAAAFAAEAAAAiABUAAAACAAAAAAAhABUAAAACAAAAAAAgABUAAAACAAAAAAAfABUAAAACAAAAAAAeABUAAAACAAAAAAAdABUAAAACAAAAAAAcABUAAAACAAAAAAAbABUAAAACAAAAAAAaABUAAAACAAAAAAAZABUAAAACAAAAAAAYABUAAAACAAAAAAAXABUAAAACAAAAAAAWABUAAAACAAAAAAAVABUAAAACAAAAAAAUABUAAAACAAAAAAATABUAAAACAAAAAAASABUAAAACAAAAAAARABUAAAACAAAAAAAQABUAAAACAAAAAAAPABUAAAACAAAAAAAOABUAAAACAAAAAAANABUAAAACAAAAAAAMABUAAAACAAAAAAALABUAAAACAAAAAAAKABUAAAACAAAAAAAJABUAAAACAAAAAAAIABUAAAACAAAAAAAHABUAAAACAAAAAAAGABUAAAACAAAAAAAFABUAAAACAAAAAAAEABUAAAACAAAAAAADABUAAAACAAAAAAACABUAAAACAAAAAAABABUAAAACAAAAAAAAABUAAAAEAAEAAAAAAAAAAAAEAAAAAAAAAAEAAAADAAEAAAAAAAIAAAADAAEAAAAAAAMAAAADAAEAAAAAAAQAAAADAAEAAAAAAAUAAAADAAEAAAAAAAYAAAADAAEAAAAAAAcAAAADAAEAAAAAAAgAAAADAAEAAAAAAAkAAAADAAEAAAAAAAoAAAADAAEAAAAAAAsAAAADAAEAAAAAAAwAAAADAAEAAAAAAA0AAAADAAEAAAAAAA4AAAADAAEAAAAAAA8AAAADAAEAAAAAABAAAAADAAEAAAAAABEAAAADAAEAAAAAABIAAAADAAEAAAAAABMAAAADAAEAAAAAABQAAAADAAEAAAABAAAAAAACAAIAAAACAAAAAAACAAIAAAADAAAAAAACAAIAAAAEAAAAAAACAAIAAAAFAAAAAAACAAIAAAAGAAAAAAACAAIAAAAHAAAAAAACAAIAAAAIAAAAAAACAAIAAAAJAAAAAAACAAIAAAAKAAAAAAACAAIAAAALAAAAAAACAAIAAAAMAAAAAAACAAIAAAANAAAAAAACAAIAAAAOAAAAAAACAAIAAAAPAAAAAAACAAIAAAAQAAAAAAACAAIAAAARAAAAAAACAAIAAAASAAAAAAACAAIAAAATAAAAAAACAAIAAAAUAAAAAAACAAIAAAAVAAAAAAACAAIAAAAWAAAAAAACAAIAAAAXAAAAAAACAAIAAAAYAAAAAAACAAIAAAAZAAAAAAACAAIAAAAaAAAAAAACAAIAAAAbAAAAAAACAAIAAAAcAAAAAAACAAIAAAAdAAAAAAACAAIAAAAeAAAAAAACAAIAAAAfAAAAAAACAAIAAAAgAAAAAAACAAIAAAAhAAAAAAACAAIAAAAjAAAAAAAFAAAAAAAiAAAAAAACAAIAAAAjAAEAAAABAAEAAAAjAAIAAAABAAEAAAAjAAMAAAABAAEAAAAjAAQAAAABAAEAAAAjAAUAAAABAAEAAAAjAAYAAAABAAEAAAAjAAcAAAABAAEAAAAjAAgAAAABAAEAAAAjAAkAAAABAAEAAAAjAAoAAAABAAEAAAAjAAsAAAABAAEAAAAjAAwAAAABAAEAAAAjAA0AAAABAAEAAAAjAA4AAAABAAEAAAAjAA8AAAABAAEAAAAjABAAAAABAAEAAAAjABEAAAABAAEAAAAjABIAAAABAAEAAAAjABMAAAABAAEAAAAjABQAAAABAAEAAAA=")
+
+[node name="Laser" parent="." unique_id=932062609 instance=ExtResource("2_eyogd")]
+
+[node name="Trigger" parent="." unique_id=1183924401 instance=ExtResource("3_71hr5")]
+door_path = NodePath("../Door_ToRight")
+
+[node name="Door_ToRight" parent="." unique_id=1980675981 instance=ExtResource("4_m3m5b")]
+position = Vector2(605, 171)
+scale = Vector2(0.5, 0.5)
+
+[node name="Mirror_Spawner" parent="." unique_id=1378017199 instance=ExtResource("7_4sx61")]
+position = Vector2(404, 296)
+mirror_scene = ExtResource("8_qpd75")
+max_mirrors = 4
+
+[node name="House" parent="." unique_id=1454567019 instance=ExtResource("9_svelw")]
+position = Vector2(743, 442.00006)
+
+[node name="Label" type="Label" parent="." unique_id=1858798818]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 464.0
+offset_top = 273.0
+offset_right = 698.5
+offset_bottom = 384.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Level Complete"
