@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://cgyj6fdtpekif" path="res://Scene  - New/Scene/Door_ToRight.tscn" id="5_5kjoa"]
 [ext_resource type="PackedScene" uid="uid://bi2fm2hx85yl" path="res://Scene  - New/Scene/House.tscn" id="5_hdyv3"]
 [ext_resource type="PackedScene" uid="uid://crly0ntp87wu6" path="res://Scene  - New/Scene/Mirror_Spawner.tscn" id="7_ut41e"]
+[ext_resource type="PackedScene" uid="uid://ruuy6vksw05m" path="res://Scene  - New/Scene/Level_Complete.tscn" id="10_k2b07"]
 
 [node name="Main" type="Node2D" unique_id=267740278]
 script = ExtResource("1_5kjoa")
@@ -49,14 +50,4 @@ position = Vector2(188, 500)
 [node name="House3" parent="." unique_id=1000531155 instance=ExtResource("5_hdyv3")]
 position = Vector2(402, 495)
 
-[node name="Label" type="Label" parent="." unique_id=567370575]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 464.0
-offset_top = 273.0
-offset_right = 698.5
-offset_bottom = 384.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "Level Complete"
+[node name="Label" parent="." unique_id=2027484806 instance=ExtResource("10_k2b07")]
