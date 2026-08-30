@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://vl51ne7n0cco"]
 
 [ext_resource type="Script" uid="uid://blikuphi207os" path="res://UI/Scripts/HomeScreen.gd" id="1_d7fbi"]
+[ext_resource type="Texture2D" uid="uid://d3af2mp03o538" path="res://Asset/Art/Homescreen/Homescreen.png" id="2_4in46"]
 [ext_resource type="PackedScene" uid="uid://cip0gmnccnt8e" path="res://UI/Scenes/Button.tscn" id="2_ox04f"]
 
 [node name="Homescreen" type="Control" unique_id=165318869]
@@ -19,36 +20,37 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+texture = ExtResource("2_4in46")
 
-[node name="ButtonNode" type="VBoxContainer" parent="." unique_id=1881286714]
+[node name="ButtonNode" type="VBoxContainer" parent="." unique_id=1935880965]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_top = -100.0
-offset_bottom = 100.0
+offset_left = 388.0
+offset_top = 61.00003
+offset_right = 428.0
+offset_bottom = 101.00003
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 18
+rotation = 0.20943952
+theme_override_constants/separation = 16
 
 [node name="StartButton" parent="ButtonNode" unique_id=1699704292 instance=ExtResource("2_ox04f")]
 layout_mode = 2
 destinationImage = "uid://bsbvkhttvkpyv"
 typeButton = 1
-sizeButton = 1
 
 [node name="OptionsButton" parent="ButtonNode" unique_id=157524004 instance=ExtResource("2_ox04f")]
 layout_mode = 2
 destinationImage = "uid://dkan4fc25jtpk"
 typeButton = 1
-sizeButton = 1
 purpose = 1
 
 [node name="ExitButton" parent="ButtonNode" unique_id=1231602618 instance=ExtResource("2_ox04f")]
 layout_mode = 2
 destinationImage = "uid://6eiqw3iuio4c"
 typeButton = 1
-sizeButton = 1
 purpose = 2
