@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://csbxlqkujg113"]
+
+[ext_resource type="Script" uid="uid://dkqhagol7mk11" path="res://Scene  - New/Scene/Trigger.gd" id="1_ukuyt"]
+[ext_resource type="Texture2D" uid="uid://cpqtetkh7487y" path="res://Asset/Art/Mirror - Button.png" id="1_yr261"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ukuyt"]
+size = Vector2(140, 48)
+
+[node name="Trigger" type="StaticBody2D" unique_id=1183924401 groups=["trigger"]]
+script = ExtResource("1_ukuyt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=431125554]
+position = Vector2(1, -2)
+shape = SubResource("RectangleShape2D_ukuyt")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1962987475]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("1_yr261")

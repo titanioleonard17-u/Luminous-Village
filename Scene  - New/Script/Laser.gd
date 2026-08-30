@@ -50,12 +50,23 @@ func _calculate_laser_path() -> Array[Vector2]:
 			if collider.has_method("open"):
 				collider.open()
 			break
+		elif collider.is_in_group("trigger"):
+			if collider.has_method("mark_hit"):
+				collider.mark_hit()
+			var is_front_side: bool = true
+			if collider.has_method("get_reflect_normal"):
+				var front_normal: Vector2 = collider.get_reflect_normal()
+				is_front_side = hit_normal.dot(front_normal) > 0.5
+			if is_front_side:
+				current_dir = current_dir.bounce(hit_normal)
+				current_pos = hit_point + hit_normal * 4.0
+			else:
+				break
 		elif collider.is_in_group("mirror"):
 			var is_front_side: bool = true
 			if collider.has_method("get_reflect_normal"):
 				var front_normal: Vector2 = collider.get_reflect_normal()
 				is_front_side = hit_normal.dot(front_normal) > 0.5
-
 			if is_front_side:
 				current_dir = current_dir.bounce(hit_normal)
 				current_pos = hit_point + hit_normal * 4.0

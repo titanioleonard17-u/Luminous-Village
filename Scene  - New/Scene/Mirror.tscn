@@ -4,16 +4,16 @@
 [ext_resource type="Script" uid="uid://i7cak6xerp6w" path="res://Scene  - New/Script/Mirror.gd" id="1_ysbfl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fjrjh"]
-size = Vector2(377.4276, 128.60197)
+size = Vector2(442.36572, 155.6124)
 
 [node name="Mirror" type="StaticBody2D" unique_id=1943216660 groups=["mirror"]]
 script = ExtResource("1_ysbfl")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=200045112]
-position = Vector2(3.9999962, -5.5000033)
+position = Vector2(0.49999976, -2.0000005)
 scale = Vector2(0.31874081, -0.30845878)
 shape = SubResource("RectangleShape2D_fjrjh")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1698868491]
-scale = Vector2(0.25927064, 0.25927064)
+scale = Vector2(0.3, 0.3)
 texture = ExtResource("1_ck18i")

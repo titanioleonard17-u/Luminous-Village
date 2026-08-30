@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://d1ibvcfo0548o"]
+
+[ext_resource type="Texture2D" uid="uid://b6fwmuxjjh3nt" path="res://Asset/Art/Fence.png" id="1_71f3f"]
+[ext_resource type="Script" uid="uid://c4mnd8pc87443" path="res://Scene  - New/Scene/Door.gd" id="1_y4rod"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ysbfl"]
+size = Vector2(129, 42)
+
+[node name="Door" type="StaticBody2D" unique_id=2099982022 groups=["door"]]
+script = ExtResource("1_y4rod")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1167317496]
+position = Vector2(1.5, -7)
+shape = SubResource("RectangleShape2D_ysbfl")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1044424341]
+scale = Vector2(0.3, 0.322)
+texture = ExtResource("1_71f3f")
