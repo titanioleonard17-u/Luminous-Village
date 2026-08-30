@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://b1mrdlepo3a1i" path="res://UI/Scripts/LevelSelection.gd" id="1_7a4f5"]
 [ext_resource type="Texture2D" uid="uid://cqnp8fqr4yls6" path="res://Asset/Art/LevelSelection/Level BG.png" id="2_uo3a4"]
 [ext_resource type="PackedScene" uid="uid://cip0gmnccnt8e" path="res://UI/Scenes/Button.tscn" id="3_uo3a4"]
+[ext_resource type="Texture2D" uid="uid://b0qo0mcus6dut" path="res://Asset/Art/LevelSelection/Button - Level.png" id="4_xyuep"]
 
 [node name="LevelSelection" type="Control" unique_id=714932231]
 layout_mode = 3
@@ -41,33 +42,28 @@ theme_override_constants/separation = 64
 
 [node name="LevelBox1" parent="LevelBoxNode/Row1" unique_id=1699704292 instance=ExtResource("3_uo3a4")]
 layout_mode = 2
-destinationImage = "uid://b0qo0mcus6dut"
-sizeButton = 1
-fontSize = 56
+customes = Array[Texture2D]([ExtResource("4_xyuep")])
+size_button = 1
 
 [node name="LevelBox2" parent="LevelBoxNode/Row1" unique_id=1460360254 instance=ExtResource("3_uo3a4")]
 layout_mode = 2
-destinationImage = "uid://b0qo0mcus6dut"
-sizeButton = 1
-fontSize = 56
+customes = Array[Texture2D]([ExtResource("4_xyuep")])
+size_button = 1
 
 [node name="LevelBox3" parent="LevelBoxNode/Row1" unique_id=1632259646 instance=ExtResource("3_uo3a4")]
 layout_mode = 2
-destinationImage = "uid://b0qo0mcus6dut"
-sizeButton = 1
-fontSize = 56
+customes = Array[Texture2D]([ExtResource("4_xyuep")])
+size_button = 1
 
 [node name="LevelBox4" parent="LevelBoxNode/Row1" unique_id=1658231588 instance=ExtResource("3_uo3a4")]
 layout_mode = 2
-destinationImage = "uid://b0qo0mcus6dut"
-sizeButton = 1
-fontSize = 56
+customes = Array[Texture2D]([ExtResource("4_xyuep")])
+size_button = 1
 
 [node name="LevelBox5" parent="LevelBoxNode/Row1" unique_id=2086475856 instance=ExtResource("3_uo3a4")]
 layout_mode = 2
-destinationImage = "uid://b0qo0mcus6dut"
-sizeButton = 1
-fontSize = 56
+customes = Array[Texture2D]([ExtResource("4_xyuep")])
+size_button = 1
 
 [node name="Row2" type="HBoxContainer" parent="LevelBoxNode" unique_id=2033373069]
 layout_mode = 2
@@ -75,33 +71,28 @@ theme_override_constants/separation = 64
 
 [node name="LevelBox1" parent="LevelBoxNode/Row2" unique_id=1686756194 instance=ExtResource("3_uo3a4")]
 layout_mode = 2
-destinationImage = "uid://b0qo0mcus6dut"
-sizeButton = 1
-fontSize = 56
+customes = Array[Texture2D]([ExtResource("4_xyuep")])
+size_button = 1
 
 [node name="LevelBox2" parent="LevelBoxNode/Row2" unique_id=1575319611 instance=ExtResource("3_uo3a4")]
 layout_mode = 2
-destinationImage = "uid://b0qo0mcus6dut"
-sizeButton = 1
-fontSize = 56
+customes = Array[Texture2D]([ExtResource("4_xyuep")])
+size_button = 1
 
 [node name="LevelBox3" parent="LevelBoxNode/Row2" unique_id=661839263 instance=ExtResource("3_uo3a4")]
 layout_mode = 2
-destinationImage = "uid://b0qo0mcus6dut"
-sizeButton = 1
-fontSize = 56
+customes = Array[Texture2D]([ExtResource("4_xyuep")])
+size_button = 1
 
 [node name="LevelBox4" parent="LevelBoxNode/Row2" unique_id=720545459 instance=ExtResource("3_uo3a4")]
 layout_mode = 2
-destinationImage = "uid://b0qo0mcus6dut"
-sizeButton = 1
-fontSize = 56
+customes = Array[Texture2D]([ExtResource("4_xyuep")])
+size_button = 1
 
 [node name="LevelBox5" parent="LevelBoxNode/Row2" unique_id=1991708526 instance=ExtResource("3_uo3a4")]
 layout_mode = 2
-destinationImage = "uid://b0qo0mcus6dut"
-sizeButton = 1
-fontSize = 56
+customes = Array[Texture2D]([ExtResource("4_xyuep")])
+size_button = 1
 
 [node name="Row3" type="HBoxContainer" parent="LevelBoxNode" unique_id=809871072]
 layout_mode = 2
@@ -109,30 +100,25 @@ theme_override_constants/separation = 64
 
 [node name="LevelBox1" parent="LevelBoxNode/Row3" unique_id=1806951937 instance=ExtResource("3_uo3a4")]
 layout_mode = 2
-destinationImage = "uid://b0qo0mcus6dut"
-sizeButton = 1
-fontSize = 56
+customes = Array[Texture2D]([ExtResource("4_xyuep")])
+size_button = 1
 
 [node name="LevelBox2" parent="LevelBoxNode/Row3" unique_id=1280073596 instance=ExtResource("3_uo3a4")]
 layout_mode = 2
-destinationImage = "uid://b0qo0mcus6dut"
-sizeButton = 1
-fontSize = 56
+customes = Array[Texture2D]([ExtResource("4_xyuep")])
+size_button = 1
 
 [node name="LevelBox3" parent="LevelBoxNode/Row3" unique_id=1387569078 instance=ExtResource("3_uo3a4")]
 layout_mode = 2
-destinationImage = "uid://b0qo0mcus6dut"
-sizeButton = 1
-fontSize = 56
+customes = Array[Texture2D]([ExtResource("4_xyuep")])
+size_button = 1
 
 [node name="LevelBox4" parent="LevelBoxNode/Row3" unique_id=1880833669 instance=ExtResource("3_uo3a4")]
 layout_mode = 2
-destinationImage = "uid://b0qo0mcus6dut"
-sizeButton = 1
-fontSize = 56
+customes = Array[Texture2D]([ExtResource("4_xyuep")])
+size_button = 1
 
 [node name="LevelBox5" parent="LevelBoxNode/Row3" unique_id=1593294344 instance=ExtResource("3_uo3a4")]
 layout_mode = 2
-destinationImage = "uid://b0qo0mcus6dut"
-sizeButton = 1
-fontSize = 56
+customes = Array[Texture2D]([ExtResource("4_xyuep")])
+size_button = 1

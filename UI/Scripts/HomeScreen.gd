@@ -14,7 +14,7 @@ func _on_button_pressed(button: BaseButton) -> void:
 			#get_tree().change_scene_to_file("res://UI/Scenes/LevelSelection.tscn")
 
 		"options":
-			print("Options")
+			$OptionsMenu.visible = true
 
 		"exit":
 			get_tree().quit()

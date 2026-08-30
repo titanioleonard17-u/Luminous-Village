@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://cbuu0vhh5nig0"]
+
+[ext_resource type="Script" uid="uid://cwo8omf1rkd1l" path="res://UI/Scripts/CheckBox.gd" id="1_2l6y3"]
+[ext_resource type="Texture2D" uid="uid://cli7jdqa4f8xm" path="res://Asset/Art/OptionsMenu/Button - Checkbox.png" id="1_b1o57"]
+[ext_resource type="Texture2D" uid="uid://dfy8lcc1mc7n7" path="res://Asset/Art/OptionsMenu/Button - Blank.png" id="2_2l6y3"]
+[ext_resource type="PackedScene" uid="uid://cip0gmnccnt8e" path="res://UI/Scenes/Button.tscn" id="2_b1o57"]
+
+[sub_resource type="SystemFont" id="SystemFont_q01mv"]
+font_names = PackedStringArray("Berlin Sans FB")
+subpixel_positioning = 0
+
+[node name="CheckBox" type="HBoxContainer" unique_id=21320873]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 16
+script = ExtResource("1_2l6y3")
+text = "asd"
+
+[node name="Label" type="Label" parent="." unique_id=281956534]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = SubResource("SystemFont_q01mv")
+theme_override_font_sizes/font_size = 48
+
+[node name="Button" parent="." unique_id=1699704292 instance=ExtResource("2_b1o57")]
+layout_mode = 2
+customes = Array[Texture2D]([ExtResource("2_2l6y3"), ExtResource("1_b1o57")])
+purpose = 4

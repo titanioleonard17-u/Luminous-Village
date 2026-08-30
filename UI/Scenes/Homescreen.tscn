@@ -4,6 +4,9 @@
 [ext_resource type="Texture2D" uid="uid://d3af2mp03o538" path="res://Asset/Art/Homescreen/Homescreen.png" id="2_4in46"]
 [ext_resource type="PackedScene" uid="uid://cip0gmnccnt8e" path="res://UI/Scenes/Button.tscn" id="2_ox04f"]
 [ext_resource type="PackedScene" uid="uid://vgu3xe4vi0k6" path="res://UI/Scenes/OptionsMenu.tscn" id="3_cgs7r"]
+[ext_resource type="Texture2D" uid="uid://bsbvkhttvkpyv" path="res://Asset/Art/Homescreen/Button  - Play.png" id="5_utgno"]
+[ext_resource type="Texture2D" uid="uid://dkan4fc25jtpk" path="res://Asset/Art/Homescreen/Button  - Option.png" id="6_47pds"]
+[ext_resource type="Texture2D" uid="uid://6eiqw3iuio4c" path="res://Asset/Art/Homescreen/Button  - Exit.png" id="7_670br"]
 
 [node name="Homescreen" type="Control" unique_id=165318869]
 layout_mode = 3
@@ -23,9 +26,6 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_4in46")
 
-[node name="OptionsMenu" parent="." unique_id=1384109385 instance=ExtResource("3_cgs7r")]
-layout_mode = 1
-
 [node name="ButtonNode" type="VBoxContainer" parent="." unique_id=1935880965]
 layout_mode = 1
 anchors_preset = 8
@@ -44,17 +44,24 @@ theme_override_constants/separation = 16
 
 [node name="StartButton" parent="ButtonNode" unique_id=1699704292 instance=ExtResource("2_ox04f")]
 layout_mode = 2
-destinationImage = "uid://bsbvkhttvkpyv"
-typeButton = 1
+customes = Array[Texture2D]([ExtResource("5_utgno")])
+type_button = 1
+size_button = 1
 
 [node name="OptionsButton" parent="ButtonNode" unique_id=157524004 instance=ExtResource("2_ox04f")]
 layout_mode = 2
-destinationImage = "uid://dkan4fc25jtpk"
-typeButton = 1
+customes = Array[Texture2D]([ExtResource("6_47pds")])
+type_button = 1
+size_button = 1
 purpose = 1
 
 [node name="ExitButton" parent="ButtonNode" unique_id=1231602618 instance=ExtResource("2_ox04f")]
 layout_mode = 2
-destinationImage = "uid://6eiqw3iuio4c"
-typeButton = 1
+customes = Array[Texture2D]([ExtResource("7_670br")])
+type_button = 1
+size_button = 1
 purpose = 2
+
+[node name="OptionsMenu" parent="." unique_id=1384109385 instance=ExtResource("3_cgs7r")]
+visible = false
+layout_mode = 1

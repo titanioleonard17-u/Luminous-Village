@@ -49,6 +49,9 @@ func playAudio(audio_name: String, type: AudioType) -> void:
 # SFX
 # =========================================================
 func find_sound(sound_name: String) -> String:
+	if sound_name == "ClickChecked" or sound_name == "ClickUnchecked":
+		sound_name = "ClickDefault"
+
 	var path := "res://Asset/Sound/SFX"
 	var dir := DirAccess.open(path)
 

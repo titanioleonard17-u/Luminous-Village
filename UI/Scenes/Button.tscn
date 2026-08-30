@@ -3,8 +3,13 @@
 [ext_resource type="Script" uid="uid://bdr8gxowwb12b" path="res://UI/Scripts/Button.gd" id="1_5flae"]
 [ext_resource type="Texture2D" uid="uid://b0qo0mcus6dut" path="res://Asset/Art/LevelSelection/Button - Level.png" id="2_7l3oq"]
 
+[sub_resource type="SystemFont" id="SystemFont_f7dg3"]
+font_names = PackedStringArray("Berlin Sans FB")
+subpixel_positioning = 0
+
 [node name="Button" type="TextureButton" unique_id=1699704292]
 script = ExtResource("1_5flae")
+customes = Array[Texture2D]([ExtResource("2_7l3oq")])
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=697912376]
 layout_mode = 1
@@ -33,6 +38,7 @@ offset_right = 0.5
 offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_fonts/font = SubResource("SystemFont_f7dg3")
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://vgu3xe4vi0k6"]
 
 [ext_resource type="Texture2D" uid="uid://daffvaq4il1f7" path="res://Asset/Art/Homescreen/BG - Option.png" id="1_a3wot"]
+[ext_resource type="PackedScene" uid="uid://cbuu0vhh5nig0" path="res://UI/Scenes/CheckBox.tscn" id="2_dy1ut"]
 
 [node name="OptionsMenu" type="Control" unique_id=1384109385]
 layout_mode = 3
@@ -10,13 +11,15 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=767086867]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1784977549]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+color = Color(0, 0, 0, 0.6666667)
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=180810502]
 layout_mode = 1
@@ -47,15 +50,12 @@ offset_bottom = 44.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=912672515]
+[node name="SFX" parent="VBoxContainer" unique_id=21320873 instance=ExtResource("2_dy1ut")]
 layout_mode = 2
+text = "SFX"
+isChecked = true
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer" unique_id=1438147148]
+[node name="BGM" parent="VBoxContainer" unique_id=1314161543 instance=ExtResource("2_dy1ut")]
 layout_mode = 2
-theme_override_font_sizes/font_size = 64
-text = "Yatta"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="CheckBox" type="CheckBox" parent="VBoxContainer/HBoxContainer" unique_id=1779535383]
-layout_mode = 2
+text = "BGM"
+isChecked = true
