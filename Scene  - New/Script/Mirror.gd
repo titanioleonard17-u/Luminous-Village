@@ -35,6 +35,4 @@ func _is_point_over(world_pos: Vector2) -> bool:
 	return global_position.distance_to(world_pos) < 80.0
 
 func get_reflect_normal() -> Vector2:
-	# Arah "depan" cermin (sisi yang mantul), sesuai arah panah di sprite.
-	# Kalau panah nunjuk ke bawah secara lokal, pakai Vector2.DOWN.
 	return Vector2.DOWN.rotated(global_rotation)

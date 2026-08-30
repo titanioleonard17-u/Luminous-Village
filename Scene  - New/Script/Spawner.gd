@@ -2,7 +2,7 @@ extends Node2D
 
 @export var mirror_scene: PackedScene # drag mirror.tscn ke sini di Inspector
 @export var max_mirrors: int = 3 # atur limit per level lewat Inspector
-@export var spawn_offset: Vector2 = Vector2(50, 0) # jarak spawn dari posisi mouse, biar gak numpuk
+@export var mirror_collision_size: Vector2 = Vector2(120, 40) # samain sama ukuran Size collision Mirror
 
 var spawned_mirrors: Array[Node2D] = []
 
@@ -16,22 +16,43 @@ func _try_spawn_mirror() -> void:
 	if spawned_mirrors.size() >= max_mirrors:
 		print("Limit mirror sudah tercapai! (%d/%d)" % [spawned_mirrors.size(), max_mirrors])
 		return
-	
+
 	if mirror_scene == null:
 		push_warning("Mirror Scene belum di-assign di Inspector!")
 		return
 
+	var spawn_pos: Vector2 = get_global_mouse_position()
+
+	if _is_position_blocked(spawn_pos):
+		print("Tidak bisa spawn, posisi bertabrakan dengan objek lain!")
+		return
+
 	var new_mirror: Node2D = mirror_scene.instantiate()
-	new_mirror.global_position = get_global_mouse_position()
+	new_mirror.global_position = spawn_pos
 	add_child(new_mirror)
 	spawned_mirrors.append(new_mirror)
 	print("Mirror spawned: %d/%d" % [spawned_mirrors.size(), max_mirrors])
+
+func _is_position_blocked(pos: Vector2) -> bool:
+	var space_state: PhysicsDirectSpaceState2D = get_world_2d().direct_space_state
+
+	var shape := RectangleShape2D.new()
+	shape.size = mirror_collision_size
+
+	var query := PhysicsShapeQueryParameters2D.new()
+	query.shape = shape
+	query.transform = Transform2D(0.0, pos)
+	query.collide_with_bodies = true
+	query.collide_with_areas = true
+	query.collision_mask = 0xFFFFFFFF
+
+	var result: Array[Dictionary] = space_state.intersect_shape(query, 8)
+	return result.size() > 0
 
 func _try_delete_last_mirror() -> void:
 	if spawned_mirrors.is_empty():
 		print("Tidak ada mirror untuk dihapus!")
 		return
-
 	var last_mirror: Node2D = spawned_mirrors.pop_back()
 	last_mirror.queue_free()
 	print("Mirror deleted: %d/%d" % [spawned_mirrors.size(), max_mirrors])

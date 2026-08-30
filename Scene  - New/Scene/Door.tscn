@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://d1ibvcfo0548o"]
 
 [ext_resource type="Texture2D" uid="uid://b6fwmuxjjh3nt" path="res://Asset/Art/Fence.png" id="1_71f3f"]
-[ext_resource type="Script" uid="uid://c4mnd8pc87443" path="res://Scene  - New/Scene/Door.gd" id="1_y4rod"]
+[ext_resource type="Script" uid="uid://c4mnd8pc87443" path="res://Scene  - New/Script/Door.gd" id="1_y4rod"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ysbfl"]
 size = Vector2(129, 42)

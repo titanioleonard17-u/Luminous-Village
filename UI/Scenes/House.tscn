@@ -47,7 +47,6 @@ script = ExtResource("2_a37bq")
 position = Vector2(228, 102)
 
 [node name="Polygon2D" type="Polygon2D" parent="WindowLight" unique_id=1733977985]
-visible = false
 material = SubResource("ShaderMaterial_4qex0")
 position = Vector2(-16, 40)
 color = Color(1, 1, 1, 0.21568628)

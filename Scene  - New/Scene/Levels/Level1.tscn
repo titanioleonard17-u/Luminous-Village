@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://d3ap067k2hoeu"]
+
+[ext_resource type="PackedScene" uid="uid://k5b0y2snplf3" path="res://Scene  - New/Scene/Mirror.tscn" id="1_885hd"]
+[ext_resource type="PackedScene" uid="uid://p3itxxvyp673" path="res://Scene  - New/Scene/Laser.tscn" id="2_hdyv3"]
+[ext_resource type="PackedScene" uid="uid://co2d8js0nkj26" path="res://Scene  - New/Scene/TileMapLayer_Ground.tscn" id="3_5kjoa"]
+[ext_resource type="PackedScene" uid="uid://v723peurkr7k" path="res://Scene  - New/Scene/TileMaLayer_Collision.tscn" id="4_k2b07"]
+[ext_resource type="PackedScene" uid="uid://csbxlqkujg113" path="res://Scene  - New/Scene/Trigger.tscn" id="5_0gowx"]
+[ext_resource type="PackedScene" uid="uid://d1ibvcfo0548o" path="res://Scene  - New/Scene/Door.tscn" id="6_ajkvu"]
+[ext_resource type="PackedScene" uid="uid://crly0ntp87wu6" path="res://Scene  - New/Scene/Mirror_Spawner.tscn" id="7_ut41e"]
+
+[node name="Main" type="Node2D" unique_id=267740278]
+
+[node name="Laser" parent="." unique_id=932062609 instance=ExtResource("2_hdyv3")]
+position = Vector2(0, 111)
+
+[node name="Ground_Tile" parent="." unique_id=240078724 instance=ExtResource("3_5kjoa")]
+
+[node name="Solid_Tile" parent="." unique_id=1907145580 instance=ExtResource("4_k2b07")]
+
+[node name="Trigger" parent="." unique_id=1183924401 instance=ExtResource("5_0gowx")]
+position = Vector2(764, 70)
+door_path = NodePath("../Door")
+
+[node name="Door" parent="." unique_id=2099982022 instance=ExtResource("6_ajkvu")]
+
+[node name="Mirror_Spawner" parent="." unique_id=1378017199 instance=ExtResource("7_ut41e")]
+mirror_scene = ExtResource("1_885hd")

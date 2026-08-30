@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://csbxlqkujg113"]
 
-[ext_resource type="Script" uid="uid://dkqhagol7mk11" path="res://Scene  - New/Scene/Trigger.gd" id="1_ukuyt"]
+[ext_resource type="Script" uid="uid://dkqhagol7mk11" path="res://Scene  - New/Script/Trigger.gd" id="1_ukuyt"]
 [ext_resource type="Texture2D" uid="uid://cpqtetkh7487y" path="res://Asset/Art/Mirror - Button.png" id="1_yr261"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ukuyt"]
