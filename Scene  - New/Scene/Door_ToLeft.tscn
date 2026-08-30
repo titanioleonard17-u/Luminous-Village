@@ -6,13 +6,14 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ysbfl"]
 size = Vector2(129, 42)
 
-[node name="Door" type="StaticBody2D" unique_id=2099982022 groups=["door"]]
+[node name="Door_ToLeft" type="StaticBody2D" unique_id=2099982022 groups=["door"]]
 script = ExtResource("1_y4rod")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1167317496]
-position = Vector2(1.5, -7)
+position = Vector2(56.5, 0.5)
 shape = SubResource("RectangleShape2D_ysbfl")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1044424341]
+position = Vector2(55, 7.5)
 scale = Vector2(0.3, 0.322)
 texture = ExtResource("1_71f3f")

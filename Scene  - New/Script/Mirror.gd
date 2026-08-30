@@ -4,6 +4,10 @@ var is_dragging: bool = false
 var touch_index: int = -1
 
 func _input(event: InputEvent) -> void:
+	if get_tree().paused:
+		print("Mirror masih dapat input walau paused!")
+		return
+
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if event.pressed and _is_point_over(get_global_mouse_position()):

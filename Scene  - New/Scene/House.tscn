@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://bi2fm2hx85yl"]
 
-[ext_resource type="Texture2D" uid="uid://biwo1xnrgwu6j" path="res://Asset/Art/House.png" id="1_yc0i8"]
-[ext_resource type="Script" uid="uid://djtsffu037hqo" path="res://UI/Scripts/House.gd" id="2_a37bq"]
+[ext_resource type="Texture2D" uid="uid://biwo1xnrgwu6j" path="res://Asset/Art/House.png" id="1_b40jt"]
+[ext_resource type="Script" uid="uid://djtsffu037hqo" path="res://Scene  - New/Script/House.gd" id="2_0yb2j"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a37bq"]
-atlas = ExtResource("1_yc0i8")
+atlas = ExtResource("1_b40jt")
 region = Rect2(0, 0, 1000, 1000)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_nsk4d"]
@@ -37,14 +37,23 @@ gradient = SubResource("Gradient_xfo04")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 
-[node name="House" type="AnimatedSprite2D" unique_id=1421699112]
+[node name="House" type="StaticBody2D" unique_id=1454567019 groups=["house"]]
+scale = Vector2(0.3, 0.3)
+script = ExtResource("2_0yb2j")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1886905754]
+position = Vector2(-1, 2)
+scale = Vector2(0.5, 0.5)
+polygon = PackedVector2Array(-492, 2, -224, -336, -58, -362, -36, -326, 116, -356, 176, -432, 244, -432, 484, -50, 420, -8, 398, 84, 432, 144, 358, 220, 300, 188, 136, 276, 150, 304, 32, 384, -94, 340, -94, 302, -320, 254, -432, 228, -398, 156, -416, 76)
+
+[node name="House_Sprite" type="AnimatedSprite2D" parent="." unique_id=1421699112]
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_nsk4d")
 animation = &"house"
-script = ExtResource("2_a37bq")
 
 [node name="WindowLight" type="Node2D" parent="." unique_id=103838575]
-position = Vector2(228, 102)
+position = Vector2(114, 51)
+scale = Vector2(0.5, 0.5)
 
 [node name="Polygon2D" type="Polygon2D" parent="WindowLight" unique_id=1733977985]
 material = SubResource("ShaderMaterial_4qex0")

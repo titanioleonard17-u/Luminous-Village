@@ -27,6 +27,9 @@ func get_reflect_normal() -> Vector2:
 
 # --- Rotate lewat sentuh/drag, sama kayak Mirror ---
 func _input(event: InputEvent) -> void:
+	if get_tree().paused:
+		return
+
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if event.pressed and _is_point_over(get_global_mouse_position()):

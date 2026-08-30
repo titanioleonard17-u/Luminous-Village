@@ -7,6 +7,7 @@
 size = Vector2(442.36572, 155.6124)
 
 [node name="Mirror" type="StaticBody2D" unique_id=1943216660 groups=["mirror"]]
+scale = Vector2(0.5, 0.5)
 script = ExtResource("1_ysbfl")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=200045112]
