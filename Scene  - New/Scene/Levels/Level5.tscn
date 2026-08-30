@@ -9,10 +9,11 @@
 [ext_resource type="PackedScene" uid="uid://crly0ntp87wu6" path="res://Scene  - New/Scene/Mirror_Spawner.tscn" id="7_ph1hf"]
 [ext_resource type="PackedScene" uid="uid://bi2fm2hx85yl" path="res://Scene  - New/Scene/House.tscn" id="9_0rl5c"]
 [ext_resource type="PackedScene" uid="uid://k5b0y2snplf3" path="res://Scene  - New/Scene/Mirror.tscn" id="9_ph1hf"]
+[ext_resource type="PackedScene" uid="uid://ruuy6vksw05m" path="res://Scene  - New/Scene/Level_Complete.tscn" id="10_ph1hf"]
 
 [node name="Main" type="Node2D" unique_id=371732297]
 script = ExtResource("1_nk814")
-win_label_path = NodePath("Label")
+win_label_path = NodePath("Label2")
 
 [node name="Ground_Tile" parent="." unique_id=240078724 instance=ExtResource("2_3b4hk")]
 
@@ -42,14 +43,4 @@ position = Vector2(821, 544.00006)
 [node name="Mirror_Spawner" parent="." unique_id=1378017199 instance=ExtResource("7_ph1hf")]
 mirror_scene = ExtResource("9_ph1hf")
 
-[node name="Label" type="Label" parent="." unique_id=1754797947]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 464.0
-offset_top = 273.0
-offset_right = 698.5
-offset_bottom = 384.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "Level Complete"
+[node name="Label2" parent="." unique_id=2027484806 instance=ExtResource("10_ph1hf")]

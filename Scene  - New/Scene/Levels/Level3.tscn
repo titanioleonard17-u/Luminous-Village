@@ -9,10 +9,11 @@
 [ext_resource type="PackedScene" uid="uid://crly0ntp87wu6" path="res://Scene  - New/Scene/Mirror_Spawner.tscn" id="7_sgfbn"]
 [ext_resource type="PackedScene" uid="uid://k5b0y2snplf3" path="res://Scene  - New/Scene/Mirror.tscn" id="8_o2r5u"]
 [ext_resource type="PackedScene" uid="uid://bi2fm2hx85yl" path="res://Scene  - New/Scene/House.tscn" id="9_wgfei"]
+[ext_resource type="PackedScene" uid="uid://ruuy6vksw05m" path="res://Scene  - New/Scene/Level_Complete.tscn" id="10_sgfbn"]
 
 [node name="Main" type="Node2D" unique_id=1868670609]
 script = ExtResource("1_cilsv")
-win_label_path = NodePath("Label")
+win_label_path = NodePath("Label2")
 
 [node name="Ground_Tile" parent="." unique_id=240078724 instance=ExtResource("2_853wm")]
 
@@ -42,14 +43,4 @@ max_mirrors = 4
 [node name="House" parent="." unique_id=1454567019 instance=ExtResource("9_wgfei")]
 position = Vector2(783, 452.00006)
 
-[node name="Label" type="Label" parent="." unique_id=11613271]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 464.0
-offset_top = 273.0
-offset_right = 698.5
-offset_bottom = 384.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "Level Complete"
+[node name="Label2" parent="." unique_id=2027484806 instance=ExtResource("10_sgfbn")]
