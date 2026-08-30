@@ -20,7 +20,7 @@ func _ready() -> void:
 
 	bgm_player.finished.connect(_on_bgm_finished)
 
-func playAudio(audio_name: String, type: AudioType, random := false) -> void:
+func playAudio(audio_name: String, type: AudioType) -> void:
 	var path := ""
 
 	match type:

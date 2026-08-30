@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://dtcw4bgmuuftu"]
+
+[ext_resource type="Script" uid="uid://c3drfslgh6875" path="res://UI/Scripts/PauseTrigger.gd" id="1_aemob"]
+[ext_resource type="PackedScene" uid="uid://cip0gmnccnt8e" path="res://UI/Scenes/Button.tscn" id="2_sfsru"]
+[ext_resource type="PackedScene" uid="uid://cvcst5qciygg3" path="res://UI/Scenes/PauseMenu.tscn" id="3_aemob"]
+
+[node name="PauseTriger" type="Control" unique_id=556950568]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_aemob")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1784847670]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -8.0
+offset_bottom = 64.0
+grow_horizontal = 0
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+
+[node name="PauseNavigation" type="HBoxContainer" parent="MarginContainer" unique_id=545518767]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="SoundButton" parent="MarginContainer/PauseNavigation" unique_id=1699704292 instance=ExtResource("2_sfsru")]
+layout_mode = 2
+destinationImage = "uid://n2ngtinar1tu"
+
+[node name="PauseButton" parent="MarginContainer/PauseNavigation" unique_id=1995370032 instance=ExtResource("2_sfsru")]
+layout_mode = 2
+destinationImage = "uid://wk16j6xbgwkn"
+purpose = 1
+
+[node name="PauseMenu" parent="." unique_id=2124132558 instance=ExtResource("3_aemob")]
+visible = false
+layout_mode = 1
+
+[connection signal="pressed" from="MarginContainer/PauseNavigation/PauseButton" to="." method="_on_pause_button_pressed"]

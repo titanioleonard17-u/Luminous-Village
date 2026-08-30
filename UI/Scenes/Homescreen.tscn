@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://blikuphi207os" path="res://UI/Scripts/HomeScreen.gd" id="1_d7fbi"]
 [ext_resource type="Texture2D" uid="uid://d3af2mp03o538" path="res://Asset/Art/Homescreen/Homescreen.png" id="2_4in46"]
 [ext_resource type="PackedScene" uid="uid://cip0gmnccnt8e" path="res://UI/Scenes/Button.tscn" id="2_ox04f"]
+[ext_resource type="PackedScene" uid="uid://vgu3xe4vi0k6" path="res://UI/Scenes/OptionsMenu.tscn" id="3_cgs7r"]
 
 [node name="Homescreen" type="Control" unique_id=165318869]
 layout_mode = 3
@@ -21,6 +22,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_4in46")
+
+[node name="OptionsMenu" parent="." unique_id=1384109385 instance=ExtResource("3_cgs7r")]
+layout_mode = 1
 
 [node name="ButtonNode" type="VBoxContainer" parent="." unique_id=1935880965]
 layout_mode = 1

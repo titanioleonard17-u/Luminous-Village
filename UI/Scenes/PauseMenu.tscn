@@ -1,38 +1,22 @@
-[gd_scene format=3 uid="uid://dtcw4bgmuuftu"]
+[gd_scene format=3 uid="uid://cvcst5qciygg3"]
 
-[ext_resource type="Script" uid="uid://c3drfslgh6875" path="res://UI/Scripts/PauseMenu.gd" id="1_d6k42"]
+[ext_resource type="Script" uid="uid://bmc0r6cm58o7u" path="res://UI/Scripts/PauseMenu.gd" id="1_d6k42"]
+[ext_resource type="PackedScene" uid="uid://dnefawufp7ebx" path="res://UI/Scenes/Transition.tscn" id="2_d6k42"]
+[ext_resource type="Texture2D" uid="uid://hwgbrj04tvpb" path="res://Asset/Art/PauseMenu/BG - Menu.png" id="3_63cs0"]
 [ext_resource type="PackedScene" uid="uid://cip0gmnccnt8e" path="res://UI/Scenes/Button.tscn" id="6_5tk2c"]
 
-[node name="PauseMenu" type="CanvasLayer" unique_id=1338659700]
-script = ExtResource("1_d6k42")
-
-[node name="PauseNavigation" type="HBoxContainer" parent="." unique_id=545518767]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -132.0
-offset_bottom = 64.0
-grow_horizontal = 0
-theme_override_constants/separation = 8
-
-[node name="SoundButton" parent="PauseNavigation" unique_id=1699704292 instance=ExtResource("6_5tk2c")]
-layout_mode = 2
-destinationImage = "uid://n2ngtinar1tu"
-
-[node name="PauseButton" parent="PauseNavigation" unique_id=1995370032 instance=ExtResource("6_5tk2c")]
-layout_mode = 2
-destinationImage = "uid://wk16j6xbgwkn"
-purpose = 1
-
-[node name="PauseMenuContainer" type="Control" parent="." unique_id=2140800717]
+[node name="PauseMenu" type="Control" unique_id=795113934]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_d6k42")
 
-[node name="ColorRect" type="ColorRect" parent="PauseMenuContainer" unique_id=2115397876]
+[node name="Transition" parent="." unique_id=1483636045 instance=ExtResource("2_d6k42")]
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1510749457]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -41,7 +25,22 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.6666667)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenuContainer" unique_id=1968757114]
+[node name="TextureRect" type="TextureRect" parent="." unique_id=788957666]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -480.0
+offset_top = -299.0
+offset_right = 480.0
+offset_bottom = 213.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_63cs0")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1850409764]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -56,27 +55,23 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 16
 
-[node name="ResumeButton" parent="PauseMenuContainer/VBoxContainer" unique_id=225009101 instance=ExtResource("6_5tk2c")]
+[node name="ResumeButton" parent="VBoxContainer" unique_id=1699704292 instance=ExtResource("6_5tk2c")]
 layout_mode = 2
 destinationImage = "uid://c7ttgj0cm5u1u"
 typeButton = 1
-sizeButton = 1
 purpose = 2
 
-[node name="RetryButton" parent="PauseMenuContainer/VBoxContainer" unique_id=1683427197 instance=ExtResource("6_5tk2c")]
+[node name="RetryButton" parent="VBoxContainer" unique_id=553593008 instance=ExtResource("6_5tk2c")]
 layout_mode = 2
 destinationImage = "uid://olgm5cqpljy8"
 typeButton = 1
-sizeButton = 1
 
-[node name="ExitButton" parent="PauseMenuContainer/VBoxContainer" unique_id=904126791 instance=ExtResource("6_5tk2c")]
+[node name="ExitButton" parent="VBoxContainer" unique_id=120312425 instance=ExtResource("6_5tk2c")]
 layout_mode = 2
-destinationImage = "uid://olgm5cqpljy8"
+destinationImage = "uid://6eiqw3iuio4c"
 typeButton = 1
-sizeButton = 1
 purpose = 2
 
-[connection signal="pressed" from="PauseNavigation/PauseButton" to="." method="_on_pause_button_pressed"]
-[connection signal="pressed" from="PauseMenuContainer/VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
-[connection signal="pressed" from="PauseMenuContainer/VBoxContainer/RetryButton" to="." method="_on_retry_button_pressed"]
-[connection signal="pressed" from="PauseMenuContainer/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/RetryButton" to="." method="_on_retry_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]

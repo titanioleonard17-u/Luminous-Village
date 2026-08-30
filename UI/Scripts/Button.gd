@@ -36,8 +36,8 @@ var normalTexture: Texture2D
 const SIZE_CONFIG = {
 	TypeBtn.SQUARE: {
 		SizeBtn.SMALL: {
-			"button_size": Vector2(97, 97),
-			"texture_size": Vector2(124, 124)
+			"button_size": Vector2(78, 78),
+			"texture_size": Vector2(100, 100)
 		},
 		SizeBtn.MEDIUM: {
 			"button_size": Vector2(135, 134),
