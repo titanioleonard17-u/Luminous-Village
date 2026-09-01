@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://bjqneerdeuds8"]
+
+[ext_resource type="AudioStream" uid="uid://b5tb04ti655cj" path="res://Asset/Sound/BGM/AdventureVibe_0dB.ogg" id="1_pg7io"]
+[ext_resource type="AudioStream" uid="uid://dcl7h73jlpgwl" path="res://Asset/Sound/BGM/Homescreen_0dB.ogg" id="2_wu0eg"]
+[ext_resource type="AudioStream" uid="uid://byft6psibri0k" path="res://Asset/Sound/BGM/PicnicVibe_0dB.ogg" id="3_ytiqc"]
+
+[node name="BGM" type="Node2D" unique_id=510306413]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=102653020]
+bus = &"BGM"
+
+[node name="AdventureVibe0dB" type="AudioStreamPlayer" parent="AudioStreamPlayer" unique_id=861993090]
+stream = ExtResource("1_pg7io")
+
+[node name="Homescreen0dB" type="AudioStreamPlayer" parent="AudioStreamPlayer" unique_id=762298247]
+stream = ExtResource("2_wu0eg")
+
+[node name="PicnicVibe0dB" type="AudioStreamPlayer" parent="AudioStreamPlayer" unique_id=1490270012]
+stream = ExtResource("3_ytiqc")

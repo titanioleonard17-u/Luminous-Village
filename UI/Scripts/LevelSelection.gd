@@ -20,3 +20,7 @@ func _ready() -> void:
 				#texture_rect.texture = atlas
 				#atlas.region.position.x += 64
 				#LevelBox.get_node("Label").add_theme_color_override("font_color", Color.WHITE)
+
+
+func _on_button_pressed() -> void:
+	Transition.play("res://UI/Scenes/Homescreen.tscn")

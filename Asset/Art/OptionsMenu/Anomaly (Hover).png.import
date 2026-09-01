@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bt0g8lem4ot4"
-path="res://.godot/imported/Anomaly.png-337edee0917c816fa834efec441e8689.ctex"
+uid="uid://do03jmm2712tn"
+path="res://.godot/imported/Anomaly (Hover).png-2cdcbc0260f7df0c99904c9477355452.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Asset/Art/Homescreen/Anomaly.png"
-dest_files=["res://.godot/imported/Anomaly.png-337edee0917c816fa834efec441e8689.ctex"]
+source_file="res://Asset/Art/OptionsMenu/Anomaly (Hover).png"
+dest_files=["res://.godot/imported/Anomaly (Hover).png-2cdcbc0260f7df0c99904c9477355452.ctex"]
 
 [params]
 

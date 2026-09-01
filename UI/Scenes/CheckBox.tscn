@@ -4,6 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://cli7jdqa4f8xm" path="res://Asset/Art/OptionsMenu/Button - Checkbox.png" id="1_b1o57"]
 [ext_resource type="Texture2D" uid="uid://dfy8lcc1mc7n7" path="res://Asset/Art/OptionsMenu/Button - Blank.png" id="2_2l6y3"]
 [ext_resource type="PackedScene" uid="uid://cip0gmnccnt8e" path="res://UI/Scenes/Button.tscn" id="2_b1o57"]
+[ext_resource type="Texture2D" uid="uid://bt0g8lem4ot4" path="res://Asset/Art/OptionsMenu/Anomaly.png" id="5_f7dg3"]
+[ext_resource type="Texture2D" uid="uid://do03jmm2712tn" path="res://Asset/Art/OptionsMenu/Anomaly (Hover).png" id="6_4kskr"]
 
 [sub_resource type="SystemFont" id="SystemFont_q01mv"]
 font_names = PackedStringArray("Berlin Sans FB")
@@ -31,4 +33,5 @@ theme_override_font_sizes/font_size = 48
 [node name="Button" parent="." unique_id=1699704292 instance=ExtResource("2_b1o57")]
 layout_mode = 2
 customes = Array[Texture2D]([ExtResource("2_2l6y3"), ExtResource("1_b1o57")])
+customes_disabled = Array[Texture2D]([ExtResource("5_f7dg3"), ExtResource("6_4kskr")])
 purpose = 4

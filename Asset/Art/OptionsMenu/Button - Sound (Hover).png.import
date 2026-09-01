@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://do03jmm2712tn"
-path="res://.godot/imported/Anomaly (Hover).png-d9204f4c80fea8f9b4265460bb6173bc.ctex"
+uid="uid://bvl34r41n1nrq"
+path="res://.godot/imported/Button - Sound (Hover).png-a2eed251d595cc656176d48031578c78.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Asset/Art/Homescreen/Anomaly (Hover).png"
-dest_files=["res://.godot/imported/Anomaly (Hover).png-d9204f4c80fea8f9b4265460bb6173bc.ctex"]
+source_file="res://Asset/Art/OptionsMenu/Button - Sound (Hover).png"
+dest_files=["res://.godot/imported/Button - Sound (Hover).png-a2eed251d595cc656176d48031578c78.ctex"]
 
 [params]
 

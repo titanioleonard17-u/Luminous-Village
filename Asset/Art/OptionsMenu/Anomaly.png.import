@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://n2ngtinar1tu"
-path="res://.godot/imported/Button - Sound.png-a1229f9a52bb5c9539be040962fb9871.ctex"
+uid="uid://bt0g8lem4ot4"
+path="res://.godot/imported/Anomaly.png-0be66669cbbe8d0fedb39e6b1afb0230.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Asset/Art/PauseMenu/Button - Sound.png"
-dest_files=["res://.godot/imported/Button - Sound.png-a1229f9a52bb5c9539be040962fb9871.ctex"]
+source_file="res://Asset/Art/OptionsMenu/Anomaly.png"
+dest_files=["res://.godot/imported/Anomaly.png-0be66669cbbe8d0fedb39e6b1afb0230.ctex"]
 
 [params]
 

@@ -1,21 +1,20 @@
 extends HBoxContainer
-
 @export var text: String
 @export var isChecked: bool
 
-# Called when the node enters the scene tree for the first time.
+signal check_toggled(is_checked: bool)
+
 func _ready() -> void:
 	$Label.text = text
 	$Button.isChecked = isChecked
-
 	$Button.setCostume(int(isChecked))
-
 	if isChecked:
 		$Button.purpose = $Button.PurposeBtn.CHECKED
 	else:
 		$Button.purpose = $Button.PurposeBtn.UNCHECKED
+	
+	$Button.check_toggled.connect(_on_button_toggled)
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func _on_button_toggled(is_checked: bool) -> void:
+	isChecked = is_checked
+	check_toggled.emit(is_checked)

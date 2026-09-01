@@ -1,6 +1,5 @@
 extends TextureButton
 
-
 enum TypeBtn {
 	SQUARE,
 	RECTANGLE
@@ -21,9 +20,11 @@ enum PurposeBtn {
 	UNCHECKED
 }
 
+signal check_toggled(is_checked: bool)
 
 @export_category("Button")
 @export var customes: Array[Texture2D]
+@export var customes_disabled: Array[Texture2D]
 @export var type_button: TypeBtn
 @export var size_button: SizeBtn
 @export var purpose: PurposeBtn = PurposeBtn.DEFAULT
@@ -32,11 +33,9 @@ enum PurposeBtn {
 @export var text: String
 @export var font_size: int = 64
 
-
 var current_costume: int = 0
 var normal_texture: Texture2D
 var isChecked: bool
-
 
 const SIZE_CONFIG = {
 	TypeBtn.SQUARE: {
@@ -57,8 +56,11 @@ const SIZE_CONFIG = {
 			"texture_size": Vector2(220, 220)
 		}
 	},
-
 	TypeBtn.RECTANGLE: {
+		SizeBtn.EXTRA_SMALL: {
+			"button_size": Vector2(154, 63),
+			"texture_size": Vector2(210, 210)
+		},
 		SizeBtn.SMALL: {
 			"button_size": Vector2(205, 84),
 			"texture_size": Vector2(280, 280)
@@ -74,10 +76,8 @@ const SIZE_CONFIG = {
 func _ready() -> void:
 	isChecked = purpose == PurposeBtn.CHECKED
 
-	
 	setupLabel()
 	setupTexture()
-
 	call_deferred("applySizeConfig")
 
 
@@ -116,6 +116,10 @@ func applySizeConfig() -> void:
 
 
 func _on_mouse_entered() -> void:
+	# Disabled tidak boleh punya efek hover
+	if disabled:
+		return
+
 	AudioManager.playAudio(
 		"Hover",
 		AudioManager.AudioType.SFX
@@ -125,16 +129,23 @@ func _on_mouse_entered() -> void:
 
 
 func _on_mouse_exited() -> void:
+	# Disabled tetap menggunakan texture disabled
+	if disabled:
+		return
+
 	$TextureRect.texture = normal_texture
 
 
 func applyHoverTexture() -> void:
+	# Jangan apply hover kalau disabled
+	if disabled:
+		return
+
 	if not normal_texture:
 		return
 
 	var path := normal_texture.resource_path
 	var hover_path := path.get_basename() + " (Hover)." + path.get_extension()
-
 	var hover_texture := load(hover_path)
 
 	if hover_texture:
@@ -144,15 +155,21 @@ func applyHoverTexture() -> void:
 
 
 func _on_pressed() -> void:
+	# Tambahan pengaman
+	if disabled:
+		return
+
 	isChecked = !isChecked
 	nextCostume()
-	
-	var purpose_name : String = PurposeBtn.keys()[purpose].to_lower().capitalize()
+
+	var purpose_name: String = PurposeBtn.keys()[purpose].to_lower().capitalize()
 
 	AudioManager.playAudio(
 		"Click" + purpose_name,
 		AudioManager.AudioType.SFX
 	)
+
+	check_toggled.emit(isChecked)
 
 
 func nextCostume() -> void:
@@ -160,14 +177,17 @@ func nextCostume() -> void:
 		return
 
 	current_costume = (current_costume + 1) % customes.size()
-
 	normal_texture = customes[current_costume]
 
-	# Kalau mouse masih di button, langsung tampilkan hover
+	# Disabled tidak menggunakan hover
+	if disabled:
+		return
+
 	if is_hovered():
 		applyHoverTexture()
 	else:
 		$TextureRect.texture = normal_texture
+
 
 func setCostume(index: int) -> void:
 	if customes.is_empty():
@@ -179,6 +199,39 @@ func setCostume(index: int) -> void:
 	current_costume = index
 	normal_texture = customes[index]
 
+	# Disabled tidak menggunakan hover
+	if disabled:
+		return
+
+	if is_hovered():
+		applyHoverTexture()
+	else:
+		$TextureRect.texture = normal_texture
+
+
+func setDisabledVisual(disabled_state: bool) -> void:
+	disabled = disabled_state
+
+	var source := customes_disabled if disabled_state else customes
+
+	if source.is_empty():
+		return
+
+	var index := int(isChecked)
+
+	if index >= source.size():
+		return
+
+	normal_texture = source[index]
+
+	# Saat disabled:
+	# langsung gunakan texture disabled,
+	# jangan pernah apply hover.
+	if disabled:
+		$TextureRect.texture = normal_texture
+		return
+
+	# Saat enabled kembali, cek apakah mouse sedang hover.
 	if is_hovered():
 		applyHoverTexture()
 	else:
