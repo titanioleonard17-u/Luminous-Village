@@ -23,7 +23,6 @@ func _calculate_laser_path() -> Array[Vector2]:
 	var points: Array[Vector2] = [start_position]
 	var current_pos: Vector2 = start_position
 	var current_dir: Vector2 = start_direction.normalized().rotated(rotation)
-
 	var space_state := get_world_2d().direct_space_state
 	var exclude_rids: Array[RID] = []
 
@@ -37,7 +36,6 @@ func _calculate_laser_path() -> Array[Vector2]:
 		query.exclude = exclude_rids
 
 		var result := space_state.intersect_ray(query)
-
 		if result.is_empty():
 			points.append(current_pos + current_dir * laser_length_fallback)
 			break
@@ -84,4 +82,4 @@ func _calculate_laser_path() -> Array[Vector2]:
 		else:
 			break
 
-	return points	
+	return points

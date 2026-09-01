@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://daffvaq4il1f7"
-path="res://.godot/imported/BG - Option.png-18d8aae9ccf00579aa36ad5887ebf539.ctex"
+uid="uid://bf7adhtne2h3r"
+path="res://.godot/imported/Button - Next (Hover).png-da327d3b4641d7a2448f814269cbe33d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Asset/Art/BG - Option.png"
-dest_files=["res://.godot/imported/BG - Option.png-18d8aae9ccf00579aa36ad5887ebf539.ctex"]
+source_file="res://Asset/Art/Button - Next (Hover).png"
+dest_files=["res://.godot/imported/Button - Next (Hover).png-da327d3b4641d7a2448f814269cbe33d.ctex"]
 
 [params]
 

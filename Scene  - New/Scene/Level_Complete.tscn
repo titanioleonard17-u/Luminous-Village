@@ -2,6 +2,24 @@
 
 [ext_resource type="Texture2D" uid="uid://b8q6ukxt27mes" path="res://Asset/Art/LevelSelection/Complete.png" id="1_8xnyu"]
 
-[node name="Label" type="Sprite2D" unique_id=2027484806]
+[node name="Level_Complete" type="Node2D" unique_id=177384268]
+
+[node name="Level_Select2" type="Button" parent="." unique_id=328813239]
+offset_left = 158.00002
+offset_top = 425.0
+offset_right = 1318.0
+offset_bottom = 1081.0
+scale = Vector2(0.306, 0.306)
+icon = ExtResource("1_8xnyu")
+
+[node name="Next_Level2" type="Button" parent="." unique_id=1355792614]
+offset_left = 636.0
+offset_top = 419.0
+offset_right = 1796.0
+offset_bottom = 1075.0
+scale = Vector2(0.30649713, 0.30649713)
+icon = ExtResource("1_8xnyu")
+
+[node name="Label" type="Sprite2D" parent="." unique_id=2027484806]
 position = Vector2(566, 333)
 texture = ExtResource("1_8xnyu")
