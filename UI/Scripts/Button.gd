@@ -30,7 +30,7 @@ enum PurposeBtn {
 
 @export_category("Advance")
 @export var text: String
-@export var font_size: int = 80
+@export var font_size: int = 64
 
 
 var current_costume: int = 0

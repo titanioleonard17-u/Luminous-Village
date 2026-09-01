@@ -24,6 +24,7 @@ text = "asd"
 [node name="Label" type="Label" parent="." unique_id=281956534]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = SubResource("SystemFont_q01mv")
 theme_override_font_sizes/font_size = 48
 
