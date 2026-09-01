@@ -11,14 +11,18 @@ enum AudioType {
 	RANDOM_VIBE
 }
 
+
 func _ready() -> void:
 	bgm_player = AudioStreamPlayer.new()
+	bgm_player.bus = "BGM"
 	add_child(bgm_player)
 
 	sfx_player = AudioStreamPlayer.new()
+	sfx_player.bus = "SFX"
 	add_child(sfx_player)
 
 	bgm_player.finished.connect(_on_bgm_finished)
+
 
 func playAudio(audio_name: String, type: AudioType) -> void:
 	var path := ""
@@ -40,7 +44,17 @@ func playAudio(audio_name: String, type: AudioType) -> void:
 
 	var player := sfx_player if type == AudioType.SFX else bgm_player
 
-	player.stream = load(path)
+	# Jangan restart kalau BGM yang sama masih sedang dimainkan
+	if type != AudioType.SFX:
+		var new_stream: AudioStream = load(path)
+
+		if player.stream == new_stream and player.playing:
+			return
+
+		player.stream = new_stream
+	else:
+		player.stream = load(path)
+
 	player.volume_db = get_sound_volume(path)
 	player.play()
 
@@ -48,6 +62,7 @@ func playAudio(audio_name: String, type: AudioType) -> void:
 # =========================================================
 # SFX
 # =========================================================
+
 func find_sound(sound_name: String) -> String:
 	if sound_name == "ClickChecked" or sound_name == "ClickUnchecked":
 		sound_name = "ClickDefault"
@@ -79,24 +94,6 @@ func find_sound(sound_name: String) -> String:
 # =========================================================
 # BGM
 # =========================================================
-func playRandomVibe() -> void:
-	var path := get_random_vibe()
-
-	if path == "":
-		push_error("Tidak ada BGM Vibe!")
-		return
-
-	is_vibe_playing = true
-
-	bgm_player.stream = load(path)
-	bgm_player.volume_db = get_sound_volume(path)
-	bgm_player.play()
-
-
-func stopBGM() -> void:
-	is_vibe_playing = false
-	bgm_player.stop()
-
 
 func find_bgm(bgm_name: String) -> String:
 	var path := "res://Asset/Sound/BGM"
@@ -121,6 +118,29 @@ func find_bgm(bgm_name: String) -> String:
 
 	push_error("BGM tidak ditemukan: " + bgm_name)
 	return ""
+
+
+func playRandomVibe() -> void:
+	var path := get_random_vibe()
+
+	if path == "":
+		push_error("Tidak ada BGM Vibe!")
+		return
+
+	is_vibe_playing = true
+
+	bgm_player.stream = load(path)
+	bgm_player.volume_db = get_sound_volume(path)
+	bgm_player.play()
+
+
+func stopBGM() -> void:
+	is_vibe_playing = false
+	bgm_player.stop()
+
+
+func isBGMPlaying() -> bool:
+	return bgm_player.playing
 
 
 func get_random_vibe() -> String:

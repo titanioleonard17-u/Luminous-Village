@@ -1,7 +1,49 @@
 [gd_scene format=3 uid="uid://vgu3xe4vi0k6"]
 
 [ext_resource type="Texture2D" uid="uid://daffvaq4il1f7" path="res://Asset/Art/Homescreen/BG - Option.png" id="1_a3wot"]
+[ext_resource type="Script" uid="uid://varxow7pxgxv" path="res://UI/Scripts/OptionsMenu.gd" id="1_eec4q"]
 [ext_resource type="PackedScene" uid="uid://cbuu0vhh5nig0" path="res://UI/Scenes/CheckBox.tscn" id="2_dy1ut"]
+[ext_resource type="PackedScene" uid="uid://cip0gmnccnt8e" path="res://UI/Scenes/Button.tscn" id="3_40io0"]
+[ext_resource type="Script" uid="uid://cii3ggecrmep4" path="res://UI/Scripts/VolumeOptions.gd" id="3_a8xds"]
+[ext_resource type="Texture2D" uid="uid://n2ngtinar1tu" path="res://Asset/Art/OptionsMenu/Button - Sound.png" id="4_eec4q"]
+[ext_resource type="Texture2D" uid="uid://dlkuuwuxef83a" path="res://Asset/Art/OptionsMenu/Button - Sound Dis.png" id="5_40io0"]
+[ext_resource type="Texture2D" uid="uid://bhtnq3djaw0is" path="res://Asset/Art/Button - Back.png" id="8_a8xds"]
+
+[sub_resource type="GDScript" id="GDScript_gjaal"]
+script/source = "extends HBoxContainer
+
+@onready var volume_slider: HSlider = $VolumeSlider
+@onready var volume_label: Label = $Label
+
+var master_bus := AudioServer.get_bus_index(\"Master\")
+
+
+func _ready():
+	# Fixed width Label supaya slider tidak berubah ukuran
+	volume_label.custom_minimum_size.x = 100
+	
+	# Ambil volume Master saat UI dibuka
+	var volume_db := AudioServer.get_bus_volume_db(master_bus)
+	var volume := db_to_linear(volume_db) * 100.0
+	
+	volume_slider.value = volume
+	volume_label.text = str(roundi(volume)) + \"%\"
+
+
+func _on_volume_slider_value_changed(value: float):
+	# Ubah volume Master berdasarkan slider 0-100
+	AudioServer.set_bus_volume_db(
+		master_bus,
+		linear_to_db(value / 100.0)
+	)
+	
+	# Update angka
+	volume_label.text = str(roundi(value)) + \"%\"
+"
+
+[sub_resource type="SystemFont" id="SystemFont_40io0"]
+font_names = PackedStringArray("Berlin Sans FB")
+subpixel_positioning = 0
 
 [node name="OptionsMenu" type="Control" unique_id=1384109385]
 layout_mode = 3
@@ -10,6 +52,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_eec4q")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1784977549]
 visible = false
@@ -36,26 +79,71 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_a3wot")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1581204207]
+[node name="VolumeOptions" type="VBoxContainer" parent="." unique_id=1581204207]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -95.5
-offset_top = -44.0
-offset_right = 95.5
-offset_bottom = 44.0
+offset_left = -150.0
+offset_top = -93.5
+offset_right = 200.0
+offset_bottom = 93.5
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("3_a8xds")
 
-[node name="SFX" parent="VBoxContainer" unique_id=21320873 instance=ExtResource("2_dy1ut")]
+[node name="SFX" parent="VolumeOptions" unique_id=21320873 instance=ExtResource("2_dy1ut")]
 layout_mode = 2
 text = "SFX"
 isChecked = true
 
-[node name="BGM" parent="VBoxContainer" unique_id=1314161543 instance=ExtResource("2_dy1ut")]
+[node name="BGM" parent="VolumeOptions" unique_id=1314161543 instance=ExtResource("2_dy1ut")]
 layout_mode = 2
 text = "BGM"
 isChecked = true
+
+[node name="MasterVolume" type="HBoxContainer" parent="VolumeOptions" unique_id=358421420]
+layout_mode = 2
+theme_override_constants/separation = 16
+script = SubResource("GDScript_gjaal")
+
+[node name="MuteAllButton" parent="VolumeOptions/MasterVolume" unique_id=1699704292 instance=ExtResource("3_40io0")]
+layout_mode = 2
+customes = Array[Texture2D]([ExtResource("4_eec4q"), ExtResource("5_40io0")])
+customes_disabled = Array[Texture2D]([])
+type_button = 0
+size_button = 0
+purpose = 0
+text = ""
+font_size = 64
+
+[node name="VolumeSlider" type="HSlider" parent="VolumeOptions/MasterVolume" unique_id=159939523]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+value = 100.0
+
+[node name="Label" type="Label" parent="VolumeOptions/MasterVolume" unique_id=592688556]
+layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_40io0")
+theme_override_font_sizes/font_size = 32
+text = "100%"
+
+[node name="BackButton" parent="." unique_id=151178184 instance=ExtResource("3_40io0")]
+layout_mode = 0
+offset_left = 742.0
+offset_top = 496.0
+offset_right = 1092.0
+offset_bottom = 496.0
+customes = Array[Texture2D]([ExtResource("8_a8xds")])
+customes_disabled = Array[Texture2D]([])
+type_button = 1
+size_button = 1
+purpose = 2
+text = ""
+font_size = 64
+
+[connection signal="value_changed" from="VolumeOptions/MasterVolume/VolumeSlider" to="VolumeOptions/MasterVolume" method="_on_volume_slider_value_changed"]
+[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]

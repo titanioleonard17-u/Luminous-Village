@@ -10,6 +10,12 @@ subpixel_positioning = 0
 [node name="Button" type="TextureButton" unique_id=1699704292]
 script = ExtResource("1_5flae")
 customes = Array[Texture2D]([ExtResource("2_7l3oq")])
+customes_disabled = null
+type_button = null
+size_button = null
+purpose = null
+text = null
+font_size = null
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=697912376]
 layout_mode = 1

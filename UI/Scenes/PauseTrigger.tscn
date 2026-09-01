@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://dtcw4bgmuuftu"]
+[gd_scene format=3 uid="uid://cc81hm1d8jnxv"]
 
 [ext_resource type="Script" uid="uid://c3drfslgh6875" path="res://UI/Scripts/PauseTrigger.gd" id="1_aemob"]
 [ext_resource type="PackedScene" uid="uid://cip0gmnccnt8e" path="res://UI/Scenes/Button.tscn" id="2_sfsru"]
