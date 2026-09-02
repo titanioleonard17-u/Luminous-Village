@@ -41,3 +41,4 @@ position = Vector2(414, 291)
 
 [node name="Label2" parent="." unique_id=2027484806 instance=ExtResource("10_g2471")]
 visible = false
+script = null
