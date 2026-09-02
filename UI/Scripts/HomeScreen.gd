@@ -1,7 +1,7 @@
 extends Control
 
 func _ready() -> void:
-	AudioManager.playAudio("Homescreen", AudioManager.AudioType.BGM)
+	AudioManager.playAudio("HomeScreen", AudioManager.AudioType.BGM)
 	for child in $ButtonNode.get_children():
 		if child is BaseButton:
 			child.pressed.connect(_on_button_pressed.bind(child))

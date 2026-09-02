@@ -2,13 +2,13 @@
 
 importer="oggvorbisstr"
 type="AudioStreamOggVorbis"
-uid="uid://dcl7h73jlpgwl"
-path="res://.godot/imported/Homescreen_0dB.ogg-34e7f3515a3a237f4740d6ffa70bb188.oggvorbisstr"
+uid="uid://d3iinu3sa8veq"
+path="res://.godot/imported/HomeScreen_0dB.ogg-a5e6c29426312e34af3f428f8238962a.oggvorbisstr"
 
 [deps]
 
-source_file="res://Asset/Sound/BGM/Homescreen_0dB.ogg"
-dest_files=["res://.godot/imported/Homescreen_0dB.ogg-34e7f3515a3a237f4740d6ffa70bb188.oggvorbisstr"]
+source_file="res://Asset/Sound/BGM/HomeScreen_0dB.ogg"
+dest_files=["res://.godot/imported/HomeScreen_0dB.ogg-a5e6c29426312e34af3f428f8238962a.oggvorbisstr"]
 
 [params]
 
