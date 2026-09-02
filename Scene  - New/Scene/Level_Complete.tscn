@@ -2,12 +2,14 @@
 
 [ext_resource type="Texture2D" uid="uid://b8q6ukxt27mes" path="res://Asset/Art/LevelSelection/Complete.png" id="1_8xnyu"]
 [ext_resource type="PackedScene" uid="uid://cip0gmnccnt8e" path="res://UI/Scenes/Button.tscn" id="1_2317k"]
+[ext_resource type="Script" uid="uid://ca706bvfcye2a" path="res://Scene  - New/Script/LevelComplete.gd" id="1_eq22a"]
 [ext_resource type="Texture2D" uid="uid://bhtnq3djaw0is" path="res://Asset/Art/Button - Back.png" id="2_0a220"]
 [ext_resource type="Texture2D" uid="uid://g5keom7unw3s" path="res://Asset/Art/Button - Next.png" id="3_5lbyd"]
 
 [node name="Level_Complete" type="Control" unique_id=949011591]
 layout_mode = 3
 anchors_preset = 0
+script = ExtResource("1_eq22a")
 
 [node name="Label" type="TextureRect" parent="." unique_id=498074221]
 layout_mode = 0
@@ -18,7 +20,7 @@ offset_bottom = 652.0
 scale = Vector2(0.6800003, 0.6800003)
 texture = ExtResource("1_8xnyu")
 
-[node name="Button" parent="." unique_id=1699704292 instance=ExtResource("1_2317k")]
+[node name="BackButton" parent="." unique_id=1699704292 instance=ExtResource("1_2317k")]
 layout_mode = 0
 offset_left = 247.0
 offset_top = 392.0
@@ -29,7 +31,7 @@ type_button = 1
 size_button = 2
 purpose = 2
 
-[node name="Button2" parent="." unique_id=1023854592 instance=ExtResource("1_2317k")]
+[node name="NextButton" parent="." unique_id=1023854592 instance=ExtResource("1_2317k")]
 layout_mode = 0
 offset_left = 626.0
 offset_top = 391.0
@@ -39,3 +41,5 @@ customes = Array[Texture2D]([ExtResource("3_5lbyd")])
 type_button = 1
 size_button = 2
 purpose = 2
+
+[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]

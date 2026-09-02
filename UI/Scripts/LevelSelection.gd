@@ -2,6 +2,8 @@ extends Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	AudioManager.playAudio("HomeScreen", AudioManager.AudioType.BGM)
+	
 	for Row in $LevelBoxNode.get_children():
 		print(Row.name)
 		for LevelBox in Row.get_children():
