@@ -21,7 +21,6 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 16
 script = ExtResource("1_2l6y3")
-text = "asd"
 
 [node name="Label" type="Label" parent="." unique_id=281956534]
 layout_mode = 2

@@ -17,8 +17,9 @@ script/source = "extends HBoxContainer
 
 var master_bus := AudioServer.get_bus_index(\"Master\")
 
-
 func _ready():
+	$VolumeSlider.value = SettingsManager.settings[\"master_volume\"] * 100
+	
 	# Fixed width Label supaya slider tidak berubah ukuran
 	volume_label.custom_minimum_size.x = 100
 	
@@ -31,6 +32,8 @@ func _ready():
 
 
 func _on_volume_slider_value_changed(value: float):
+	SettingsManager.set_master_volume(value / 100.0)
+	
 	# Ubah volume Master berdasarkan slider 0-100
 	AudioServer.set_bus_volume_db(
 		master_bus,
