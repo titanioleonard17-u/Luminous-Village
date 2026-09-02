@@ -1,9 +1,23 @@
 extends Control
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready() -> void:
-	pass # Replace with function body.
+	process_mode = Node.PROCESS_MODE_ALWAYS
+	$PauseMenu.visible = false
+
 
 func _on_pause_button_pressed() -> void:
 	$PauseMenu.visible = true
-	get_tree().pause = true
+	get_tree().paused = true
+
+func _input(event: InputEvent) -> void:
+	print(get_tree().paused)
+	if event.is_action_pressed("PauseTrigger"):
+		if get_tree().paused:
+			AudioManager.playAudio("ClickClose", AudioManager.AudioType.SFX)
+			$PauseMenu.visible = false
+			get_tree().paused = false
+		else:
+			AudioManager.playAudio("ClickOpen", AudioManager.AudioType.SFX)
+			$PauseMenu.visible = true
+			get_tree().paused = true

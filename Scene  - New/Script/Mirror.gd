@@ -5,7 +5,7 @@ var touch_index: int = -1
 
 func _input(event: InputEvent) -> void:
 	if get_tree().paused:
-		print("Mirror masih dapat input walau paused!")
+		#print("Mirror masih dapat input walau paused!")
 		return
 
 	if event is InputEventMouseButton:

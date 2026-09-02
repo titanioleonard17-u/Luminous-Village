@@ -7,7 +7,6 @@ extends Node2D
 var level_complete: bool = false
 var is_celebrating_win: bool = false
 var win_label: Node = null
-var btn_level_select: Button = null
 var btn_next_level: Button = null
 var celebration_id: int = 0
 
@@ -37,12 +36,10 @@ func _strip_button_style(btn: Button) -> void:
 	btn.add_theme_stylebox_override("pressed", empty_style)
 	btn.add_theme_stylebox_override("focus", empty_style)
 	btn.add_theme_stylebox_override("disabled", empty_style)
-	# Kalau kamu pasang gambar di properti Icon, biar gambarnya ngisi penuh tombol:
 	btn.expand_icon = true
 
 func _squish_button(btn: Button) -> void:
 	# Kompensasi posisi manual biar tombol gak "maju"/geser pas di-scale
-	# (gak pakai pivot_offset karena ganggu posisi awal animasi drop)
 	var base_pos: Vector2 = btn.position
 	var half_size: Vector2 = btn.size / 2.0
 
@@ -116,7 +113,7 @@ func _trigger_win() -> void:
 	print("PAUSED STATUS: ", get_tree().paused)
 
 	if win_label:
-		AudioManager.playAudio("LevelComplete", AudioManager.AudioType.SFX)
+		AudioManager.playImportantSFX("LevelComplete")
 		win_label.visible = true
 		var tween := create_tween()
 		tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
@@ -125,7 +122,6 @@ func _trigger_win() -> void:
 		tween.tween_callback(_show_buttons)
 
 func _show_buttons() -> void:
-	_animate_button_drop(btn_level_select)
 	_animate_button_drop(btn_next_level)
 
 func _animate_button_drop(btn: Button) -> void:
@@ -135,8 +131,6 @@ func _animate_button_drop(btn: Button) -> void:
 	btn.modulate.a = 0.0
 
 	var target_pos: Vector2 = btn.position
-
-	# Mulai dari atas label COMPLETE: X tetap punya tombol, Y ambil dari label
 	var start_pos: Vector2 = target_pos
 	if win_label:
 		start_pos.y = win_label.position.y

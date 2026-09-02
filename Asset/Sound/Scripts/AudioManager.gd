@@ -2,7 +2,7 @@ extends Node
 
 var bgm_player: AudioStreamPlayer
 var sfx_player: AudioStreamPlayer
-
+var important_sfx_player: AudioStreamPlayer
 var is_vibe_playing := false
 
 enum AudioType {
@@ -23,7 +23,12 @@ func _ready() -> void:
 	sfx_player.bus = "SFX"
 	add_child(sfx_player)
 
+	important_sfx_player = AudioStreamPlayer.new()
+	important_sfx_player.bus = "SFX"
+	add_child(important_sfx_player)
+
 	bgm_player.finished.connect(_on_bgm_finished)
+
 
 
 func playAudio(audio_name: String, type: AudioType) -> void:
@@ -32,11 +37,9 @@ func playAudio(audio_name: String, type: AudioType) -> void:
 	match type:
 		AudioType.SFX:
 			path = find_sound(audio_name)
-
 		AudioType.BGM:
 			path = find_bgm(audio_name)
 			is_vibe_playing = false
-
 		AudioType.RANDOM_VIBE:
 			path = get_random_vibe()
 			is_vibe_playing = true
@@ -46,7 +49,6 @@ func playAudio(audio_name: String, type: AudioType) -> void:
 
 	var player := sfx_player if type == AudioType.SFX else bgm_player
 
-	# Jangan restart kalau BGM yang sama masih sedang dimainkan
 	if type != AudioType.SFX:
 		var new_stream: AudioStream = load(path)
 
@@ -59,6 +61,8 @@ func playAudio(audio_name: String, type: AudioType) -> void:
 
 	player.volume_db = get_sound_volume(path)
 	player.play()
+
+
 
 
 # =========================================================
@@ -134,6 +138,16 @@ func playRandomVibe() -> void:
 	bgm_player.stream = load(path)
 	bgm_player.volume_db = get_sound_volume(path)
 	bgm_player.play()
+
+func playImportantSFX(audio_name: String) -> void:
+	var path := find_sound(audio_name)
+
+	if path == "":
+		return
+
+	important_sfx_player.stream = load(path)
+	important_sfx_player.volume_db = get_sound_volume(path)
+	important_sfx_player.play()
 
 
 func stopBGM() -> void:

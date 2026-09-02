@@ -3,7 +3,10 @@
 [ext_resource type="Script" uid="uid://bmc0r6cm58o7u" path="res://UI/Scripts/PauseMenu.gd" id="1_d6k42"]
 [ext_resource type="PackedScene" uid="uid://dnefawufp7ebx" path="res://UI/Scenes/Transition.tscn" id="2_d6k42"]
 [ext_resource type="Texture2D" uid="uid://hwgbrj04tvpb" path="res://Asset/Art/PauseMenu/BG - Menu.png" id="3_63cs0"]
+[ext_resource type="Texture2D" uid="uid://c7ttgj0cm5u1u" path="res://Asset/Art/PauseMenu/Button  - Resume.png" id="5_d6jux"]
+[ext_resource type="Texture2D" uid="uid://olgm5cqpljy8" path="res://Asset/Art/PauseMenu/Button  - Retry.png" id="6_5c42o"]
 [ext_resource type="PackedScene" uid="uid://cip0gmnccnt8e" path="res://UI/Scenes/Button.tscn" id="6_5tk2c"]
+[ext_resource type="Texture2D" uid="uid://6eiqw3iuio4c" path="res://Asset/Art/Homescreen/Button  - Exit.png" id="7_21hq3"]
 
 [node name="PauseMenu" type="Control" unique_id=795113934]
 layout_mode = 3
@@ -47,29 +50,31 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -147.5
-offset_top = -129.0
-offset_right = 147.5
-offset_bottom = 129.0
+offset_top = -16.0
+offset_bottom = 16.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 16
 
 [node name="ResumeButton" parent="VBoxContainer" unique_id=1699704292 instance=ExtResource("6_5tk2c")]
 layout_mode = 2
-destinationImage = "uid://c7ttgj0cm5u1u"
-typeButton = 1
+customes = Array[Texture2D]([ExtResource("5_d6jux")])
+type_button = 1
+size_button = 1
 purpose = 2
 
 [node name="RetryButton" parent="VBoxContainer" unique_id=553593008 instance=ExtResource("6_5tk2c")]
 layout_mode = 2
-destinationImage = "uid://olgm5cqpljy8"
-typeButton = 1
+customes = Array[Texture2D]([ExtResource("6_5c42o")])
+type_button = 1
+size_button = 1
+purpose = 0
 
 [node name="ExitButton" parent="VBoxContainer" unique_id=120312425 instance=ExtResource("6_5tk2c")]
 layout_mode = 2
-destinationImage = "uid://6eiqw3iuio4c"
-typeButton = 1
+customes = Array[Texture2D]([ExtResource("7_21hq3")])
+type_button = 1
+size_button = 1
 purpose = 2
 
 [connection signal="pressed" from="VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
