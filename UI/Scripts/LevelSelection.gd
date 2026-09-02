@@ -25,4 +25,4 @@ func _ready() -> void:
 
 
 func _on_button_pressed() -> void:
-	Transition.play("res://UI/Scenes/Homescreen.tscn")
+	Transition.play("res://UI/Scenes/HomeScreen.tscn")

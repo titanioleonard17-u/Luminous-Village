@@ -30,11 +30,9 @@ theme_override_constants/separation = 8
 
 [node name="SoundButton" parent="MarginContainer/PauseNavigation" unique_id=1699704292 instance=ExtResource("2_sfsru")]
 layout_mode = 2
-destinationImage = "uid://n2ngtinar1tu"
 
 [node name="PauseButton" parent="MarginContainer/PauseNavigation" unique_id=1995370032 instance=ExtResource("2_sfsru")]
 layout_mode = 2
-destinationImage = "uid://wk16j6xbgwkn"
 purpose = 1
 
 [node name="PauseMenu" parent="." unique_id=2124132558 instance=ExtResource("3_aemob")]

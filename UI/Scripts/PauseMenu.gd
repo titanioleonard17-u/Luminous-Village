@@ -5,10 +5,11 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 func _on_resume_button_pressed() -> void:
+	get_tree().pause = false
 	self.visible = false
 
 func _on_retry_button_pressed() -> void:
 	pass # Replace with function body.
 
 func _on_exit_button_pressed() -> void:
-	Transition.play("res://UI/Scenes/Homescreen.tscn")
+	Transition.play("res://UI/Scenes/HomeScreen.tscn")

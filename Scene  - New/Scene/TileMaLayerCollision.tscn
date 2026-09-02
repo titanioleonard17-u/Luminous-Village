@@ -99,6 +99,6 @@ texture = ExtResource("1_c6m4r")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_vk2er")
 
-[node name="Solid_Tile" type="TileMapLayer" unique_id=1907145580]
+[node name="SolidTile" type="TileMapLayer" unique_id=1907145580]
 scale = Vector2(2, 2)
 tile_set = SubResource("TileSet_sinmp")

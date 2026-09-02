@@ -13,6 +13,8 @@ enum AudioType {
 
 
 func _ready() -> void:
+	process_mode = Node.PROCESS_MODE_ALWAYS
+	
 	bgm_player = AudioStreamPlayer.new()
 	bgm_player.bus = "BGM"
 	add_child(bgm_player)

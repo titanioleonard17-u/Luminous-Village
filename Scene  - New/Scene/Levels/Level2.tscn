@@ -2,13 +2,13 @@
 
 [ext_resource type="Script" uid="uid://dnkya1u3tc0yu" path="res://LevelManager.gd" id="1_4anci"]
 [ext_resource type="PackedScene" uid="uid://p3itxxvyp673" path="res://Scene  - New/Scene/Laser.tscn" id="2_b3hpt"]
-[ext_resource type="PackedScene" uid="uid://co2d8js0nkj26" path="res://Scene  - New/Scene/TileMapLayer_Ground.tscn" id="2_gbee0"]
-[ext_resource type="PackedScene" uid="uid://v723peurkr7k" path="res://Scene  - New/Scene/TileMaLayer_Collision.tscn" id="3_hp0c8"]
-[ext_resource type="PackedScene" uid="uid://crly0ntp87wu6" path="res://Scene  - New/Scene/Mirror_Spawner.tscn" id="7_g2471"]
+[ext_resource type="PackedScene" uid="uid://co2d8js0nkj26" path="res://Scene  - New/Scene/TileMapLayerGround.tscn" id="2_gbee0"]
+[ext_resource type="PackedScene" uid="uid://v723peurkr7k" path="res://Scene  - New/Scene/TileMaLayerCollision.tscn" id="3_hp0c8"]
+[ext_resource type="PackedScene" uid="uid://crly0ntp87wu6" path="res://Scene  - New/Scene/MirrorSpawner.tscn" id="7_g2471"]
 [ext_resource type="PackedScene" uid="uid://k5b0y2snplf3" path="res://Scene  - New/Scene/Mirror.tscn" id="8_nhui6"]
 [ext_resource type="PackedScene" uid="uid://b78j83aks04lv" path="res://Scene  - New/Scene/Prism.tscn" id="9_g2471"]
 [ext_resource type="PackedScene" uid="uid://bi2fm2hx85yl" path="res://Scene  - New/Scene/House.tscn" id="9_hp0c8"]
-[ext_resource type="PackedScene" uid="uid://ruuy6vksw05m" path="res://Scene  - New/Scene/Level_Complete.tscn" id="10_g2471"]
+[ext_resource type="PackedScene" uid="uid://ruuy6vksw05m" path="res://Scene  - New/Scene/LevelComplete.tscn" id="10_g2471"]
 
 [node name="Main" type="Node2D" unique_id=694264438]
 script = ExtResource("1_4anci")

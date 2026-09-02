@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ysbfl"]
 size = Vector2(129, 42)
 
-[node name="Door_ToLeft" type="StaticBody2D" unique_id=2099982022 groups=["door"]]
+[node name="DoorToLeft" type="StaticBody2D" unique_id=2099982022 groups=["door"]]
 script = ExtResource("1_y4rod")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1167317496]

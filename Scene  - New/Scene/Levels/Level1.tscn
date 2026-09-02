@@ -3,11 +3,11 @@
 [ext_resource type="Script" uid="uid://dnkya1u3tc0yu" path="res://LevelManager.gd" id="1_5kjoa"]
 [ext_resource type="PackedScene" uid="uid://k5b0y2snplf3" path="res://Scene  - New/Scene/Mirror.tscn" id="1_885hd"]
 [ext_resource type="PackedScene" uid="uid://p3itxxvyp673" path="res://Scene  - New/Scene/Laser.tscn" id="2_hdyv3"]
-[ext_resource type="PackedScene" uid="uid://co2d8js0nkj26" path="res://Scene  - New/Scene/TileMapLayer_Ground.tscn" id="3_5kjoa"]
-[ext_resource type="PackedScene" uid="uid://v723peurkr7k" path="res://Scene  - New/Scene/TileMaLayer_Collision.tscn" id="4_k2b07"]
+[ext_resource type="PackedScene" uid="uid://co2d8js0nkj26" path="res://Scene  - New/Scene/TileMapLayerGround.tscn" id="3_5kjoa"]
+[ext_resource type="PackedScene" uid="uid://v723peurkr7k" path="res://Scene  - New/Scene/TileMaLayerCollision.tscn" id="4_k2b07"]
 [ext_resource type="PackedScene" uid="uid://bi2fm2hx85yl" path="res://Scene  - New/Scene/House.tscn" id="5_hdyv3"]
-[ext_resource type="PackedScene" uid="uid://crly0ntp87wu6" path="res://Scene  - New/Scene/Mirror_Spawner.tscn" id="7_ut41e"]
-[ext_resource type="PackedScene" uid="uid://ruuy6vksw05m" path="res://Scene  - New/Scene/Level_Complete.tscn" id="10_k2b07"]
+[ext_resource type="PackedScene" uid="uid://crly0ntp87wu6" path="res://Scene  - New/Scene/MirrorSpawner.tscn" id="7_ut41e"]
+[ext_resource type="PackedScene" uid="uid://ruuy6vksw05m" path="res://Scene  - New/Scene/LevelComplete.tscn" id="10_k2b07"]
 
 [node name="Main" type="Node2D" unique_id=267740278]
 script = ExtResource("1_5kjoa")

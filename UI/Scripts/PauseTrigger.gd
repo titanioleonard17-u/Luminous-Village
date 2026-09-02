@@ -6,3 +6,4 @@ func _ready() -> void:
 
 func _on_pause_button_pressed() -> void:
 	$PauseMenu.visible = true
+	get_tree().pause = true

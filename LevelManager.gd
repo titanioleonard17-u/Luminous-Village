@@ -1,9 +1,7 @@
 extends Node2D
 
 @export var win_label_path: NodePath
-@export var btn_level_select_path: NodePath
 @export var btn_next_level_path: NodePath
-@export var level_select_scene: String = "res://Asset/Art/LevelSelection.tscn"  # sesuaikan path scene-mu
 @export var next_level_scene: String = ""  # isi per-level di Inspector, misal "res://Level2.tscn"
 
 var level_complete: bool = false
@@ -14,6 +12,7 @@ var btn_next_level: Button = null
 var celebration_id: int = 0
 
 func _ready() -> void:
+	AudioManager.playRandomVibe()
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	level_complete = false
 
@@ -21,14 +20,6 @@ func _ready() -> void:
 		win_label = get_node(win_label_path)
 		win_label.visible = false
 		win_label.process_mode = Node.PROCESS_MODE_ALWAYS
-
-	if not btn_level_select_path.is_empty():
-		btn_level_select = get_node(btn_level_select_path)
-		btn_level_select.visible = false
-		btn_level_select.process_mode = Node.PROCESS_MODE_ALWAYS
-		btn_level_select.pressed.connect(_on_level_select_pressed)
-		btn_level_select.button_down.connect(_squish_button.bind(btn_level_select))
-		_strip_button_style(btn_level_select)
 
 	if not btn_next_level_path.is_empty():
 		btn_next_level = get_node(btn_next_level_path)
@@ -125,6 +116,7 @@ func _trigger_win() -> void:
 	print("PAUSED STATUS: ", get_tree().paused)
 
 	if win_label:
+		AudioManager.playAudio("LevelComplete", AudioManager.AudioType.SFX)
 		win_label.visible = true
 		var tween := create_tween()
 		tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
@@ -156,10 +148,6 @@ func _animate_button_drop(btn: Button) -> void:
 	tween.set_parallel(true)
 	tween.tween_property(btn, "position", target_pos, 0.4).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 	tween.tween_property(btn, "modulate:a", 1.0, 0.4)
-
-func _on_level_select_pressed() -> void:
-	get_tree().paused = false
-	get_tree().change_scene_to_file(level_select_scene)
 
 func _on_next_level_pressed() -> void:
 	get_tree().paused = false
