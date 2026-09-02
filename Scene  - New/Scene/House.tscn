@@ -47,6 +47,7 @@ scale = Vector2(0.5, 0.5)
 polygon = PackedVector2Array(-492, 2, -224, -336, -58, -362, -36, -326, 116, -356, 176, -432, 244, -432, 484, -50, 420, -8, 398, 84, 432, 144, 358, 220, 300, 188, 136, 276, 150, 304, 32, 384, -94, 340, -94, 302, -320, 254, -432, 228, -398, 156, -416, 76)
 
 [node name="House_Sprite" type="AnimatedSprite2D" parent="." unique_id=1421699112]
+light_mask = 3
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_nsk4d")
 animation = &"house"
@@ -69,11 +70,13 @@ position = Vector2(-2, 0)
 [node name="PointLight2D" type="PointLight2D" parent="WindowLight/LightNode" unique_id=824164535]
 scale = Vector2(2, 2)
 color = Color(1, 1, 0.47843137, 1)
+range_item_cull_mask = 2
 texture = SubResource("GradientTexture2D_nsk4d")
 
 [node name="PointLight2D2" type="PointLight2D" parent="WindowLight/LightNode" unique_id=749594801]
 scale = Vector2(4, 4)
 color = Color(1, 1, 0.47843137, 1)
+range_item_cull_mask = 2
 texture = SubResource("GradientTexture2D_nsk4d")
 
 [node name="LightNode2" type="Node2D" parent="WindowLight" unique_id=1843918144]
@@ -82,9 +85,11 @@ position = Vector2(-46, -212)
 [node name="PointLight2D" type="PointLight2D" parent="WindowLight/LightNode2" unique_id=1107986475]
 scale = Vector2(2, 2)
 color = Color(1, 1, 0.47843137, 1)
+range_item_cull_mask = 2
 texture = SubResource("GradientTexture2D_nsk4d")
 
 [node name="PointLight2D2" type="PointLight2D" parent="WindowLight/LightNode2" unique_id=153228888]
 scale = Vector2(4, 4)
 color = Color(1, 1, 0.47843137, 1)
+range_item_cull_mask = 2
 texture = SubResource("GradientTexture2D_nsk4d")
