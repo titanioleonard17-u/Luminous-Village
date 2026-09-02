@@ -4,5 +4,13 @@
 
 [node name="Laser" type="Node2D" unique_id=932062609]
 script = ExtResource("1_vq4fx")
-laser_width = 4.0
-glow_layers = 5
+laser_length_fallback = 40000.0
+laser_color = Color(0.8666667, 0.8666667, 0.050980393, 0.80784315)
+laser_width = 7.0
+glow_layers = 8
+glow_width_multiplier = 5.9
+glow_alpha = 0.07
+glow_softness = 0.9
+fade_along_length = false
+fade_start_ratio = 0.4
+fade_softness = 0.5
