@@ -259,6 +259,14 @@ _data = {
 visible = false
 script = ExtResource("1_s5qj0")
 
+[node name="Blocker" type="ColorRect" parent="." unique_id=1010469816]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0)
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=110703503]
 libraries/ = SubResource("AnimationLibrary_b0f6i")
 
