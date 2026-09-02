@@ -136,11 +136,18 @@ func _trace_ray(start_pos: Vector2, start_dir: Vector2, bounces_left: int, exclu
 			var branch_exclude: Array[RID] = local_exclude.duplicate()
 			branch_exclude.append(collider_rid)
 
+			# Kalau prism punya get_split_origin(), cabang mulai dari situ
+			# (biasanya titik tengah objek) supaya keluarnya simetris ke
+			# pojok-pojok lain -- bukan dari titik tabrak yang bisa meleset.
+			var split_origin: Vector2 = hit_point
+			if collider.has_method("get_split_origin"):
+				split_origin = collider.get_split_origin()
+
 			var result_paths: Array = []
 			for split_dir in split_dirs:
 				# Dorong titik mulai tiap cabang sesuai arahnya sendiri-sendiri,
 				# supaya benar-benar keluar dari bentuk prism (bukan cuma geser sedikit).
-				var branch_start: Vector2 = hit_point + split_dir.normalized() * 8.0
+				var branch_start: Vector2 = split_origin + split_dir.normalized() * 8.0
 				var sub_paths: Array = _trace_ray(branch_start, split_dir, remaining, branch_exclude)
 				for sub in sub_paths:
 					var combined: Array[Vector2] = points.duplicate()

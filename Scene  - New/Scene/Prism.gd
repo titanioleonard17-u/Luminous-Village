@@ -1,12 +1,8 @@
 extends StaticBody2D
 
-## Sudut pisah tiap cabang dari arah datang laser (derajat).
-## 20 berarti cabang kiri belok +20°, cabang kanan belok -20°.
-@export_range(5, 89, 1) var split_angle_deg: float = 20.0
-
-## Kalau arah sebarannya kebalik dari yang diharapkan, centang ini di
-## Inspector -- nggak perlu edit kode lagi, tinggal toggle.
-@export var invert_pass_through: bool = false
+## Sudut sisi pertama segitiga (derajat), diukur dari sumbu X (kanan).
+## Kalau arah keluar cahayanya nggak pas sama sprite, geser nilai ini.
+@export_range(-180, 180, 1) var forward_offset_deg: float = 0.0
 
 var is_dragging: bool = false
 var touch_index: int = -1
@@ -53,29 +49,39 @@ func _is_point_over(world_pos: Vector2) -> bool:
 	return global_position.distance_to(world_pos) < 80.0
 
 
-## Sisi "depan" prism (yang bisa memecah cahaya). Sesuaikan arah ini
-## dengan orientasi sprite/collision shape segitiga kalian.
+## Menghitung arah normal (mengarah keluar) dari 3 sisi segitiga, berdasar
+## rotasi objek + forward_offset_deg. Segitiga dianggap simetris, jadi
+## 3 sisinya dianggap berjarak 120° satu sama lain.
+func _get_face_normals() -> Array:
+	var base_angle: float = deg_to_rad(forward_offset_deg) + global_rotation
+	var normals: Array = []
+	for i in range(3):
+		normals.append(Vector2.from_angle(base_angle + deg_to_rad(120.0 * i)))
+	return normals
+
+
+## Sisi "masuk" (yang bisa mancarin cahaya) -- cuma sisi ini yang aktif.
+## 2 sisi lainnya diperlakukan Laser.gd sebagai collision biasa (laser
+## berhenti di situ, tidak pecah).
 func get_reflect_normal() -> Vector2:
-	return Vector2.DOWN.rotated(global_rotation)
+	return _get_face_normals()[0]
 
 
-## Arah "tembus" default prism -- ini yang jadi pusat/tengah dari 2 cabang.
-## Selalu mengikuti rotasi objek secara penuh & smooth (nggak di-clamp),
-## supaya muter kanan/kiri kerasa natural. Kalau arahnya kebalik, centang
-## invert_pass_through di Inspector.
-func get_pass_through_direction() -> Vector2:
-	var base_dir: Vector2 = Vector2.LEFT if invert_pass_through else Vector2.RIGHT
-	return base_dir.rotated(global_rotation)
+## Titik asal kedua cabang cahaya. Dipakai Laser.gd (kalau ada) supaya
+## cabang mulai dari TENGAH segitiga -- bukan dari titik tabrak di sisi
+## masuk -- jadi keluarnya simetris ke arah 2 pojok lainnya, kayak
+## prisma beneran (bukan miring/nggak pas pojok).
+func get_split_origin() -> Vector2:
+	return global_position
 
 
-## Dipanggil Laser.gd saat ray kena prism dari sisi depan.
-## Pusat sebaran mengikuti rotasi objek secara penuh & smooth.
+## Dipanggil Laser.gd saat ray kena prism DARI SISI MASUK (sisi 0) saja.
+## Kalau kena sisi lain, Laser.gd sudah berhenti duluan sebelum sampai sini
+## (lihat get_reflect_normal() di atas), jadi di sini tinggal keluarkan
+## cahaya ke 2 sisi lainnya.
 func get_split_directions(_incoming_dir: Vector2, _hit_normal: Vector2) -> Array:
-	var forward: Vector2 = get_pass_through_direction()
-	var half_angle_rad: float = deg_to_rad(split_angle_deg) * 0.5
-	var branch_a: Vector2 = forward.rotated(half_angle_rad)
-	var branch_b: Vector2 = forward.rotated(-half_angle_rad)
-	return [branch_a, branch_b]
+	var normals: Array = _get_face_normals()
+	return [normals[1], normals[2]]
 
 
 func mark_hit() -> void:

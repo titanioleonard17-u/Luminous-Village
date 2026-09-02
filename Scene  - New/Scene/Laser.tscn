@@ -5,4 +5,4 @@
 [node name="Laser" type="Node2D" unique_id=932062609]
 script = ExtResource("1_vq4fx")
 laser_width = 4.0
-glow_layers = 2
+glow_layers = 5
