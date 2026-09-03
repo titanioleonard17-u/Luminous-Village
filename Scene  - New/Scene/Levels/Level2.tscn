@@ -38,7 +38,6 @@ sign_rise_offset = Vector2(0, -100)
 
 [node name="LCContainer" type="CanvasLayer" parent="." unique_id=1902336494]
 layer = 2
-visible = false
 
 [node name="LevelComplete" parent="LCContainer" unique_id=949011591 instance=ExtResource("10_g2471")]
 metadata/_edit_use_anchors_ = true

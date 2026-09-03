@@ -34,6 +34,7 @@ _bundled = {
 [node name="Level5" type="Node2D" unique_id=371732297]
 script = ExtResource("1_nk814")
 level_complete_path = NodePath("LCContainer/LevelComplete")
+sign_rise_offset = Vector2(0, -100)
 
 [node name="LCContainer" type="CanvasLayer" parent="." unique_id=873931066]
 layer = 2
