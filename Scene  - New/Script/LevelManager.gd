@@ -1,45 +1,82 @@
 extends Node2D
 
-@export var win_label_path: NodePath
-@export var btn_next_level_path: NodePath
-@export var next_level_scene: String = ""  # isi per-level di Inspector, misal "res://Level2.tscn"
+@export var level_complete_path: NodePath   # drag node "LevelComplete" instance ke sini
+
+@export_category("Animasi")
+@export var slide_in_offset_y: float = 800.0   # seberapa jauh Bg & Sign mulai dari bawah layar
+@export var sign_rise_offset: Vector2 = Vector2(0, -250)  # posisi Complete_Sign setelah naik ke atas
+@export var hold_duration: float = 1.2         # jeda sebelum sign naik & tombol turun
+
+@export var next_level_scene: String = ""
 
 var level_complete: bool = false
 var is_celebrating_win: bool = false
-var win_label: Node = null
-var btn_next_level: Button = null
 var celebration_id: int = 0
+
+var bg: Control = null
+var sign: Control = null
+var back_button: TextureButton = null
+var next_button: TextureButton = null
+
+# posisi asli (dari editor) sebagai posisi target/final
+var bg_target_pos: Vector2
+var sign_center_pos: Vector2   # posisi tengah sign SEBELUM naik
+var back_target_pos: Vector2
+var next_target_pos: Vector2
 
 func _ready() -> void:
 	AudioManager.playRandomVibe()
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	level_complete = false
 
-	if not win_label_path.is_empty():
-		win_label = get_node(win_label_path)
-		win_label.visible = false
-		win_label.process_mode = Node.PROCESS_MODE_ALWAYS
+	if level_complete_path.is_empty():
+		push_warning("level_complete_path belum diisi di Inspector!")
+		return
 
-	if not btn_next_level_path.is_empty():
-		btn_next_level = get_node(btn_next_level_path)
-		btn_next_level.visible = false
-		btn_next_level.process_mode = Node.PROCESS_MODE_ALWAYS
-		btn_next_level.pressed.connect(_on_next_level_pressed)
-		btn_next_level.button_down.connect(_squish_button.bind(btn_next_level))
-		_strip_button_style(btn_next_level)
+	var lc := get_node(level_complete_path)
 
-func _strip_button_style(btn: Button) -> void:
-	# Hilangkan background kotak/hitam bawaan Button, biar cuma icon/teksnya aja yang keliatan
-	var empty_style := StyleBoxEmpty.new()
-	btn.add_theme_stylebox_override("normal", empty_style)
-	btn.add_theme_stylebox_override("hover", empty_style)
-	btn.add_theme_stylebox_override("pressed", empty_style)
-	btn.add_theme_stylebox_override("focus", empty_style)
-	btn.add_theme_stylebox_override("disabled", empty_style)
-	btn.expand_icon = true
+	# Pakai Unique Name (%Bg, %Complete_Sign, dst) yang sudah diset di LevelComplete.tscn.
+	# Kalau belum sempat set unique name, ini fallback ke nama biasa.
+	bg = lc.get_node_or_null("%Bg")
+	if bg == null:
+		bg = lc.get_node_or_null("Bg")
 
-func _squish_button(btn: Button) -> void:
-	# Kompensasi posisi manual biar tombol gak "maju"/geser pas di-scale
+	sign = lc.get_node_or_null("%Complete_Sign")
+	if sign == null:
+		sign = lc.get_node_or_null("Complete_Sign")
+
+	back_button = lc.get_node_or_null("%Back_Button")
+	if back_button == null:
+		back_button = lc.get_node_or_null("Back_Button")
+
+	next_button = lc.get_node_or_null("%Next_Button")
+	if next_button == null:
+		next_button = lc.get_node_or_null("Next_Button")
+
+	if bg:
+		bg.process_mode = Node.PROCESS_MODE_ALWAYS
+		bg_target_pos = bg.position
+		bg.visible = false
+
+	if sign:
+		sign.process_mode = Node.PROCESS_MODE_ALWAYS
+		sign_center_pos = sign.position
+		sign.visible = false
+
+	if back_button:
+		back_button.process_mode = Node.PROCESS_MODE_ALWAYS
+		back_target_pos = back_button.position
+		back_button.visible = false
+		back_button.button_down.connect(_squish_button.bind(back_button))
+
+	if next_button:
+		next_button.process_mode = Node.PROCESS_MODE_ALWAYS
+		next_target_pos = next_button.position
+		next_button.visible = false
+		next_button.pressed.connect(_on_next_level_pressed)
+		next_button.button_down.connect(_squish_button.bind(next_button))
+
+func _squish_button(btn: TextureButton) -> void:
 	var base_pos: Vector2 = btn.position
 	var half_size: Vector2 = btn.size / 2.0
 
@@ -110,38 +147,62 @@ func _trigger_win() -> void:
 
 	level_complete = true
 	get_tree().paused = true
-	print("PAUSED STATUS: ", get_tree().paused)
 
-	if win_label:
-		AudioManager.playImportantSFX("LevelComplete")
-		win_label.visible = true
-		var tween := create_tween()
-		tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
-		win_label.modulate.a = 0.0
-		tween.tween_property(win_label, "modulate:a", 1.0, 0.6)
-		tween.tween_callback(_show_buttons)
+	AudioManager.playImportantSFX("LevelComplete")
+	_play_complete_sequence()
 
-func _show_buttons() -> void:
-	_animate_button_drop(btn_next_level)
+func _play_complete_sequence() -> void:
+	# --- Tahap 1: Bg & Complete_Sign naik bareng dari bawah layar ---
+	if bg:
+		bg.visible = true
+		bg.position = bg_target_pos + Vector2(0, slide_in_offset_y)
+	if sign:
+		sign.visible = true
+		sign.position = sign_center_pos + Vector2(0, slide_in_offset_y)
 
-func _animate_button_drop(btn: Button) -> void:
-	if btn == null:
-		return
-	btn.visible = true
-	btn.modulate.a = 0.0
+	var tween_in := create_tween()
+	tween_in.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+	tween_in.set_parallel(true)
 
-	var target_pos: Vector2 = btn.position
-	var start_pos: Vector2 = target_pos
-	if win_label:
-		start_pos.y = win_label.position.y
+	if bg:
+		tween_in.tween_property(bg, "position", bg_target_pos, 0.5)\
+			.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	if sign:
+		tween_in.tween_property(sign, "position", sign_center_pos, 0.5)\
+			.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 
-	btn.position = start_pos
+	await tween_in.finished
 
-	var tween := create_tween()
-	tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
-	tween.set_parallel(true)
-	tween.tween_property(btn, "position", target_pos, 0.4).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
-	tween.tween_property(btn, "modulate:a", 1.0, 0.4)
+	# --- Tahap 2: tahan sebentar di tengah ---
+	await get_tree().create_timer(hold_duration, true).timeout
+
+	# --- Tahap 3: Sign naik ke atas, Back & Next turun "dari dalam" Sign ---
+	if back_button:
+		back_button.position = sign_center_pos
+		back_button.visible = true
+		back_button.modulate.a = 0.0
+	if next_button:
+		next_button.position = sign_center_pos
+		next_button.visible = true
+		next_button.modulate.a = 0.0
+
+	var tween_out := create_tween()
+	tween_out.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+	tween_out.set_parallel(true)
+
+	if sign:
+		tween_out.tween_property(sign, "position", sign_center_pos + sign_rise_offset, 0.5)\
+			.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+
+	if back_button:
+		tween_out.tween_property(back_button, "position", back_target_pos, 0.45)\
+			.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+		tween_out.tween_property(back_button, "modulate:a", 1.0, 0.25)
+
+	if next_button:
+		tween_out.tween_property(next_button, "position", next_target_pos, 0.45)\
+			.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+		tween_out.tween_property(next_button, "modulate:a", 1.0, 0.25)
 
 func _on_next_level_pressed() -> void:
 	get_tree().paused = false

@@ -12,7 +12,8 @@
 
 [node name="Main" type="Node2D" unique_id=694264438]
 script = ExtResource("1_4anci")
-win_label_path = NodePath("CanvasLayer/LevelComplete")
+level_complete_path = NodePath("CanvasLayer/LevelComplete")
+sign_rise_offset = Vector2(0, -100)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1902336494]
 

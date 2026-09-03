@@ -1,6 +1,0 @@
-[gd_scene format=3 uid="uid://bclpx5em7hka3"]
-
-[ext_resource type="Texture2D" uid="uid://b08sc6vir8qxw" path="res://Asset/Art/Decor/Bush.png" id="1_50dy6"]
-
-[node name="Sprite2D" type="Sprite2D" unique_id=573211236]
-texture = ExtResource("1_50dy6")
