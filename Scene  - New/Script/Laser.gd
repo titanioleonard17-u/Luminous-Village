@@ -44,15 +44,31 @@ func _physics_process(_delta: float) -> void:
 
 func _draw() -> void:
 	var all_paths: Array = _calculate_laser_paths()
+
+	# --- Dedupe state (dipakai bareng lintas semua cabang/path) ---
+	# Ini yang mencegah segmen/joint/impact-glow yang SAMA (mis. bagian
+	# sebelum prisma yang dipakai bareng oleh 2 cabang hasil split)
+	# digambar berkali-kali. Karena blend mode-nya ADD, gambar dobel di
+	# posisi yang sama bikin alpha-nya numpuk jadi keliatan putih terang.
+	var drawn_segments: Dictionary = {}   # key: "layer_p0_p1" -> true
+	var drawn_joints: Dictionary = {}     # key: "layer_pos" -> true
+	var drawn_impacts: Dictionary = {}    # key: "pos" -> true
+
 	for path_data in all_paths:
 		var points: Array = path_data["points"]
 		var skip_glow: Array = path_data["skip_glow"]
 		if points.size() < 2:
 			continue
-		_draw_path(points, skip_glow)
+		_draw_path(points, skip_glow, drawn_segments, drawn_joints, drawn_impacts)
 
 
-func _draw_path(points: Array, skip_glow: Array) -> void:
+func _round_key(v: Vector2) -> String:
+	# Bulatkan posisi biar toleran terhadap floating point noise kecil,
+	# tapi tetap cukup presisi buat mendeteksi "titik yang sama".
+	return "%d_%d" % [round(v.x * 4.0), round(v.y * 4.0)]
+
+
+func _draw_path(points: Array, skip_glow: Array, drawn_segments: Dictionary, drawn_joints: Dictionary, drawn_impacts: Dictionary) -> void:
 	var total_length: float = 0.0
 	for i in range(points.size() - 1):
 		total_length += (points[i + 1] - points[i]).length()
@@ -80,29 +96,38 @@ func _draw_path(points: Array, skip_glow: Array) -> void:
 
 		var traveled: float = 0.0
 		for i in range(points.size() - 1):
-			var p0: Vector2 = to_local(points[i])
-			var p1: Vector2 = to_local(points[i + 1])
-			var seg_dir: Vector2 = (p1 - p0).normalized()
-			var normal: Vector2 = Vector2(-seg_dir.y, seg_dir.x)
 			var seg_len: float = (points[i + 1] - points[i]).length()
 
-			var width_start: float = max_width
-			var width_end: float = max_width
+			# --- Cek dedupe segmen (sama persis di path lain, mis. shared
+			# prefix sebelum titik split prisma) ---
+			var seg_key: String = "%d_%s_%s" % [layer, _round_key(points[i]), _round_key(points[i + 1])]
+			var already_drawn_seg: bool = drawn_segments.has(seg_key)
+			if not already_drawn_seg:
+				drawn_segments[seg_key] = true
 
-			var alpha_start: float = base_alpha * _fade_at.call(traveled)
-			var alpha_end: float = base_alpha * _fade_at.call(traveled + seg_len)
+			if not already_drawn_seg:
+				var p0: Vector2 = to_local(points[i])
+				var p1: Vector2 = to_local(points[i + 1])
+				var seg_dir: Vector2 = (p1 - p0).normalized()
+				var normal: Vector2 = Vector2(-seg_dir.y, seg_dir.x)
 
-			var color_start := Color(laser_color.r, laser_color.g, laser_color.b, alpha_start)
-			var color_end := Color(laser_color.r, laser_color.g, laser_color.b, alpha_end)
+				var width_start: float = max_width
+				var width_end: float = max_width
 
-			var poly := PackedVector2Array([
-				p0 - normal * width_start * 0.5,
-				p1 - normal * width_end * 0.5,
-				p1 + normal * width_end * 0.5,
-				p0 + normal * width_start * 0.5,
-			])
-			var poly_colors := PackedColorArray([color_start, color_end, color_end, color_start])
-			draw_polygon(poly, poly_colors)
+				var alpha_start: float = base_alpha * _fade_at.call(traveled)
+				var alpha_end: float = base_alpha * _fade_at.call(traveled + seg_len)
+
+				var color_start := Color(laser_color.r, laser_color.g, laser_color.b, alpha_start)
+				var color_end := Color(laser_color.r, laser_color.g, laser_color.b, alpha_end)
+
+				var poly := PackedVector2Array([
+					p0 - normal * width_start * 0.5,
+					p1 - normal * width_end * 0.5,
+					p1 + normal * width_end * 0.5,
+					p0 + normal * width_start * 0.5,
+				])
+				var poly_colors := PackedColorArray([color_start, color_end, color_end, color_start])
+				draw_polygon(poly, poly_colors)
 
 			traveled += seg_len
 
@@ -116,6 +141,12 @@ func _draw_path(points: Array, skip_glow: Array) -> void:
 				if i < points.size() - 2:
 					if skip_glow[i + 1]:
 						continue
+
+					var joint_key: String = "%d_%s" % [layer, _round_key(points[i + 1])]
+					if drawn_joints.has(joint_key):
+						continue
+					drawn_joints[joint_key] = true
+
 					var joint_local: Vector2 = to_local(points[i + 1])
 					var joint_alpha: float = base_alpha * _fade_at.call(traveled_joint)
 					var joint_color := Color(laser_color.r, laser_color.g, laser_color.b, joint_alpha)
@@ -129,6 +160,12 @@ func _draw_path(points: Array, skip_glow: Array) -> void:
 			traveled_impact += (points[i + 1] - points[i]).length()
 			if skip_glow[i + 1]:
 				continue
+
+			var impact_key: String = _round_key(points[i + 1])
+			if drawn_impacts.has(impact_key):
+				continue
+			drawn_impacts[impact_key] = true
+
 			var impact_pos: Vector2 = to_local(points[i + 1])
 			var impact_fade: float = _fade_at.call(traveled_impact)
 			_draw_impact_glow(impact_pos, impact_fade)

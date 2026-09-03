@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Luminous Village"
-run/main_scene="uid://dpjyi62h7s13i"
+run/main_scene="uid://bhtyqmmm3gq4g"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 
