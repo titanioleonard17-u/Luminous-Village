@@ -1,28 +1,51 @@
 extends Control
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready() -> void:
 	AudioManager.playAudio("HomeScreen", AudioManager.AudioType.BGM)
-	
-	for Row in $LevelBoxNode.get_children():
-		print(Row.name)
-		for LevelBox in Row.get_children():
-			var index: int = int((LevelBox.name).trim_prefix("LevelBox")) + (int((Row.name).trim_prefix("Row")) - 1)*5
-			var level_id: String = "Level" + str(index)
-			#LevelBox.target_scene = "res://Colorless_files/Scenes/Levels/Level" + str(index) + ".tscn"
-			
-			#if SaveManager.is_level_completed(level_id) or SaveManager.is_current_level(level_id):
-				#LevelBox.get_node("Lock").visible = false
-			LevelBox.get_node("Label").text = str(index)
-			
-			#if SaveManager.is_level_completed(level_id):
-				#var texture_rect: TextureRect = LevelBox.get_node("Border")
-				#var atlas: AtlasTexture = texture_rect.texture.duplicate()
-#
-				#texture_rect.texture = atlas
-				#atlas.region.position.x += 64
-				#LevelBox.get_node("Label").add_theme_color_override("font_color", Color.WHITE)
+
+	for row in $LevelBoxNode.get_children():
+		var row_index := int(row.name.trim_prefix("Row")) - 1
+
+		for level_box in row.get_children():
+			var box_index := int(level_box.name.trim_prefix("LevelBox"))
+
+			# Hitung index level
+			var index := box_index + row_index * 5
+			var level_id := "Level" + str(index)
+
+			# Tampilkan nomor level
+			level_box.get_node("Label").text = str(index)
+
+			# Cek apakah level sudah terbuka
+			var unlocked := _is_level_unlocked(index)
+
+			# Atur status button
+			level_box.disabled = not unlocked
+
+			# Hubungkan button
+			level_box.pressed.connect(
+				_on_level_box_pressed.bind(index)
+			)
+
+
+func _is_level_unlocked(index: int) -> bool:
+	# Level 1 selalu terbuka
+	if index == 1:
+		return true
+
+	# Level berikutnya terbuka jika level sebelumnya selesai
+	var previous_level := "Level" + str(index - 1)
+
+	return SaveManager.is_level_completed(previous_level)
+
+
+func _on_level_box_pressed(index: int) -> void:
+	var level_id := "Level" + str(index)
+	var target_scene := "res://Scene  - New/Scene/Levels/Level%d.tscn" % index
+
+	Transition.play(target_scene)
 
 
 func _on_button_pressed() -> void:
-	Transition.play("res://UI/Scenes/Homescreen.tscn")
+	Transition.play("res://UI/Scenes/HomeScreen.tscn")

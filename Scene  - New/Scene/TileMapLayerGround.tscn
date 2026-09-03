@@ -53,6 +53,6 @@ texture = ExtResource("1_weym8")
 [sub_resource type="TileSet" id="TileSet_bn75j"]
 sources/0 = SubResource("TileSetAtlasSource_ef470")
 
-[node name="Ground_Tile" type="TileMapLayer" unique_id=240078724]
+[node name="GroundTile" type="TileMapLayer" unique_id=240078724]
 scale = Vector2(2, 2)
 tile_set = SubResource("TileSet_bn75j")

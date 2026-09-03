@@ -133,19 +133,16 @@ theme_override_fonts/font = SubResource("SystemFont_40io0")
 theme_override_font_sizes/font_size = 32
 text = "100%"
 
-[node name="BackButton" parent="." unique_id=151178184 instance=ExtResource("3_40io0")]
+[node name="BackButton" parent="." unique_id=1278173817 instance=ExtResource("3_40io0")]
 layout_mode = 0
 offset_left = 742.0
 offset_top = 496.0
-offset_right = 1092.0
+offset_right = 742.0
 offset_bottom = 496.0
 customes = Array[Texture2D]([ExtResource("8_a8xds")])
-customes_disabled = Array[Texture2D]([])
 type_button = 1
 size_button = 1
 purpose = 2
-text = ""
-font_size = 64
 
 [connection signal="value_changed" from="VolumeOptions/MasterVolume/VolumeSlider" to="VolumeOptions/MasterVolume" method="_on_volume_slider_value_changed"]
 [connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]

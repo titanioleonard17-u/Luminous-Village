@@ -67,6 +67,8 @@ func _set_lights_visible(value: bool) -> void:
 
 func _squish() -> void:
 	var tween := create_tween()
+	
+	AudioManager.playAudio("Pop", AudioManager.AudioType.SFX)
 	tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
 	tween.tween_property(window_sprite, "scale", Vector2(0.59, 0.41), 0.08)
 	tween.tween_property(window_sprite, "scale", Vector2(0.46, 0.54), 0.06)

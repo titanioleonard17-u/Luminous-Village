@@ -45,22 +45,32 @@ theme_override_constants/separation = 16
 [node name="StartButton" parent="ButtonNode" unique_id=1699704292 instance=ExtResource("3_cfpv3")]
 layout_mode = 2
 customes = Array[Texture2D]([ExtResource("4_qihuk")])
+customes_disabled = Array[Texture2D]([])
 type_button = 1
 size_button = 1
+purpose = 0
+text = ""
+font_size = 64
 
 [node name="OptionsButton" parent="ButtonNode" unique_id=157524004 instance=ExtResource("3_cfpv3")]
 layout_mode = 2
 customes = Array[Texture2D]([ExtResource("5_qeure")])
+customes_disabled = Array[Texture2D]([])
 type_button = 1
 size_button = 1
 purpose = 1
+text = ""
+font_size = 64
 
 [node name="ExitButton" parent="ButtonNode" unique_id=1231602618 instance=ExtResource("3_cfpv3")]
 layout_mode = 2
 customes = Array[Texture2D]([ExtResource("6_cqdcb")])
+customes_disabled = Array[Texture2D]([])
 type_button = 1
 size_button = 1
 purpose = 2
+text = ""
+font_size = 64
 
 [node name="OptionsMenu" parent="." unique_id=1384109385 instance=ExtResource("7_v12o4")]
 visible = false
