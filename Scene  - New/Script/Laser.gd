@@ -44,13 +44,15 @@ func _physics_process(_delta: float) -> void:
 
 func _draw() -> void:
 	var all_paths: Array = _calculate_laser_paths()
-	for points in all_paths:
+	for path_data in all_paths:
+		var points: Array = path_data["points"]
+		var skip_glow: Array = path_data["skip_glow"]
 		if points.size() < 2:
 			continue
-		_draw_path(points)
+		_draw_path(points, skip_glow)
 
 
-func _draw_path(points: Array) -> void:
+func _draw_path(points: Array, skip_glow: Array) -> void:
 	var total_length: float = 0.0
 	for i in range(points.size() - 1):
 		total_length += (points[i + 1] - points[i]).length()
@@ -84,7 +86,6 @@ func _draw_path(points: Array) -> void:
 			var normal: Vector2 = Vector2(-seg_dir.y, seg_dir.x)
 			var seg_len: float = (points[i + 1] - points[i]).length()
 
-			# Lebar konstan sepanjang laser (tidak taper)
 			var width_start: float = max_width
 			var width_end: float = max_width
 
@@ -106,36 +107,34 @@ func _draw_path(points: Array) -> void:
 			traveled += seg_len
 
 		# --- Bundarin tiap titik sambungan (bend point) biar gak "patah/nabrak" ---
+		# KECUALI titik yang ditandai skip_glow (tembus rumah)
 		if round_joints and points.size() > 2:
 			var traveled_joint: float = 0.0
 			for i in range(points.size() - 1):
 				var seg_len_j: float = (points[i + 1] - points[i]).length()
 				traveled_joint += seg_len_j
-				# hanya titik tengah (bukan titik awal/akhir laser) yang perlu dibundarkan
 				if i < points.size() - 2:
+					if skip_glow[i + 1]:
+						continue
 					var joint_local: Vector2 = to_local(points[i + 1])
 					var joint_alpha: float = base_alpha * _fade_at.call(traveled_joint)
 					var joint_color := Color(laser_color.r, laser_color.g, laser_color.b, joint_alpha)
 					draw_circle(joint_local, max_width * 0.5, joint_color)
 
 	# --- Glow radial di setiap titik tumbukan (bukan cuma joint segmen laser) ---
-	# Dibuat SEKALI di luar loop layer (fungsinya sendiri sudah punya banyak layer),
-	# supaya efeknya konsisten dan tidak ikut kena "max_width" tiap glow_layers.
+	# KECUALI titik yang ditandai skip_glow (tembus rumah)
 	if impact_glow_enabled:
 		var traveled_impact: float = 0.0
 		for i in range(points.size() - 1):
 			traveled_impact += (points[i + 1] - points[i]).length()
-			# titik awal (index 0, sumber laser) sengaja dilewati
+			if skip_glow[i + 1]:
+				continue
 			var impact_pos: Vector2 = to_local(points[i + 1])
 			var impact_fade: float = _fade_at.call(traveled_impact)
 			_draw_impact_glow(impact_pos, impact_fade)
 
 
 func _draw_impact_glow(pos: Vector2, fade: float) -> void:
-	# Lingkaran radial (inti terang di tengah, makin ke luar makin buram/transparan)
-	# supaya titik tumbukan keliatan natural, bukan cuma "kepotong" rata.
-	# Basisnya dihitung dari lebar glow TERLEBAR (bukan cuma laser_width), supaya
-	# lingkarannya cukup besar buat nutup semua sudut/pojok kotak segmen laser.
 	var widest_glow_width: float = laser_width + laser_width * glow_width_multiplier
 	widest_glow_width = min(widest_glow_width, laser_width * 25.0)
 	var core_radius: float = widest_glow_width * 0.5
@@ -150,7 +149,6 @@ func _draw_impact_glow(pos: Vector2, fade: float) -> void:
 		var color := Color(laser_color.r, laser_color.g, laser_color.b, alpha)
 		draw_circle(pos, radius, color)
 
-	# inti terang yang nutup penuh lebar glow segmen (biar sudut kotaknya ketutup total)
 	var core_color := Color(1.0, 1.0, 1.0, impact_glow_alpha * fade)
 	draw_circle(pos, core_radius, core_color)
 
@@ -162,6 +160,7 @@ func _calculate_laser_paths() -> Array:
 
 func _trace_ray(start_pos: Vector2, start_dir: Vector2, bounces_left: int, exclude_rids: Array[RID]) -> Array:
 	var points: Array[Vector2] = [start_pos]
+	var skip_glow: Array[bool] = [true]  # titik awal (sumber laser) tidak perlu glow tumbukan
 	var current_pos: Vector2 = start_pos
 	var current_dir: Vector2 = start_dir
 	var local_exclude: Array[RID] = exclude_rids.duplicate()
@@ -184,7 +183,8 @@ func _trace_ray(start_pos: Vector2, start_dir: Vector2, bounces_left: int, exclu
 
 		if result.is_empty():
 			points.append(current_pos + current_dir * laser_length_fallback)
-			return [points]
+			skip_glow.append(true)  # ujung laser di kejauhan, tidak perlu glow tumbukan
+			return [{"points": points, "skip_glow": skip_glow}]
 
 		var hit_point: Vector2 = result.position
 		var hit_normal: Vector2 = result.normal
@@ -193,23 +193,28 @@ func _trace_ray(start_pos: Vector2, start_dir: Vector2, bounces_left: int, exclu
 		points.append(hit_point)
 
 		if collider.is_in_group("door"):
+			skip_glow.append(false)
 			if collider.has_method("open"):
 				collider.open()
-			return [points]
+			return [{"points": points, "skip_glow": skip_glow}]
 
 		elif collider.is_in_group("trigger"):
 			if collider.has_method("mark_hit"):
 				collider.mark_hit()
 			if _is_front_side(collider, hit_normal):
+				skip_glow.append(false)
 				current_dir = current_dir.bounce(hit_normal)
 				current_pos = hit_point + hit_normal * 4.0
 				continue
 			else:
-				return [points]
+				skip_glow.append(false)
+				return [{"points": points, "skip_glow": skip_glow}]
 
 		elif collider.is_in_group("house"):
 			if collider.has_method("mark_hit"):
 				collider.mark_hit()
+			# House SELALU tembus lurus, tidak pernah mantul, dan TIDAK ada bundar/glow
+			skip_glow.append(true)
 			local_exclude.append(collider_rid)
 			current_pos = hit_point + current_dir * 2.0
 			continue
@@ -218,14 +223,17 @@ func _trace_ray(start_pos: Vector2, start_dir: Vector2, bounces_left: int, exclu
 			if collider.has_method("mark_hit"):
 				collider.mark_hit()
 			if not _is_front_side(collider, hit_normal):
-				return [points]
+				skip_glow.append(false)
+				return [{"points": points, "skip_glow": skip_glow}]
+
+			skip_glow.append(false)
 
 			var split_dirs: Array = [current_dir, current_dir]
 			if collider.has_method("get_split_directions"):
 				split_dirs = collider.get_split_directions(current_dir, hit_normal)
 
 			if remaining <= 0 or split_dirs.size() < 2:
-				return [points]
+				return [{"points": points, "skip_glow": skip_glow}]
 
 			var branch_exclude: Array[RID] = local_exclude.duplicate()
 			branch_exclude.append(collider_rid)
@@ -239,23 +247,28 @@ func _trace_ray(start_pos: Vector2, start_dir: Vector2, bounces_left: int, exclu
 				var branch_start: Vector2 = split_origin + split_dir.normalized() * 8.0
 				var sub_paths: Array = _trace_ray(branch_start, split_dir, remaining, branch_exclude)
 				for sub in sub_paths:
-					var combined: Array[Vector2] = points.duplicate()
-					combined.append_array(sub)
-					result_paths.append(combined)
+					var combined_points: Array[Vector2] = points.duplicate()
+					combined_points.append_array(sub["points"])
+					var combined_skip: Array[bool] = skip_glow.duplicate()
+					combined_skip.append_array(sub["skip_glow"])
+					result_paths.append({"points": combined_points, "skip_glow": combined_skip})
 			return result_paths
 
 		elif collider.is_in_group("mirror"):
 			if _is_front_side(collider, hit_normal):
+				skip_glow.append(false)
 				current_dir = current_dir.bounce(hit_normal)
 				current_pos = hit_point + hit_normal * 4.0
 				continue
 			else:
-				return [points]
+				skip_glow.append(false)
+				return [{"points": points, "skip_glow": skip_glow}]
 
 		else:
-			return [points]
+			skip_glow.append(false)
+			return [{"points": points, "skip_glow": skip_glow}]
 
-	return [points]
+	return [{"points": points, "skip_glow": skip_glow}]
 
 
 func _is_front_side(collider: Object, hit_normal: Vector2) -> bool:
