@@ -62,9 +62,11 @@ position = Vector2(935, 216)
 rotation = -3.1415925
 
 [node name="DoorToLeft" parent="." unique_id=2099982022 instance=ExtResource("8_ehms3")]
+position = Vector2(297, 277)
 scale = Vector2(0.5, 0.5)
 
 [node name="Trigger" parent="." unique_id=1183924401 instance=ExtResource("8_8i2e1")]
+position = Vector2(317, 167)
 door_path = NodePath("../DoorToLeft")
 
 [node name="Mirror_Spawner" parent="." unique_id=1378017199 instance=ExtResource("7_4sx61")]
