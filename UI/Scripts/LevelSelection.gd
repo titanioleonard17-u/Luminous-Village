@@ -14,8 +14,7 @@ func _ready() -> void:
 			var index := box_index + row_index * 5
 			var level_id := "Level" + str(index)
 
-			# Tampilkan nomor level
-			level_box.get_node("Label").text = str(index)
+			
 
 			# Cek apakah level sudah terbuka
 			var unlocked := _is_level_unlocked(index)
@@ -26,7 +25,9 @@ func _ready() -> void:
 				var defaultTexture: Texture2D = load("res://Asset/Art/LevelSelection/Button - Level.png")
 				level_box.customes[0] = defaultTexture
 				level_box.setCostume(0)
-				print(level_box.customes)
+				
+				# Tampilkan nomor level
+				level_box.get_node("Label").text = str(index)
 
 			# Hubungkan button
 			level_box.pressed.connect(
