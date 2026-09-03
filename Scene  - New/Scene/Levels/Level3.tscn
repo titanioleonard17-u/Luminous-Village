@@ -7,7 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://v723peurkr7k" path="res://Scene  - New/Scene/TileMaLayerCollision.tscn" id="3_wgfei"]
 [ext_resource type="PackedScene" uid="uid://og8kwyfuk7te" path="res://Scene  - New/Scene/decor.tscn" id="6_2j1hv"]
 [ext_resource type="PackedScene" uid="uid://crly0ntp87wu6" path="res://Scene  - New/Scene/MirrorSpawner.tscn" id="7_sgfbn"]
+[ext_resource type="PackedScene" uid="uid://csbxlqkujg113" path="res://Scene  - New/Scene/Trigger.tscn" id="8_jorrf"]
 [ext_resource type="Script" uid="uid://i7cak6xerp6w" path="res://Scene  - New/Script/Mirror.gd" id="9_2j1hv"]
+[ext_resource type="PackedScene" uid="uid://cgyj6fdtpekif" path="res://Scene  - New/Scene/DoorToRight.tscn" id="9_l44mt"]
 [ext_resource type="PackedScene" uid="uid://b78j83aks04lv" path="res://Scene  - New/Scene/Prism.tscn" id="9_sgfbn"]
 [ext_resource type="PackedScene" uid="uid://bi2fm2hx85yl" path="res://Scene  - New/Scene/House.tscn" id="9_wgfei"]
 [ext_resource type="Texture2D" uid="uid://dg8tesaclo8yx" path="res://Asset/Art/Mirror.png" id="10_epicw"]
@@ -57,6 +59,14 @@ tile_map_data = PackedByteArray("AAACAAIAAAAEAAQAAAACAAMAAAADAAUAAAACAAQAAAADAAU
 [node name="Laser" parent="." unique_id=932062609 instance=ExtResource("2_5a2k2")]
 position = Vector2(935, 216)
 rotation = -3.1415925
+
+[node name="Trigger" parent="." unique_id=1183924401 instance=ExtResource("8_jorrf")]
+position = Vector2(160, 156)
+door_path = NodePath("../DoorToRight")
+
+[node name="DoorToRight" parent="." unique_id=1980675981 instance=ExtResource("9_l44mt")]
+position = Vector2(213, 421)
+scale = Vector2(0.5, 0.5)
 
 [node name="Mirror_Spawner" parent="." unique_id=1378017199 instance=ExtResource("7_sgfbn")]
 mirror_scene = SubResource("PackedScene_jorrf")
