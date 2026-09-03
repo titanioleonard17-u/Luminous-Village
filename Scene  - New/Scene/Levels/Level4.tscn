@@ -3,44 +3,186 @@
 [ext_resource type="Script" uid="uid://dnkya1u3tc0yu" path="res://Scene  - New/Script/LevelManager.gd" id="1_nfdql"]
 [ext_resource type="PackedScene" uid="uid://co2d8js0nkj26" path="res://Scene  - New/Scene/TileMapLayerGround.tscn" id="2_475u7"]
 [ext_resource type="PackedScene" uid="uid://p3itxxvyp673" path="res://Scene  - New/Scene/Laser.tscn" id="2_eyogd"]
-[ext_resource type="PackedScene" uid="uid://csbxlqkujg113" path="res://Scene  - New/Scene/Trigger.tscn" id="3_71hr5"]
 [ext_resource type="PackedScene" uid="uid://v723peurkr7k" path="res://Scene  - New/Scene/TileMaLayerCollision.tscn" id="3_svelw"]
-[ext_resource type="PackedScene" uid="uid://cgyj6fdtpekif" path="res://Scene  - New/Scene/DoorToRight.tscn" id="4_m3m5b"]
+[ext_resource type="Texture2D" uid="uid://bxktms8uk0wnt" path="res://Asset/Art/Tilemap - 2D.png" id="4_svelw"]
 [ext_resource type="PackedScene" uid="uid://crly0ntp87wu6" path="res://Scene  - New/Scene/MirrorSpawner.tscn" id="7_4sx61"]
-[ext_resource type="PackedScene" uid="uid://k5b0y2snplf3" path="res://Scene  - New/Scene/Mirror.tscn" id="8_qpd75"]
+[ext_resource type="PackedScene" uid="uid://b78j83aks04lv" path="res://Scene  - New/Scene/Prism.tscn" id="9_4sx61"]
 [ext_resource type="PackedScene" uid="uid://bi2fm2hx85yl" path="res://Scene  - New/Scene/House.tscn" id="9_svelw"]
 [ext_resource type="PackedScene" uid="uid://ruuy6vksw05m" path="res://Scene  - New/Scene/LevelComplete.tscn" id="10_4sx61"]
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qpd75"]
+texture = ExtResource("4_svelw")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+5:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+4:2/0 = 0
+5:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+4:3/0 = 0
+0:4/0 = 0
+1:4/0 = 0
+2:4/0 = 0
+3:4/0 = 0
+4:4/0 = 0
+5:4/0 = 0
+0:5/0 = 0
+1:5/0 = 0
+2:5/0 = 0
+3:5/0 = 0
+4:5/0 = 0
+5:5/0 = 0
+0:6/0 = 0
+1:6/0 = 0
+2:6/0 = 0
+3:6/0 = 0
+4:6/0 = 0
+5:6/0 = 0
+0:7/0 = 0
+1:7/0 = 0
+2:7/0 = 0
+3:7/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_jy4g3"]
+sources/0 = SubResource("TileSetAtlasSource_qpd75")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8i2e1"]
+texture = ExtResource("4_svelw")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:0/0 = 0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:0/0 = 0
+3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+4:0/0 = 0
+4:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+5:0/0 = 0
+5:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:1/0 = 0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:1/0 = 0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:1/0 = 0
+2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:1/0 = 0
+3:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+4:1/0 = 0
+4:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+5:1/0 = 0
+5:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:2/0 = 0
+0:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:2/0 = 0
+1:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:2/0 = 0
+2:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:2/0 = 0
+3:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+4:2/0 = 0
+4:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+5:2/0 = 0
+5:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:3/0 = 0
+0:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:3/0 = 0
+1:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:3/0 = 0
+2:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:3/0 = 0
+3:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+4:3/0 = 0
+4:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:4/0 = 0
+0:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:4/0 = 0
+1:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:4/0 = 0
+2:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:4/0 = 0
+3:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+4:4/0 = 0
+4:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+5:4/0 = 0
+5:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:5/0 = 0
+0:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:5/0 = 0
+1:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:5/0 = 0
+2:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:5/0 = 0
+3:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+4:5/0 = 0
+4:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+5:5/0 = 0
+5:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:6/0 = 0
+0:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:6/0 = 0
+1:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:6/0 = 0
+2:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:6/0 = 0
+3:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+4:6/0 = 0
+4:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+5:6/0 = 0
+5:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:7/0 = 0
+0:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:7/0 = 0
+1:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:7/0 = 0
+2:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:7/0 = 0
+3:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="TileSet" id="TileSet_ehms3"]
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_8i2e1")
+
 [node name="Main" type="Node2D" unique_id=1451308095]
 script = ExtResource("1_nfdql")
-win_label_path = NodePath("Label2")
 
-[node name="Ground_Tile" parent="." unique_id=240078724 instance=ExtResource("2_475u7")]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1047980135]
 
-[node name="Ground_Tile2" parent="." unique_id=1096621312 instance=ExtResource("2_475u7")]
+[node name="LevelComplete" parent="CanvasLayer" unique_id=949011591 instance=ExtResource("10_4sx61")]
+visible = false
+metadata/_edit_use_anchors_ = true
+
+[node name="GroundTile" parent="." unique_id=240078724 instance=ExtResource("2_475u7")]
 scale = Vector2(4, 4)
+tile_set = SubResource("TileSet_jy4g3")
 
 [node name="Solid_Tile" parent="." unique_id=1907145580 instance=ExtResource("3_svelw")]
-scale = Vector2(4, 4)
-
-[node name="Solid_Tile2" parent="." unique_id=153871858 instance=ExtResource("3_svelw")]
 tile_map_data = PackedByteArray("AAAjABUAAAAFAAEAAAAiABUAAAACAAAAAAAhABUAAAACAAAAAAAgABUAAAACAAAAAAAfABUAAAACAAAAAAAeABUAAAACAAAAAAAdABUAAAACAAAAAAAcABUAAAACAAAAAAAbABUAAAACAAAAAAAaABUAAAACAAAAAAAZABUAAAACAAAAAAAYABUAAAACAAAAAAAXABUAAAACAAAAAAAWABUAAAACAAAAAAAVABUAAAACAAAAAAAUABUAAAACAAAAAAATABUAAAACAAAAAAASABUAAAACAAAAAAARABUAAAACAAAAAAAQABUAAAACAAAAAAAPABUAAAACAAAAAAAOABUAAAACAAAAAAANABUAAAACAAAAAAAMABUAAAACAAAAAAALABUAAAACAAAAAAAKABUAAAACAAAAAAAJABUAAAACAAAAAAAIABUAAAACAAAAAAAHABUAAAACAAAAAAAGABUAAAACAAAAAAAFABUAAAACAAAAAAAEABUAAAACAAAAAAADABUAAAACAAAAAAACABUAAAACAAAAAAABABUAAAACAAAAAAAAABUAAAAEAAEAAAAAAAAAAAAEAAAAAAAAAAEAAAADAAEAAAAAAAIAAAADAAEAAAAAAAMAAAADAAEAAAAAAAQAAAADAAEAAAAAAAUAAAADAAEAAAAAAAYAAAADAAEAAAAAAAcAAAADAAEAAAAAAAgAAAADAAEAAAAAAAkAAAADAAEAAAAAAAoAAAADAAEAAAAAAAsAAAADAAEAAAAAAAwAAAADAAEAAAAAAA0AAAADAAEAAAAAAA4AAAADAAEAAAAAAA8AAAADAAEAAAAAABAAAAADAAEAAAAAABEAAAADAAEAAAAAABIAAAADAAEAAAAAABMAAAADAAEAAAAAABQAAAADAAEAAAABAAAAAAACAAIAAAACAAAAAAACAAIAAAADAAAAAAACAAIAAAAEAAAAAAACAAIAAAAFAAAAAAACAAIAAAAGAAAAAAACAAIAAAAHAAAAAAACAAIAAAAIAAAAAAACAAIAAAAJAAAAAAACAAIAAAAKAAAAAAACAAIAAAALAAAAAAACAAIAAAAMAAAAAAACAAIAAAANAAAAAAACAAIAAAAOAAAAAAACAAIAAAAPAAAAAAACAAIAAAAQAAAAAAACAAIAAAARAAAAAAACAAIAAAASAAAAAAACAAIAAAATAAAAAAACAAIAAAAUAAAAAAACAAIAAAAVAAAAAAACAAIAAAAWAAAAAAACAAIAAAAXAAAAAAACAAIAAAAYAAAAAAACAAIAAAAZAAAAAAACAAIAAAAaAAAAAAACAAIAAAAbAAAAAAACAAIAAAAcAAAAAAACAAIAAAAdAAAAAAACAAIAAAAeAAAAAAACAAIAAAAfAAAAAAACAAIAAAAgAAAAAAACAAIAAAAhAAAAAAACAAIAAAAjAAAAAAAFAAAAAAAiAAAAAAACAAIAAAAjAAEAAAABAAEAAAAjAAIAAAABAAEAAAAjAAMAAAABAAEAAAAjAAQAAAABAAEAAAAjAAUAAAABAAEAAAAjAAYAAAABAAEAAAAjAAcAAAABAAEAAAAjAAgAAAABAAEAAAAjAAkAAAABAAEAAAAjAAoAAAABAAEAAAAjAAsAAAABAAEAAAAjAAwAAAABAAEAAAAjAA0AAAABAAEAAAAjAA4AAAABAAEAAAAjAA8AAAABAAEAAAAjABAAAAABAAEAAAAjABEAAAABAAEAAAAjABIAAAABAAEAAAAjABMAAAABAAEAAAAjABQAAAABAAEAAAA=")
+tile_set = SubResource("TileSet_ehms3")
 
 [node name="Laser" parent="." unique_id=932062609 instance=ExtResource("2_eyogd")]
+scale = Vector2(4, 4)
 
-[node name="Trigger" parent="." unique_id=1183924401 instance=ExtResource("3_71hr5")]
-door_path = NodePath("../Door_ToRight")
-
-[node name="Door_ToRight" parent="." unique_id=1980675981 instance=ExtResource("4_m3m5b")]
-position = Vector2(605, 171)
-scale = Vector2(0.5, 0.5)
-
-[node name="Mirror_Spawner" parent="." unique_id=1378017199 instance=ExtResource("7_4sx61")]
-position = Vector2(404, 296)
-mirror_scene = ExtResource("8_qpd75")
-max_mirrors = 4
+[node name="MirrorSpawner" parent="." unique_id=1378017199 instance=ExtResource("7_4sx61")]
+scale = Vector2(4, 4)
 
 [node name="House" parent="." unique_id=1454567019 instance=ExtResource("9_svelw")]
-position = Vector2(743, 442.00006)
+scale = Vector2(1.2, 1.2)
 
-[node name="Label2" parent="." unique_id=2027484806 instance=ExtResource("10_4sx61")]
+[node name="Prism" parent="." unique_id=1943216660 instance=ExtResource("9_4sx61")]
+scale = Vector2(4, 4)

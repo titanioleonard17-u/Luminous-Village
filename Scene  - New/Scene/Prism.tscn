@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b78j83aks04lv"]
 
-[ext_resource type="Script" uid="uid://ceygu6xik5tv0" path="res://Scene  - New/Scene/Prism.gd" id="1_4et03"]
+[ext_resource type="Script" uid="uid://ceygu6xik5tv0" path="res://Scene  - New/Script/Prism.gd" id="1_4et03"]
 [ext_resource type="Texture2D" uid="uid://7nyw4aokwuwg" path="res://Asset/Art/Prism.png" id="2_4et03"]
 
 [node name="Prism" type="StaticBody2D" unique_id=1943216660 groups=["mirror"]]
