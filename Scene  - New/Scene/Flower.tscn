@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://be7b1liotp12d"]
+
+[ext_resource type="Texture2D" uid="uid://cpopudf2rgwla" path="res://Asset/Art/Decor/Flower.png" id="1_a5uk8"]
+
+[node name="Sprite2D" type="Sprite2D" unique_id=877389345]
+position = Vector2(-0.99999994, 0.99999976)
+scale = Vector2(0.172, 0.172)
+texture = ExtResource("1_a5uk8")

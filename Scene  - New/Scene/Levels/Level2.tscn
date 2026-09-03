@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://v723peurkr7k" path="res://Scene  - New/Scene/TileMaLayer_Collision.tscn" id="3_hp0c8"]
 [ext_resource type="PackedScene" uid="uid://crly0ntp87wu6" path="res://Scene  - New/Scene/Mirror_Spawner.tscn" id="7_g2471"]
 [ext_resource type="PackedScene" uid="uid://k5b0y2snplf3" path="res://Scene  - New/Scene/Mirror.tscn" id="8_nhui6"]
-[ext_resource type="PackedScene" uid="uid://b78j83aks04lv" path="res://Scene  - New/Scene/Prism.tscn" id="9_g2471"]
 [ext_resource type="PackedScene" uid="uid://bi2fm2hx85yl" path="res://Scene  - New/Scene/House.tscn" id="9_hp0c8"]
 [ext_resource type="PackedScene" uid="uid://ruuy6vksw05m" path="res://Scene  - New/Scene/Level_Complete.tscn" id="10_g2471"]
 
@@ -35,9 +34,6 @@ scale = Vector2(0.35, 0.35)
 [node name="House2" parent="." unique_id=560386614 instance=ExtResource("9_hp0c8")]
 position = Vector2(212, 450)
 scale = Vector2(0.35, 0.35)
-
-[node name="Prism" parent="." unique_id=1943216660 instance=ExtResource("9_g2471")]
-position = Vector2(414, 291)
 
 [node name="Label2" parent="." unique_id=2027484806 instance=ExtResource("10_g2471")]
 visible = false

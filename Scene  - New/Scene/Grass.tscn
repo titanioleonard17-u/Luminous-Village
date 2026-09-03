@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://bglr1qlmrkrqq"]
+
+[ext_resource type="Texture2D" uid="uid://dh578u45y6w02" path="res://Asset/Art/Decor/Grass.png" id="1_sw26w"]
+
+[node name="Sprite2D" type="Sprite2D" unique_id=1049184454]
+position = Vector2(9.536743e-07, 9.536743e-07)
+scale = Vector2(0.10050001, 0.10050001)
+texture = ExtResource("1_sw26w")
