@@ -22,6 +22,11 @@ func _ready() -> void:
 
 			# Atur status button
 			level_box.disabled = not unlocked
+			if unlocked:
+				var defaultTexture: Texture2D = load("res://Asset/Art/LevelSelection/Button - Level.png")
+				level_box.customes[0] = defaultTexture
+				level_box.setCostume(0)
+				print(level_box.customes)
 
 			# Hubungkan button
 			level_box.pressed.connect(
