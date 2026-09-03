@@ -12,9 +12,6 @@ func _ready() -> void:
 
 			# Hitung index level
 			var index := box_index + row_index * 5
-			var level_id := "Level" + str(index)
-
-			
 
 			# Cek apakah level sudah terbuka
 			var unlocked := _is_level_unlocked(index)
@@ -47,7 +44,6 @@ func _is_level_unlocked(index: int) -> bool:
 
 
 func _on_level_box_pressed(index: int) -> void:
-	var level_id := "Level" + str(index)
 	var target_scene := "res://Scene  - New/Scene/Levels/Level%d.tscn" % index
 
 	Transition.play(target_scene)

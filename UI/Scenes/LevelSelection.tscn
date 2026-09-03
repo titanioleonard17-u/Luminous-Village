@@ -94,6 +94,7 @@ text = ""
 font_size = 64
 
 [node name="Row2" type="HBoxContainer" parent="LevelBoxNode" unique_id=2033373069]
+visible = false
 layout_mode = 2
 theme_override_constants/separation = 64
 
@@ -148,6 +149,7 @@ text = ""
 font_size = 64
 
 [node name="Row3" type="HBoxContainer" parent="LevelBoxNode" unique_id=809871072]
+visible = false
 layout_mode = 2
 theme_override_constants/separation = 64
 
