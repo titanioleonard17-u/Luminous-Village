@@ -11,6 +11,7 @@ var guideText = [
 ]
 
 @onready var label = $Container/MarginContainer/Label
+@onready var page = $Container/Pages
 var currentText = 0;
 
 # Called when the node enters the scene tree for the first time.
@@ -19,6 +20,7 @@ func _ready() -> void:
 
 func ChangeText(id: int):
 	label.text = guideText[currentText]
+	page.text = str(currentText+1) + " / " + str(guideText.size())
 
 func _on_back_button_pressed() -> void:
 	currentText = clamp(currentText - 1, 0, guideText.size() - 1)
