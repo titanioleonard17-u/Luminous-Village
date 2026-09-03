@@ -128,6 +128,7 @@ func _trigger_win() -> void:
 	level_complete = true
 	get_tree().paused = true
 
+	SaveManager.complete_level(get_tree().current_scene.name)
 	AudioManager.playImportantSFX("LevelComplete")
 	$LCContainer/LevelComplete.visible = true;
 	_play_complete_sequence()

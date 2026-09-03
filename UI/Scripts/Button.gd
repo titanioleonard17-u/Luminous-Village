@@ -48,9 +48,8 @@ const SIZE_CONFIG = {
 			"texture_size": Vector2(100, 100)
 		},
 		SizeBtn.MEDIUM: {
-			"button_size": Vector2(135, 134),
-			"texture_size": Vector2(172, 172)
-		},
+			"button_size": Vector2(120, 120),
+			"texture_size": Vector2(155, 155) },
 		SizeBtn.LARGE: {
 			"button_size": Vector2(173, 170),
 			"texture_size": Vector2(220, 220)

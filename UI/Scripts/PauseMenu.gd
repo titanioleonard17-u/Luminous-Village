@@ -14,4 +14,4 @@ func _on_retry_button_pressed() -> void:
 
 func _on_exit_button_pressed() -> void:
 	get_tree().paused = false
-	Transition.play("res://UI/Scenes/HomeScreen.tscn")
+	Transition.play("res://UI/Scenes/LevelSelection.tscn")

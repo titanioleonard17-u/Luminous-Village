@@ -4,7 +4,7 @@ const SAVE_PATH := "user://savegame.json"
 
 var save_data := {
 	"completed_levels": [],
-	"current_level": "",
+	"current_level": "1",
 }
 
 
@@ -50,15 +50,41 @@ func load_game() -> void:
 
 
 # =========================
+# LEVEL
+# =========================
+
+func get_current_level() -> String:
+	return save_data["current_level"]
+
+
+func complete_level(level_name: String) -> void:
+	# Tambahkan ke daftar level yang sudah selesai
+	if not save_data["completed_levels"].has(level_name):
+		save_data["completed_levels"].append(level_name)
+
+	# Tentukan level berikutnya
+	var next_level := int(level_name) + 1
+	var current_level := int(save_data["current_level"])
+
+	# Hanya update kalau progress-nya lebih jauh
+	if next_level > current_level:
+		save_data["current_level"] = "Level" + str(next_level)
+
+	save_game()
+
+
+func is_level_completed(level_name: String) -> bool:
+	return save_data["completed_levels"].has(level_name)
+
+
+# =========================
 # RESET
 # =========================
 
 func reset_game() -> void:
 	save_data = {
-		"version": 1,
 		"completed_levels": [],
-		"current_level": "",
-		"game_progress": {}
+		"current_level": "1",
 	}
 
 	save_game()

@@ -17,15 +17,33 @@ func _ready() -> void:
 			# Tampilkan nomor level
 			level_box.get_node("Label").text = str(index)
 
-			# Hubungkan button ke level yang sesuai
+			# Cek apakah level sudah terbuka
+			var unlocked := _is_level_unlocked(index)
+
+			# Atur status button
+			level_box.disabled = not unlocked
+
+			# Hubungkan button
 			level_box.pressed.connect(
 				_on_level_box_pressed.bind(index)
 			)
 
 
+func _is_level_unlocked(index: int) -> bool:
+	# Level 1 selalu terbuka
+	if index == 1:
+		return true
+
+	# Level berikutnya terbuka jika level sebelumnya selesai
+	var previous_level := "Level" + str(index - 1)
+
+	return SaveManager.is_level_completed(previous_level)
+
+
 func _on_level_box_pressed(index: int) -> void:
+	var level_id := "Level" + str(index)
 	var target_scene := "res://Scene  - New/Scene/Levels/Level%d.tscn" % index
-	
+
 	Transition.play(target_scene)
 
 
