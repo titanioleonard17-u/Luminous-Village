@@ -33,7 +33,9 @@ func _input(event: InputEvent) -> void:
 
 func _rotate_towards(world_pos: Vector2) -> void:
 	var direction: Vector2 = world_pos - global_position
-	rotation = direction.angle()
+	var target_rotation: float = direction.angle()
+
+	rotation = lerp_angle(rotation, target_rotation, 0.1)
 
 func _is_point_over(world_pos: Vector2) -> bool:
 	return global_position.distance_to(world_pos) < 80.0
