@@ -16,6 +16,15 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_eq22a")
 
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1737574885]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.6666667)
+
 [node name="Bg" type="TextureRect" parent="." unique_id=93045106]
 layout_mode = 0
 offset_left = -439.0
@@ -57,3 +66,4 @@ size_button = 2
 purpose = 2
 
 [connection signal="pressed" from="Back_Button" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="Next_Button" to="." method="_on_next_button_pressed"]

@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://ruuy6vksw05m" path="res://Scene  - New/Scene/LevelComplete.tscn" id="2_7fxvy"]
 [ext_resource type="PackedScene" uid="uid://p3itxxvyp673" path="res://Scene  - New/Scene/Laser.tscn" id="2_hdyv3"]
 [ext_resource type="PackedScene" uid="uid://v723peurkr7k" path="res://Scene  - New/Scene/TileMaLayerCollision.tscn" id="2_ppncw"]
+[ext_resource type="PackedScene" uid="uid://cc81hm1d8jnxv" path="res://UI/Scenes/PauseTrigger.tscn" id="3_k2b07"]
 [ext_resource type="PackedScene" uid="uid://crly0ntp87wu6" path="res://Scene  - New/Scene/MirrorSpawner.tscn" id="4_885hd"]
 [ext_resource type="Texture2D" uid="uid://bxktms8uk0wnt" path="res://Asset/Art/Tilemap - 2D.png" id="4_hdyv3"]
 [ext_resource type="PackedScene" uid="uid://bi2fm2hx85yl" path="res://Scene  - New/Scene/House.tscn" id="8_5kjoa"]
@@ -160,12 +161,17 @@ sources/0 = SubResource("TileSetAtlasSource_ajkvu")
 
 [node name="Level1" type="Node2D" unique_id=1214213121]
 script = ExtResource("1_hdyv3")
+level_complete_path = NodePath("LCContainer/LevelComplete")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=825491678]
+[node name="LCContainer" type="CanvasLayer" parent="." unique_id=2374739]
+layer = 2
 
-[node name="LevelComplete" parent="CanvasLayer" unique_id=949011591 instance=ExtResource("2_7fxvy")]
-visible = false
+[node name="LevelComplete" parent="LCContainer" unique_id=949011591 instance=ExtResource("2_7fxvy")]
 metadata/_edit_use_anchors_ = true
+
+[node name="PauseContainer" type="CanvasLayer" parent="." unique_id=712733464]
+
+[node name="PauseTriger" parent="PauseContainer" unique_id=556950568 instance=ExtResource("3_k2b07")]
 
 [node name="GroundTile" parent="." unique_id=240078724 instance=ExtResource("1_w5ab2")]
 scale = Vector2(4, 4)

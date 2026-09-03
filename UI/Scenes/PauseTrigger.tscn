@@ -32,9 +32,12 @@ theme_override_constants/separation = 8
 [node name="PauseButton" parent="MarginContainer/PauseNavigation" unique_id=1995370032 instance=ExtResource("2_sfsru")]
 layout_mode = 2
 customes = Array[Texture2D]([ExtResource("3_sfsru")])
+customes_disabled = Array[Texture2D]([])
 type_button = 0
 size_button = 1
 purpose = 1
+text = ""
+font_size = 64
 
 [node name="PauseMenu" parent="." unique_id=2124132558 instance=ExtResource("3_aemob")]
 visible = false

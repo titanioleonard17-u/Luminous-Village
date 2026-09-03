@@ -28,6 +28,8 @@ func _ready() -> void:
 	AudioManager.playRandomVibe()
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	level_complete = false
+	
+	$LCContainer/LevelComplete.visible = false
 
 	if level_complete_path.is_empty():
 		push_warning("level_complete_path belum diisi di Inspector!")
@@ -127,6 +129,7 @@ func _trigger_win() -> void:
 	get_tree().paused = true
 
 	AudioManager.playImportantSFX("LevelComplete")
+	$LCContainer/LevelComplete.visible = true;
 	_play_complete_sequence()
 
 func _play_complete_sequence() -> void:
