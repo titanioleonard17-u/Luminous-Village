@@ -256,6 +256,7 @@ _data = {
 }
 
 [node name="Transition" type="CanvasLayer" unique_id=1483636045]
+layer = 2
 visible = false
 script = ExtResource("1_s5qj0")
 

@@ -67,34 +67,12 @@ func _ready() -> void:
 		back_button.process_mode = Node.PROCESS_MODE_ALWAYS
 		back_target_pos = back_button.position
 		back_button.visible = false
-		back_button.button_down.connect(_squish_button.bind(back_button))
 
 	if next_button:
 		next_button.process_mode = Node.PROCESS_MODE_ALWAYS
 		next_target_pos = next_button.position
 		next_button.visible = false
 		next_button.pressed.connect(_on_next_level_pressed)
-		next_button.button_down.connect(_squish_button.bind(next_button))
-
-func _squish_button(btn: TextureButton) -> void:
-	var base_pos: Vector2 = btn.position
-	var half_size: Vector2 = btn.size / 2.0
-
-	var s1 := Vector2(0.85, 0.75)
-	var s2 := Vector2(1.08, 0.92)
-	var s3 := Vector2(1.0, 1.0)
-
-	var tween := create_tween()
-	tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
-
-	tween.tween_property(btn, "scale", s1, 0.08)
-	tween.parallel().tween_property(btn, "position", base_pos - (s1 - Vector2.ONE) * half_size, 0.08)
-
-	tween.tween_property(btn, "scale", s2, 0.06)
-	tween.parallel().tween_property(btn, "position", base_pos - (s2 - Vector2.ONE) * half_size, 0.06)
-
-	tween.tween_property(btn, "scale", s3, 0.08)
-	tween.parallel().tween_property(btn, "position", base_pos, 0.08)
 
 func _process(_delta: float) -> void:
 	if level_complete:

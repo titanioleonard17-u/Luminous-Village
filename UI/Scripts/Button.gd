@@ -114,6 +114,9 @@ func applySizeConfig() -> void:
 	$TextureRect.size = texture_size
 	$TextureRect.position = (button_size - texture_size) / 2.0
 
+	# Pivot di tengah button
+	pivot_offset = button_size / 2.0
+
 
 func _on_mouse_entered() -> void:
 	# Disabled tidak boleh punya efek hover
@@ -163,6 +166,8 @@ func _on_pressed() -> void:
 	nextCostume()
 
 	var purpose_name: String = PurposeBtn.keys()[purpose].to_lower().capitalize()
+	
+	SquishButton()
 
 	AudioManager.playAudio(
 		"Click" + purpose_name,
@@ -236,3 +241,15 @@ func setDisabledVisual(disabled_state: bool) -> void:
 		applyHoverTexture()
 	else:
 		$TextureRect.texture = normal_texture
+
+func SquishButton() -> void:
+	var s1 := Vector2(0.85, 0.75)
+	var s2 := Vector2(1.08, 0.92)
+	var s3 := Vector2.ONE
+
+	var tween := create_tween()
+	tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+
+	tween.tween_property(self, "scale", s1, 0.08)
+	tween.tween_property(self, "scale", s2, 0.06)
+	tween.tween_property(self, "scale", s3, 0.08)
