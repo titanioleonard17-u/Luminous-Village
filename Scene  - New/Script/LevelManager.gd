@@ -7,6 +7,9 @@ extends Node2D
 @export var sign_rise_offset: Vector2 = Vector2(0, -250)  # posisi Complete_Sign setelah naik ke atas
 @export var hold_duration: float = 1.2         # jeda sebelum sign naik & tombol turun
 
+@export_category("Win Delay")
+@export var win_delay: float = 0.6   # jeda setelah semua rumah pop sampai layar Level Complete muncul (dulu 2.3, dipendekin karena gak ada lagi animasi kedip bareng)
+
 @export var next_level_scene: String = ""
 
 var level_complete: bool = false
@@ -118,7 +121,7 @@ func _trigger_win() -> void:
 		if house.has_method("celebrate"):
 			house.celebrate()
 
-	await get_tree().create_timer(2.3, true).timeout
+	await get_tree().create_timer(win_delay, true).timeout
 
 	if my_id != celebration_id or not is_celebrating_win:
 		return
