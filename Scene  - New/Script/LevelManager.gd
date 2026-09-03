@@ -109,8 +109,6 @@ func _trigger_win() -> void:
 	celebration_id += 1
 	var my_id: int = celebration_id
 
-	print("Semua rumah nyala! Mulai kedip perayaan. id=", my_id)
-
 	var lasers: Array = get_tree().get_nodes_in_group("laser")
 	for laser in lasers:
 		laser.visible = false
@@ -189,12 +187,10 @@ func _play_complete_sequence() -> void:
 func _on_next_level_pressed() -> void:
 	get_tree().paused = false
 	if next_level_scene.is_empty():
-		print("next_level_scene belum diisi di Inspector untuk level ini!")
 		return
 	get_tree().change_scene_to_file(next_level_scene)
 
 func _cancel_celebration() -> void:
-	print("Rumah lepas dari laser, batalkan perayaan & nyalakan laser lagi.")
 	is_celebrating_win = false
 	celebration_id += 1
 

@@ -1,17 +1,11 @@
 extends Control
-
-
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	$PauseMenu.visible = false
-
-
 func _on_pause_button_pressed() -> void:
 	$PauseMenu.visible = true
 	get_tree().paused = true
-
 func _input(event: InputEvent) -> void:
-	print(get_tree().paused)
 	if event.is_action_pressed("PauseTrigger"):
 		if get_tree().paused:
 			AudioManager.playAudio("ClickClose", AudioManager.AudioType.SFX)
