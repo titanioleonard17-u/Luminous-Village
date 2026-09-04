@@ -14,7 +14,7 @@ enum AudioType {
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
-	
+
 	bgm_player = AudioStreamPlayer.new()
 	bgm_player.bus = "BGM"
 	add_child(bgm_player)
@@ -29,6 +29,7 @@ func _ready() -> void:
 
 	bgm_player.finished.connect(_on_bgm_finished)
 
+	playAudio("HomeScreen", AudioType.BGM)
 
 
 func playAudio(audio_name: String, type: AudioType) -> void:
@@ -37,9 +38,11 @@ func playAudio(audio_name: String, type: AudioType) -> void:
 	match type:
 		AudioType.SFX:
 			path = find_sound(audio_name)
+
 		AudioType.BGM:
 			path = find_bgm(audio_name)
 			is_vibe_playing = false
+
 		AudioType.RANDOM_VIBE:
 			path = get_random_vibe()
 			is_vibe_playing = true
@@ -47,22 +50,26 @@ func playAudio(audio_name: String, type: AudioType) -> void:
 	if path == "":
 		return
 
-	var player := sfx_player if type == AudioType.SFX else bgm_player
+	var player: AudioStreamPlayer
+
+	if type == AudioType.SFX:
+		player = sfx_player
+	else:
+		player = bgm_player
+
+	var stream: AudioStream = load(path)
+
+	if stream == null:
+		push_error("Gagal load audio: " + path)
+		return
 
 	if type != AudioType.SFX:
-		var new_stream: AudioStream = load(path)
-
-		if player.stream == new_stream and player.playing:
+		if player.stream == stream and player.playing:
 			return
 
-		player.stream = new_stream
-	else:
-		player.stream = load(path)
-
+	player.stream = stream
 	player.volume_db = get_sound_volume(path)
 	player.play()
-
-
 
 
 # =========================================================
@@ -83,7 +90,13 @@ func find_sound(sound_name: String) -> String:
 	var regex := RegEx.new()
 	regex.compile("^(.+)_-?\\d+(?:\\.\\d+)?dB$")
 
-	for file in dir.get_files():
+	for raw_file in dir.get_files():
+		# Di build export, file asli diganti jadi "namafile.ext.import".
+		# Buang suffix ".import" itu supaya nama file kembali normal.
+		var file := raw_file
+		if file.get_extension() == "import":
+			file = file.get_basename()
+
 		var base_name := file.get_basename()
 		var result := regex.search(base_name)
 
@@ -112,7 +125,13 @@ func find_bgm(bgm_name: String) -> String:
 	var regex := RegEx.new()
 	regex.compile("^(.+)_-?\\d+(?:\\.\\d+)?dB$")
 
-	for file in dir.get_files():
+	for raw_file in dir.get_files():
+		# Di build export, file asli diganti jadi "namafile.ext.import".
+		# Buang suffix ".import" itu supaya nama file kembali normal.
+		var file := raw_file
+		if file.get_extension() == "import":
+			file = file.get_basename()
+
 		var base_name := file.get_basename()
 		var result := regex.search(base_name)
 
@@ -126,6 +145,10 @@ func find_bgm(bgm_name: String) -> String:
 	return ""
 
 
+# =========================================================
+# RANDOM VIBE
+# =========================================================
+
 func playRandomVibe() -> void:
 	var path := get_random_vibe()
 
@@ -135,28 +158,15 @@ func playRandomVibe() -> void:
 
 	is_vibe_playing = true
 
-	bgm_player.stream = load(path)
-	bgm_player.volume_db = get_sound_volume(path)
-	bgm_player.play()
+	var stream: AudioStream = load(path)
 
-func playImportantSFX(audio_name: String) -> void:
-	var path := find_sound(audio_name)
-
-	if path == "":
+	if stream == null:
+		push_error("Gagal load BGM Vibe: " + path)
 		return
 
-	important_sfx_player.stream = load(path)
-	important_sfx_player.volume_db = get_sound_volume(path)
-	important_sfx_player.play()
-
-
-func stopBGM() -> void:
-	is_vibe_playing = false
-	bgm_player.stop()
-
-
-func isBGMPlaying() -> bool:
-	return bgm_player.playing
+	bgm_player.stream = stream
+	bgm_player.volume_db = get_sound_volume(path)
+	bgm_player.play()
 
 
 func get_random_vibe() -> String:
@@ -172,7 +182,13 @@ func get_random_vibe() -> String:
 	var regex := RegEx.new()
 	regex.compile("^.+Vibe_-?\\d+(?:\\.\\d+)?dB$")
 
-	for file in dir.get_files():
+	for raw_file in dir.get_files():
+		# Di build export, file asli diganti jadi "namafile.ext.import".
+		# Buang suffix ".import" itu supaya nama file kembali normal.
+		var file := raw_file
+		if file.get_extension() == "import":
+			file = file.get_basename()
+
 		var base_name := file.get_basename()
 
 		if regex.search(base_name):
@@ -183,6 +199,40 @@ func get_random_vibe() -> String:
 		return ""
 
 	return vibe_songs.pick_random()
+
+
+# =========================================================
+# IMPORTANT SFX
+# =========================================================
+
+func playImportantSFX(audio_name: String) -> void:
+	var path := find_sound(audio_name)
+
+	if path == "":
+		return
+
+	var stream: AudioStream = load(path)
+
+	if stream == null:
+		push_error("Gagal load important SFX: " + path)
+		return
+
+	important_sfx_player.stream = stream
+	important_sfx_player.volume_db = get_sound_volume(path)
+	important_sfx_player.play()
+
+
+# =========================================================
+# BGM CONTROL
+# =========================================================
+
+func stopBGM() -> void:
+	is_vibe_playing = false
+	bgm_player.stop()
+
+
+func isBGMPlaying() -> bool:
+	return bgm_player.playing
 
 
 # =========================================================
