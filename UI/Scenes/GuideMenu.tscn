@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://43ol7ai1lse0"]
 
 [ext_resource type="PackedScene" uid="uid://cip0gmnccnt8e" path="res://UI/Scenes/Button.tscn" id="1_12d8v"]
-[ext_resource type="Script" uid="uid://byrrdt4ekloft" path="res://Scene  - New/Script/TutorialText.gd" id="1_xf3b1"]
+[ext_resource type="Script" uid="uid://byrrdt4ekloft" path="res://UI/Scripts/GuideMenu.gd" id="1_xf3b1"]
 [ext_resource type="Texture2D" uid="uid://g5keom7unw3s" path="res://Asset/Art/Button - Next.png" id="2_xf3b1"]
 [ext_resource type="Texture2D" uid="uid://bhtnq3djaw0is" path="res://Asset/Art/Button - Back.png" id="3_2djnx"]
 
@@ -9,7 +9,7 @@
 font_names = PackedStringArray("Berlin Sans FB")
 subpixel_positioning = 0
 
-[node name="TutorialText" type="Control" unique_id=1234219416]
+[node name="GuideMenu" type="Control" unique_id=1234219416]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
