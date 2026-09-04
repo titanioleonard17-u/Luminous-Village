@@ -2,6 +2,9 @@
 
 [ext_resource type="Script" uid="uid://bep24nohftir0" path="res://Scene  - New/Scene/Mirror_Counter.gd" id="1_3eyo3"]
 
+[sub_resource type="SystemFont" id="SystemFont_b5iei"]
+font_names = PackedStringArray("Berlin Sans FB")
+
 [node name="Mirror_Counter" type="CanvasLayer" unique_id=2086307742]
 script = ExtResource("1_3eyo3")
 
@@ -9,5 +12,6 @@ script = ExtResource("1_3eyo3")
 offset_left = 8.0
 offset_right = 57.0
 offset_bottom = 45.0
+theme_override_fonts/font = SubResource("SystemFont_b5iei")
 theme_override_font_sizes/font_size = 50
 text = "4/4"
