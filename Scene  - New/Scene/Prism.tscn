@@ -13,5 +13,6 @@ scale = Vector2(0.31874081, -0.30845878)
 polygon = PackedVector2Array(-1.5686721, 155.61237, -152.16125, -97.25774, 167.84799, -97.25774)
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1698868491]
+texture_filter = 2
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("2_4et03")

@@ -100,5 +100,6 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_vk2er")
 
 [node name="SolidTile" type="TileMapLayer" unique_id=1907145580]
+texture_filter = 1
 scale = Vector2(2, 2)
 tile_set = SubResource("TileSet_sinmp")

@@ -12,6 +12,7 @@ open_rotation_degrees = 90.0
 open_speed = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1167317496]
+texture_filter = 2
 position = Vector2(56.5, 0.5)
 shape = SubResource("RectangleShape2D_ysbfl")
 

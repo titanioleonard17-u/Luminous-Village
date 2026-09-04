@@ -43,6 +43,7 @@ sign_rise_offset = Vector2(0, -100)
 layer = 2
 
 [node name="LevelComplete" parent="LCContainer" unique_id=949011591 instance=ExtResource("10_ph1hf")]
+visible = false
 metadata/_edit_use_anchors_ = true
 
 [node name="PauseContainer" type="CanvasLayer" parent="." unique_id=1794675470]
@@ -72,12 +73,12 @@ scale = Vector2(0.8, 0.72)
 position = Vector2(628.99994, 411.99994)
 rotation = -3.1415925
 scale = Vector2(1.4960002, 0.57600003)
+open_rotation_degrees = -90.0
 
 [node name="Trigger" parent="." unique_id=1183924401 instance=ExtResource("9_5rk2a")]
 position = Vector2(1046, 146)
 rotation = 1.5707964
 door_path = NodePath("../DoorToLeft")
-
 
 [node name="Trigger2" parent="." unique_id=92230006 instance=ExtResource("9_5rk2a")]
 position = Vector2(91, 111)

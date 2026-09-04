@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://biwo1xnrgwu6j"
-path="res://.godot/imported/House.png-015cc0dc062fe2bbdb8878ea2355c37a.ctex"
+uid="uid://di5ghg8tuwoc2"
+path="res://.godot/imported/Button - Help.png-be8156346cc09225c954c64506df1ce4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Asset/Art/House.png"
-dest_files=["res://.godot/imported/House.png-015cc0dc062fe2bbdb8878ea2355c37a.ctex"]
+source_file="res://Asset/Art/OptionsMenu/Button - Help.png"
+dest_files=["res://.godot/imported/Button - Help.png-be8156346cc09225c954c64506df1ce4.ctex"]
 
 [params]
 
@@ -23,7 +23,7 @@ compress/rdo_quality_loss=0.0
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=true
+mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""

@@ -38,6 +38,7 @@ polygon = PackedVector2Array(-492, 2, -224, -336, -58, -362, -36, -326, 116, -35
 
 [node name="House_Sprite" type="AnimatedSprite2D" parent="." unique_id=1421699112]
 light_mask = 3
+texture_filter = 4
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_nsk4d")
 animation = &"house"

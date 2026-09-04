@@ -17,6 +17,7 @@ scale = Vector2(1.5, 1.5)
 shape = SubResource("RectangleShape2D_rpblv")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=332315743]
+texture_filter = 2
 position = Vector2(-93.75001, 9.249985)
 scale = Vector2(0.45299995, 0.45299995)
 texture = ExtResource("1_7a0bk")
