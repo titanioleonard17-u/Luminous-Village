@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://v723peurkr7k" path="res://Scene  - New/Scene/TileMaLayerCollision.tscn" id="3_0rl5c"]
 [ext_resource type="PackedScene" uid="uid://cc81hm1d8jnxv" path="res://UI/Scenes/PauseTrigger.tscn" id="3_ph1hf"]
 [ext_resource type="PackedScene" uid="uid://og8kwyfuk7te" path="res://Scene  - New/Scene/decor.tscn" id="6_jxvl2"]
-[ext_resource type="PackedScene" uid="uid://cen1rv6xnlc18" path="res://Scene  - New/Scene/Mirror_Counter.tscn" id="7_5rk2a"]
+[ext_resource type="PackedScene" uid="uid://cen1rv6xnlc18" path="res://Scene  - New/Scene/MirrorCounter.tscn" id="7_5rk2a"]
 [ext_resource type="PackedScene" uid="uid://crly0ntp87wu6" path="res://Scene  - New/Scene/MirrorSpawner.tscn" id="7_ph1hf"]
 [ext_resource type="PackedScene" uid="uid://d1ibvcfo0548o" path="res://Scene  - New/Scene/DoorToLeft.tscn" id="8_jldiq"]
 [ext_resource type="PackedScene" uid="uid://bi2fm2hx85yl" path="res://Scene  - New/Scene/House.tscn" id="9_0rl5c"]

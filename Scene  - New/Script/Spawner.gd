@@ -60,4 +60,4 @@ func get_remaining_mirrors() -> int:
 
 func _update_counter() -> void:
 	if mirror_counter:
-		mirror_counter.set_count(get_remaining_mirrors(), max_mirrors)
+		mirror_counter.setMirrorCount(get_remaining_mirrors(), max_mirrors)

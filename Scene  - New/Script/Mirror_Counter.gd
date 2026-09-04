@@ -1,11 +1,15 @@
 extends CanvasLayer
 
-@onready var label: Label = $Label
+@onready var label: Label = $MarginContainer/HorizontalContainer/MirrorCount
+@onready var bounceLabel: Label = $MarginContainer/HorizontalContainer/BounceCount
 
 var _tween: Tween
 
-func set_count(remaining: int, max_count: int) -> void:
-	label.text = "%d / %d" % [remaining, max_count]
+func setMirrorCount(remaining: int, max_count: int) -> void:
+	label.text = "MC: %d / %d" % [remaining, max_count]
+
+func setBounceCount(remaining: int, max_count: int) -> void:
+	bounceLabel.text = "BC: %d / %d" %[remaining, max_count]
 
 func play_error_effect() -> void:
 	if _tween and _tween.is_valid():

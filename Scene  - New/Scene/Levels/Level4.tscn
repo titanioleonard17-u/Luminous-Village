@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://v723peurkr7k" path="res://Scene  - New/Scene/TileMaLayerCollision.tscn" id="3_svelw"]
 [ext_resource type="PackedScene" uid="uid://og8kwyfuk7te" path="res://Scene  - New/Scene/decor.tscn" id="6_jy4g3"]
 [ext_resource type="PackedScene" uid="uid://crly0ntp87wu6" path="res://Scene  - New/Scene/MirrorSpawner.tscn" id="7_4sx61"]
-[ext_resource type="PackedScene" uid="uid://cen1rv6xnlc18" path="res://Scene  - New/Scene/Mirror_Counter.tscn" id="7_hp15k"]
+[ext_resource type="PackedScene" uid="uid://cen1rv6xnlc18" path="res://Scene  - New/Scene/MirrorCounter.tscn" id="7_hp15k"]
 [ext_resource type="PackedScene" uid="uid://csbxlqkujg113" path="res://Scene  - New/Scene/Trigger.tscn" id="8_8i2e1"]
 [ext_resource type="PackedScene" uid="uid://d1ibvcfo0548o" path="res://Scene  - New/Scene/DoorToLeft.tscn" id="8_ehms3"]
 [ext_resource type="PackedScene" uid="uid://b78j83aks04lv" path="res://Scene  - New/Scene/Prism.tscn" id="9_4sx61"]
@@ -41,7 +41,6 @@ sign_rise_offset = Vector2(0, -100)
 
 [node name="Container" type="CanvasLayer" parent="." unique_id=1062211876]
 layer = 2
-visible = false
 
 [node name="PauseTriger" parent="Container" unique_id=556950568 instance=ExtResource("3_4sx61")]
 
@@ -61,6 +60,7 @@ tile_map_data = PackedByteArray("AAAPAAQAAAAAAAAAAAAPAAUAAAAAAAEAAAAQAAQAAAABAAA
 
 [node name="Laser" parent="." unique_id=932062609 instance=ExtResource("2_eyogd")]
 position = Vector2(-80, 116)
+max_bounces = 15
 
 [node name="DoorToLeft" parent="." unique_id=2099982022 instance=ExtResource("8_ehms3")]
 position = Vector2(197, 449.00003)

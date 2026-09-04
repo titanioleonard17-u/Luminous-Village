@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://v723peurkr7k" path="res://Scene  - New/Scene/TileMaLayerCollision.tscn" id="3_hp0c8"]
 [ext_resource type="PackedScene" uid="uid://cc81hm1d8jnxv" path="res://UI/Scenes/PauseTrigger.tscn" id="3_nhui6"]
 [ext_resource type="PackedScene" uid="uid://og8kwyfuk7te" path="res://Scene  - New/Scene/decor.tscn" id="6_af3bf"]
-[ext_resource type="PackedScene" uid="uid://cen1rv6xnlc18" path="res://Scene  - New/Scene/Mirror_Counter.tscn" id="7_af3bf"]
+[ext_resource type="PackedScene" uid="uid://cen1rv6xnlc18" path="res://Scene  - New/Scene/MirrorCounter.tscn" id="7_af3bf"]
 [ext_resource type="PackedScene" uid="uid://crly0ntp87wu6" path="res://Scene  - New/Scene/MirrorSpawner.tscn" id="7_g2471"]
 [ext_resource type="Script" uid="uid://i7cak6xerp6w" path="res://Scene  - New/Script/Mirror.gd" id="7_nhui6"]
 [ext_resource type="Texture2D" uid="uid://dg8tesaclo8yx" path="res://Asset/Art/Mirror.png" id="8_af3bf"]
@@ -58,6 +58,14 @@ tile_map_data = PackedByteArray("AAAVABUAAAAAAAAAAAAVABYAAAAAAAEAAAAWABUAAAABAAA
 [node name="Laser" parent="." unique_id=932062609 instance=ExtResource("2_b3hpt")]
 position = Vector2(1176, 153)
 rotation = 3.1415927
+max_bounces = null
+start_direction = null
+round_joints = null
+impact_glow_enabled = null
+impact_glow_radius_multiplier = null
+impact_glow_alpha = null
+impact_glow_layers = null
+impact_glow_softness = null
 
 [node name="Mirror_Spawner" parent="." unique_id=1378017199 node_paths=PackedStringArray("mirror_counter") instance=ExtResource("7_g2471")]
 mirror_scene = SubResource("PackedScene_ebemg")
