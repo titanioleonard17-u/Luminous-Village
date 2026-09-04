@@ -84,8 +84,6 @@ position = Vector2(91, 111)
 rotation = -1.5707964
 door_path = NodePath("../DoorToLeft2")
 
-[node name="Mirror_Spawner" parent="." unique_id=1378017199 instance=ExtResource("7_ph1hf")]
-
 [node name="Mirror_Spawner" parent="." unique_id=1378017199 node_paths=PackedStringArray("mirror_counter") instance=ExtResource("7_ph1hf")]
 mirror_scene = SubResource("PackedScene_jldiq")
 max_mirrors = 4
