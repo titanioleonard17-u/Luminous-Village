@@ -28,6 +28,9 @@ var back_target_pos: Vector2
 var next_target_pos: Vector2
 
 func _ready() -> void:
+	if get_tree().current_scene.name.contains("Level1"):
+		$LCContainer/PauseTriger/GuideMenu.visible = true
+		
 	AudioManager.playRandomVibe()
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	level_complete = false
