@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://bpj3tcr403cbm"]
+
+[ext_resource type="Texture2D" uid="uid://c2cdty634s88n" path="res://Asset/Art/LevelSelection/Comingsoon.png" id="1_d0bhg"]
+[ext_resource type="PackedScene" uid="uid://cc81hm1d8jnxv" path="res://UI/Scenes/PauseTrigger.tscn" id="2_5g5ju"]
+
+[node name="ComingSoon" type="Control" unique_id=1301150567]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=499518931]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=410430415]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_d0bhg")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="PauseTriger" parent="." unique_id=556950568 instance=ExtResource("2_5g5ju")]
+layout_mode = 1

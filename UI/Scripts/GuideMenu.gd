@@ -7,6 +7,7 @@ var guideText = [
 	"Cermin dapat diputar sebesar 360 derajat.",
 	"Prisma dapat memecah 1 arah cahaya menjadi 2 arah. (Hanya mempunya 1 sisi sisi input)",
 	"Cermin dapat di spawn dengan menekan angka 1. (Cermin akan muncul tepat pada posisi mouse saat ini)",
+	"Cermin dapat dihapus dengan menekan tombol 0 (hanya dapat dihapus secara berurtan)",
 	"Cermin tidak dapat di spawn jika berjarak sangat dekat dengan objek lain, atau jika kuota cermin sudah habis.",
 	"Baik! Sudah waktunya untuk menyinari desa!"
 ]

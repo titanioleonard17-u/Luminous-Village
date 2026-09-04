@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cen1rv6xnlc18"]
 
-[ext_resource type="Script" uid="uid://bep24nohftir0" path="res://Scene  - New/Scene/Mirror_Counter.gd" id="1_3eyo3"]
+[ext_resource type="Script" uid="uid://bep24nohftir0" path="res://Scene  - New/Script/Mirror_Counter.gd" id="1_3eyo3"]
 
 [sub_resource type="SystemFont" id="SystemFont_b5iei"]
 font_names = PackedStringArray("Berlin Sans FB")

@@ -1,7 +1,6 @@
 extends Control
 
 func _ready() -> void:
-	print(SaveManager.is_tutorial_completed())
 	AudioManager.playAudio("HomeScreen", AudioManager.AudioType.BGM)
 	for child in $ButtonNode.get_children():
 		if child is BaseButton:

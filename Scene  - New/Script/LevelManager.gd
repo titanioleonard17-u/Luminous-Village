@@ -35,7 +35,7 @@ func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	level_complete = false
 	
-	$LCContainer/LevelComplete.visible = false
+	$Container/LevelComplete.visible = false
 
 	if level_complete_path.is_empty():
 		push_warning("level_complete_path belum diisi di Inspector!")
@@ -134,9 +134,10 @@ func _trigger_win() -> void:
 
 	if get_tree().current_scene.name == "TutorialLevel" and not SaveManager.is_tutorial_completed():
 		SaveManager.complete_tutorial()
-	SaveManager.complete_level(get_tree().current_scene.name)
+	else:
+		SaveManager.complete_level(get_tree().current_scene.name)
 	AudioManager.playImportantSFX("LevelComplete")
-	$LCContainer/LevelComplete.visible = true;
+	$Container/LevelComplete.visible = true;
 	_play_complete_sequence()
 
 func _play_complete_sequence() -> void:

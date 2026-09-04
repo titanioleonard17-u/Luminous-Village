@@ -3,7 +3,7 @@ extends Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	#AudioManager.playAudio("Homescreen", AudioManager.AudioType.BGM)
+	#AudioManager.playAudio("HomeScreen", AudioManager.AudioType.BGM)
 	pass
 
 

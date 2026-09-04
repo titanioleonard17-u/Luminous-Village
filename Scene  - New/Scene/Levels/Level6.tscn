@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://b6glss8yofc12"]
+
+[ext_resource type="Script" uid="uid://dnkya1u3tc0yu" path="res://Scene  - New/Script/LevelManager.gd" id="1_5k81a"]
+[ext_resource type="PackedScene" uid="uid://cc81hm1d8jnxv" path="res://UI/Scenes/PauseTrigger.tscn" id="2_6enjc"]
+[ext_resource type="PackedScene" uid="uid://ruuy6vksw05m" path="res://Scene  - New/Scene/LevelComplete.tscn" id="3_sw0kt"]
+
+[node name="Level6" type="Node2D" unique_id=1314743367]
+script = ExtResource("1_5k81a")
+
+[node name="Container" type="CanvasLayer" parent="." unique_id=780753473]
+layer = 3
+
+[node name="PauseTriger" parent="Container" unique_id=556950568 instance=ExtResource("2_6enjc")]
+metadata/_edit_use_anchors_ = true
+
+[node name="LevelComplete" parent="Container" unique_id=949011591 instance=ExtResource("3_sw0kt")]
+scale = Vector2(1, 1.0031694)
+metadata/_edit_use_anchors_ = true
+
+[node name="Control" type="Control" parent="." unique_id=779022881]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Control" unique_id=1485356674]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

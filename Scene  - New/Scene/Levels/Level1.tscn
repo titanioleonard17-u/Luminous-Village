@@ -33,21 +33,18 @@ _bundled = {
 
 [node name="Level1" type="Node2D" unique_id=1214213121]
 script = ExtResource("1_hdyv3")
-level_complete_path = NodePath("LCContainer/LevelComplete")
+level_complete_path = NodePath("Container/LevelComplete")
 sign_rise_offset = Vector2(0, -100)
 
-[node name="LCContainer" type="CanvasLayer" parent="." unique_id=2374739]
+[node name="Container" type="CanvasLayer" parent="." unique_id=2374739]
 layer = 3
 
-[node name="PauseTriger" parent="LCContainer" unique_id=556950568 instance=ExtResource("3_k2b07")]
+[node name="PauseTriger" parent="Container" unique_id=556950568 instance=ExtResource("3_k2b07")]
 metadata/_edit_use_anchors_ = true
 
-[node name="LevelComplete" parent="LCContainer" unique_id=949011591 instance=ExtResource("2_7fxvy")]
+[node name="LevelComplete" parent="Container" unique_id=949011591 instance=ExtResource("2_7fxvy")]
 scale = Vector2(1, 1.0031694)
 metadata/_edit_use_anchors_ = true
-
-[node name="PauseContainer" type="CanvasLayer" parent="." unique_id=712733464]
-layer = 2
 
 [node name="Mirror_Counter" parent="." unique_id=2086307742 instance=ExtResource("7_ajkvu")]
 
