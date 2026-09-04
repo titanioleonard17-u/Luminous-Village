@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://dg8tesaclo8yx" path="res://Asset/Art/Mirror.png" id="12_inkjj"]
 [ext_resource type="PackedScene" uid="uid://bi2fm2hx85yl" path="res://Scene  - New/Scene/House.tscn" id="13_dfy7l"]
 [ext_resource type="PackedScene" uid="uid://b78j83aks04lv" path="res://Scene  - New/Scene/Prism.tscn" id="14_hxsrk"]
+[ext_resource type="PackedScene" uid="uid://cen1rv6xnlc18" path="res://Scene  - New/Scene/Mirror_Counter.tscn" id="16_4i7o2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fjrjh"]
 size = Vector2(442.36572, 155.6124)
@@ -34,7 +35,7 @@ _bundled = {
 "version": 3
 }
 
-[node name="Level1" type="Node2D" unique_id=1214213121]
+[node name="TutorialLevel" type="Node2D" unique_id=1214213121]
 script = ExtResource("1_l88e2")
 level_complete_path = NodePath("LCContainer/LevelComplete")
 sign_rise_offset = Vector2(0, -100)
@@ -83,3 +84,7 @@ scale = Vector2(0.35, 0.35)
 
 [node name="Prism" parent="." unique_id=69888643 instance=ExtResource("14_hxsrk")]
 position = Vector2(921, 322)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1574932961]
+
+[node name="Mirror_Counter" parent="CanvasLayer" unique_id=2086307742 instance=ExtResource("16_4i7o2")]

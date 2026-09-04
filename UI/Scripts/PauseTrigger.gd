@@ -4,7 +4,7 @@ func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	$PauseMenu.visible = false
 	$GuideMenu.visible = false
-	
+	#Level1/PauseContainer/PauseTriger/GuideMenu
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("Escape"):
 		if not $GuideMenu.visible:

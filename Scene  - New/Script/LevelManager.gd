@@ -29,7 +29,7 @@ var next_target_pos: Vector2
 
 func _ready() -> void:
 	if get_tree().current_scene.name.contains("Level1"):
-		$LCContainer/PauseTriger/GuideMenu.visible = true
+		$PauseContainer/PauseTriger/GuideMenu.visible = true
 		
 	AudioManager.playRandomVibe()
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -132,6 +132,8 @@ func _trigger_win() -> void:
 	level_complete = true
 	get_tree().paused = true
 
+	if get_tree().current_scene.name == "TutorialLevel" and not SaveManager.is_tutorial_completed():
+		SaveManager.complete_tutorial()
 	SaveManager.complete_level(get_tree().current_scene.name)
 	AudioManager.playImportantSFX("LevelComplete")
 	$LCContainer/LevelComplete.visible = true;

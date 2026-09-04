@@ -5,6 +5,7 @@ const SAVE_PATH := "user://savegame.json"
 var save_data := {
 	"completed_levels": [],
 	"current_level": "1",
+	"tutorial_complete": false
 }
 
 
@@ -72,10 +73,16 @@ func complete_level(level_name: String) -> void:
 
 	save_game()
 
+func complete_tutorial():
+	save_data["tutorial_complete"] = true
+	
+	save_game()
 
 func is_level_completed(level_name: String) -> bool:
 	return save_data["completed_levels"].has(level_name)
 
+func is_tutorial_completed() -> bool:
+	return save_data["tutorial_complete"]
 
 # =========================
 # RESET
