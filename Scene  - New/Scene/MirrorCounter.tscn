@@ -28,6 +28,7 @@ theme_override_font_sizes/font_size = 50
 text = "4/4"
 
 [node name="BounceCount" type="Label" parent="MarginContainer/HorizontalContainer" unique_id=2015912369]
+visible = false
 layout_mode = 2
 theme_override_fonts/font = SubResource("SystemFont_b5iei")
 theme_override_font_sizes/font_size = 50
