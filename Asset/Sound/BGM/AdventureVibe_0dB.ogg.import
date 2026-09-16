@@ -13,7 +13,7 @@ dest_files=["res://.godot/imported/AdventureVibe_0dB.ogg-b9fb992b27fadf051a625f4
 [params]
 
 loop=false
-loop_offset=0
-bpm=0
+loop_offset=0.0
+bpm=0.0
 beat_count=0
 bar_beats=4
