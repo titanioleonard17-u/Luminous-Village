@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ukuyt"]
 size = Vector2(140, 48)
 
-[node name="Trigger" type="StaticBody2D" unique_id=1183924401 groups=["trigger"]]
+[node name="Trigger" type="StaticBody2D" unique_id=1183924401 groups=["mirror", "trigger"]]
 scale = Vector2(0.5, 0.5)
 script = ExtResource("1_ukuyt")
 

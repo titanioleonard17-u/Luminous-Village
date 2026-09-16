@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://rkw6mhmslota"]
+
+[ext_resource type="Script" uid="uid://dnkya1u3tc0yu" path="res://Scene  - New/Script/LevelManager.gd" id="1_vgl8u"]
+[ext_resource type="PackedScene" uid="uid://cc81hm1d8jnxv" path="res://UI/Scenes/PauseTrigger.tscn" id="2_ixvyy"]
+[ext_resource type="PackedScene" uid="uid://ruuy6vksw05m" path="res://Scene  - New/Scene/LevelComplete.tscn" id="3_ly7m8"]
+[ext_resource type="PackedScene" uid="uid://cen1rv6xnlc18" path="res://Scene  - New/Scene/MirrorCounter.tscn" id="4_i13vw"]
+[ext_resource type="PackedScene" uid="uid://bpj3tcr403cbm" path="res://UI/Scenes/ComingSoon.tscn" id="5_6plmd"]
+
+[node name="LevelComingSoon" type="Node2D" unique_id=233836549]
+script = ExtResource("1_vgl8u")
+
+[node name="Container" type="CanvasLayer" parent="." unique_id=1712154464]
+layer = 3
+
+[node name="PauseTriger" parent="Container" unique_id=556950568 instance=ExtResource("2_ixvyy")]
+
+[node name="LevelComplete" parent="Container" unique_id=949011591 instance=ExtResource("3_ly7m8")]
+visible = false
+metadata/_edit_use_anchors_ = true
+
+[node name="MirrorCounter" parent="." unique_id=2086307742 instance=ExtResource("4_i13vw")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1407789125]
+layer = 2
+
+[node name="ComingSoon" parent="CanvasLayer" unique_id=1301150567 instance=ExtResource("5_6plmd")]
+metadata/_edit_use_anchors_ = true
