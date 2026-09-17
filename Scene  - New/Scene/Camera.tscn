@@ -4,8 +4,8 @@
 
 [node name="Camera" type="Camera2D" unique_id=25551895]
 anchor_mode = 0
-limit_left = -500
-limit_top = -500
-limit_right = 1652
-limit_bottom = 1148
+limit_left = -576
+limit_top = -324
+limit_right = 576
+limit_bottom = 324
 script = ExtResource("1_ab0i1")

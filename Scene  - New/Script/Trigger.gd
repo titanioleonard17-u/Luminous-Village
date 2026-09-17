@@ -58,4 +58,16 @@ func _rotate_towards(world_pos: Vector2) -> void:
 	rotation = direction.angle()
 
 func _is_point_over(world_pos: Vector2) -> bool:
-	return global_position.distance_to(world_pos) < 80.0
+	var space_state = get_world_2d().direct_space_state
+
+	var query = PhysicsPointQueryParameters2D.new()
+	query.position = world_pos
+	query.collide_with_bodies = true
+
+	var result = space_state.intersect_point(query)
+
+	for hit in result:
+		if hit.collider == self:
+			return true
+
+	return false

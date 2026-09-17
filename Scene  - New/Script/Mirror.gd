@@ -69,7 +69,19 @@ func _rotate_towards(world_pos: Vector2) -> void:
 	joystick_ui.set_angle(mouse_angle)
 
 func _is_point_over(world_pos: Vector2) -> bool:
-	return global_position.distance_to(world_pos) < interact_radius
+	var space_state = get_world_2d().direct_space_state
+
+	var query = PhysicsPointQueryParameters2D.new()
+	query.position = world_pos
+	query.collide_with_bodies = true
+
+	var result = space_state.intersect_point(query)
+
+	for hit in result:
+		if hit.collider == self:
+			return true
+
+	return false
 
 func get_reflect_normal() -> Vector2:
 	return Vector2.DOWN.rotated(global_rotation)
