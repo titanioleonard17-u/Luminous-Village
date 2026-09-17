@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://p3itxxvyp673" path="res://Scene  - New/Scene/Laser.tscn" id="2_hqelf"]
 [ext_resource type="PackedScene" uid="uid://v723peurkr7k" path="res://Scene  - New/Scene/TileMaLayerCollision.tscn" id="3_0rl5c"]
 [ext_resource type="PackedScene" uid="uid://cc81hm1d8jnxv" path="res://UI/Scenes/PauseTrigger.tscn" id="3_ph1hf"]
+[ext_resource type="PackedScene" uid="uid://dg7uatncjoc7i" path="res://UI/Scenes/ModeAnimation.tscn" id="3_u0cx6"]
 [ext_resource type="PackedScene" uid="uid://og8kwyfuk7te" path="res://Scene  - New/Scene/decor.tscn" id="6_jxvl2"]
 [ext_resource type="PackedScene" uid="uid://cen1rv6xnlc18" path="res://Scene  - New/Scene/MirrorCounter.tscn" id="7_5rk2a"]
 [ext_resource type="PackedScene" uid="uid://crly0ntp87wu6" path="res://Scene  - New/Scene/MirrorSpawner.tscn" id="7_ph1hf"]
@@ -37,12 +38,15 @@ _bundled = {
 [node name="Level5" type="Node2D" unique_id=371732297]
 script = ExtResource("1_nk814")
 level_complete_path = NodePath("Container/LevelComplete")
-sign_rise_offset = Vector2(0, -100)
 
 [node name="Container" type="CanvasLayer" parent="." unique_id=873931066]
 layer = 2
 
 [node name="PauseTriger" parent="Container" unique_id=556950568 instance=ExtResource("3_ph1hf")]
+metadata/_edit_use_anchors_ = true
+
+[node name="ModeAnimation" parent="Container" unique_id=1134989736 instance=ExtResource("3_u0cx6")]
+visible = false
 
 [node name="LevelComplete" parent="Container" unique_id=949011591 instance=ExtResource("10_ph1hf")]
 visible = false
