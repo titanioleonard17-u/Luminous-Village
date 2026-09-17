@@ -175,6 +175,7 @@ func _trigger_win() -> void:
 
 	AudioManager.playImportantSFX("LevelComplete")
 
+	await get_tree().create_timer(2.0).timeout
 	$Container/LevelComplete.visible = true
 	_play_complete_sequence()
 
