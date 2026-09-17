@@ -16,8 +16,8 @@ func _physics_process(_delta: float) -> void:
 		return
 	var current_frame: int = Engine.get_physics_frames()
 	var is_hit: bool = (current_frame - last_hit_frame) <= 1
-	if door.has_method("set_open"):
-		door.set_open(is_hit)
+	if door.has_method("set_trigger_state"):
+		door.set_trigger_state(self, is_hit)
 
 func mark_hit() -> void:
 	last_hit_frame = Engine.get_physics_frames()
