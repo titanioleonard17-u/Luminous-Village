@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://dg7uatncjoc7i"]
 
+[ext_resource type="PackedScene" uid="uid://tg3mokvaes6y" path="res://Scene  - New/Scene/FireFly.tscn" id="1_q2d1u"]
+
 [sub_resource type="Animation" id="Animation_n11i2"]
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -51,6 +53,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
+
+[node name="FireFly" parent="." unique_id=521813545 instance=ExtResource("1_q2d1u")]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2115129703]
 libraries/ = SubResource("AnimationLibrary_hp6bp")
