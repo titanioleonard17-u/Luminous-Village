@@ -6,13 +6,14 @@
 [ext_resource type="PackedScene" uid="uid://p3itxxvyp673" path="res://Scene  - New/Scene/Laser.tscn" id="2_hdyv3"]
 [ext_resource type="PackedScene" uid="uid://v723peurkr7k" path="res://Scene  - New/Scene/TileMaLayerCollision.tscn" id="2_ppncw"]
 [ext_resource type="PackedScene" uid="uid://cc81hm1d8jnxv" path="res://UI/Scenes/PauseTrigger.tscn" id="3_k2b07"]
+[ext_resource type="PackedScene" uid="uid://dg7uatncjoc7i" path="res://UI/Scenes/ModeAnimation.tscn" id="3_uxah3"]
 [ext_resource type="PackedScene" uid="uid://crly0ntp87wu6" path="res://Scene  - New/Scene/MirrorSpawner.tscn" id="4_885hd"]
 [ext_resource type="PackedScene" uid="uid://og8kwyfuk7te" path="res://Scene  - New/Scene/decor.tscn" id="6_ajkvu"]
 [ext_resource type="PackedScene" uid="uid://cen1rv6xnlc18" path="res://Scene  - New/Scene/MirrorCounter.tscn" id="7_ajkvu"]
 [ext_resource type="PackedScene" uid="uid://bi2fm2hx85yl" path="res://Scene  - New/Scene/House.tscn" id="8_5kjoa"]
 [ext_resource type="Script" uid="uid://i7cak6xerp6w" path="res://Scene  - New/Script/Mirror.gd" id="9_ajkvu"]
 [ext_resource type="Texture2D" uid="uid://dg8tesaclo8yx" path="res://Asset/Art/Mirror.png" id="10_ut41e"]
-[ext_resource type="PackedScene" uid="uid://cembrpus1owlg" path="res://Scene  - New/Script/teleporter.tscn" id="13_ut41e"]
+[ext_resource type="PackedScene" uid="uid://cembrpus1owlg" path="res://Scene  - New/Scene/teleporter.tscn" id="13_ut41e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fjrjh"]
 size = Vector2(442.36572, 155.6124)
@@ -35,13 +36,15 @@ _bundled = {
 [node name="Level1" type="Node2D" unique_id=1214213121]
 script = ExtResource("1_hdyv3")
 level_complete_path = NodePath("Container/LevelComplete")
-sign_rise_offset = Vector2(0, -100)
 
 [node name="Container" type="CanvasLayer" parent="." unique_id=2374739]
 layer = 3
 
 [node name="PauseTriger" parent="Container" unique_id=556950568 instance=ExtResource("3_k2b07")]
 metadata/_edit_use_anchors_ = true
+
+[node name="ModeAnimation" parent="Container" unique_id=1134989736 instance=ExtResource("3_uxah3")]
+visible = false
 
 [node name="LevelComplete" parent="Container" unique_id=949011591 instance=ExtResource("2_7fxvy")]
 visible = false
@@ -77,4 +80,3 @@ linked_teleporter = NodePath("../Teleporter2")
 
 [node name="Teleporter2" parent="." unique_id=518796278 instance=ExtResource("13_ut41e")]
 position = Vector2(661, 450)
-scale = Vector2(0.25, 0.25)

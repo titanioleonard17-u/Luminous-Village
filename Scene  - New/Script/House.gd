@@ -131,3 +131,7 @@ func night_blink() -> void:
 
 	is_blinking = false
 	_set_lights_alpha(1.0)
+
+func turn_on_lights() -> void:
+	is_blinking = false
+	_set_lights_alpha(1.0)

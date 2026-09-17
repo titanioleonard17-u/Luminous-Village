@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://dnkya1u3tc0yu" path="res://Scene  - New/Script/LevelManager.gd" id="1_l88e2"]
 [ext_resource type="PackedScene" uid="uid://ruuy6vksw05m" path="res://Scene  - New/Scene/LevelComplete.tscn" id="2_5qj7r"]
 [ext_resource type="PackedScene" uid="uid://cc81hm1d8jnxv" path="res://UI/Scenes/PauseTrigger.tscn" id="3_4i7o2"]
+[ext_resource type="PackedScene" uid="uid://dg7uatncjoc7i" path="res://UI/Scenes/ModeAnimation.tscn" id="3_eg2x6"]
 [ext_resource type="PackedScene" uid="uid://co2d8js0nkj26" path="res://Scene  - New/Scene/TileMapLayerGround.tscn" id="4_qevdi"]
 [ext_resource type="PackedScene" uid="uid://og8kwyfuk7te" path="res://Scene  - New/Scene/decor.tscn" id="5_8go3y"]
 [ext_resource type="PackedScene" uid="uid://v723peurkr7k" path="res://Scene  - New/Scene/TileMaLayerCollision.tscn" id="6_rrgxn"]
@@ -38,14 +39,16 @@ _bundled = {
 [node name="TutorialLevel" type="Node2D" unique_id=1214213121]
 script = ExtResource("1_l88e2")
 level_complete_path = NodePath("Container/LevelComplete")
-sign_rise_offset = Vector2(0, -100)
 
 [node name="Container" type="CanvasLayer" parent="." unique_id=2374739]
 layer = 2
 
 [node name="PauseTriger" parent="Container" unique_id=556950568 instance=ExtResource("3_4i7o2")]
 
+[node name="ModeAnimation" parent="Container" unique_id=1134989736 instance=ExtResource("3_eg2x6")]
+
 [node name="LevelComplete" parent="Container" unique_id=949011591 instance=ExtResource("2_5qj7r")]
+visible = false
 scale = Vector2(1, 1.0031694)
 metadata/_edit_use_anchors_ = true
 

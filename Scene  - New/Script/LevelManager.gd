@@ -27,7 +27,6 @@ var sign_center_pos: Vector2
 var back_target_pos: Vector2
 var next_target_pos: Vector2
 
-
 func _ready() -> void:
 	if get_tree().current_scene.name.contains("TutorialLevel"):
 		$Container/PauseTriger/GuideMenu.visible = true
@@ -82,14 +81,12 @@ func _ready() -> void:
 		next_button.visible = false
 		next_button.pressed.connect(_on_next_level_pressed)
 
-
 func _process(_delta: float) -> void:
 	if level_complete or is_celebrating_win:
 		return
 
 	if _all_houses_lit():
 		_trigger_win()
-
 
 func _all_houses_lit() -> bool:
 	var houses: Array = get_tree().get_nodes_in_group("house")
@@ -103,10 +100,10 @@ func _all_houses_lit() -> bool:
 
 	return true
 
-
 func _trigger_win() -> void:
 	is_celebrating_win = true
 	celebration_id += 1
+
 	var my_id: int = celebration_id
 
 	var lasers: Array = get_tree().get_nodes_in_group("laser")
@@ -120,44 +117,27 @@ func _trigger_win() -> void:
 		if house.has_method("celebrate"):
 			house.celebrate()
 
-	# Tunggu Pop selesai
 	await get_tree().create_timer(0.7, true).timeout
 
 	if my_id != celebration_id or not is_celebrating_win:
 		return
 
-	# Jeda 0.5 detik setelah Pop
 	await get_tree().create_timer(0.5, true).timeout
 
 	if my_id != celebration_id or not is_celebrating_win:
 		return
 
-	# Lock cermin sebelum masuk mode malam
 	_lock_mirrors()
 
-	# Switch ke mode malam
 	await _switch_to_night()
 
 	if my_id != celebration_id or not is_celebrating_win:
 		return
 
-	# Setelah mode malam selesai, lampu mulai blinking
-	var blink_duration: float = 0.0
-
 	for house in houses:
-		if house.has_method("night_blink"):
-			house.night_blink()
+		if house.has_method("turn_on_lights"):
+			house.turn_on_lights()
 
-			var duration: float = house.blink_count * (
-				house.blink_on_duration +
-				house.blink_off_duration
-			)
-
-			blink_duration = max(blink_duration, duration)
-
-	await get_tree().create_timer(blink_duration, true).timeout
-
-	# Tunggu sebelum Level Complete
 	await get_tree().create_timer(win_delay, true).timeout
 
 	if my_id != celebration_id or not is_celebrating_win:
@@ -179,7 +159,6 @@ func _trigger_win() -> void:
 	$Container/LevelComplete.visible = true
 	_play_complete_sequence()
 
-
 func _switch_to_night() -> void:
 	if is_switching_night:
 		return
@@ -196,7 +175,6 @@ func _switch_to_night() -> void:
 
 	await animation_player.animation_finished
 
-
 func _lock_mirrors() -> void:
 	var mirrors: Array = get_tree().get_nodes_in_group("mirror")
 
@@ -204,9 +182,7 @@ func _lock_mirrors() -> void:
 		if mirror.has_method("set_locked"):
 			mirror.set_locked(true)
 
-
 func _play_complete_sequence() -> void:
-	# Tahap 1: Bg & Sign naik bareng
 	if bg:
 		bg.visible = true
 		bg.position = bg_target_pos + Vector2(0, slide_in_offset_y)
@@ -237,10 +213,8 @@ func _play_complete_sequence() -> void:
 
 	await tween_in.finished
 
-	# Tahap 2: tahan sebentar
 	await get_tree().create_timer(hold_duration, true).timeout
 
-	# Tahap 3: Sign naik, tombol turun
 	if back_button:
 		back_button.position = sign_center_pos
 		back_button.visible = true
@@ -292,7 +266,6 @@ func _play_complete_sequence() -> void:
 			1.0,
 			0.25
 		)
-
 
 func _on_next_level_pressed() -> void:
 	get_tree().paused = false

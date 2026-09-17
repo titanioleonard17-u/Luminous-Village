@@ -13,6 +13,7 @@ extends StaticBody2D
 var is_dragging: bool = false
 var touch_index: int = -1
 var joystick_ui: JoystickUI
+var is_locked: bool = false
 
 func _ready() -> void:
 	add_to_group("teleporter")
@@ -29,6 +30,9 @@ func _ready() -> void:
 	joystick_ui.set_angle(rotation)
 
 func _input(event: InputEvent) -> void:
+	if is_locked:
+		return
+
 	if get_tree().paused:
 		return
 
@@ -104,3 +108,7 @@ func get_teleport_exit(incoming_dir: Vector2) -> Variant:
 
 func mark_hit() -> void:
 	pass # kalau mau efek visual pas kena laser, taruh di sini
+
+func set_locked(value: bool) -> void:
+	is_locked = value
+	_end_drag()

@@ -44,6 +44,7 @@ layer = 2
 [node name="PauseTriger" parent="Container" unique_id=556950568 instance=ExtResource("3_sgfbn")]
 
 [node name="ModeAnimation" parent="Container" unique_id=1134989736 instance=ExtResource("3_l44mt")]
+visible = false
 
 [node name="LevelComplete" parent="Container" unique_id=949011591 instance=ExtResource("10_sgfbn")]
 visible = false
