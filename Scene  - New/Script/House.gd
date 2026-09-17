@@ -5,16 +5,16 @@ extends StaticBody2D
 @onready var light_node2: Node2D = $WindowLight/BalconLightNode
 
 @export var blink_count: int = 3
-@export var blink_on_duration: float = 0.28   # lama nyala tiap kedip
-@export var blink_off_duration: float = 0.22  # lama mati tiap kedip
-@export var lost_hit_grace_frames: int = 6    # toleransi berapa physics frame boleh "gak kena" sebelum dianggap sinar hilang beneran
+@export var blink_on_duration: float = 0.28
+@export var blink_off_duration: float = 0.22
+@export var lost_hit_grace_frames: int = 6
 
 var last_hit_frame: int = -10
-var is_lit: bool = false          # status nyala solid (final)
-var is_blinking: bool = false     # lagi proses kedip menyala
+var is_lit: bool = false
+var is_blinking: bool = false
 var is_celebrating: bool = false
 
-var blink_id: int = 0             # token buat cancel proses blink kalau sinar hilang di tengah jalan
+var blink_id: int = 0
 
 
 func _ready() -> void:
@@ -30,13 +30,11 @@ func _physics_process(_delta: float) -> void:
 	var hit: bool = is_currently_hit()
 
 	if hit:
-		if not is_lit and not is_blinking:
-			_start_blink_then_lit()
+		if not is_lit:
+			is_lit = true
+			_squish()
 	else:
-		# Hanya matikan kalau sinar SUDAH hilang lebih lama dari grace period,
-		# biar glitch 1 frame (mis. laser lagi geser di mirror/prism) gak bikin
-		# rumah yang udah nyala ikutan kedip ulang.
-		if (is_lit or is_blinking) and _lost_hit_beyond_grace():
+		if is_lit and _lost_hit_beyond_grace():
 			_turn_off()
 
 
@@ -54,31 +52,6 @@ func _lost_hit_beyond_grace() -> bool:
 	return (current_frame - last_hit_frame) > lost_hit_grace_frames
 
 
-func _start_blink_then_lit() -> void:
-	is_blinking = true
-	blink_id += 1
-	var my_id: int = blink_id
-
-	for i in range(blink_count):
-		if my_id != blink_id or is_celebrating:
-			return
-		_set_lights_alpha(1.0)
-		_squish()
-		await get_tree().create_timer(blink_on_duration, true).timeout
-		if my_id != blink_id or is_celebrating:
-			return
-		_set_lights_alpha(0.0)
-		await get_tree().create_timer(blink_off_duration, true).timeout
-
-	if my_id != blink_id or is_celebrating:
-		return
-
-	is_blinking = false
-	is_lit = true
-	_set_lights_alpha(1.0)
-	_squish()
-
-
 func _turn_off() -> void:
 	blink_id += 1
 	is_blinking = false
@@ -91,11 +64,9 @@ func celebrate() -> void:
 	blink_id += 1
 	is_blinking = false
 
-	# Rumah tetap nyala terang, cukup 1x pop sebagai penekanan,
-	# tidak perlu kedip 3x lagi seperti proses awal.
-	_set_lights_alpha(1.0)
-	AudioManager.playAudio("Pop", AudioManager.AudioType.SFX)
-	_squish()
+	await _squish()
+	await _squish()
+	await _squish()
 
 	is_celebrating = false
 
@@ -111,25 +82,24 @@ func stop_celebrate() -> void:
 func _squish() -> void:
 	var tween := create_tween()
 	tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+
 	AudioManager.playAudio("Pop", AudioManager.AudioType.SFX)
+
 	tween.tween_property(
 		window_sprite,
 		"scale",
-		Vector2(0.59, 0.41),
-		0.08
-	)
-	tween.tween_property(
-		window_sprite,
-		"scale",
-		Vector2(0.46, 0.54),
-		0.06
-	)
+		Vector2(0.56, 0.45),
+		0.12
+	).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+
 	tween.tween_property(
 		window_sprite,
 		"scale",
 		Vector2(0.5, 0.5),
-		0.08
-	)
+		0.20
+	).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+
+	await tween.finished
 
 
 func get_reflect_normal() -> Vector2:
@@ -139,6 +109,7 @@ func get_reflect_normal() -> Vector2:
 func _set_lights_alpha(alpha: float) -> void:
 	light_node.modulate.a = alpha
 	light_node2.modulate.a = alpha
+
 	for lightNode in $WindowLight.get_children():
 		if lightNode.name.contains("LightNode"):
 			for pointLight in lightNode.get_children():
@@ -146,3 +117,17 @@ func _set_lights_alpha(alpha: float) -> void:
 					var color: Color = pointLight.color
 					color.a = alpha
 					pointLight.color = color
+
+
+func night_blink() -> void:
+	is_blinking = true
+
+	for i in range(blink_count):
+		_set_lights_alpha(1.0)
+		await get_tree().create_timer(blink_on_duration, true).timeout
+
+		_set_lights_alpha(0.0)
+		await get_tree().create_timer(blink_off_duration, true).timeout
+
+	is_blinking = false
+	_set_lights_alpha(1.0)
