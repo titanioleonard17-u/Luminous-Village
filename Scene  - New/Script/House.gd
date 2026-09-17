@@ -3,6 +3,7 @@ extends StaticBody2D
 @onready var window_sprite: AnimatedSprite2D = $House_Sprite
 @onready var light_node: Node2D = $WindowLight/TerraceLightNode
 @onready var light_node2: Node2D = $WindowLight/BalconLightNode
+@onready var light: Sprite2D = $Light
 
 @export var blink_count: int = 3
 @export var blink_on_duration: float = 0.28
@@ -19,6 +20,7 @@ var blink_id: int = 0
 
 func _ready() -> void:
 	_set_lights_alpha(0.0)
+	light.modulate.a = 0.0
 
 
 func _physics_process(_delta: float) -> void:
@@ -50,13 +52,6 @@ func is_currently_hit() -> bool:
 func _lost_hit_beyond_grace() -> bool:
 	var current_frame: int = Engine.get_physics_frames()
 	return (current_frame - last_hit_frame) > lost_hit_grace_frames
-
-
-func _turn_off() -> void:
-	blink_id += 1
-	is_blinking = false
-	is_lit = false
-	_set_lights_alpha(0.0)
 
 
 func celebrate() -> void:
@@ -132,6 +127,24 @@ func night_blink() -> void:
 	is_blinking = false
 	_set_lights_alpha(1.0)
 
+func _turn_off() -> void:
+	blink_id += 1
+	is_blinking = false
+	is_lit = false
+	_set_lights_alpha(0.0)
+
 func turn_on_lights() -> void:
 	is_blinking = false
 	_set_lights_alpha(1.0)
+
+	light.modulate.a = 0.0
+
+	var tween := create_tween()
+	tween.tween_property(
+		light,
+		"modulate:a",
+		100.0 / 255.0,
+		0.5
+	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+
+	await tween.finished
