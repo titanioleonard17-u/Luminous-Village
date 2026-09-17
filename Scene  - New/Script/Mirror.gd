@@ -7,6 +7,7 @@ extends StaticBody2D
 
 var is_dragging: bool = false
 var touch_index: int = -1
+var is_locked: bool = false
 
 var joystick_ui: JoystickUI
 
@@ -23,6 +24,9 @@ func _ready() -> void:
 	joystick_ui.set_angle(rotation)
 
 func _input(event: InputEvent) -> void:
+	if is_locked:
+		return
+
 	if get_tree().paused:
 		return
 
@@ -85,3 +89,6 @@ func _is_point_over(world_pos: Vector2) -> bool:
 
 func get_reflect_normal() -> Vector2:
 	return Vector2.DOWN.rotated(global_rotation)
+
+func set_locked(value: bool) -> void:
+	is_locked = value
