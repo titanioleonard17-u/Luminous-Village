@@ -235,6 +235,7 @@ func _trace_ray(start_pos: Vector2, start_dir: Vector2, bounces_left: int, exclu
 		var result := space_state.intersect_ray(query)
 
 		if result.is_empty():
+			print("[LASER DEBUG] NO HIT dari ", current_pos, " arah ", current_dir, " -> tembus sampai fallback")
 			points.append(current_pos + current_dir * laser_length_fallback)
 			skip_glow.append(true)
 
@@ -250,6 +251,15 @@ func _trace_ray(start_pos: Vector2, start_dir: Vector2, bounces_left: int, exclu
 		var collider_rid: RID = result.rid
 
 		points.append(hit_point)
+
+		# --- DEBUG UNIVERSAL: log APAPUN yang kena, sebelum grup di-cek ---
+		var node_path: String = collider.get_path() if collider is Node else "NON_NODE"
+		var groups_str: String = ""
+		if collider is Node:
+			for g in (collider as Node).get_groups():
+				groups_str += str(g) + ","
+		print("[LASER DEBUG] Kena collider: ", node_path, " | groups=[", groups_str, "] | hit_pos=", hit_point)
+		# --- END DEBUG UNIVERSAL ---
 
 		if collider.is_in_group("door"):
 			skip_glow.append(false)
@@ -290,7 +300,61 @@ func _trace_ray(start_pos: Vector2, start_dir: Vector2, bounces_left: int, exclu
 			current_pos = hit_point + current_dir * 2.0
 			continue
 
+		elif collider.is_in_group("teleporter"):
+			print("[LASER DEBUG]   -> Path node teleporter: ", node_path, " | allow_incoming=", collider.allow_incoming if "allow_incoming" in collider else "NO_PROP")
+
+			if collider.has_method("mark_hit"):
+				collider.mark_hit()
+
+			if "allow_incoming" in collider and not collider.allow_incoming:
+				print("[LASER DEBUG]   -> DIBLOK (allow_incoming=false)")
+				skip_glow.append(false)
+
+				return [{
+					"points": points,
+					"skip_glow": skip_glow,
+					"bounce_count": bounce_count
+				}]
+
+			skip_glow.append(true)
+
+			var entry_path: Dictionary = {
+				"points": points,
+				"skip_glow": skip_glow,
+				"bounce_count": bounce_count
+			}
+
+			if remaining <= 0 or not collider.has_method("get_teleport_exit"):
+				return [entry_path]
+
+			var exit_data = collider.get_teleport_exit(current_dir)
+
+			if exit_data == null:
+				return [entry_path]
+
+			var exit_pos: Vector2 = exit_data["position"]
+			var exit_dir: Vector2 = exit_data["direction"]
+
+			print("[LASER DEBUG]   -> Exit ke pos=", exit_pos, " dir=", exit_dir)
+
+			var new_exclude: Array[RID] = local_exclude.duplicate()
+			if exit_data.has("exclude_rid") and exit_data["exclude_rid"] != RID():
+				new_exclude.append(exit_data["exclude_rid"])
+
+			var sub_paths: Array = _trace_ray(exit_pos, exit_dir, remaining, new_exclude, bounce_count)
+
+			# entry_path nyambung fisik ke ray sebelum masuk teleporter.
+			# sub_paths (dari exit_pos) TIDAK nyambung ke entry_path secara
+			# posisi -- makanya cuma di-append sebagai path terpisah, bukan
+			# digabung titik-titiknya.
+			var result_paths: Array = [entry_path]
+			result_paths.append_array(sub_paths)
+
+			return result_paths
+
 		elif collider.is_in_group("prism"):
+			print("[LASER DEBUG]   -> Kena PRISM lagi (rid=", collider_rid, ") | front_side=", _is_front_side(collider, hit_normal))
+
 			if collider.has_method("mark_hit"):
 				collider.mark_hit()
 
@@ -338,18 +402,35 @@ func _trace_ray(start_pos: Vector2, start_dir: Vector2, bounces_left: int, exclu
 					bounce_count
 				)
 
-				for sub in sub_paths:
-					var combined_points: Array[Vector2] = points.duplicate()
-					combined_points.append_array(sub["points"])
+				# PENTING: _trace_ray() bisa balikin LEBIH DARI SATU path kalau
+				# di tengah branch ini ada teleporter (path sebelum masuk +
+				# path setelah keluar dari exit_pos, yang posisinya beda dan
+				# TIDAK nyambung fisik ke prism ini).
+				#
+				# Cuma sub_paths[0] yang benar-benar lanjutan langsung dari
+				# branch_start -> baru boleh disambung dengan titik-titik
+				# prism. Sisanya (index 1 dst) adalah path independen dan
+				# HARUS di-append apa adanya, tanpa prefix titik prism --
+				# kalau tidak, akan muncul garis "hantu" dari prism menuju
+				# titik keluar teleporter (ini bug yang bikin cahaya
+				# kelihatan nargetin balik ke prism).
+				for i in range(sub_paths.size()):
+					var sub = sub_paths[i]
 
-					var combined_skip: Array[bool] = skip_glow.duplicate()
-					combined_skip.append_array(sub["skip_glow"])
+					if i == 0:
+						var combined_points: Array[Vector2] = points.duplicate()
+						combined_points.append_array(sub["points"])
 
-					result_paths.append({
-						"points": combined_points,
-						"skip_glow": combined_skip,
-						"bounce_count": sub["bounce_count"]
-					})
+						var combined_skip: Array[bool] = skip_glow.duplicate()
+						combined_skip.append_array(sub["skip_glow"])
+
+						result_paths.append({
+							"points": combined_points,
+							"skip_glow": combined_skip,
+							"bounce_count": sub["bounce_count"]
+						})
+					else:
+						result_paths.append(sub)
 
 			return result_paths
 
@@ -371,6 +452,7 @@ func _trace_ray(start_pos: Vector2, start_dir: Vector2, bounces_left: int, exclu
 				}]
 
 		else:
+			print("[LASER DEBUG]   -> Kena collider TIDAK DIKENAL grupnya (fallback else), berhenti di sini")
 			skip_glow.append(false)
 
 			return [{

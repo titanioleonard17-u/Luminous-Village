@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://crly0ntp87wu6" path="res://Scene  - New/Scene/MirrorSpawner.tscn" id="11_e1afm"]
 [ext_resource type="Script" uid="uid://i7cak6xerp6w" path="res://Scene  - New/Script/Mirror.gd" id="12_kmpxn"]
 [ext_resource type="Texture2D" uid="uid://dg8tesaclo8yx" path="res://Asset/Art/Mirror.png" id="13_4twuu"]
+[ext_resource type="PackedScene" uid="uid://cembrpus1owlg" path="res://Scene  - New/Script/teleporter.tscn" id="14_cjg0y"]
 [ext_resource type="PackedScene" uid="uid://bi2fm2hx85yl" path="res://Scene  - New/Scene/House.tscn" id="14_lne6q"]
 [ext_resource type="PackedScene" uid="uid://b78j83aks04lv" path="res://Scene  - New/Scene/Prism.tscn" id="15_5mj0m"]
 
@@ -66,7 +67,6 @@ position = Vector2(-160, 311)
 position = Vector2(401, 69)
 rotation = 1.5707964
 scale = Vector2(0.8, 0.72)
-required_triggers = 2
 
 [node name="DoorToLeft2" parent="." unique_id=658189723 instance=ExtResource("9_k43od")]
 position = Vector2(628.99994, 411.99994)
@@ -79,12 +79,6 @@ position = Vector2(1046, 146)
 rotation = 1.5707964
 door_path = NodePath("../DoorToLeft")
 
-[node name="Trigger3" parent="." unique_id=1384391422 instance=ExtResource("10_04gpt")]
-position = Vector2(614, 85)
-rotation = -3.1415925
-scale = Vector2(0.25, 0.25)
-door_path = NodePath("../DoorToLeft")
-
 [node name="Trigger2" parent="." unique_id=92230006 instance=ExtResource("10_04gpt")]
 position = Vector2(91, 111)
 rotation = -1.5707964
@@ -95,9 +89,18 @@ mirror_scene = SubResource("PackedScene_jldiq")
 max_mirrors = 4
 mirror_counter = NodePath("../MirrorCounter")
 
+[node name="Teleporter" parent="." unique_id=1943216660 instance=ExtResource("14_cjg0y")]
+position = Vector2(715, 343)
+rotation = 1.5707964
+scale = Vector2(0.4, 0.36)
+linked_teleporter = NodePath("../Teleporter2")
+
+[node name="Teleporter2" parent="." unique_id=602513355 instance=ExtResource("14_cjg0y")]
+position = Vector2(755, 114)
+
 [node name="House" parent="." unique_id=1454567019 instance=ExtResource("14_lne6q")]
 position = Vector2(554, 507)
 scale = Vector2(0.28, 0.28)
 
-[node name="Prism" parent="." unique_id=1943216660 instance=ExtResource("15_5mj0m")]
+[node name="Prism" parent="." unique_id=198949855 instance=ExtResource("15_5mj0m")]
 position = Vector2(541, 299)
