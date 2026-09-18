@@ -27,6 +27,9 @@ func _physics_process(_delta: float) -> void:
 	if get_tree().paused:
 		return
 
+	if is_celebrating:
+		return
+
 	var hit: bool = is_currently_hit()
 	laser_on_house = hit
 
@@ -52,27 +55,25 @@ func _lost_hit_beyond_grace() -> bool:
 	return (current_frame - last_hit_frame) > lost_hit_grace_frames
 
 
-func celebrate() -> bool:
+func celebrate() -> void:
 	if is_squishing or is_lit:
-		return false
+		return
 
 	is_squishing = true
 
 	for i in range(3):
 		if not is_currently_hit():
 			is_squishing = false
-			return false
+			return
 
 		await _squish()
 
 		if not is_currently_hit():
 			is_squishing = false
-			return false
+			return
 
 	is_lit = true
 	is_squishing = false
-
-	return true
 
 
 func stop_celebrate() -> void:
@@ -105,6 +106,10 @@ func _squish() -> void:
 	).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 
 	await tween.finished
+
+
+func get_squish_duration() -> float:
+	return 3.0 * (0.12 + 0.20)
 
 
 func get_reflect_normal() -> Vector2:

@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://ckugf4npytyh3" path="res://UI/Scripts/FireFlyTexture.tres" id="3_kv0nq"]
 
 [node name="NightModeSwitch" type="CanvasLayer" unique_id=2070446548]
+layer = 3
 script = ExtResource("1_yftj0")
 
 [node name="Container" type="Node2D" parent="." unique_id=1061071967]

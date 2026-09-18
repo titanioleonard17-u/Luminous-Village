@@ -8,6 +8,7 @@ extends Node2D
 @export var hold_duration: float = 1.2
 
 @export_category("Win Delay")
+@export var night_delay: float = 0.5
 @export var win_delay: float = 0.6
 
 @export var next_level_scene: String = ""
@@ -131,20 +132,15 @@ func _trigger_win() -> void:
 	for laser in lasers:
 		laser.visible = false
 
-	# Semua rumah mulai squish bersamaan
-	var celebrations: Array = []
-
+	# Semua rumah mulai celebrate bersamaan
 	for house in houses:
 		if house.has_method("celebrate"):
-			celebrations.append(house.celebrate())
-
-	# Tunggu animasi 3x squish selesai
-	await get_tree().create_timer(0.96, true).timeout
+			house.celebrate()
 
 	if my_id != celebration_id or not is_celebrating_win:
 		return
 
-	# WAJIB masih tersorot setelah animasi selesai
+	# Cek lagi apakah semua rumah masih disorot
 	if not _all_houses_lit():
 		is_celebrating_win = false
 
@@ -156,15 +152,23 @@ func _trigger_win() -> void:
 
 	_lock_mirrors()
 
+	# Jeda manual sebelum Night Mode
+	await get_tree().create_timer(night_delay, true).timeout
+
+	if my_id != celebration_id or not is_celebrating_win:
+		return
+
 	await _switch_to_night()
 
 	if my_id != celebration_id or not is_celebrating_win:
 		return
 
+	# Nyalakan semua lampu rumah
 	for house in houses:
 		if house.has_method("turn_on_lights"):
 			house.turn_on_lights()
 
+	# Jeda sebelum Level Complete
 	await get_tree().create_timer(win_delay, true).timeout
 
 	if my_id != celebration_id or not is_celebrating_win:
@@ -197,7 +201,6 @@ func _show_night() -> void:
 	$NightModulate.color = Color(1, 1, 1, 1)
 
 	var tween := create_tween()
-	tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
 
 	tween.tween_property(
 		$NightModulate,
@@ -217,13 +220,9 @@ func _switch_to_night() -> void:
 
 	$NightModulate.visible = true
 
-	# Fade menjadi malam
 	await _show_night()
 
-	# Disable Pause / Guide
 	$PauseTriger.enable_night_mode()
-
-	# Munculkan kunang-kunang
 	$NightModeSwitch.visible = true
 
 
@@ -246,9 +245,6 @@ func _play_complete_sequence() -> void:
 		sign.visible = true
 		sign.position = sign_center_pos + Vector2(0, slide_in_offset_y)
 
-	# ==========================================
-	# ANIMASI BG + SIGN MASUK
-	# ==========================================
 	if bg or sign:
 		var tween_in := create_tween()
 		tween_in.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
@@ -274,9 +270,6 @@ func _play_complete_sequence() -> void:
 
 	await get_tree().create_timer(hold_duration, true).timeout
 
-	# ==========================================
-	# SIAPKAN BUTTON
-	# ==========================================
 	if back_button:
 		back_button.position = sign_center_pos
 		back_button.visible = true
@@ -287,9 +280,6 @@ func _play_complete_sequence() -> void:
 		next_button.visible = true
 		next_button.modulate.a = 0.0
 
-	# ==========================================
-	# SIGN NAIK + BUTTON MUNCUL
-	# ==========================================
 	if sign or back_button or next_button:
 		var tween_out := create_tween()
 		tween_out.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)

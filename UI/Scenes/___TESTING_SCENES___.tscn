@@ -46,8 +46,8 @@ layer = 2
 metadata/_edit_use_anchors_ = true
 
 [node name="NightModeSwitch" parent="." unique_id=2070446548 instance=ExtResource("4_jy4qx")]
-layer = 3
-script = null
+max_opacity = 0.9
+max_opacity_speed = 0.4
 
 [node name="LevelComplete" parent="." unique_id=949011591 instance=ExtResource("3_66txm")]
 layer = 4
