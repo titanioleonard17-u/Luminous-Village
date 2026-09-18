@@ -5,9 +5,31 @@ extends Camera2D
 @export var max_zoom := 2.0
 @export var zoom_duration := 0.2
 
+@export_category("Camera Limit Expand")
+@export var expand_x := 0.0
+@export var expand_y := 0.0
+
 var dragging := false
 var last_mouse_position := Vector2.ZERO
 var zoom_tween: Tween
+
+var original_limit_left: int
+var original_limit_right: int
+var original_limit_top: int
+var original_limit_bottom: int
+
+
+func _ready():
+	original_limit_left = limit_left
+	original_limit_right = limit_right
+	original_limit_top = limit_top
+	original_limit_bottom = limit_bottom
+
+	limit_left -= int(expand_x / 2.0)
+	limit_right += int(expand_x / 2.0)
+	limit_top -= int(expand_y / 2.0)
+	limit_bottom += int(expand_y / 2.0)
+
 
 func _input(event):
 	# Drag map
@@ -28,6 +50,19 @@ func _input(event):
 		var movement = event.position - last_mouse_position
 		position -= movement / zoom.x
 		last_mouse_position = event.position
+
+		# Jangan lewat Camera2D limit
+		position.x = clamp(
+			position.x,
+			limit_left,
+			limit_right
+		)
+
+		position.y = clamp(
+			position.y,
+			limit_top,
+			limit_bottom
+		)
 
 	# Zoom
 	if event is InputEventMouseButton:
@@ -71,6 +106,7 @@ func set_zoom_level(target: float, mouse_position: Vector2):
 		new_position,
 		zoom_duration
 	)
+
 
 func is_mouse_on_mirror() -> bool:
 	var space_state = get_world_2d().direct_space_state

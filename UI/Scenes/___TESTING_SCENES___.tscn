@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://crly0ntp87wu6" path="res://Scene  - New/Scene/MirrorSpawner.tscn" id="10_uqmvm"]
 [ext_resource type="Script" uid="uid://i7cak6xerp6w" path="res://Scene  - New/Script/Mirror.gd" id="11_hcrvv"]
 [ext_resource type="Texture2D" uid="uid://dg8tesaclo8yx" path="res://Asset/Art/Mirror.png" id="12_mxdcr"]
+[ext_resource type="PackedScene" uid="uid://45o3mn1a0cx" path="res://Scene  - New/Scene/Camera.tscn" id="15_66txm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fjrjh"]
 size = Vector2(442.36572, 155.6124)
@@ -35,14 +36,12 @@ _bundled = {
 
 [node name="node" type="Node2D" unique_id=58270103]
 script = ExtResource("1_jy4qx")
-level_complete_path = NodePath("LevelComplete")
 
 [node name="NightModulate" parent="." unique_id=1237042344 instance=ExtResource("2_2ulkr")]
 
 [node name="MirrorCounter" parent="." unique_id=2086307742 instance=ExtResource("8_5ucdq")]
 
 [node name="PauseTriger" parent="." unique_id=556950568 instance=ExtResource("4_al7r5")]
-layer = 2
 metadata/_edit_use_anchors_ = true
 
 [node name="NightModeSwitch" parent="." unique_id=2070446548 instance=ExtResource("4_jy4qx")]
@@ -50,7 +49,6 @@ max_opacity = 0.9
 max_opacity_speed = 0.4
 
 [node name="LevelComplete" parent="." unique_id=949011591 instance=ExtResource("3_66txm")]
-layer = 4
 scale = Vector2(1, 1.0031694)
 transform = Transform2D(1, 0, 0, 1.0031694, 0, 0)
 metadata/_edit_use_anchors_ = true
@@ -74,3 +72,5 @@ max_mirrors = 4
 [node name="House" parent="." unique_id=1454567019 instance=ExtResource("2_5gfbr")]
 position = Vector2(250.00009, 468)
 scale = Vector2(0.35, 0.35)
+
+[node name="Camera" parent="." unique_id=25551895 instance=ExtResource("15_66txm")]
