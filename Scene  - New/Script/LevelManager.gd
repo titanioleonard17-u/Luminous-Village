@@ -57,13 +57,6 @@ func _ready() -> void:
 	back_button = lc.find_child("Back_Button", true, false) as TextureButton
 	next_button = lc.find_child("Next_Button", true, false) as TextureButton
 
-	print("=== LEVEL COMPLETE SETUP ===")
-	print("LevelComplete: ", lc)
-	print("BG: ", bg)
-	print("SIGN: ", sign)
-	print("BACK: ", back_button)
-	print("NEXT: ", next_button)
-
 	if bg:
 		bg.process_mode = Node.PROCESS_MODE_ALWAYS
 		bg_target_pos = bg.position
@@ -188,12 +181,7 @@ func _trigger_win() -> void:
 
 	await get_tree().create_timer(2.0, true).timeout
 
-	print("=== MENAMPILKAN LEVEL COMPLETE ===")
-
 	$LevelComplete.visible = true
-
-	print("LevelComplete visible: ", $LevelComplete.visible)
-
 	_play_complete_sequence()
 
 
@@ -235,8 +223,6 @@ func _lock_mirrors() -> void:
 
 
 func _play_complete_sequence() -> void:
-	print("=== PLAY COMPLETE SEQUENCE ===")
-
 	if bg:
 		bg.visible = true
 		bg.position = bg_target_pos + Vector2(0, slide_in_offset_y)
@@ -324,9 +310,6 @@ func _play_complete_sequence() -> void:
 			)
 
 		await tween_out.finished
-
-	print("=== COMPLETE SEQUENCE SELESAI ===")
-
 
 func _on_next_level_pressed() -> void:
 	get_tree().paused = false

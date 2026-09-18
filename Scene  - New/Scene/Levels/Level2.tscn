@@ -73,10 +73,9 @@ impact_glow_alpha = null
 impact_glow_layers = null
 impact_glow_softness = null
 
-[node name="Mirror_Spawner" parent="." unique_id=1378017199 node_paths=PackedStringArray("mirror_counter") instance=ExtResource("7_g2471")]
+[node name="Mirror_Spawner" parent="." unique_id=1378017199 instance=ExtResource("7_g2471")]
 mirror_scene = SubResource("PackedScene_ebemg")
 max_mirrors = 4
-mirror_counter = NodePath("")
 
 [node name="House" parent="." unique_id=1454567019 instance=ExtResource("9_hp0c8")]
 position = Vector2(719, 451.00003)
