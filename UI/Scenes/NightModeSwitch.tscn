@@ -91,3 +91,53 @@ texture_scale = 0.25
 color = Color(1, 0.8509804, 0.3019608, 1)
 texture = ExtResource("3_kv0nq")
 texture_scale = 0.25
+
+[node name="Light11" type="PointLight2D" parent="Container/LightNode" unique_id=170171354]
+color = Color(1, 0.8509804, 0.3019608, 1)
+texture = ExtResource("3_kv0nq")
+texture_scale = 0.25
+
+[node name="Light12" type="PointLight2D" parent="Container/LightNode" unique_id=1403325415]
+color = Color(1, 0.8509804, 0.3019608, 1)
+texture = ExtResource("3_kv0nq")
+texture_scale = 0.25
+
+[node name="Light13" type="PointLight2D" parent="Container/LightNode" unique_id=872645849]
+color = Color(1, 0.8509804, 0.3019608, 1)
+texture = ExtResource("3_kv0nq")
+texture_scale = 0.25
+
+[node name="Light14" type="PointLight2D" parent="Container/LightNode" unique_id=501051027]
+color = Color(1, 0.8509804, 0.3019608, 1)
+texture = ExtResource("3_kv0nq")
+texture_scale = 0.25
+
+[node name="Light15" type="PointLight2D" parent="Container/LightNode" unique_id=2041793253]
+color = Color(1, 0.8509804, 0.3019608, 1)
+texture = ExtResource("3_kv0nq")
+texture_scale = 0.25
+
+[node name="Light16" type="PointLight2D" parent="Container/LightNode" unique_id=33538817]
+color = Color(1, 0.8509804, 0.3019608, 1)
+texture = ExtResource("3_kv0nq")
+texture_scale = 0.25
+
+[node name="Light17" type="PointLight2D" parent="Container/LightNode" unique_id=242550924]
+color = Color(1, 0.8509804, 0.3019608, 1)
+texture = ExtResource("3_kv0nq")
+texture_scale = 0.25
+
+[node name="Light18" type="PointLight2D" parent="Container/LightNode" unique_id=321707247]
+color = Color(1, 0.8509804, 0.3019608, 1)
+texture = ExtResource("3_kv0nq")
+texture_scale = 0.25
+
+[node name="Light19" type="PointLight2D" parent="Container/LightNode" unique_id=267299578]
+color = Color(1, 0.8509804, 0.3019608, 1)
+texture = ExtResource("3_kv0nq")
+texture_scale = 0.25
+
+[node name="Light20" type="PointLight2D" parent="Container/LightNode" unique_id=1389910130]
+color = Color(1, 0.8509804, 0.3019608, 1)
+texture = ExtResource("3_kv0nq")
+texture_scale = 0.25

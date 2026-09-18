@@ -38,8 +38,8 @@ func _ready() -> void:
 	level_complete = false
 
 	$LevelComplete.visible = false
-	#$NightModeSwitch.visible = false
-	#$NightModulate.visible = false
+	$NightModeSwitch.visible = false
+	$NightModulate.visible = false
 
 	if level_complete_path.is_empty():
 		push_warning("level_complete_path belum diisi di Inspector!")

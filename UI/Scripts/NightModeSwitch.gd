@@ -64,10 +64,10 @@ func _process(delta: float) -> void:
 			_respawn_light(light)
 
 
-func _input(event: InputEvent) -> void:
-	if event is InputEventKey:
-		if event.pressed and event.keycode == KEY_F:
-			start_lights()
+#func _input(event: InputEvent) -> void:
+	#if event is InputEventKey:
+		#if event.pressed and event.keycode == KEY_F:
+			#start_lights()
 
 
 func start_lights() -> void:
