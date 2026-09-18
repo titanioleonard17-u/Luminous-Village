@@ -36,6 +36,11 @@ _bundled = {
 [node name="node" type="Node2D" unique_id=58270103]
 script = ExtResource("1_jy4qx")
 level_complete_path = NodePath("LevelComplete")
+slide_in_offset_y = null
+sign_rise_offset = null
+hold_duration = null
+win_delay = null
+next_level_scene = null
 
 [node name="NightModulate" parent="." unique_id=1237042344 instance=ExtResource("2_2ulkr")]
 

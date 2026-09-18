@@ -1,0 +1,64 @@
+[gd_scene format=3 uid="uid://dtyuxbdbjf17x"]
+
+[ext_resource type="PackedScene" uid="uid://tg3mokvaes6y" path="res://Scene  - New/Scene/FireFly.tscn" id="1_q2d1u"]
+[ext_resource type="Script" uid="uid://bq2ibnfju0ud3" path="res://UI/Scripts/NightModeSwitch.gd" id="1_yftj0"]
+[ext_resource type="Texture2D" uid="uid://ckugf4npytyh3" path="res://UI/Scripts/FireFlyTexture.tres" id="3_kv0nq"]
+
+[node name="NightModeSwitch" type="CanvasLayer" unique_id=2070446548]
+script = ExtResource("1_yftj0")
+
+[node name="Container" type="Node2D" parent="." unique_id=1061071967]
+
+[node name="FireFly" parent="Container" unique_id=521813545 instance=ExtResource("1_q2d1u")]
+
+[node name="LightNode" type="Node2D" parent="Container" unique_id=1429968835]
+
+[node name="Light" type="PointLight2D" parent="Container/LightNode" unique_id=740449976]
+color = Color(1, 0.8509804, 0.3019608, 1)
+texture = ExtResource("3_kv0nq")
+texture_scale = 0.25
+
+[node name="Light2" type="PointLight2D" parent="Container/LightNode" unique_id=1238084486]
+color = Color(1, 0.8509804, 0.3019608, 1)
+texture = ExtResource("3_kv0nq")
+texture_scale = 0.25
+
+[node name="Light3" type="PointLight2D" parent="Container/LightNode" unique_id=203752084]
+color = Color(1, 0.8509804, 0.3019608, 1)
+texture = ExtResource("3_kv0nq")
+texture_scale = 0.25
+
+[node name="Light4" type="PointLight2D" parent="Container/LightNode" unique_id=472950647]
+color = Color(1, 0.8509804, 0.3019608, 1)
+texture = ExtResource("3_kv0nq")
+texture_scale = 0.25
+
+[node name="Light5" type="PointLight2D" parent="Container/LightNode" unique_id=1145235676]
+color = Color(1, 0.8509804, 0.3019608, 1)
+texture = ExtResource("3_kv0nq")
+texture_scale = 0.25
+
+[node name="Light6" type="PointLight2D" parent="Container/LightNode" unique_id=1016732760]
+color = Color(1, 0.8509804, 0.3019608, 1)
+texture = ExtResource("3_kv0nq")
+texture_scale = 0.25
+
+[node name="Light7" type="PointLight2D" parent="Container/LightNode" unique_id=1854607711]
+color = Color(1, 0.8509804, 0.3019608, 1)
+texture = ExtResource("3_kv0nq")
+texture_scale = 0.25
+
+[node name="Light8" type="PointLight2D" parent="Container/LightNode" unique_id=1397150176]
+color = Color(1, 0.8509804, 0.3019608, 1)
+texture = ExtResource("3_kv0nq")
+texture_scale = 0.25
+
+[node name="Light9" type="PointLight2D" parent="Container/LightNode" unique_id=1186986303]
+color = Color(1, 0.8509804, 0.3019608, 1)
+texture = ExtResource("3_kv0nq")
+texture_scale = 0.25
+
+[node name="Light10" type="PointLight2D" parent="Container/LightNode" unique_id=598835936]
+color = Color(1, 0.8509804, 0.3019608, 1)
+texture = ExtResource("3_kv0nq")
+texture_scale = 0.25

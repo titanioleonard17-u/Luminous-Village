@@ -3,7 +3,6 @@ extends StaticBody2D
 @onready var window_sprite: AnimatedSprite2D = $House_Sprite
 @onready var light_node: Node2D = $WindowLight/TerraceLightNode
 @onready var light_node2: Node2D = $WindowLight/BalconLightNode
-@onready var light: Sprite2D = $Light
 
 @export var blink_count: int = 3
 @export var blink_on_duration: float = 0.28
@@ -14,27 +13,26 @@ var last_hit_frame: int = -10
 var is_lit: bool = false
 var is_blinking: bool = false
 var is_celebrating: bool = false
+var is_squishing: bool = false
+var laser_on_house: bool = false
 
 var blink_id: int = 0
 
 
 func _ready() -> void:
 	_set_lights_alpha(0.0)
-	light.modulate.a = 0.0
 
 
 func _physics_process(_delta: float) -> void:
 	if get_tree().paused:
 		return
-	if is_celebrating:
-		return
 
 	var hit: bool = is_currently_hit()
+	laser_on_house = hit
 
 	if hit:
-		if not is_lit:
-			is_lit = true
-			_squish()
+		if not is_lit and not is_squishing:
+			celebrate()
 	else:
 		if is_lit and _lost_hit_beyond_grace():
 			_turn_off()
@@ -54,21 +52,33 @@ func _lost_hit_beyond_grace() -> bool:
 	return (current_frame - last_hit_frame) > lost_hit_grace_frames
 
 
-func celebrate() -> void:
-	is_celebrating = true
-	blink_id += 1
-	is_blinking = false
+func celebrate() -> bool:
+	if is_squishing or is_lit:
+		return false
 
-	await _squish()
-	await _squish()
-	await _squish()
+	is_squishing = true
 
-	is_celebrating = false
+	for i in range(3):
+		if not is_currently_hit():
+			is_squishing = false
+			return false
+
+		await _squish()
+
+		if not is_currently_hit():
+			is_squishing = false
+			return false
+
+	is_lit = true
+	is_squishing = false
+
+	return true
 
 
 func stop_celebrate() -> void:
 	is_celebrating = false
 	is_lit = false
+	is_squishing = false
 	is_blinking = false
 	blink_id += 1
 	_set_lights_alpha(0.0)
@@ -127,24 +137,21 @@ func night_blink() -> void:
 	is_blinking = false
 	_set_lights_alpha(1.0)
 
+
 func _turn_off() -> void:
 	blink_id += 1
 	is_blinking = false
 	is_lit = false
 	_set_lights_alpha(0.0)
 
+
 func turn_on_lights() -> void:
 	is_blinking = false
 	_set_lights_alpha(1.0)
 
-	light.modulate.a = 0.0
 
-	var tween := create_tween()
-	tween.tween_property(
-		light,
-		"modulate:a",
-		100.0 / 255.0,
-		0.5
-	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+func laser_entered() -> void:
+	laser_on_house = true
 
-	await tween.finished
+	if not is_squishing and not is_lit:
+		celebrate()

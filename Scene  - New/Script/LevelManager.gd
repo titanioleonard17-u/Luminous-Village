@@ -27,59 +27,73 @@ var sign_center_pos: Vector2
 var back_target_pos: Vector2
 var next_target_pos: Vector2
 
+
 func _ready() -> void:
 	if get_tree().current_scene.name.contains("TutorialLevel"):
-		$Container/PauseTriger/GuideMenu.visible = true
+		$PauseTriger/GuideMenu.visible = true
 
 	AudioManager.playRandomVibe()
+
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	level_complete = false
 
-	$Container/LevelComplete.visible = false
-	$Container/ModeAnimation.visible = false
+	$LevelComplete.visible = false
+	$NightModeSwitch.visible = false
+	$NightModulate.visible = false
 
 	if level_complete_path.is_empty():
 		push_warning("level_complete_path belum diisi di Inspector!")
 		return
 
-	var lc := get_node(level_complete_path)
+	var lc := get_node_or_null(level_complete_path)
 
-	bg = lc.get_node_or_null("%Bg")
-	if bg == null:
-		bg = lc.get_node_or_null("Bg")
+	if lc == null:
+		push_error("LevelComplete tidak ditemukan dari level_complete_path!")
+		return
 
-	sign = lc.get_node_or_null("%Complete_Sign")
-	if sign == null:
-		sign = lc.get_node_or_null("Complete_Sign")
+	bg = lc.find_child("Bg", true, false) as Control
+	sign = lc.find_child("Complete_Sign", true, false) as Control
+	back_button = lc.find_child("Back_Button", true, false) as TextureButton
+	next_button = lc.find_child("Next_Button", true, false) as TextureButton
 
-	back_button = lc.get_node_or_null("%Back_Button")
-	if back_button == null:
-		back_button = lc.get_node_or_null("Back_Button")
-
-	next_button = lc.get_node_or_null("%Next_Button")
-	if next_button == null:
-		next_button = lc.get_node_or_null("Next_Button")
+	print("=== LEVEL COMPLETE SETUP ===")
+	print("LevelComplete: ", lc)
+	print("BG: ", bg)
+	print("SIGN: ", sign)
+	print("BACK: ", back_button)
+	print("NEXT: ", next_button)
 
 	if bg:
 		bg.process_mode = Node.PROCESS_MODE_ALWAYS
 		bg_target_pos = bg.position
 		bg.visible = false
+	else:
+		push_warning("Bg tidak ditemukan!")
 
 	if sign:
 		sign.process_mode = Node.PROCESS_MODE_ALWAYS
 		sign_center_pos = sign.position
 		sign.visible = false
+	else:
+		push_warning("Complete_Sign tidak ditemukan!")
 
 	if back_button:
 		back_button.process_mode = Node.PROCESS_MODE_ALWAYS
 		back_target_pos = back_button.position
 		back_button.visible = false
+	else:
+		push_warning("Back_Button tidak ditemukan!")
 
 	if next_button:
 		next_button.process_mode = Node.PROCESS_MODE_ALWAYS
 		next_target_pos = next_button.position
 		next_button.visible = false
-		next_button.pressed.connect(_on_next_level_pressed)
+
+		if not next_button.pressed.is_connected(_on_next_level_pressed):
+			next_button.pressed.connect(_on_next_level_pressed)
+	else:
+		push_warning("Next_Button tidak ditemukan!")
+
 
 func _process(_delta: float) -> void:
 	if level_complete or is_celebrating_win:
@@ -87,6 +101,7 @@ func _process(_delta: float) -> void:
 
 	if _all_houses_lit():
 		_trigger_win()
+
 
 func _all_houses_lit() -> bool:
 	var houses: Array = get_tree().get_nodes_in_group("house")
@@ -98,7 +113,11 @@ func _all_houses_lit() -> bool:
 		if not house.is_lit:
 			return false
 
+		if not house.is_currently_hit():
+			return false
+
 	return true
+
 
 func _trigger_win() -> void:
 	is_celebrating_win = true
@@ -107,24 +126,32 @@ func _trigger_win() -> void:
 	var my_id: int = celebration_id
 
 	var lasers: Array = get_tree().get_nodes_in_group("laser")
+	var houses: Array = get_tree().get_nodes_in_group("house")
 
 	for laser in lasers:
 		laser.visible = false
 
-	var houses: Array = get_tree().get_nodes_in_group("house")
+	# Semua rumah mulai squish bersamaan
+	var celebrations: Array = []
 
 	for house in houses:
 		if house.has_method("celebrate"):
-			house.celebrate()
+			celebrations.append(house.celebrate())
 
-	await get_tree().create_timer(0.7, true).timeout
+	# Tunggu animasi 3x squish selesai
+	await get_tree().create_timer(0.96, true).timeout
 
 	if my_id != celebration_id or not is_celebrating_win:
 		return
 
-	await get_tree().create_timer(0.5, true).timeout
+	# WAJIB masih tersorot setelah animasi selesai
+	if not _all_houses_lit():
+		is_celebrating_win = false
 
-	if my_id != celebration_id or not is_celebrating_win:
+		for house in houses:
+			if house.has_method("stop_celebrate"):
+				house.stop_celebrate()
+
 		return
 
 	_lock_mirrors()
@@ -155,9 +182,32 @@ func _trigger_win() -> void:
 
 	AudioManager.playImportantSFX("LevelComplete")
 
-	await get_tree().create_timer(2.0).timeout
-	$Container/LevelComplete.visible = true
+	await get_tree().create_timer(2.0, true).timeout
+
+	print("=== MENAMPILKAN LEVEL COMPLETE ===")
+
+	$LevelComplete.visible = true
+
+	print("LevelComplete visible: ", $LevelComplete.visible)
+
 	_play_complete_sequence()
+
+
+func _show_night() -> void:
+	$NightModulate.color = Color(1, 1, 1, 1)
+
+	var tween := create_tween()
+	tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+
+	tween.tween_property(
+		$NightModulate,
+		"color",
+		Color(0.15, 0.15, 0.25, 1.0),
+		1.0
+	)
+
+	await tween.finished
+
 
 func _switch_to_night() -> void:
 	if is_switching_night:
@@ -165,15 +215,17 @@ func _switch_to_night() -> void:
 
 	is_switching_night = true
 
-	var animation_player := $Container/ModeAnimation/AnimationPlayer
+	$NightModulate.visible = true
 
-	$Container/ModeAnimation.visible = true
+	# Fade menjadi malam
+	await _show_night()
 
-	animation_player.stop()
-	animation_player.seek(0.0, true)
-	animation_player.play("SwitchModeNight")
+	# Disable Pause / Guide
+	$PauseTriger.enable_night_mode()
 
-	await animation_player.animation_finished
+	# Munculkan kunang-kunang
+	$NightModeSwitch.visible = true
+
 
 func _lock_mirrors() -> void:
 	var mirrors: Array = get_tree().get_nodes_in_group("mirror")
@@ -182,7 +234,10 @@ func _lock_mirrors() -> void:
 		if mirror.has_method("set_locked"):
 			mirror.set_locked(true)
 
+
 func _play_complete_sequence() -> void:
+	print("=== PLAY COMPLETE SEQUENCE ===")
+
 	if bg:
 		bg.visible = true
 		bg.position = bg_target_pos + Vector2(0, slide_in_offset_y)
@@ -191,30 +246,37 @@ func _play_complete_sequence() -> void:
 		sign.visible = true
 		sign.position = sign_center_pos + Vector2(0, slide_in_offset_y)
 
-	var tween_in := create_tween()
-	tween_in.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
-	tween_in.set_parallel(true)
+	# ==========================================
+	# ANIMASI BG + SIGN MASUK
+	# ==========================================
+	if bg or sign:
+		var tween_in := create_tween()
+		tween_in.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+		tween_in.set_parallel(true)
 
-	if bg:
-		tween_in.tween_property(
-			bg,
-			"position",
-			bg_target_pos,
-			0.5
-		).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+		if bg:
+			tween_in.tween_property(
+				bg,
+				"position",
+				bg_target_pos,
+				0.5
+			).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 
-	if sign:
-		tween_in.tween_property(
-			sign,
-			"position",
-			sign_center_pos,
-			0.5
-		).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+		if sign:
+			tween_in.tween_property(
+				sign,
+				"position",
+				sign_center_pos,
+				0.5
+			).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 
-	await tween_in.finished
+		await tween_in.finished
 
 	await get_tree().create_timer(hold_duration, true).timeout
 
+	# ==========================================
+	# SIAPKAN BUTTON
+	# ==========================================
 	if back_button:
 		back_button.position = sign_center_pos
 		back_button.visible = true
@@ -225,52 +287,62 @@ func _play_complete_sequence() -> void:
 		next_button.visible = true
 		next_button.modulate.a = 0.0
 
-	var tween_out := create_tween()
-	tween_out.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
-	tween_out.set_parallel(true)
+	# ==========================================
+	# SIGN NAIK + BUTTON MUNCUL
+	# ==========================================
+	if sign or back_button or next_button:
+		var tween_out := create_tween()
+		tween_out.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+		tween_out.set_parallel(true)
 
-	if sign:
-		tween_out.tween_property(
-			sign,
-			"position",
-			sign_center_pos + sign_rise_offset,
-			0.5
-		).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+		if sign:
+			tween_out.tween_property(
+				sign,
+				"position",
+				sign_center_pos + sign_rise_offset,
+				0.5
+			).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 
-	if back_button:
-		tween_out.tween_property(
-			back_button,
-			"position",
-			back_target_pos,
-			0.45
-		).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+		if back_button:
+			tween_out.tween_property(
+				back_button,
+				"position",
+				back_target_pos,
+				0.45
+			).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 
-		tween_out.tween_property(
-			back_button,
-			"modulate:a",
-			1.0,
-			0.25
-		)
+			tween_out.tween_property(
+				back_button,
+				"modulate:a",
+				1.0,
+				0.25
+			)
 
-	if next_button:
-		tween_out.tween_property(
-			next_button,
-			"position",
-			next_target_pos,
-			0.45
-		).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+		if next_button:
+			tween_out.tween_property(
+				next_button,
+				"position",
+				next_target_pos,
+				0.45
+			).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 
-		tween_out.tween_property(
-			next_button,
-			"modulate:a",
-			1.0,
-			0.25
-		)
+			tween_out.tween_property(
+				next_button,
+				"modulate:a",
+				1.0,
+				0.25
+			)
+
+		await tween_out.finished
+
+	print("=== COMPLETE SEQUENCE SELESAI ===")
+
 
 func _on_next_level_pressed() -> void:
 	get_tree().paused = false
 
 	if next_level_scene.is_empty():
+		push_warning("next_level_scene belum diisi!")
 		return
 
 	get_tree().change_scene_to_file(next_level_scene)
