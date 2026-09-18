@@ -4,6 +4,30 @@
 [ext_resource type="Script" uid="uid://bq2ibnfju0ud3" path="res://UI/Scripts/NightModeSwitch.gd" id="1_yftj0"]
 [ext_resource type="Texture2D" uid="uid://ckugf4npytyh3" path="res://UI/Scripts/FireFlyTexture.tres" id="3_kv0nq"]
 
+[sub_resource type="Gradient" id="Gradient_eb631"]
+colors = PackedColorArray(0, 1, 0, 1, 1, 1, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_eb631"]
+gradient = SubResource("Gradient_eb631")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_kqavk"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(576, 324, 1)
+gravity = Vector3(0, 0, 0)
+linear_accel_min = -5.000002
+linear_accel_max = 0.99999774
+scale_min = 0.5
+scale_max = 1.1999999
+color_ramp = SubResource("GradientTexture1D_eb631")
+turbulence_enabled = true
+turbulence_noise_strength = 2.0
+turbulence_noise_speed = Vector3(0.5, 0.9, 0)
+turbulence_influence_min = 0.2
+turbulence_influence_max = 0.35000002
+turbulence_initial_displacement_min = 1.490116e-06
+turbulence_initial_displacement_max = 1.490116e-06
+
 [node name="NightModeSwitch" type="CanvasLayer" unique_id=2070446548]
 layer = 3
 script = ExtResource("1_yftj0")
@@ -11,6 +35,8 @@ script = ExtResource("1_yftj0")
 [node name="Container" type="Node2D" parent="." unique_id=1061071967]
 
 [node name="FireFly" parent="Container" unique_id=521813545 instance=ExtResource("1_q2d1u")]
+lifetime = 10.0
+process_material = SubResource("ParticleProcessMaterial_kqavk")
 
 [node name="LightNode" type="Node2D" parent="Container" unique_id=1429968835]
 
