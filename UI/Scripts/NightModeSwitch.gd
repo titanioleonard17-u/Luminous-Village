@@ -77,11 +77,19 @@ func start_lights() -> void:
 	if lights_active:
 		return
 
+	AudioManager.playAudio("Grasshopper", AudioManager.AudioType.SFX)
 	lights_active = true
 	is_spawning = true
 
 	_spawn_lights_one_by_one()
 
+func stop_lights() -> void:
+	lights_active = false
+	is_spawning = false
+
+	for light: PointLight2D in lights:
+		light.visible = false
+		light.set_meta("fading_in", false)
 
 func _spawn_lights_one_by_one() -> void:
 	for light: PointLight2D in lights:
@@ -120,16 +128,6 @@ func _spawn_lights_one_by_one() -> void:
 		light.set_meta("fading_in", false)
 
 	is_spawning = false
-
-
-func stop_lights() -> void:
-	lights_active = false
-	is_spawning = false
-
-	for light: PointLight2D in lights:
-		light.visible = false
-		light.set_meta("fading_in", false)
-
 
 func _get_lights() -> void:
 	lights.clear()
