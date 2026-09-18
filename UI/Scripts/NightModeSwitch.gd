@@ -26,8 +26,17 @@ extends CanvasLayer
 @export var min_opacity_speed: float = 0.15
 @export var max_opacity_speed: float = 0.35
 
+# Animasi muncul
+@export_category("Light Spawn")
+@export var fade_in_duration: float = 1.0
+@export var spawn_delay: float = 0.0
+
 var lights: Array[PointLight2D] = []
 var spawn_positions: Array[Vector2] = []
+
+var lights_active: bool = false
+var is_spawning: bool = false
+
 
 func _ready() -> void:
 	randomize()
@@ -36,24 +45,99 @@ func _ready() -> void:
 	_generate_spawn_positions()
 	_setup_lights()
 
-	print("JUMLAH LIGHT: ", lights.size())
+	for light: PointLight2D in lights:
+		light.visible = false
+
 
 func _process(delta: float) -> void:
+	if not lights_active:
+		return
+
 	for light: PointLight2D in lights:
 		_move_light(light, delta)
-		_update_opacity(light, delta)
+
+		# Jangan mengubah opacity selama fade-in
+		if not light.get_meta("fading_in", false):
+			_update_opacity(light, delta)
 
 		if _is_outside(light):
 			_respawn_light(light)
+
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventKey:
+		if event.pressed and event.keycode == KEY_F:
+			start_lights()
+
+
+func start_lights() -> void:
+	if is_spawning:
+		return
+
+	if lights_active:
+		return
+
+	lights_active = true
+	is_spawning = true
+
+	_spawn_lights_one_by_one()
+
+
+func _spawn_lights_one_by_one() -> void:
+	for light: PointLight2D in lights:
+		light.visible = false
+
+		light.set_meta("fading_in", true)
+
+		var target_opacity: float = light.get_meta("opacity")
+
+		var color: Color = light.color
+		color.a = 0.0
+		light.color = color
+
+	for i in range(lights.size()):
+		var light: PointLight2D = lights[i]
+
+		# Jeda sebelum light berikutnya muncul
+		if i > 0:
+			await get_tree().create_timer(spawn_delay).timeout
+
+		light.visible = true
+
+		var target_opacity: float = light.get_meta("opacity")
+
+		var tween := create_tween()
+
+		tween.tween_property(
+			light,
+			"color:a",
+			target_opacity,
+			fade_in_duration
+		).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+
+		await tween.finished
+
+		light.set_meta("fading_in", false)
+
+	is_spawning = false
+
+
+func stop_lights() -> void:
+	lights_active = false
+	is_spawning = false
+
+	for light: PointLight2D in lights:
+		light.visible = false
+		light.set_meta("fading_in", false)
+
 
 func _get_lights() -> void:
 	lights.clear()
 
 	for child: Node in $Container/LightNode.get_children():
-		print(child.name, " | ", child.get_class())
-
 		if child is PointLight2D:
 			lights.append(child as PointLight2D)
+
 
 func _generate_spawn_positions() -> void:
 	spawn_positions.clear()
@@ -88,6 +172,7 @@ func _generate_spawn_positions() -> void:
 		push_warning(
 			"Tidak semua posisi light berhasil dibuat karena min_spawn_distance terlalu besar."
 		)
+
 
 func _setup_lights() -> void:
 	for i in range(lights.size()):
@@ -153,6 +238,12 @@ func _setup_lights() -> void:
 			1.0 if randf() > 0.5 else -1.0
 		)
 
+		light.set_meta(
+			"fading_in",
+			false
+		)
+
+
 func _move_light(light: PointLight2D, delta: float) -> void:
 	var direction: Vector2 = light.get_meta("direction")
 	var speed: float = light.get_meta("speed")
@@ -169,6 +260,7 @@ func _move_light(light: PointLight2D, delta: float) -> void:
 			"direction",
 			new_direction.normalized()
 		)
+
 
 func _update_opacity(light: PointLight2D, delta: float) -> void:
 	var opacity: float = light.get_meta("opacity")
@@ -199,6 +291,7 @@ func _update_opacity(light: PointLight2D, delta: float) -> void:
 	color.a = opacity
 	light.color = color
 
+
 func _is_outside(light: PointLight2D) -> bool:
 	var light_scale: float = light.get_meta(
 		"light_scale",
@@ -214,6 +307,7 @@ func _is_outside(light: PointLight2D) -> bool:
 		or pos.y < -margin
 		or pos.y > area_size.y + margin
 	)
+
 
 func _respawn_light(light: PointLight2D) -> void:
 	var new_position: Vector2 = _get_best_spawn_position(light)
@@ -237,6 +331,7 @@ func _respawn_light(light: PointLight2D) -> void:
 		"direction",
 		new_direction
 	)
+
 
 func _get_best_spawn_position(
 	current_light: PointLight2D

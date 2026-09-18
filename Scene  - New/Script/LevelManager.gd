@@ -6,10 +6,9 @@ extends Node2D
 @export var hold_duration: float = 1.2
 
 @export_category("Win Delay")
-@export var night_delay: float = 0.5
-@export var win_delay: float = 0.6
-
-@export var next_level_scene: String = ""
+@export var nightDelay: float = 0.5
+@export var winDelay: float = 0.6
+@export var transitionDuration: float = 0.5
 
 var level_complete: bool = false
 var is_celebrating_win: bool = false
@@ -39,8 +38,8 @@ func _ready() -> void:
 	level_complete = false
 
 	$LevelComplete.visible = false
-	$NightModeSwitch.visible = false
-	$NightModulate.visible = false
+	#$NightModeSwitch.visible = false
+	#$NightModulate.visible = false
 
 	if level_complete_path.is_empty():
 		push_warning("level_complete_path belum diisi di Inspector!")
@@ -82,9 +81,6 @@ func _ready() -> void:
 		next_button.process_mode = Node.PROCESS_MODE_ALWAYS
 		next_target_pos = next_button.position
 		next_button.visible = false
-
-		if not next_button.pressed.is_connected(_on_next_level_pressed):
-			next_button.pressed.connect(_on_next_level_pressed)
 	else:
 		push_warning("Next_Button tidak ditemukan!")
 
@@ -146,7 +142,8 @@ func _trigger_win() -> void:
 	_lock_mirrors()
 
 	# Jeda manual sebelum Night Mode
-	await get_tree().create_timer(night_delay, true).timeout
+	await get_tree().create_timer(nightDelay, true).timeout
+	$NightModeSwitch.start_lights()
 
 	if my_id != celebration_id or not is_celebrating_win:
 		return
@@ -162,7 +159,7 @@ func _trigger_win() -> void:
 			house.turn_on_lights()
 
 	# Jeda sebelum Level Complete
-	await get_tree().create_timer(win_delay, true).timeout
+	await get_tree().create_timer(winDelay, true).timeout
 
 	if my_id != celebration_id or not is_celebrating_win:
 		return
@@ -194,11 +191,15 @@ func _show_night() -> void:
 		$NightModulate,
 		"color",
 		Color(0.15, 0.15, 0.25, 1.0),
-		1.0
+		transitionDuration
 	)
 
 	await tween.finished
 
+func _start_night_effects() -> void:
+	$Particle.restart()
+	$Particle.emitting = true
+	$LightController.start_lights()
 
 func _switch_to_night() -> void:
 	if is_switching_night:
@@ -310,12 +311,3 @@ func _play_complete_sequence() -> void:
 			)
 
 		await tween_out.finished
-
-func _on_next_level_pressed() -> void:
-	get_tree().paused = false
-
-	if next_level_scene.is_empty():
-		push_warning("next_level_scene belum diisi!")
-		return
-
-	get_tree().change_scene_to_file(next_level_scene)

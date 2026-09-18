@@ -35,6 +35,8 @@ script = ExtResource("1_yftj0")
 [node name="Container" type="Node2D" parent="." unique_id=1061071967]
 
 [node name="FireFly" parent="Container" unique_id=521813545 instance=ExtResource("1_q2d1u")]
+visible = false
+emitting = false
 lifetime = 10.0
 process_material = SubResource("ParticleProcessMaterial_kqavk")
 
