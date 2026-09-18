@@ -14,7 +14,6 @@
 [ext_resource type="PackedScene" uid="uid://bi2fm2hx85yl" path="res://Scene  - New/Scene/House.tscn" id="8_5kjoa"]
 [ext_resource type="Script" uid="uid://i7cak6xerp6w" path="res://Scene  - New/Script/Mirror.gd" id="9_ajkvu"]
 [ext_resource type="Texture2D" uid="uid://dg8tesaclo8yx" path="res://Asset/Art/Mirror.png" id="10_ut41e"]
-[ext_resource type="PackedScene" uid="uid://cembrpus1owlg" path="res://Scene  - New/Scene/teleporter.tscn" id="13_ut41e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fjrjh"]
 size = Vector2(442.36572, 155.6124)
@@ -72,10 +71,3 @@ max_mirrors = 4
 [node name="House" parent="." unique_id=1454567019 instance=ExtResource("8_5kjoa")]
 position = Vector2(250.00009, 468)
 scale = Vector2(0.35, 0.35)
-
-[node name="Teleporter" parent="." unique_id=1943216660 instance=ExtResource("13_ut41e")]
-position = Vector2(938, 132)
-linked_teleporter = NodePath("../Teleporter2")
-
-[node name="Teleporter2" parent="." unique_id=518796278 instance=ExtResource("13_ut41e")]
-position = Vector2(661, 450)
