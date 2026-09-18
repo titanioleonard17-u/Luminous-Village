@@ -12,27 +12,8 @@
 [ext_resource type="PackedScene" uid="uid://og8kwyfuk7te" path="res://Scene  - New/Scene/decor.tscn" id="6_ajkvu"]
 [ext_resource type="PackedScene" uid="uid://cen1rv6xnlc18" path="res://Scene  - New/Scene/MirrorCounter.tscn" id="7_ajkvu"]
 [ext_resource type="PackedScene" uid="uid://bi2fm2hx85yl" path="res://Scene  - New/Scene/House.tscn" id="8_5kjoa"]
-[ext_resource type="Script" uid="uid://i7cak6xerp6w" path="res://Scene  - New/Script/Mirror.gd" id="9_ajkvu"]
-[ext_resource type="Texture2D" uid="uid://dg8tesaclo8yx" path="res://Asset/Art/Mirror.png" id="10_ut41e"]
+[ext_resource type="PackedScene" uid="uid://k5b0y2snplf3" path="res://Scene  - New/Scene/Mirror.tscn" id="12_uxah3"]
 [ext_resource type="PackedScene" uid="uid://cembrpus1owlg" path="res://Scene  - New/Scene/teleporter.tscn" id="13_ut41e"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_fjrjh"]
-size = Vector2(442.36572, 155.6124)
-
-[sub_resource type="PackedScene" id="PackedScene_ajkvu"]
-_bundled = {
-"conn_count": 0,
-"conns": PackedInt32Array(),
-"editable_instances": [],
-"id_paths": [PackedInt32Array(), PackedInt32Array()],
-"names": PackedStringArray("Mirror", "StaticBody2D", "mirror", "scale", "script", "CollisionShape2D", "CollisionShape2D", "position", "scale", "shape", "Sprite2D", "Sprite2D", "scale", "texture"),
-"node_count": 3,
-"node_ids": PackedInt32Array(1943216660, 200045112, 1698868491),
-"node_paths": [NodePath("."), NodePath(".")],
-"nodes": PackedInt32Array(-1, -1, 1, 0, -1, 2, 3, 0, 4, 1, 1, 2, 1073741824, 0, 6, 5, -1, 3, 7, 2, 8, 3, 9, 4, 0, 1073741825, 0, 11, 10, -1, 2, 12, 5, 13, 6, 0),
-"variants": [Vector2(0.5, 0.5), ExtResource("9_ajkvu"), Vector2(0.49999976, -2.0000005), Vector2(0.31874081, -0.30845878), SubResource("RectangleShape2D_fjrjh"), Vector2(0.3, 0.3), ExtResource("10_ut41e")],
-"version": 3
-}
 
 [node name="Level1" type="Node2D" unique_id=1214213121]
 script = ExtResource("1_hdyv3")
@@ -65,10 +46,9 @@ tile_map_data = PackedByteArray("AAAeABIAAAAAAAAAAAAeABMAAAAAAAEAAAAVABcAAAACAAA
 [node name="Laser" parent="." unique_id=932062609 instance=ExtResource("2_hdyv3")]
 position = Vector2(-160, 155)
 
-[node name="Mirror_Spawner" parent="." unique_id=1378017199 node_paths=PackedStringArray("mirror_counter") instance=ExtResource("4_885hd")]
-mirror_scene = SubResource("PackedScene_ajkvu")
+[node name="MirrorSpawner" parent="." unique_id=1378017199 instance=ExtResource("4_885hd")]
+mirror_scene = ExtResource("12_uxah3")
 max_mirrors = 4
-mirror_counter = NodePath("")
 
 [node name="House" parent="." unique_id=1454567019 instance=ExtResource("8_5kjoa")]
 position = Vector2(250.00009, 468)
