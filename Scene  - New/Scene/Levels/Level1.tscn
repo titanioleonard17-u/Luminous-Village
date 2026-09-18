@@ -65,10 +65,9 @@ tile_map_data = PackedByteArray("AAAeABIAAAAAAAAAAAAeABMAAAAAAAEAAAAVABcAAAACAAA
 [node name="Laser" parent="." unique_id=932062609 instance=ExtResource("2_hdyv3")]
 position = Vector2(-160, 155)
 
-[node name="Mirror_Spawner" parent="." unique_id=1378017199 node_paths=PackedStringArray("mirror_counter") instance=ExtResource("4_885hd")]
+[node name="Mirror_Spawner" parent="." unique_id=1378017199 instance=ExtResource("4_885hd")]
 mirror_scene = SubResource("PackedScene_ajkvu")
 max_mirrors = 4
-mirror_counter = NodePath("")
 
 [node name="House" parent="." unique_id=1454567019 instance=ExtResource("8_5kjoa")]
 position = Vector2(250.00009, 468)

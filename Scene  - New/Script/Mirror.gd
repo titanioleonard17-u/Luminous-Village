@@ -32,22 +32,26 @@ func _input(event: InputEvent) -> void:
 
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:
-			if event.pressed and _is_point_over(get_global_mouse_position()):
-				_start_drag()
+			if event.pressed:
+				if not is_dragging and _is_point_over(get_global_mouse_position()):
+					_start_drag()
 			else:
-				_end_drag()
+				if is_dragging:
+					_end_drag()
 
 	if event is InputEventMouseMotion and is_dragging:
 		_rotate_towards(get_global_mouse_position())
 
 	if event is InputEventScreenTouch:
 		var world_pos: Vector2 = get_global_transform_with_canvas().affine_inverse() * event.position
-		if event.pressed and _is_point_over(world_pos):
-			touch_index = event.index
-			_start_drag()
-		elif not event.pressed and event.index == touch_index:
-			touch_index = -1
-			_end_drag()
+		if event.pressed:
+			if not is_dragging and _is_point_over(world_pos):
+				touch_index = event.index
+				_start_drag()
+		else:
+			if is_dragging and event.index == touch_index:
+				touch_index = -1
+				_end_drag()
 
 	if event is InputEventScreenDrag and is_dragging and event.index == touch_index:
 		var world_pos: Vector2 = get_global_transform_with_canvas().affine_inverse() * event.position

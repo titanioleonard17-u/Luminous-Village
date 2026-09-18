@@ -13,7 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://crly0ntp87wu6" path="res://Scene  - New/Scene/MirrorSpawner.tscn" id="11_e1afm"]
 [ext_resource type="Script" uid="uid://i7cak6xerp6w" path="res://Scene  - New/Script/Mirror.gd" id="12_kmpxn"]
 [ext_resource type="Texture2D" uid="uid://dg8tesaclo8yx" path="res://Asset/Art/Mirror.png" id="13_4twuu"]
-[ext_resource type="PackedScene" uid="uid://cembrpus1owlg" path="res://Scene  - New/Script/teleporter.tscn" id="14_cjg0y"]
+[ext_resource type="PackedScene" uid="uid://cembrpus1owlg" path="res://Scene  - New/Scene/teleporter.tscn" id="14_cjg0y"]
 [ext_resource type="PackedScene" uid="uid://bi2fm2hx85yl" path="res://Scene  - New/Scene/House.tscn" id="14_lne6q"]
 [ext_resource type="PackedScene" uid="uid://b78j83aks04lv" path="res://Scene  - New/Scene/Prism.tscn" id="15_5mj0m"]
 
@@ -37,13 +37,12 @@ _bundled = {
 
 [node name="Level5" type="Node2D" unique_id=371732297]
 script = ExtResource("1_ir0k2")
-level_complete_path = NodePath("Container/LevelComplete")
-sign_rise_offset = Vector2(0, -100)
 
 [node name="Container" type="CanvasLayer" parent="." unique_id=873931066]
 layer = 2
 
 [node name="PauseTriger" parent="Container" unique_id=556950568 instance=ExtResource("2_cjg0y")]
+visible = false
 
 [node name="LevelComplete" parent="Container" unique_id=949011591 instance=ExtResource("3_x17pd")]
 visible = false
