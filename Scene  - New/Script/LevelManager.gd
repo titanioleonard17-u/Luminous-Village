@@ -1,7 +1,5 @@
 extends Node2D
 
-@export var level_complete_path: NodePath
-
 @export_category("Animasi")
 @export var slide_in_offset_y: float = 800.0
 @export var sign_rise_offset: Vector2 = Vector2(0, -100)
@@ -27,6 +25,7 @@ var bg_target_pos: Vector2
 var sign_center_pos: Vector2
 var back_target_pos: Vector2
 var next_target_pos: Vector2
+var level_complete_path: NodePath
 
 
 func _ready() -> void:
@@ -35,6 +34,7 @@ func _ready() -> void:
 
 	AudioManager.playRandomVibe()
 
+	level_complete_path = $LevelComplete.get_path()
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	level_complete = false
 

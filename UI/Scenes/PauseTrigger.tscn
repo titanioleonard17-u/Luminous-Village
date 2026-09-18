@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://43ol7ai1lse0" path="res://UI/Scenes/GuideMenu.tscn" id="6_b5iei"]
 
 [node name="PauseTrigerm" type="CanvasLayer" unique_id=1158435896]
+layer = 2
 script = ExtResource("1_aemob")
 
 [node name="Container" type="Control" parent="." unique_id=896830061]
