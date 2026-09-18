@@ -74,3 +74,4 @@ position = Vector2(250.00009, 468)
 scale = Vector2(0.35, 0.35)
 
 [node name="Camera" parent="." unique_id=25551895 instance=ExtResource("15_66txm")]
+expand_right = 4000.0

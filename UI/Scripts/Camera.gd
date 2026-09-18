@@ -6,30 +6,20 @@ extends Camera2D
 @export var zoom_duration := 0.2
 
 @export_category("Camera Limit Expand")
-@export var expand_x := 0.0
-@export var expand_y := 0.0
+@export var expand_left := 0.0
+@export var expand_right := 0.0
+@export var expand_top := 0.0
+@export var expand_bottom := 0.0
 
 var dragging := false
 var last_mouse_position := Vector2.ZERO
 var zoom_tween: Tween
 
-var original_limit_left: int
-var original_limit_right: int
-var original_limit_top: int
-var original_limit_bottom: int
-
-
 func _ready():
-	original_limit_left = limit_left
-	original_limit_right = limit_right
-	original_limit_top = limit_top
-	original_limit_bottom = limit_bottom
-
-	limit_left -= int(expand_x / 2.0)
-	limit_right += int(expand_x / 2.0)
-	limit_top -= int(expand_y / 2.0)
-	limit_bottom += int(expand_y / 2.0)
-
+	limit_left -= int(expand_left)
+	limit_right += int(expand_right)
+	limit_top -= int(expand_top)
+	limit_bottom += int(expand_bottom)
 
 func _input(event):
 	# Drag map
@@ -51,18 +41,8 @@ func _input(event):
 		position -= movement / zoom.x
 		last_mouse_position = event.position
 
-		# Jangan lewat Camera2D limit
-		position.x = clamp(
-			position.x,
-			limit_left,
-			limit_right
-		)
-
-		position.y = clamp(
-			position.y,
-			limit_top,
-			limit_bottom
-		)
+		position.x = clamp(position.x, limit_left, limit_right)
+		position.y = clamp(position.y, limit_top, limit_bottom)
 
 	# Zoom
 	if event is InputEventMouseButton:
@@ -71,7 +51,6 @@ func _input(event):
 
 		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN and event.pressed:
 			set_zoom_level(zoom.x - zoom_step, event.position)
-
 
 func set_zoom_level(target: float, mouse_position: Vector2):
 	target = clamp(target, min_zoom, max_zoom)
@@ -107,7 +86,6 @@ func set_zoom_level(target: float, mouse_position: Vector2):
 		zoom_duration
 	)
 
-
 func is_mouse_on_mirror() -> bool:
 	var space_state = get_world_2d().direct_space_state
 
@@ -128,7 +106,6 @@ func is_mouse_on_mirror() -> bool:
 			return true
 
 	return false
-
 
 func _unhandled_input(event):
 	if event is InputEventMouseButton:
