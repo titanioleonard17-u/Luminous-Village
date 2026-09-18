@@ -235,7 +235,6 @@ func _trace_ray(start_pos: Vector2, start_dir: Vector2, bounces_left: int, exclu
 		var result := space_state.intersect_ray(query)
 
 		if result.is_empty():
-			print("[LASER DEBUG] NO HIT dari ", current_pos, " arah ", current_dir, " -> tembus sampai fallback")
 			points.append(current_pos + current_dir * laser_length_fallback)
 			skip_glow.append(true)
 
@@ -251,15 +250,6 @@ func _trace_ray(start_pos: Vector2, start_dir: Vector2, bounces_left: int, exclu
 		var collider_rid: RID = result.rid
 
 		points.append(hit_point)
-
-		# --- DEBUG UNIVERSAL: log APAPUN yang kena, sebelum grup di-cek ---
-		var node_path: String = collider.get_path() if collider is Node else "NON_NODE"
-		var groups_str: String = ""
-		if collider is Node:
-			for g in (collider as Node).get_groups():
-				groups_str += str(g) + ","
-		print("[LASER DEBUG] Kena collider: ", node_path, " | groups=[", groups_str, "] | hit_pos=", hit_point)
-		# --- END DEBUG UNIVERSAL ---
 
 		if collider.is_in_group("door"):
 			skip_glow.append(false)
@@ -301,13 +291,10 @@ func _trace_ray(start_pos: Vector2, start_dir: Vector2, bounces_left: int, exclu
 			continue
 
 		elif collider.is_in_group("teleporter"):
-			print("[LASER DEBUG]   -> Path node teleporter: ", node_path, " | allow_incoming=", collider.allow_incoming if "allow_incoming" in collider else "NO_PROP")
-
 			if collider.has_method("mark_hit"):
 				collider.mark_hit()
 
 			if "allow_incoming" in collider and not collider.allow_incoming:
-				print("[LASER DEBUG]   -> DIBLOK (allow_incoming=false)")
 				skip_glow.append(false)
 
 				return [{
@@ -335,8 +322,6 @@ func _trace_ray(start_pos: Vector2, start_dir: Vector2, bounces_left: int, exclu
 			var exit_pos: Vector2 = exit_data["position"]
 			var exit_dir: Vector2 = exit_data["direction"]
 
-			print("[LASER DEBUG]   -> Exit ke pos=", exit_pos, " dir=", exit_dir)
-
 			var new_exclude: Array[RID] = local_exclude.duplicate()
 			if exit_data.has("exclude_rid") and exit_data["exclude_rid"] != RID():
 				new_exclude.append(exit_data["exclude_rid"])
@@ -353,8 +338,6 @@ func _trace_ray(start_pos: Vector2, start_dir: Vector2, bounces_left: int, exclu
 			return result_paths
 
 		elif collider.is_in_group("prism"):
-			print("[LASER DEBUG]   -> Kena PRISM lagi (rid=", collider_rid, ") | front_side=", _is_front_side(collider, hit_normal))
-
 			if collider.has_method("mark_hit"):
 				collider.mark_hit()
 
@@ -452,7 +435,6 @@ func _trace_ray(start_pos: Vector2, start_dir: Vector2, bounces_left: int, exclu
 				}]
 
 		else:
-			print("[LASER DEBUG]   -> Kena collider TIDAK DIKENAL grupnya (fallback else), berhenti di sini")
 			skip_glow.append(false)
 
 			return [{
