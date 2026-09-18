@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://c6qsld2g23ke8"]
+
+[ext_resource type="Texture2D" uid="uid://dd3103fc0njo1" path="res://Asset/Art/Obstacle/Tree - Obs.png" id="1_i326u"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_sinmp"]
+polygon = PackedVector2Array(-4, -26, -22, -13, -20, 8, -10, 12, -10, 24, 12, 24, 8, 14, 17, 12, 24, -9, 15, -23)
+
+[node name="Node2D" type="Node2D" unique_id=1692994331]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2086069408]
+texture = ExtResource("1_i326u")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="." unique_id=771141934]
+occluder = SubResource("OccluderPolygon2D_sinmp")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=101856153]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=1162144828]
+polygon = PackedVector2Array(-4, -26, -22, -13, -20, 9, -10, 13, -10, 25, 12, 25, 8, 14, 17, 12, 24, -8, 14, -23)

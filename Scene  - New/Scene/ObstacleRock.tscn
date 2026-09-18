@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://bl2nqw4gh42qa"]
+
+[ext_resource type="Texture2D" uid="uid://birhvj375uvi1" path="res://Asset/Art/Obstacle/Rock - Obs.png" id="1_e33u4"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_sinmp"]
+polygon = PackedVector2Array(16, -22, 2, -23, -1, -17, -8, -19, -17, -11, -16, 0, -24, 16, 25, 24)
+
+[node name="Node2D" type="Node2D" unique_id=568403434]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=239608997]
+texture = ExtResource("1_e33u4")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="." unique_id=1709925424]
+occluder = SubResource("OccluderPolygon2D_sinmp")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=2020622864]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=906980023]
+polygon = PackedVector2Array(-7, -19, -16, -12, -16, 1, -25, 17, 25, 25, 16, -24, 2, -23, -1, -17)
