@@ -5,6 +5,9 @@
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_sinmp"]
 polygon = PackedVector2Array(16, -22, 2, -23, -1, -17, -8, -19, -17, -11, -16, 0, -24, 16, 25, 24)
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_e6txl"]
+polygon = PackedVector2Array(-25, 17, -10, 21, -5, 26, 25, 25, 24, 15, 22, -6, 19, -7, 17, -25, 1, -22, -3, -16, -10, -18, -17, -12, -16, 1)
+
 [node name="Node2D" type="Node2D" unique_id=568403434]
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=239608997]
@@ -14,6 +17,11 @@ texture = ExtResource("1_e33u4")
 occluder = SubResource("OccluderPolygon2D_sinmp")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=2020622864]
+visible = false
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=906980023]
+visible = false
 polygon = PackedVector2Array(-7, -19, -16, -12, -16, 1, -25, 17, 25, 25, 16, -24, 2, -23, -1, -17)
+
+[node name="LightOccluder2D2" type="LightOccluder2D" parent="." unique_id=1341972996]
+occluder = SubResource("OccluderPolygon2D_e6txl")
