@@ -1,4 +1,6 @@
-extends StaticBody2D
+extends Node2D
+# Slider sensitivity versi UI (screen-space).
+# Taruh scene ini di dalam CanvasLayer supaya tidak ikut kamera dan tidak punya collision.
 
 signal value_changed(value: float)
 
@@ -7,6 +9,11 @@ signal value_changed(value: float)
 @export var max_value: float = 10.0
 @export var default_value: float = 5.0
 @export var invert: bool = true
+
+## Lebar area yang bisa diklik/disentuh (piksel). Besarkan supaya enak dipakai di HP.
+@export var hit_width: float = 80.0
+## Tambahan area klik di atas dan bawah ujung track.
+@export var hit_padding: float = 20.0
 
 @export var mirror_target_path: NodePath
 var mirror_target: Node = null
@@ -19,63 +26,73 @@ var current_value: float = 0.5
 
 const SAVE_PATH := "user://sensitivity.cfg"
 const SAVE_SECTION := "settings"
-const SAVE_KEY := "sensitivity"
+const SAVE_KEY := "sensitivity_norm" # posisi relatif 0..1, aman kalau min/max diubah
 
 func _ready() -> void:
+	add_to_group("sensitivity_slider") # supaya bisa dicari lewat group, bukan path
 	current_value = default_value
 	_load_saved_sensitivity()
 	_update_handle_position()
+	print("Slider mulai di value = ", current_value, " (default = ", default_value, ")")
 
 	if mirror_target_path != NodePath(""):
 		mirror_target = get_node_or_null(mirror_target_path)
 
-	_apply_sensitivity_to_mirror()
+	# Deferred: pastikan semua node di level sudah masuk group "sensitivity_target"
+	# sebelum value-nya di-broadcast.
+	_apply_sensitivity_to_mirror.call_deferred()
 
 func _input(event: InputEvent) -> void:
 	if get_tree().paused:
 		return
 
-	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_LEFT:
-			if event.pressed:
-				if not is_dragging and _is_point_over(get_global_mouse_position()):
-					_start_drag()
-			else:
-				if is_dragging:
-					_end_drag()
-
-	if event is InputEventMouseMotion and is_dragging:
-		_drag_to(get_global_mouse_position())
-
-	if event is InputEventScreenTouch:
-		var world_pos: Vector2 = get_global_transform_with_canvas().affine_inverse() * event.position
+	# --- Mouse ---
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if event.pressed:
-			if not is_dragging and _is_point_over(world_pos):
+			if not is_dragging and _is_point_over(_viewport_to_local(event.position)):
+				_start_drag()
+				_drag_to(_viewport_to_local(event.position))
+				get_viewport().set_input_as_handled()
+		elif is_dragging:
+			_end_drag()
+			get_viewport().set_input_as_handled()
+
+	elif event is InputEventMouseMotion and is_dragging:
+		_drag_to(_viewport_to_local(event.position))
+		get_viewport().set_input_as_handled()
+
+	# --- Touch ---
+	elif event is InputEventScreenTouch:
+		if event.pressed:
+			if not is_dragging and _is_point_over(_viewport_to_local(event.position)):
 				touch_index = event.index
 				_start_drag()
-		else:
-			if is_dragging and event.index == touch_index:
-				touch_index = -1
-				_end_drag()
+				_drag_to(_viewport_to_local(event.position))
+				get_viewport().set_input_as_handled()
+		elif is_dragging and event.index == touch_index:
+			touch_index = -1
+			_end_drag()
+			get_viewport().set_input_as_handled()
 
-	if event is InputEventScreenDrag and is_dragging and event.index == touch_index:
-		var world_pos: Vector2 = get_global_transform_with_canvas().affine_inverse() * event.position
-		_drag_to(world_pos)
+	elif event is InputEventScreenDrag and is_dragging and event.index == touch_index:
+		_drag_to(_viewport_to_local(event.position))
+		get_viewport().set_input_as_handled()
+
+# Konversi posisi event (koordinat viewport) ke koordinat lokal slider.
+# Sudah memperhitungkan transform CanvasLayer, jadi aman walau kamera zoom/geser.
+func _viewport_to_local(viewport_pos: Vector2) -> Vector2:
+	return get_global_transform_with_canvas().affine_inverse() * viewport_pos
 
 func _start_drag() -> void:
 	is_dragging = true
-	print("Slider: start drag")
 
 func _end_drag() -> void:
 	is_dragging = false
-	print("Slider: end drag, final value = ", current_value)
 	_save_sensitivity()
 
-func _drag_to(world_pos: Vector2) -> void:
-	var local_y: float = world_pos.y - global_position.y
-
+func _drag_to(local_pos: Vector2) -> void:
 	var half: float = track_length * 0.5
-	local_y = clamp(local_y, -half, half)
+	var local_y: float = clamp(local_pos.y, -half, half)
 
 	var t: float = (local_y + half) / track_length
 	if not invert:
@@ -85,7 +102,6 @@ func _drag_to(world_pos: Vector2) -> void:
 	_update_handle_position()
 	value_changed.emit(current_value)
 	_apply_sensitivity_to_mirror()
-	print("Sensitivity value: ", current_value)
 
 func _apply_sensitivity_to_mirror() -> void:
 	# Broadcast ke SEMUA node yang bisa diputar (Mirror, Prism, Trigger, dst),
@@ -104,16 +120,14 @@ func _update_handle_position() -> void:
 	var local_y: float = lerp(-half, half, t)
 	handle.position.y = local_y
 
-func _is_point_over(world_pos: Vector2) -> bool:
-	var space_state = get_world_2d().direct_space_state
-	var query = PhysicsPointQueryParameters2D.new()
-	query.position = world_pos
-	query.collide_with_bodies = true
-	var result = space_state.intersect_point(query)
-	for hit in result:
-		if hit.collider == self:
-			return true
-	return false
+# Hit-test manual: area persegi di sekitar track (tanpa physics / collision).
+func _is_point_over(local_pos: Vector2) -> bool:
+	var half: float = track_length * 0.5
+	var rect := Rect2(
+		Vector2(-hit_width * 0.5, -half - hit_padding),
+		Vector2(hit_width, track_length + hit_padding * 2.0)
+	)
+	return rect.has_point(local_pos)
 
 func get_value() -> float:
 	return current_value
@@ -129,7 +143,7 @@ func set_mirror_target(target: Node) -> void:
 
 func _save_sensitivity() -> void:
 	var cfg := ConfigFile.new()
-	cfg.set_value(SAVE_SECTION, SAVE_KEY, current_value)
+	cfg.set_value(SAVE_SECTION, SAVE_KEY, inverse_lerp(min_value, max_value, current_value))
 	var err := cfg.save(SAVE_PATH)
 	if err != OK:
 		push_warning("Gagal save sensitivity: " + str(err))
@@ -140,5 +154,7 @@ func _load_saved_sensitivity() -> void:
 	if err != OK:
 		return # belum pernah ke-save, pakai default_value
 
-	var saved_value: float = cfg.get_value(SAVE_SECTION, SAVE_KEY, default_value)
-	current_value = clamp(saved_value, min_value, max_value)
+	var norm: float = cfg.get_value(SAVE_SECTION, SAVE_KEY, -1.0)
+	if norm < 0.0 or norm > 1.0:
+		return # belum ada data valid, pakai default_value
+	current_value = lerp(min_value, max_value, norm)

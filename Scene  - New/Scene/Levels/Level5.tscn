@@ -85,11 +85,5 @@ scale = Vector2(0.28, 0.28)
 [node name="Prism" parent="." unique_id=1943216660 instance=ExtResource("9_ph1hf")]
 position = Vector2(541, 299)
 
-[node name="SensitivityDragSlider" parent="." unique_id=67622892 instance=ExtResource("18_ha4tq")]
-position = Vector2(-1015.1043, 222.49568)
-rotation = -3.1415925
-scale = Vector2(0.5385614, 0.20736054)
-min_value = 1.0
-max_value = 10.0
-default_value = 5.0
+[node name="SensitivityDragSlider" parent="." unique_id=1977610212 instance=ExtResource("18_ha4tq")]
 mirror_target_path = NodePath("../Mirror_Spawner")
