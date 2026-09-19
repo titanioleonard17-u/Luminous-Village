@@ -29,7 +29,7 @@ var level_complete_path: NodePath
 
 func _ready() -> void:
 	if get_tree().current_scene.name.contains("TutorialLevel"):
-		$PauseTriger/GuideMenu.visible = true
+		$GuideStep.show_guide(1)
 
 	AudioManager.playRandomVibe()
 
@@ -112,6 +112,9 @@ func _all_houses_lit() -> bool:
 
 
 func _trigger_win() -> void:
+	if is_celebrating_win or level_complete:
+		return
+
 	is_celebrating_win = true
 	celebration_id += 1
 
@@ -120,35 +123,48 @@ func _trigger_win() -> void:
 	var lasers: Array = get_tree().get_nodes_in_group("laser")
 	var houses: Array = get_tree().get_nodes_in_group("house")
 
+	# ==================================================
+	# LOCK SEMUA MIRROR SEBELUM ADA ANIMASI / AWAIT
+	# ==================================================
+	_lock_mirrors()
+
+	# Hilangkan laser
 	for laser in lasers:
 		laser.visible = false
 
-	# Semua rumah mulai celebrate bersamaan
+	# Semua rumah mulai 3x squish
 	for house in houses:
 		if house.has_method("celebrate"):
 			house.celebrate()
 
-	if my_id != celebration_id or not is_celebrating_win:
-		return
+	# Tunggu sampai SEMUA rumah selesai celebrate
+	while true:
+		if my_id != celebration_id or not is_celebrating_win:
+			return
 
-	# Cek lagi apakah semua rumah masih disorot
-	if not _all_houses_lit():
-		is_celebrating_win = false
+		var all_finished := true
 
 		for house in houses:
-			if house.has_method("stop_celebrate"):
-				house.stop_celebrate()
+			if not house.is_lit:
+				all_finished = false
+				break
 
-		return
+		if all_finished:
+			break
 
-	_lock_mirrors()
+		await get_tree().process_frame
 
-	# Jeda manual sebelum Night Mode
+	# ==================================================
+	# MULAI NIGHT MODE
+	# MIRROR SUDAH TIDAK BISA BERUBAH
+	# ==================================================
+
 	await get_tree().create_timer(nightDelay, true).timeout
-	$NightModeSwitch.start_lights()
 
 	if my_id != celebration_id or not is_celebrating_win:
 		return
+
+	$NightModeSwitch.start_lights()
 
 	await _switch_to_night()
 
@@ -160,7 +176,6 @@ func _trigger_win() -> void:
 		if house.has_method("turn_on_lights"):
 			house.turn_on_lights()
 
-	# Jeda sebelum Level Complete
 	await get_tree().create_timer(winDelay, true).timeout
 
 	if my_id != celebration_id or not is_celebrating_win:
@@ -182,6 +197,7 @@ func _trigger_win() -> void:
 
 	$LevelComplete.visible = true
 	_play_complete_sequence()
+
 
 
 func _show_night() -> void:
@@ -235,6 +251,12 @@ func _lock_mirrors() -> void:
 	var mirrors: Array = get_tree().get_nodes_in_group("mirror")
 
 	for mirror in mirrors:
+		if mirror.has_method("set_locked"):
+			mirror.set_locked(true)
+
+	var cermin: Array = get_tree().get_nodes_in_group("cermin")
+
+	for mirror in cermin:
 		if mirror.has_method("set_locked"):
 			mirror.set_locked(true)
 

@@ -30,14 +30,17 @@ func save_game() -> void:
 	file.close()
 
 
-func unlock_guide(guide_data: Dictionary) -> void:
-	for step in guide_data:
-		if not save_data.has(step):
-			save_data[step] = []
-
-		for guide in guide_data[step]:
-			if guide not in save_data[step]:
-				save_data[step].append(guide)
+func unlock_guide(step: String, guide_data: Dictionary) -> void:
+	if not guide_data.has(step):
+		print("!!! MAAF, tidak ada key " + step + " !!!")
+		return
+	
+	if not save_data.has(step):
+		save_data[step] = []
+		
+	for guide in guide_data[step]:
+		if guide not in save_data[step]:
+			save_data[step].append(guide)
 
 	save_game()
 

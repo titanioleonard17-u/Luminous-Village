@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://cg2l81a3k4pwe" path="res://UI/Scripts/GuideTrigger.gd" id="1_lgvp2"]
 [ext_resource type="PackedScene" uid="uid://cip0gmnccnt8e" path="res://UI/Scenes/Button.tscn" id="1_wnmmt"]
 [ext_resource type="Texture2D" uid="uid://di5ghg8tuwoc2" path="res://Asset/Art/OptionsMenu/Button - Help.png" id="2_0lofi"]
-[ext_resource type="PackedScene" uid="uid://43ol7ai1lse0" path="res://UI/Scenes/GuideMenu.tscn" id="3_0lofi"]
+[ext_resource type="PackedScene" uid="uid://43ol7ai1lse0" path="res://UI/Scenes/GuideStep.tscn" id="3_0lofi"]
 
 [node name="GuideTrigger" type="Control" unique_id=495538879]
 layout_mode = 3

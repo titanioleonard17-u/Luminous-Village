@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cvcst5qciygg3" path="res://UI/Scenes/PauseMenu.tscn" id="5_b5iei"]
 [ext_resource type="PackedScene" uid="uid://cuv564nqlv6ho" path="res://UI/Scenes/GuideBook.tscn" id="6_b5iei"]
 
-[node name="PauseTrigerm" type="CanvasLayer" unique_id=1158435896]
+[node name="PauseTriger" type="CanvasLayer" unique_id=1158435896]
 layer = 20
 script = ExtResource("1_aemob")
 
