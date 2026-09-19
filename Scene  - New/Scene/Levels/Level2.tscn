@@ -68,7 +68,6 @@ position = Vector2(212, 450)
 scale = Vector2(0.35, 0.35)
 
 [node name="SensitivityDragSlider" parent="." unique_id=67622892 instance=ExtResource("14_1q5d3")]
-min_value = 1.0
 max_value = 10.0
 default_value = 5.0
 mirror_target_path = NodePath("../Mirror_Spawner")

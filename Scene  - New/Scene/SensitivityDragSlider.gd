@@ -2,14 +2,12 @@ extends StaticBody2D
 
 signal value_changed(value: float)
 
-@export var track_length: float = 300.0   # panjang jalur drag (px), samakan dgn tinggi track visual
-@export var min_value: float = 10.0
-@export var max_value: float = 100.0
-@export var default_value: float = 55.0
-@export var invert: bool = true           # true = tarik ke bawah = nilai naik
+@export var track_length: float = 300.0
+@export var min_value: float = 1.0
+@export var max_value: float = 10.0
+@export var default_value: float = 5.0
+@export var invert: bool = true
 
-# Isi ini di Inspector dengan node Mirror yang mau dikontrol (drag node Mirror ke sini),
-# atau kalau Mirror di-spawn dinamis, panggil set_mirror_target() dari Mirror_spawner.
 @export var mirror_target_path: NodePath
 var mirror_target: Node = null
 
@@ -19,8 +17,13 @@ var current_value: float = 0.5
 
 @onready var handle: Sprite2D = $Handle
 
+const SAVE_PATH := "user://sensitivity.cfg"
+const SAVE_SECTION := "settings"
+const SAVE_KEY := "sensitivity"
+
 func _ready() -> void:
 	current_value = default_value
+	_load_saved_sensitivity()
 	_update_handle_position()
 
 	if mirror_target_path != NodePath(""):
@@ -66,6 +69,7 @@ func _start_drag() -> void:
 func _end_drag() -> void:
 	is_dragging = false
 	print("Slider: end drag, final value = ", current_value)
+	_save_sensitivity()
 
 func _drag_to(world_pos: Vector2) -> void:
 	var local_y: float = world_pos.y - global_position.y
@@ -84,6 +88,11 @@ func _drag_to(world_pos: Vector2) -> void:
 	print("Sensitivity value: ", current_value)
 
 func _apply_sensitivity_to_mirror() -> void:
+	# Broadcast ke SEMUA node yang bisa diputar (Mirror, Prism, Trigger, dst),
+	# termasuk yang di-spawn dinamis -- otomatis kena tanpa perlu assign manual.
+	get_tree().call_group("sensitivity_target", "set_sensitivity", current_value, max_value)
+
+	# Tetap dukung target tunggal lama (kalau masih dipakai di suatu tempat), gak masalah dobel.
 	if mirror_target != null and mirror_target.has_method("set_sensitivity"):
 		mirror_target.set_sensitivity(current_value, max_value)
 
@@ -114,7 +123,22 @@ func set_value(v: float) -> void:
 	_update_handle_position()
 	_apply_sensitivity_to_mirror()
 
-# Dipanggil dari Mirror_spawner kalau Mirror di-spawn dinamis setelah slider sudah ada di scene
 func set_mirror_target(target: Node) -> void:
 	mirror_target = target
 	_apply_sensitivity_to_mirror()
+
+func _save_sensitivity() -> void:
+	var cfg := ConfigFile.new()
+	cfg.set_value(SAVE_SECTION, SAVE_KEY, current_value)
+	var err := cfg.save(SAVE_PATH)
+	if err != OK:
+		push_warning("Gagal save sensitivity: " + str(err))
+
+func _load_saved_sensitivity() -> void:
+	var cfg := ConfigFile.new()
+	var err := cfg.load(SAVE_PATH)
+	if err != OK:
+		return # belum pernah ke-save, pakai default_value
+
+	var saved_value: float = cfg.get_value(SAVE_SECTION, SAVE_KEY, default_value)
+	current_value = clamp(saved_value, min_value, max_value)

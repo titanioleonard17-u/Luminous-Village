@@ -75,7 +75,6 @@ max_mirrors = 4
 position = Vector2(144, 507.00003)
 
 [node name="SensitivityDragSlider" parent="." unique_id=67622892 instance=ExtResource("16_skrgq")]
-min_value = 1.0
 max_value = 10.0
 default_value = 5.0
 mirror_target_path = NodePath("../Mirror_Spawner")
