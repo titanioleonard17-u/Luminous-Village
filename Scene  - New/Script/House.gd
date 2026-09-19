@@ -120,14 +120,16 @@ func _set_lights_alpha(alpha: float) -> void:
 	light_node.modulate.a = alpha
 	light_node2.modulate.a = alpha
 	light.modulate.a = alpha
-
+	var color: Color = light.color
+	color.a = alpha
+	light.color = color
 	for lightNode in $WindowLight.get_children():
 		if lightNode.name.contains("LightNode"):
 			for pointLight in lightNode.get_children():
 				if pointLight is PointLight2D:
-					var color: Color = pointLight.color
-					color.a = alpha
-					pointLight.color = color
+					var point_color: Color = pointLight.color
+					point_color.a = alpha
+					pointLight.color = point_color
 
 
 func night_blink() -> void:
