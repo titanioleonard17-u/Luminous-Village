@@ -25,6 +25,8 @@ AudioManager="*uid://c1ya2v5kcqjse"
 Transition="*uid://dnefawufp7ebx"
 SettingsManager="*uid://cnurtt4ogab5l"
 SaveManager="*uid://d2islw0scosmm"
+GuideManager="*uid://dsufrrqdq84x4"
+UiConfig="*uid://ch51ysswtlhem"
 
 [display]
 
