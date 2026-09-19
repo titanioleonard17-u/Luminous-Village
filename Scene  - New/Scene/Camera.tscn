@@ -4,8 +4,17 @@
 
 [node name="Camera" type="Camera2D" unique_id=25551895]
 anchor_mode = 0
+zoom = Vector2(0.5, 0.5)
 limit_left = -576
 limit_top = -324
 limit_right = 576
 limit_bottom = 324
 script = ExtResource("1_ab0i1")
+zoom_step = null
+min_zoom = null
+max_zoom = null
+zoom_duration = null
+expand_left = null
+expand_right = null
+expand_top = null
+expand_bottom = null
