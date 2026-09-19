@@ -5,10 +5,12 @@ extends Node2D
 @export var mirror_collision_size: Vector2 = Vector2(120, 40)
 
 var mirror_counter: CanvasLayer
+var sensitivity_slider: Node
 var spawned_mirrors: Array[Node2D] = []
 
 func _ready() -> void:
 	mirror_counter = get_tree().current_scene.get_node("MirrorCounter")
+	sensitivity_slider = get_tree().current_scene.get_node("SensitivityDragSlider")
 	_update_counter()
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -36,11 +38,14 @@ func _try_spawn_mirror() -> void:
 		return
 
 	var new_mirror: Node2D = mirror_scene.instantiate()
-
 	new_mirror.global_position = spawn_pos
 
 	add_child(new_mirror)
 	spawned_mirrors.append(new_mirror)
+
+	# TAMBAHAN: hubungkan mirror baru ke slider biar sensitivitas ngaruh
+	if sensitivity_slider and sensitivity_slider.has_method("set_mirror_target"):
+		sensitivity_slider.set_mirror_target(new_mirror)
 
 	_update_counter()
 

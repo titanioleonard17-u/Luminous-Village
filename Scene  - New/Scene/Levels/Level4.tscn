@@ -13,28 +13,10 @@
 [ext_resource type="PackedScene" uid="uid://csbxlqkujg113" path="res://Scene  - New/Scene/Trigger.tscn" id="8_8i2e1"]
 [ext_resource type="PackedScene" uid="uid://d1ibvcfo0548o" path="res://Scene  - New/Scene/DoorToLeft.tscn" id="8_ehms3"]
 [ext_resource type="PackedScene" uid="uid://b78j83aks04lv" path="res://Scene  - New/Scene/Prism.tscn" id="9_4sx61"]
-[ext_resource type="Script" uid="uid://i7cak6xerp6w" path="res://Scene  - New/Script/Mirror.gd" id="9_jy4g3"]
 [ext_resource type="PackedScene" uid="uid://bi2fm2hx85yl" path="res://Scene  - New/Scene/House.tscn" id="9_svelw"]
 [ext_resource type="PackedScene" uid="uid://ruuy6vksw05m" path="res://Scene  - New/Scene/LevelComplete.tscn" id="10_4sx61"]
-[ext_resource type="Texture2D" uid="uid://dg8tesaclo8yx" path="res://Asset/Art/Mirror.png" id="10_8i2e1"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_fjrjh"]
-size = Vector2(442.36572, 155.6124)
-
-[sub_resource type="PackedScene" id="PackedScene_ehms3"]
-_bundled = {
-"conn_count": 0,
-"conns": PackedInt32Array(),
-"editable_instances": [],
-"id_paths": [PackedInt32Array(), PackedInt32Array()],
-"names": PackedStringArray("Mirror", "StaticBody2D", "mirror", "scale", "script", "CollisionShape2D", "CollisionShape2D", "position", "scale", "shape", "Sprite2D", "Sprite2D", "scale", "texture"),
-"node_count": 3,
-"node_ids": PackedInt32Array(1943216660, 200045112, 1698868491),
-"node_paths": [NodePath("."), NodePath(".")],
-"nodes": PackedInt32Array(-1, -1, 1, 0, -1, 2, 3, 0, 4, 1, 1, 2, 1073741824, 0, 6, 5, -1, 3, 7, 2, 8, 3, 9, 4, 0, 1073741825, 0, 11, 10, -1, 2, 12, 5, 13, 6, 0),
-"variants": [Vector2(0.5, 0.5), ExtResource("9_jy4g3"), Vector2(0.49999976, -2.0000005), Vector2(0.31874081, -0.30845878), SubResource("RectangleShape2D_fjrjh"), Vector2(0.3, 0.3), ExtResource("10_8i2e1")],
-"version": 3
-}
+[ext_resource type="PackedScene" uid="uid://k5b0y2snplf3" path="res://Scene  - New/Scene/Mirror.tscn" id="14_euqlt"]
+[ext_resource type="PackedScene" uid="uid://cbqnwwpfulxg7" path="res://Scene  - New/Scene/SensitivityDragSlider.tscn" id="17_afspi"]
 
 [node name="Level4" type="Node2D" unique_id=1451308095]
 script = ExtResource("1_nfdql")
@@ -78,10 +60,9 @@ position = Vector2(748, 129)
 rotation = -1.5707964
 door_path = NodePath("../DoorToLeft")
 
-[node name="Mirror_Spawner" parent="." unique_id=1378017199 node_paths=PackedStringArray("mirror_counter") instance=ExtResource("7_4sx61")]
-mirror_scene = SubResource("PackedScene_ehms3")
+[node name="Mirror_Spawner" parent="." unique_id=1378017199 instance=ExtResource("7_4sx61")]
+mirror_scene = ExtResource("14_euqlt")
 max_mirrors = 7
-mirror_counter = NodePath("")
 
 [node name="House" parent="." unique_id=1454567019 instance=ExtResource("9_svelw")]
 position = Vector2(277, 550)
@@ -97,3 +78,9 @@ scale = Vector2(0.28, 0.28)
 
 [node name="Prism" parent="." unique_id=1943216660 instance=ExtResource("9_4sx61")]
 position = Vector2(439, 254)
+
+[node name="SensitivityDragSlider" parent="." unique_id=67622892 instance=ExtResource("17_afspi")]
+min_value = 1.0
+max_value = 10.0
+default_value = 5.0
+mirror_target_path = NodePath("../Mirror_Spawner")

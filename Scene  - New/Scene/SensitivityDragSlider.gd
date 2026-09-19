@@ -3,9 +3,9 @@ extends StaticBody2D
 signal value_changed(value: float)
 
 @export var track_length: float = 300.0   # panjang jalur drag (px), samakan dgn tinggi track visual
-@export var min_value: float = 0.0
-@export var max_value: float = 5.0
-@export var default_value: float = 0.5
+@export var min_value: float = 10.0
+@export var max_value: float = 100.0
+@export var default_value: float = 55.0
 @export var invert: bool = true           # true = tarik ke bawah = nilai naik
 
 # Isi ini di Inspector dengan node Mirror yang mau dikontrol (drag node Mirror ke sini),
