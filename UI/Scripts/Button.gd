@@ -49,7 +49,8 @@ const SIZE_CONFIG = {
 		},
 		SizeBtn.MEDIUM: {
 			"button_size": Vector2(120, 120),
-			"texture_size": Vector2(155, 155) },
+			"texture_size": Vector2(155, 155)
+		},
 		SizeBtn.LARGE: {
 			"button_size": Vector2(173, 170),
 			"texture_size": Vector2(220, 220)
@@ -80,6 +81,9 @@ func _ready() -> void:
 	call_deferred("applySizeConfig")
 
 
+# =========================
+# SETUP
+# =========================
 func setupLabel() -> void:
 	$Label.text = text
 	$Label.add_theme_font_size_override("font_size", font_size)
@@ -90,6 +94,8 @@ func setupTexture() -> void:
 		push_warning("Customes belum diisi.")
 		return
 
+	# Hormati costume yang sudah dipilih sebelum _ready (mis. lewat setCostume)
+	current_costume = clampi(current_costume, 0, customes.size() - 1)
 	normal_texture = customes[current_costume]
 
 	$TextureRect.texture = normal_texture
@@ -117,6 +123,9 @@ func applySizeConfig() -> void:
 	pivot_offset = button_size / 2.0
 
 
+# =========================
+# HOVER
+# =========================
 func _on_mouse_entered() -> void:
 	# Disabled tidak boleh punya efek hover
 	if disabled:
@@ -147,15 +156,24 @@ func applyHoverTexture() -> void:
 		return
 
 	var path := normal_texture.resource_path
-	var hover_path := path.get_basename() + " (Hover)." + path.get_extension()
-	var hover_texture := load(hover_path)
 
-	if hover_texture:
-		$TextureRect.texture = hover_texture
+	# Texture yang dibuat lewat kode tidak punya path, jadi tidak ada hover
+	if path.is_empty():
+		$TextureRect.texture = normal_texture
+		return
+
+	var hover_path := path.get_basename() + " (Hover)." + path.get_extension()
+
+	# Cek dulu supaya tidak muncul error "Resource file not found"
+	if ResourceLoader.exists(hover_path):
+		$TextureRect.texture = load(hover_path)
 	else:
 		$TextureRect.texture = normal_texture
 
 
+# =========================
+# PRESS
+# =========================
 func _on_pressed() -> void:
 	# Tambahan pengaman
 	if disabled:
@@ -165,7 +183,7 @@ func _on_pressed() -> void:
 	nextCostume()
 
 	var purpose_name: String = PurposeBtn.keys()[purpose].to_lower().capitalize()
-	
+
 	SquishButton()
 
 	AudioManager.playAudio(
@@ -176,6 +194,22 @@ func _on_pressed() -> void:
 	check_toggled.emit(isChecked)
 
 
+# =========================
+# COSTUME
+# =========================
+
+# Refresh texture yang tampil sesuai kondisi hover.
+# Disabled tidak menggunakan hover (ditangani di setDisabledVisual).
+func refreshTexture() -> void:
+	if disabled:
+		return
+
+	if is_hovered():
+		applyHoverTexture()
+	else:
+		$TextureRect.texture = normal_texture
+
+
 func nextCostume() -> void:
 	if customes.is_empty():
 		return
@@ -183,34 +217,46 @@ func nextCostume() -> void:
 	current_costume = (current_costume + 1) % customes.size()
 	normal_texture = customes[current_costume]
 
-	# Disabled tidak menggunakan hover
-	if disabled:
-		return
-
-	if is_hovered():
-		applyHoverTexture()
-	else:
-		$TextureRect.texture = normal_texture
+	refreshTexture()
 
 
+# Pilih costume dari array `customes` milik tombol ini.
 func setCostume(index: int) -> void:
 	if customes.is_empty():
+		push_warning("setCostume: customes kosong.")
 		return
 
 	if index < 0 or index >= customes.size():
+		push_warning("setCostume: index %d di luar range (size: %d)." % [index, customes.size()])
 		return
 
 	current_costume = index
 	normal_texture = customes[index]
 
-	# Disabled tidak menggunakan hover
-	if disabled:
+	refreshTexture()
+
+
+# Ganti seluruh array costumes dari luar (mis. dari GuideBook),
+# lalu langsung pilih costume `start_index`.
+# Kalau array kosong, costumes bawaan scene tidak ditimpa.
+func setCostumes(
+	new_costumes: Array[Texture2D],
+	new_disabled: Array[Texture2D] = [],
+	start_index: int = 0
+) -> void:
+	if new_costumes.is_empty():
+		push_warning("setCostumes: array kosong, customes bawaan dipertahankan.")
 		return
 
-	if is_hovered():
-		applyHoverTexture()
-	else:
-		$TextureRect.texture = normal_texture
+	customes = new_costumes
+	customes_disabled = new_disabled
+
+	setCostume(start_index)
+
+
+func setText(value: String) -> void:
+	text = value
+	$Label.text = text
 
 
 func setDisabledVisual(disabled_state: bool) -> void:
@@ -236,11 +282,12 @@ func setDisabledVisual(disabled_state: bool) -> void:
 		return
 
 	# Saat enabled kembali, cek apakah mouse sedang hover.
-	if is_hovered():
-		applyHoverTexture()
-	else:
-		$TextureRect.texture = normal_texture
+	refreshTexture()
 
+
+# =========================
+# ANIMATION
+# =========================
 func SquishButton() -> void:
 	var s1 := Vector2(0.85, 0.75)
 	var s2 := Vector2(1.08, 0.92)

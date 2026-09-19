@@ -1,6 +1,9 @@
 [gd_scene format=3 uid="uid://cuv564nqlv6ho"]
 
 [ext_resource type="Script" uid="uid://dbm88no6drgmy" path="res://UI/Scripts/GuideBook.gd" id="1_w2pf2"]
+[ext_resource type="PackedScene" uid="uid://cip0gmnccnt8e" path="res://UI/Scenes/Button.tscn" id="2_1wuxd"]
+[ext_resource type="Texture2D" uid="uid://ceocyry1mbcaw" path="res://Asset/Art/Button  - Plain.png" id="3_rhsiw"]
+[ext_resource type="Texture2D" uid="uid://bhtnq3djaw0is" path="res://Asset/Art/Button - Back.png" id="4_xi8qn"]
 
 [node name="GuideBook" type="Control" unique_id=43743912]
 layout_mode = 3
@@ -10,6 +13,17 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_w2pf2")
+button_scene = ExtResource("2_1wuxd")
+title_button_costumes = Array[Texture2D]([ExtResource("3_rhsiw")])
+
+[node name="BG" type="ColorRect" parent="." unique_id=594889546]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.6666667)
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=2136343952]
 layout_mode = 1
@@ -35,7 +49,7 @@ offset_right = 368.0
 grow_vertical = 2
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 16
+theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 16
 
 [node name="TitleBox" type="ColorRect" parent="MarginContainer/ContainerBox/TitleBoxMargin" unique_id=1935751595]
@@ -69,7 +83,7 @@ offset_left = -736.0
 offset_bottom = 584.0
 grow_horizontal = 0
 pivot_offset = Vector2(736, 0)
-theme_override_constants/margin_left = 16
+theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
@@ -95,3 +109,16 @@ layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/ContainerBox/DescriptionBoxMargin/DescriptionBox/TextMargin/ScrollContainer" unique_id=1716417343]
 layout_mode = 2
+
+[node name="BackButton" parent="." unique_id=1699704292 instance=ExtResource("2_1wuxd")]
+layout_mode = 0
+offset_left = 43.0
+offset_top = 568.0
+offset_right = 43.0
+offset_bottom = 568.0
+customes = Array[Texture2D]([ExtResource("4_xi8qn")])
+type_button = 1
+size_button = 1
+purpose = 2
+
+[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]

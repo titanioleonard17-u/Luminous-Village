@@ -3,7 +3,7 @@ extends CanvasLayer
 var is_night_mode: bool = false
 
 @onready var pause_menu = $Container/PauseMenu
-@onready var guide_menu = $Container/GuideMenu
+@onready var guide_menu = $Container/GuideBook
 
 
 func _ready() -> void:

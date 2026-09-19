@@ -19,7 +19,7 @@ script = ExtResource("1_d6k42")
 
 [node name="Transition" parent="." unique_id=1483636045 instance=ExtResource("2_d6k42")]
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=1510749457]
+[node name="BG" type="ColorRect" parent="." unique_id=1510749457]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
