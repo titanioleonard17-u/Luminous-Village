@@ -5,13 +5,39 @@ var guideText = [
 	"Button mempunyai cara kerja yang sama dengan cermin, hanya saja dia juga berfungsi untuk membuka gate.",
 	"Ada sisi cermin yang dapat memantulkan, dan ada sisi yang tidak dapat memantulkan cahaya.",
 	"Cermin dapat diputar sebesar 360 derajat.",
-	"Prisma dapat memecah 1 arah cahaya menjadi 2 arah. (Hanya mempunya 1 sisi sisi input)",
+	"Cermin Prisma dapat memecah 1 arah cahaya menjadi 2 arah. (Hanya mempunya 1 sisi sisi input)",
 	"Cermin dapat di spawn dengan menekan angka 1. (Cermin akan muncul tepat pada posisi mouse saat ini)",
 	"Cermin dapat dihapus dengan menekan tombol 0. (Cermin dengan urutan terakhir yang terlebih dahulu dihapus)",
 	"Cermin tidak dapat di spawn jika berjarak sangat dekat dengan objek lain, atau jika kuota cermin sudah habis.",
-	"Ada batas pantulan teretentu dalam tiap level, jika batas tercapai, maka cahaya tidak dapat terpantul. Jadi kami harap kamu bisa menciptakan jalur efisien",
+	"Ada batas pantulan teretentu dalam tiap level, jika batas tercapai, maka cahaya tidak dapat terpantul. Jadi kami harap kamu bisa menciptakan jalur efisien.",
 	"Baik! Sudah waktunya untuk menyinari desa!"
 ]
+
+var guideBook = {
+	"step_1": [
+		{
+			"title":"Mirror",
+			"description":[
+				{"Function":"Cermin digunakan untuk memantulkan cahaya."},
+				{"Reflection Side":"Ada sisi cermin yang dapat memantulkan, dan ada sisi yang tidak dapat memantulkan cahaya."},
+				{"Mirror Rotation":"Cermin dapat diputar sebesar 360 derajat."},
+				{"Mirror Spawner":"Cermin dapat di spawn dengan menekan angka 1."},
+				{"Mirror Remover":"Cermin dapat dihapus dengan menekan tombol 0."},
+				{"Prism Mirror":"Cermin Prisma dapat memecah 1 arah cahaya menjadi 2 arah. (Hanya mempunya 1 sisi sisi input)"},
+				{"Mirror Distance":"Cermin tidak dapat di-spawn terlalu dekat dengan objek lain atau ketika kuota cermin telah habis."},
+				{"Mirror Limit":"Ada batasan spawn cermin (kuota), setiap level dapat memiliki kuota yang berbeda-beda."},
+				{"Reflection Limit":"Ada batas pantulan teretentu dalam tiap level, jika batas tercapai, maka cahaya tidak dapat terpantul. Jadi kami harap kamu bisa menciptakan jalur efisien"},
+			]
+		},
+		{
+			"title":"Button",
+			"description":[
+				{"Function":"Membuka pintu setelah terkena cahaya"},
+				{"Reflection Side":"Hanya ada 1 sisi tombol yang dapat memantulkan cahaya."}
+			]
+		}
+	]
+}
 
 @onready var label = $Container/MarginContainer/Label
 @onready var page = $Container/Pages

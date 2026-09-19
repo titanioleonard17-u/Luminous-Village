@@ -1,0 +1,97 @@
+[gd_scene format=3 uid="uid://cuv564nqlv6ho"]
+
+[ext_resource type="Script" uid="uid://dbm88no6drgmy" path="res://UI/Scripts/GuideBook.gd" id="1_w2pf2"]
+
+[node name="GuideBook" type="Control" unique_id=43743912]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_w2pf2")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=2136343952]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="ContainerBox" type="ColorRect" parent="MarginContainer" unique_id=451759476]
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="TitleBoxMargin" type="MarginContainer" parent="MarginContainer/ContainerBox" unique_id=106032486]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 368.0
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="TitleBox" type="ColorRect" parent="MarginContainer/ContainerBox/TitleBoxMargin" unique_id=1935751595]
+layout_mode = 2
+color = Color(1, 0.36, 0.36, 1)
+
+[node name="TitleMargin" type="MarginContainer" parent="MarginContainer/ContainerBox/TitleBoxMargin/TitleBox" unique_id=1623921547]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/ContainerBox/TitleBoxMargin/TitleBox/TitleMargin" unique_id=1230702465]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/ContainerBox/TitleBoxMargin/TitleBox/TitleMargin/ScrollContainer" unique_id=1073981473]
+layout_mode = 2
+
+[node name="DescriptionBoxMargin" type="MarginContainer" parent="MarginContainer/ContainerBox" unique_id=1360946906]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -736.0
+offset_bottom = 584.0
+grow_horizontal = 0
+pivot_offset = Vector2(736, 0)
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="DescriptionBox" type="ColorRect" parent="MarginContainer/ContainerBox/DescriptionBoxMargin" unique_id=325042520]
+layout_mode = 2
+color = Color(0.5765813, 0.6719816, 0, 1)
+
+[node name="TextMargin" type="MarginContainer" parent="MarginContainer/ContainerBox/DescriptionBoxMargin/DescriptionBox" unique_id=1335135454]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/ContainerBox/DescriptionBoxMargin/DescriptionBox/TextMargin" unique_id=1327410217]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/ContainerBox/DescriptionBoxMargin/DescriptionBox/TextMargin/ScrollContainer" unique_id=1716417343]
+layout_mode = 2

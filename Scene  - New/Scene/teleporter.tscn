@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cembrpus1owlg"]
 
-[ext_resource type="Script" uid="uid://schbx0xsysmd" path="res://Teleporter.gd" id="1_p0jco"]
+[ext_resource type="Script" uid="uid://schbx0xsysmd" path="res://Scene  - New/Script/Teleporter.gd" id="1_p0jco"]
 [ext_resource type="Texture2D" uid="uid://dg8tesaclo8yx" path="res://Asset/Art/Mirror.png" id="2_10i3a"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fjrjh"]
