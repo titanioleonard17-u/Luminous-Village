@@ -3,7 +3,7 @@ extends StaticBody2D
 @onready var window_sprite: AnimatedSprite2D = $House_Sprite
 @onready var light_node: Node2D = $WindowLight/TerraceLightNode
 @onready var light_node2: Node2D = $WindowLight/BalconLightNode
-
+@onready var light = $PointLight2D
 @export var blink_count: int = 3
 @export var blink_on_duration: float = 0.28
 @export var blink_off_duration: float = 0.22
@@ -119,6 +119,7 @@ func get_reflect_normal() -> Vector2:
 func _set_lights_alpha(alpha: float) -> void:
 	light_node.modulate.a = alpha
 	light_node2.modulate.a = alpha
+	light.modulate.a = alpha
 
 	for lightNode in $WindowLight.get_children():
 		if lightNode.name.contains("LightNode"):
