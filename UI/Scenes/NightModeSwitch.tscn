@@ -29,7 +29,7 @@ turbulence_initial_displacement_min = 1.490116e-06
 turbulence_initial_displacement_max = 1.490116e-06
 
 [node name="NightModeSwitch" type="CanvasLayer" unique_id=2070446548]
-layer = 3
+layer = 30
 script = ExtResource("1_yftj0")
 
 [node name="Container" type="Node2D" parent="." unique_id=1061071967]

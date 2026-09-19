@@ -7,6 +7,7 @@ font_names = PackedStringArray("Berlin Sans FB")
 subpixel_positioning = 0
 
 [node name="MirrorCounter" type="CanvasLayer" unique_id=2086307742]
+layer = 10
 script = ExtResource("1_3eyo3")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=299766182]
