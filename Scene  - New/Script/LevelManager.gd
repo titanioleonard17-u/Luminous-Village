@@ -29,7 +29,9 @@ var level_complete_path: NodePath
 
 func _ready() -> void:
 	if get_tree().current_scene.name.contains("TutorialLevel"):
+		set_interact_locked(true)
 		$GuideStep.show_guide(1)
+		$GuideStep.guideFinished.connect(_on_guide_finished)
 
 	AudioManager.playRandomVibe()
 
@@ -349,3 +351,13 @@ func _play_complete_sequence() -> void:
 			)
 
 		await tween_out.finished
+
+func set_interact_locked(value: bool) -> void:
+	var objects = get_tree().get_nodes_in_group("mirror")
+
+	for object in objects:
+		if object.has_method("set_interact_locked"):
+			object.set_interact_locked(value)
+
+func _on_guide_finished() -> void:
+	set_interact_locked(false)

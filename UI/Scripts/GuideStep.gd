@@ -48,6 +48,8 @@ var guideBook = {
 @onready var label = $ParentContainer/Container/MarginContainer/Label
 @onready var page = $ParentContainer/Container/Pages
 
+signal guideFinished
+
 var currentText = 0
 var currentStep = 1
 var _tween: Tween
@@ -102,6 +104,7 @@ func _on_next_button_pressed() -> void:
 		AudioManager.playAudio("ClickClose", AudioManager.AudioType.SFX)
 		currentText = 0
 		visible = false
+		guideFinished.emit()
 	else:
 		AudioManager.playAudio("ClickDefault", AudioManager.AudioType.SFX)
 		currentText += 1

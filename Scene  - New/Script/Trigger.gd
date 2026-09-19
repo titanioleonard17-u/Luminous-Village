@@ -11,6 +11,7 @@ extends StaticBody2D
 @export var response_curve: float = 0.15
 @export var rotation_speed: float = 0.35
 
+var is_interact_locked: bool = false
 var is_dragging: bool = false
 var touch_index: int = -1
 var last_hit_frame: int = -10
@@ -56,15 +57,10 @@ func _physics_process(_delta: float) -> void:
 		door.set_trigger_state(self, is_hit)
 
 
-func mark_hit() -> void:
-	last_hit_frame = Engine.get_physics_frames()
-
-
-func get_reflect_normal() -> Vector2:
-	return Vector2.DOWN.rotated(global_rotation)
-
-
 func _input(event: InputEvent) -> void:
+	if is_interact_locked:
+		return
+		
 	if get_tree().paused:
 		return
 
@@ -91,6 +87,15 @@ func _input(event: InputEvent) -> void:
 
 	if event is InputEventScreenDrag and is_dragging and event.index == touch_index:
 		touch_world_pos = get_global_transform_with_canvas().affine_inverse() * event.position
+
+
+
+func mark_hit() -> void:
+	last_hit_frame = Engine.get_physics_frames()
+
+
+func get_reflect_normal() -> Vector2:
+	return Vector2.DOWN.rotated(global_rotation)
 
 
 func _process(delta: float) -> void:
@@ -124,6 +129,10 @@ func _end_drag() -> void:
 
 	var screen_pos: Vector2 = get_viewport().get_screen_transform() * global_position
 	Input.warp_mouse(screen_pos)
+
+
+func set_interact_locked(value: bool) -> void:
+	is_interact_locked = value
 
 
 func _set_target(world_pos: Vector2) -> void:
