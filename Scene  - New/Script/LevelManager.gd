@@ -41,7 +41,7 @@ func _ready() -> void:
 	$NightModeSwitch.visible = false
 	$NightModulate.visible = false
 	
-	_switch_to_night()
+	#_switch_to_night()
 
 	if level_complete_path.is_empty():
 		push_warning("level_complete_path belum diisi di Inspector!")
@@ -199,14 +199,14 @@ func _show_night() -> void:
 	tween.parallel().tween_property(
 		$DirectionalLight2D,
 		"color",
-		Color(0.214, 0.409, 1.0, 1.0),
+		Color("517cfe"),
 		transitionDuration
 	)
 	
 	tween.parallel().tween_property(
 		$DirectionalLight2D,
 		"shadow_color",
-		Color(1.0, 0.0, 0.0, 1.0),
+		Color("1e0439"),
 		transitionDuration
 	)
 

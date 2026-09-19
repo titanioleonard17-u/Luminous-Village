@@ -4,7 +4,6 @@ extends StaticBody2D
 @onready var light_node: Node2D = $WindowLight/TerraceLightNode
 @onready var light_node2: Node2D = $WindowLight/BalconLightNode
 @onready var light = $PointLight2D
-
 @export var blink_count: int = 3
 @export var blink_on_duration: float = 0.28
 @export var blink_off_duration: float = 0.22
@@ -120,19 +119,17 @@ func get_reflect_normal() -> Vector2:
 func _set_lights_alpha(alpha: float) -> void:
 	light_node.modulate.a = alpha
 	light_node2.modulate.a = alpha
-	
 	light.modulate.a = alpha
 	var color: Color = light.color
 	color.a = alpha
 	light.color = color
-	
 	for lightNode in $WindowLight.get_children():
 		if lightNode.name.contains("LightNode"):
 			for pointLight in lightNode.get_children():
 				if pointLight is PointLight2D:
-					var pointColor: Color = pointLight.color
-					pointColor.a = alpha
-					pointLight.color = color
+					var point_color: Color = pointLight.color
+					point_color.a = alpha
+					pointLight.color = point_color
 
 
 func night_blink() -> void:
