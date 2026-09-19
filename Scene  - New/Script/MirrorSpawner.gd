@@ -9,8 +9,19 @@ var sensitivity_slider: Node
 var spawned_mirrors: Array[Node2D] = []
 
 func _ready() -> void:
-	mirror_counter = get_tree().current_scene.get_node("MirrorCounter")
-	sensitivity_slider = get_tree().current_scene.get_node("SensitivityDragSlider")
+	var scene_root := get_tree().current_scene
+
+	# find_child mencari sampai ke dalam anak-anak (termasuk di dalam CanvasLayer),
+	# beda dengan get_node() yang hanya melihat path persis.
+	mirror_counter = scene_root.find_child("MirrorCounter", true, false) as CanvasLayer
+
+	sensitivity_slider = scene_root.find_child("SensitivityDragSlider", true, false)
+	if sensitivity_slider == null:
+		# Cadangan: slider mendaftar sendiri ke group ini di _ready()-nya.
+		sensitivity_slider = get_tree().get_first_node_in_group("sensitivity_slider")
+	if sensitivity_slider == null:
+		push_warning("MirrorSpawner: SensitivityDragSlider tidak ditemukan.")
+
 	_update_counter()
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -43,7 +54,7 @@ func _try_spawn_mirror() -> void:
 	add_child(new_mirror)
 	spawned_mirrors.append(new_mirror)
 
-	# TAMBAHAN: hubungkan mirror baru ke slider biar sensitivitas ngaruh
+	# Hubungkan mirror baru ke slider biar sensitivitas ngaruh
 	if sensitivity_slider and sensitivity_slider.has_method("set_mirror_target"):
 		sensitivity_slider.set_mirror_target(new_mirror)
 

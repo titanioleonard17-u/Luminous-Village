@@ -4,20 +4,13 @@
 [ext_resource type="Texture2D" uid="uid://c0u2u8mkfeax0" path="res://Asset/Art/Slider.png" id="1_s1k5j"]
 [ext_resource type="Texture2D" uid="uid://dw0wc2im32llu" path="res://Asset/Art/UI Rotate - Mini.png" id="2_8o6nk"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_sinmp"]
-size = Vector2(47.2221, 483.3321)
-
-[node name="SensitivityDragSlider" type="StaticBody2D" unique_id=67622892]
+[node name="SensitivityDragSlider" type="Node2D" unique_id=1977610212]
 position = Vector2(1099, 329)
 scale = Vector2(0.3600009, 0.3600009)
 script = ExtResource("1_8o6nk")
 track_length = 500.0
 max_value = 200.0
 default_value = 100.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1561954519]
-position = Vector2(-1.3888836, 5.5555315)
-shape = SubResource("RectangleShape2D_sinmp")
 
 [node name="Handle" type="Sprite2D" parent="." unique_id=1228367376]
 position = Vector2(8.333313, 0)
