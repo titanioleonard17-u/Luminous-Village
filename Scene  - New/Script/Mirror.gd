@@ -3,18 +3,13 @@ extends StaticBody2D
 @export var interact_radius: float = 100.0
 @export var ball_ratio: float = 0.18
 @export var facing_offset_degrees: float = 90.0
-@export var rotation_speed: float = 0.35       # lerp weight per detik (0..1), makin gede makin responsif
-@export var min_drag_distance: float = 20.0    # dead zone anti-blink pas mouse deket pivot
+@export var rotation_speed: float = 0.35
+@export var min_drag_distance: float = 20.0
 
 # --- Tuning kecepatan rotasi berdasarkan sensitivitas ---
-@export var min_tau: float = 0.05      # waktu respon (detik) di sensitivitas MAKSIMUM (paling gesit)
-@export var max_tau: float = 2.5       # waktu respon (detik) di sensitivitas MINIMUM (paling berat)
-@export var response_curve: float = 0.5
-# ^ INI kunci buat rasa "tengah berat" yang kamu komplain.
-#   = 1.0  -> lurus/linear (rentang tengah numpuk ke berat, kayak sekarang)
-#   < 1.0  -> tengah & bawah jadi lebih gesit lebih cepat (misal 0.5 = mirip akar kuadrat)
-#   > 1.0  -> makin ekstrem numpuk berat di tengah-bawah, gesit cuma di ujung atas banget
-#   Coba mulai dari 0.5, kalau masih berat turunin ke 0.35-0.4
+@export var min_tau: float = 0.05
+@export var max_tau: float = 0.8
+@export var response_curve: float = 0.15
 
 var is_dragging: bool = false
 var touch_index: int = -1
@@ -22,12 +17,10 @@ var is_locked: bool = false
 var is_interact_locked: bool = false
 
 var joystick_ui: JoystickUI
-var touch_world_pos: Vector2 = Vector2.ZERO   # dipakai buat sumber posisi kalau drag via touch
+var touch_world_pos: Vector2 = Vector2.ZERO
 
-# Sensitivity aktif dari slider (0..1). -1 artinya belum pernah di-set, pakai rotation_speed default
 var active_sensitivity: float = -1.0
 
-# Cursor 1x1 transparan, fallback kalau MOUSE_MODE_HIDDEN gak reliable di platform tertentu
 var _blank_cursor: ImageTexture
 
 func _ready() -> void:
@@ -49,7 +42,7 @@ func _ready() -> void:
 func _input(event: InputEvent) -> void:
 	if is_interact_locked:
 		return
-	
+
 	if is_locked:
 		return
 
@@ -84,8 +77,6 @@ func _process(delta: float) -> void:
 	if not is_dragging:
 		return
 
-	# Poll posisi mouse tiap FRAME (bukan nunggu event motion) -> gerakan konsisten
-	# ngikutin frame rate game, gak lagi tersendat kalau event OS jarang nembak.
 	var world_pos: Vector2
 	if touch_index != -1:
 		world_pos = touch_world_pos
@@ -99,8 +90,6 @@ func _start_drag() -> void:
 	joystick_ui.global_position = global_position
 	joystick_ui.visible = true
 
-	# HIDDEN + custom cursor transparan sebagai fallback, biar beneran invisible
-	# di platform manapun (MOUSE_MODE_HIDDEN kadang gak konsisten, khususnya web/HTML5).
 	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 	Input.set_custom_mouse_cursor(_blank_cursor)
 
@@ -108,18 +97,17 @@ func _end_drag() -> void:
 	is_dragging = false
 	joystick_ui.visible = false
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-	Input.set_custom_mouse_cursor(null)   # balikin cursor normal
+	Input.set_custom_mouse_cursor(null)
 
-	# get_screen_transform() convert world -> koordinat WINDOW/OS yang sebenarnya,
-	# otomatis handle stretch mode/scale, beda sama get_canvas_transform() yang cuma
-	# kasih koordinat internal viewport (itu penyebab teleport jauh kemarin).
-	var screen_pos: Vector2 = get_viewport().get_screen_transform() * global_position
+	# Gabungan canvas_transform (efek posisi/zoom Camera2D) lalu screen_transform
+	# (efek stretch mode/window) -- get_screen_transform() doang TIDAK include
+	# transform kamera, makanya sebelumnya meleset begitu ada Camera2D.
+	var screen_pos: Vector2 = get_viewport().get_screen_transform() * get_viewport().canvas_transform * global_position
 	Input.warp_mouse(screen_pos)
 
 func _rotate_towards(world_pos: Vector2, delta: float) -> void:
 	var direction: Vector2 = world_pos - global_position
 
-	# Dead zone: kalau mouse kepentok terlalu deket pivot, sudutnya gak stabil -> skip.
 	if direction.length() < min_drag_distance:
 		return
 
@@ -134,14 +122,15 @@ func _rotate_towards(world_pos: Vector2, delta: float) -> void:
 	if t <= 0.0:
 		return
 
-	# t dilengkungkan dulu pake response_curve sebelum di-lerp ke tau.
-	# curve < 1 -> "menaikkan" nilai t kecil-menengah, jadi kerasa gesit lebih cepat
-	# begitu slider digeser dikit dari bawah, gak numpuk berat semua di tengah.
 	var t_curved: float = pow(t, response_curve)
 	var tau: float = lerp(max_tau, min_tau, t_curved)
 
 	var weight: float = 1.0 - exp(-delta / tau)
 	rotation = lerp_angle(rotation, target_rotation, weight)
+
+	var remaining: float = abs(wrapf(target_rotation - rotation, -PI, PI))
+	if remaining < deg_to_rad(1.0):
+		rotation = target_rotation
 
 	joystick_ui.set_angle(rotation + deg_to_rad(facing_offset_degrees))
 
@@ -169,10 +158,8 @@ func set_locked(value: bool) -> void:
 func set_interact_locked(value: bool) -> void:
 	is_interact_locked = value
 
-# Dipanggil dari SensitivityDragSlider. raw_value ada di rentang [0, max_value] slider,
-# di sini kita normalize ke rentang [0, 1] sebelum dipakai sebagai lerp weight.
 func set_sensitivity(raw_value: float, raw_max: float) -> void:
 	if raw_max <= 0.0:
 		active_sensitivity = 0.0
 		return
-	active_sensitivity = clamp(raw_value / raw_max, 0.0, 1.0)	
+	active_sensitivity = clamp(raw_value / raw_max, 0.0, 1.0)

@@ -9,8 +9,6 @@ position = Vector2(1099, 329)
 scale = Vector2(0.3600009, 0.3600009)
 script = ExtResource("1_8o6nk")
 track_length = 500.0
-max_value = 200.0
-default_value = 100.0
 
 [node name="Handle" type="Sprite2D" parent="." unique_id=1228367376]
 position = Vector2(8.333313, 0)

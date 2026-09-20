@@ -60,7 +60,7 @@ func _physics_process(_delta: float) -> void:
 func _input(event: InputEvent) -> void:
 	if is_interact_locked:
 		return
-		
+
 	if get_tree().paused:
 		return
 
@@ -87,7 +87,6 @@ func _input(event: InputEvent) -> void:
 
 	if event is InputEventScreenDrag and is_dragging and event.index == touch_index:
 		touch_world_pos = get_global_transform_with_canvas().affine_inverse() * event.position
-
 
 
 func mark_hit() -> void:
@@ -127,7 +126,7 @@ func _end_drag() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	Input.set_custom_mouse_cursor(null)
 
-	var screen_pos: Vector2 = get_viewport().get_screen_transform() * global_position
+	var screen_pos: Vector2 = get_viewport().get_screen_transform() * get_viewport().canvas_transform * global_position
 	Input.warp_mouse(screen_pos)
 
 
@@ -155,6 +154,10 @@ func _apply_rotation(delta: float) -> void:
 
 	var weight: float = 1.0 - exp(-delta / tau)
 	rotation = lerp_angle(rotation, target_rotation, weight)
+
+	var remaining: float = abs(wrapf(target_rotation - rotation, -PI, PI))
+	if remaining < deg_to_rad(1.0):
+		rotation = target_rotation
 
 	joystick_ui.set_angle(rotation + deg_to_rad(facing_offset_degrees))
 

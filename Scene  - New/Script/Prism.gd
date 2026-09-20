@@ -3,7 +3,7 @@ extends StaticBody2D
 ## Sudut sisi pertama segitiga (derajat), diukur dari sumbu X (kanan).
 ## Kalau arah keluar cahayanya nggak pas sama sprite, geser nilai ini.
 @export_range(-180, 180, 1) var forward_offset_deg: float = 0.0
-@export var facing_offset_degrees: float = 90.0   # <-- TAMBAHAN
+@export var facing_offset_degrees: float = 90.0
 @export var interact_radius: float = 100.0
 @export var ball_ratio: float = 0.18
 
@@ -38,7 +38,7 @@ func _ready() -> void:
 	joystick_ui.global_position = global_position
 	joystick_ui.visible = false
 	add_child(joystick_ui)
-	joystick_ui.set_angle(rotation)
+	joystick_ui.set_angle(rotation + deg_to_rad(facing_offset_degrees))
 
 	var img: Image = Image.create(1, 1, false, Image.FORMAT_RGBA8)
 	img.set_pixel(0, 0, Color(0, 0, 0, 0))
@@ -48,7 +48,7 @@ func _ready() -> void:
 func _input(event: InputEvent) -> void:
 	if is_interact_locked:
 		return
-	
+
 	if get_tree().paused:
 		return
 
@@ -106,7 +106,7 @@ func _end_drag() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	Input.set_custom_mouse_cursor(null)
 
-	var screen_pos: Vector2 = get_viewport().get_screen_transform() * global_position
+	var screen_pos: Vector2 = get_viewport().get_screen_transform() * get_viewport().canvas_transform * global_position
 	Input.warp_mouse(screen_pos)
 
 
@@ -130,6 +130,10 @@ func _apply_rotation(delta: float) -> void:
 
 	var weight: float = 1.0 - exp(-delta / tau)
 	rotation = lerp_angle(rotation, target_rotation, weight)
+
+	var remaining: float = abs(wrapf(target_rotation - rotation, -PI, PI))
+	if remaining < deg_to_rad(1.0):
+		rotation = target_rotation
 
 	joystick_ui.set_angle(rotation + deg_to_rad(facing_offset_degrees))
 
@@ -159,9 +163,6 @@ func set_sensitivity(raw_value: float, raw_max: float) -> void:
 	active_sensitivity = clamp(raw_value / raw_max, 0.0, 1.0)
 
 
-## Menghitung arah normal (mengarah keluar) dari 3 sisi segitiga, berdasar
-## rotasi objek + forward_offset_deg. Segitiga dianggap simetris, jadi
-## 3 sisinya dianggap berjarak 120° satu sama lain.
 func _get_face_normals() -> Array:
 	var base_angle: float = deg_to_rad(forward_offset_deg) + global_rotation
 	var normals: Array = []
