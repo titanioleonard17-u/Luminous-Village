@@ -73,11 +73,6 @@ rotation = 4.712389
 
 [node name="Mirror" parent="." unique_id=1943216660 instance=ExtResource("7_5qj7r")]
 position = Vector2(279, 304)
-interact_radius = null
-ball_ratio = null
-facing_offset_degrees = null
-rotation_speed = null
-min_drag_distance = null
 
 [node name="Trigger" parent="." unique_id=1183924401 instance=ExtResource("9_abcr3")]
 position = Vector2(545, 304)
@@ -95,3 +90,4 @@ scale = Vector2(0.35, 0.35)
 position = Vector2(921, 322)
 
 [node name="SensitivityDragSlider" parent="." unique_id=1977610212 instance=ExtResource("18_qu5r7")]
+track_length = 300.0

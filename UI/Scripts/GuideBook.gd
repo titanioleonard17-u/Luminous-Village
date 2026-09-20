@@ -1,235 +1,318 @@
 extends Control
 
+
+# =========================================================
+# BUTTON SCENE
+# =========================================================
+
 @export var button_scene: PackedScene
 
-# =========================
+
+# =========================================================
 # TITLE BUTTON COSTUMES
-# =========================
+# =========================================================
+
 @export_category("Title Button")
+
 @export var title_button_costumes: Array[Texture2D]
 @export var title_button_costumes_disabled: Array[Texture2D]
 @export var title_button_costume_index: int = 1
 
-@onready var guideBook = GuideManager.get_guides()
-@onready var titleBoxContainer = $MarginContainer/ContainerBox/TitleBoxMargin
-@onready var descriptionBoxContainer = $MarginContainer/ContainerBox/DescriptionBoxMargin
-@onready var title_container := $MarginContainer/ContainerBox/TitleBoxMargin/TitleBox/TitleMargin/ScrollContainer/VBoxContainer
-@onready var scroll_container := $MarginContainer/ContainerBox/DescriptionBoxMargin/DescriptionBox/TextMargin/ScrollContainer
-@onready var container := $MarginContainer/ContainerBox/DescriptionBoxMargin/DescriptionBox/TextMargin/ScrollContainer/VBoxContainer
+
+# =========================================================
+# GUIDE DATA
+# =========================================================
+
+var guideBook = {}
+
+
+# =========================================================
+# NODE REFERENCES
+# =========================================================
+
+@onready var title_list: VBoxContainer = $MarginContainer/ContainerBox/TitleList/ScrollContainer/VBoxContainer
+
+@onready var title_scroll_container: ScrollContainer = $MarginContainer/ContainerBox/TitleList/ScrollContainer
+
+@onready var description_scroll: ScrollContainer = $MarginContainer/ContainerBox/Description/ScrollContainer
+
+@onready var description_container: VBoxContainer = $MarginContainer/ContainerBox/Description/ScrollContainer/VBoxContainer
+
+
+# =========================================================
+# FONT
+# =========================================================
 
 var guide_font := SystemFont.new()
 
-# =========================
-# UI SIZE
-# =========================
-@export_category("UI")
-@export var scroll_size := Vector2(1200, 700)
 
-# =========================
+# =========================================================
 # FONT SIZE
-# =========================
-@export var title_button_font_size := 48
-@export var title_font_size := 48
-@export var subtitle_font_size := 32
-@export var description_font_size := 24
+# =========================================================
 
-# =========================
-# SPACING
-# =========================
-@export var title_spacing := 30.0
-@export var section_spacing := 35.0
+@export_category("Font Size")
 
+@export var list_font_size: int = 48
+@export var title_font_size: int = 48
+@export var subtitle_font_size: int = 32
+@export var text_font_size: int = 24
+
+
+# =========================================================
+# LIST COLOR
+# =========================================================
+
+@export_category("List Color")
+
+@export var list_color := Color("#000000")
+
+
+# =========================================================
+# DESCRIPTION COLOR
+# =========================================================
+
+@export_category("Description Color")
+
+@export var description_color := Color.BLACK
+
+
+# =========================================================
+# LIST SPACING
+# =========================================================
+
+@export_category("List Spacing")
+
+@export var list_spacing: float = 20.0
+
+
+# =========================================================
+# DESCRIPTION SPACING
+# =========================================================
+
+@export_category("Description Spacing")
+
+@export var title_to_subtitle_spacing: float = 8
+@export var subtitle_to_text_spacing: float = 0
+@export var text_to_subtitle_spacing: float = 24
+
+
+# =========================================================
+# SELECTED TITLE
+# =========================================================
+
+var selected_title := ""
+
+
+# =========================================================
+# READY
+# =========================================================
 
 func _ready() -> void:
-	# =========================
-	# FONT
-	# =========================
-	guide_font.font_names = PackedStringArray(["Berlin Sans FB"])
+
+	guide_font.font_names = PackedStringArray([
+		"Berlin Sans FB"
+	])
+
 	guide_font.subpixel_positioning = 0
 
-	# =========================
-	# TITLE / DESCRIPTION
-	# =========================
-	titleBoxContainer.size_flags_horizontal = Control.SIZE_FILL
-	descriptionBoxContainer.size_flags_horizontal = Control.SIZE_FILL
 
-	await get_tree().process_frame
+	# =====================================================
+	# TITLE SCROLL
+	# =====================================================
 
-	_resize_boxes()
+	title_scroll_container.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	title_scroll_container.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO
 
-	# =========================
-	# TITLE LIST
-	# =========================
-	title_container.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	title_list.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+
+	title_list.add_theme_constant_override(
+		"separation",
+		int(list_spacing)
+	)
+
+
+	# =====================================================
+	# DESCRIPTION SCROLL
+	# =====================================================
+
+	description_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	description_scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO
+
+	description_scroll.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	description_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+
+	description_container.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	description_container.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
+
+
+	# =====================================================
+	# LOAD GUIDE
+	# =====================================================
+
+	refresh_guide()
+
+
+# =========================================================
+# REFRESH GUIDE
+# =========================================================
+
+func refresh_guide() -> void:
+
+	guideBook = GuideManager.get_guides()
+
 	load_titles()
 
-	# =========================
-	# SCROLL CONTAINER
-	# =========================
-	scroll_container.position = Vector2(50, 50)
-	scroll_container.size = scroll_size
+	selected_title = ""
 
-	scroll_container.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
-	scroll_container.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO
-
-	container.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-
-	# =========================
-	# SHOW DEFAULT GUIDE
-	# =========================
-	show_guide("Mirror")
-
-
-# =========================
-# RESIZE BOX
-# =========================
-func _resize_boxes() -> void:
-	var parent := titleBoxContainer.get_parent()
-
-	var total_width: float = parent.size.x
-
-	if total_width <= 0:
-		return
-
-	# Simpan ukuran dan posisi asli dari scene
-	var title_original_width: float = titleBoxContainer.size.x
-	var description_original_width: float = descriptionBoxContainer.size.x
-
-	var left_margin: float = titleBoxContainer.position.x
-
-	var right_margin: float = total_width - (
-		descriptionBoxContainer.position.x +
-		description_original_width
-	)
-
-	var content_width: float = (
-		total_width -
-		left_margin -
-		right_margin
-	)
-
-	if content_width <= 0:
-		return
-
-	var original_total_width: float = (
-		title_original_width +
-		description_original_width
-	)
-
-	if original_total_width <= 0:
-		return
-
-	# Ambil rasio dari desain asli scene
-	var title_ratio: float = (
-		title_original_width /
-		original_total_width
-	)
-
-	var description_ratio: float = (
-		description_original_width /
-		original_total_width
-	)
-
-	# Terapkan rasio
-	titleBoxContainer.size.x = (
-		content_width *
-		title_ratio
-	)
-
-	descriptionBoxContainer.size.x = (
-		content_width *
-		description_ratio
-	)
-
-	# Description tetap menempel di kanan
-	descriptionBoxContainer.position.x = (
-		total_width -
-		right_margin -
-		descriptionBoxContainer.size.x
-	)
-
-
-# =========================
-# TITLE LIST
-# =========================
-func load_titles() -> void:
-	for child in title_container.get_children():
+	for child in description_container.get_children():
 		child.queue_free()
 
-	title_container.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+
+	if guideBook.is_empty():
+		return
+
+
+	var first_step = guideBook.values()[0]
+
+	if first_step.is_empty():
+		return
+
+
+	show_guide(first_step[0]["title"])
+
+
+# =========================================================
+# TITLE LIST
+# =========================================================
+
+func load_titles() -> void:
+
+	for child in title_list.get_children():
+		child.queue_free()
+
 
 	if button_scene == null:
 		push_error("GuideBook: button_scene belum diisi di Inspector.")
 		return
 
-	if title_button_costumes.is_empty():
-		print(
-			"GuideBook: pakai customes bawaan scene button (index %d)"
-			% title_button_costume_index
-		)
-	else:
-		print(
-			"GuideBook: pakai %d costume dari GuideBook (index %d)"
-			% [
-				title_button_costumes.size(),
-				title_button_costume_index
-			]
-		)
 
 	for step in guideBook:
+
 		for guide in guideBook[step]:
+
 			create_title_button(guide)
 
 
+# =========================================================
+# CREATE TITLE BUTTON
+# =========================================================
+
 func create_title_button(guide: Dictionary) -> void:
+
 	var title_button = button_scene.instantiate()
+
+
+	# =====================================================
+	# BUTTON SETTINGS
+	# =====================================================
 
 	title_button.type_button = title_button.TypeBtn.RECTANGLE
 	title_button.size_button = title_button.SizeBtn.SMALL
-	title_button.font_size = title_button_font_size
 
-	# =========================
-	# COSTUME
-	# =========================
+	title_button.font_size = list_font_size
+	
+	title_button.get_node("Label").add_theme_color_override(
+		"font_color",
+		list_color
+	)
+
+
+	# =====================================================
+	# BUTTON COSTUME
+	# =====================================================
+
 	if title_button_costumes.is_empty():
-		title_button.setCostume(title_button_costume_index)
+
+		title_button.setCostume(
+			title_button_costume_index
+		)
+
 	else:
+
 		title_button.setCostumes(
 			title_button_costumes,
 			title_button_costumes_disabled,
 			title_button_costume_index
 		)
 
-	title_button.setText(guide["title"])
-	title_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	title_button.pressed.connect(
-		show_guide.bind(guide["title"])
+
+	# =====================================================
+	# BUTTON TEXT
+	# =====================================================
+
+	title_button.setText(
+		guide["title"]
 	)
 
-	title_container.add_child(title_button)
+	title_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+
+	# =====================================================
+	# PRESSED
+	# =====================================================
+
+	title_button.pressed.connect(
+		func():
+			selected_title = guide["title"]
+			show_guide(guide["title"])
+	)
 
 
-# =========================
-# GUIDE CONTENT
-# =========================
+	title_list.add_child(title_button)
+
+
+# =========================================================
+# SHOW GUIDE
+# =========================================================
+
 func show_guide(title: String) -> void:
-	for child in container.get_children():
+
+	selected_title = title
+
+
+	for child in description_container.get_children():
 		child.queue_free()
 
+
 	for step in guideBook:
+
 		for guide in guideBook[step]:
+
 			if guide["title"] == title:
+
 				_create_guide(guide)
+
+				await get_tree().process_frame
+
+				description_scroll.scroll_vertical = 0
+
 				return
 
 
+# =========================================================
+# CREATE GUIDE CONTENT
+# =========================================================
+
 func _create_guide(guide: Dictionary) -> void:
-	# =========================
+
+	# =====================================================
 	# TITLE
-	# =========================
+	# =====================================================
+
 	var title_label := Label.new()
 
 	title_label.text = guide["title"].to_upper()
+
+	title_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 
 	title_label.add_theme_font_override(
 		"font",
@@ -241,27 +324,58 @@ func _create_guide(guide: Dictionary) -> void:
 		title_font_size
 	)
 
+	title_label.add_theme_color_override(
+		"font_color",
+		description_color
+	)
+
 	title_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 
-	container.add_child(title_label)
+	title_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 
-	# =========================
-	# TITLE SPACING
-	# =========================
+	description_container.add_child(title_label)
+
+
+	# =====================================================
+	# TITLE → SUBTITLE SPACING
+	# =====================================================
+
 	var title_space := Control.new()
 
-	title_space.custom_minimum_size.y = title_spacing
+	title_space.custom_minimum_size.y = title_to_subtitle_spacing
 
-	container.add_child(title_space)
+	description_container.add_child(title_space)
 
-	# =========================
+
+	# =====================================================
 	# DESCRIPTION
-	# =========================
+	# =====================================================
+
+	var first_section := true
+
 	for description in guide["description"]:
+
 		for subtitle in description:
-			# =========================
+
+			# -------------------------------------------------
+			# SPACING ANTAR SECTION
+			# -------------------------------------------------
+
+			if not first_section:
+
+				var section_space := Control.new()
+
+				section_space.custom_minimum_size.y = text_to_subtitle_spacing
+
+				description_container.add_child(section_space)
+
+			first_section = false
+
+
+			# -------------------------------------------------
 			# SUBTITLE
-			# =========================
+			# -------------------------------------------------
+
 			var subtitle_label := Label.new()
 
 			subtitle_label.text = subtitle
@@ -276,13 +390,33 @@ func _create_guide(guide: Dictionary) -> void:
 				subtitle_font_size
 			)
 
+			subtitle_label.add_theme_color_override(
+				"font_color",
+				description_color
+			)
+
 			subtitle_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 
-			container.add_child(subtitle_label)
+			subtitle_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 
-			# =========================
+			description_container.add_child(subtitle_label)
+
+
+			# -------------------------------------------------
+			# SUBTITLE → TEXT SPACING
+			# -------------------------------------------------
+
+			var subtitle_space := Control.new()
+
+			subtitle_space.custom_minimum_size.y = subtitle_to_text_spacing
+
+			description_container.add_child(subtitle_space)
+
+
+			# -------------------------------------------------
 			# DESCRIPTION TEXT
-			# =========================
+			# -------------------------------------------------
+
 			var description_label := Label.new()
 
 			description_label.text = description[subtitle]
@@ -294,25 +428,25 @@ func _create_guide(guide: Dictionary) -> void:
 
 			description_label.add_theme_font_size_override(
 				"font_size",
-				description_font_size
+				text_font_size
+			)
+
+			description_label.add_theme_color_override(
+				"font_color",
+				description_color
 			)
 
 			description_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 
-			container.add_child(description_label)
+			description_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 
-			# =========================
-			# SECTION SPACING
-			# =========================
-			var space := Control.new()
-
-			space.custom_minimum_size.y = section_spacing
-
-			container.add_child(space)
+			description_container.add_child(description_label)
 
 
-# =========================
+# =========================================================
 # BACK BUTTON
-# =========================
+# =========================================================
+
 func _on_back_button_pressed() -> void:
+
 	visible = false

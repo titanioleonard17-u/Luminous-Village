@@ -4,23 +4,32 @@ var is_night_mode: bool = false
 var is_step_guide_active: bool = false
 
 @onready var pause_menu = $Container/PauseMenu
-@onready var guide_menu = $Container/GuideBook
+@onready var guide_book = $Container/GuideBook
+
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 
 	pause_menu.visible = false
-	guide_menu.visible = false
+	guide_book.visible = false
 
 
 func _input(event: InputEvent) -> void:
-	if is_night_mode or is_step_guide_active:
+	if is_night_mode:
 		return
 
 	if event.is_action_pressed("Escape"):
-		if guide_menu.visible:
-			guide_menu.visible = false
-			AudioManager.playAudio("ClickDefault", AudioManager.AudioType.SFX)
+		if guide_book.visible:
+			guide_book.visible = false
+
+			set_step_guide_status(false)
+
+			AudioManager.playAudio(
+				"ClickDefault",
+				AudioManager.AudioType.SFX
+			)
+
+			get_viewport().set_input_as_handled()
 			return
 
 		if get_tree().paused:
@@ -38,14 +47,48 @@ func _input(event: InputEvent) -> void:
 
 func open_pause() -> void:
 	pause_menu.visible = true
+
+	# Lock semua mekanisme
+	set_step_guide_status(true)
+
 	get_tree().paused = true
-	AudioManager.playAudio("ClickOpen", AudioManager.AudioType.SFX)
+
+	AudioManager.playAudio(
+		"ClickOpen",
+		AudioManager.AudioType.SFX
+	)
 
 
 func close_pause() -> void:
 	pause_menu.visible = false
+
 	get_tree().paused = false
-	AudioManager.playAudio("ClickClose", AudioManager.AudioType.SFX)
+
+	# Unlock semua mekanisme
+	set_step_guide_status(false)
+
+	AudioManager.playAudio(
+		"ClickClose",
+		AudioManager.AudioType.SFX
+	)
+
+
+func open_help() -> void:
+	if get_tree().paused:
+		return
+
+	guide_book.refresh_guide()
+
+	guide_book.visible = not guide_book.visible
+
+	# Help terbuka → lock
+	# Help tertutup → unlock
+	set_step_guide_status(guide_book.visible)
+
+	AudioManager.playAudio(
+		"ClickDefault",
+		AudioManager.AudioType.SFX
+	)
 
 
 func _on_pause_button_pressed() -> void:
@@ -59,20 +102,31 @@ func _on_help_button_pressed() -> void:
 	if is_night_mode:
 		return
 
-	if get_tree().paused:
-		return
-
-	guide_menu.visible = not guide_menu.visible
-	AudioManager.playAudio("ClickDefault", AudioManager.AudioType.SFX)
+	open_help()
 
 
 func enable_night_mode() -> void:
 	is_night_mode = true
 
 	pause_menu.visible = false
-	guide_menu.visible = false
+	guide_book.visible = false
 
 	get_tree().paused = false
 
+	# Night mode → lock mekanisme
+	set_step_guide_status(true)
+
+
 func set_step_guide_status(value: bool) -> void:
 	is_step_guide_active = value
+
+	var objects = get_tree().get_nodes_in_group("mirror")
+	var mechanismConfig = get_tree().get_nodes_in_group("mechanismUIConf")
+
+	for object in objects:
+		if object.has_method("set_step_guide_status"):
+			object.set_step_guide_status(value)
+
+	for mechanism in mechanismConfig:
+		if mechanism.has_method("set_step_guide_status") and mechanism != self:
+			mechanism.set_step_guide_status(value)

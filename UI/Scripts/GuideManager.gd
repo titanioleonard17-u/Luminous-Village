@@ -8,9 +8,16 @@ var save_data := {}
 var guide_data := {
 	"step_1": [
 		{
+			"title": "Laser",
+			"description": [
+				{"Function": "Cahaya utama yang digunakan untuk menghidupkan rumah rumah yang ada di tiap level."},
+				{"How to use": "Pantulkan cahaya ini ke semua rumah."}
+			]
+		},
+		{
 			"title": "Mirror",
 			"description": [
-				{"Function": "Cermin digunakan untuk memantulkan cahaya."},
+				{"Function": "Memantulkan cahaya."},
 				{"Reflection Side": "Ada sisi cermin yang dapat memantulkan, dan ada sisi yang tidak dapat memantulkan cahaya."},
 				{"Mirror Rotation": "Cermin dapat diputar sebesar 360 derajat."},
 				{"Mirror Spawner": "Cermin dapat di spawn dengan menekan angka 1."},
@@ -27,10 +34,40 @@ var guide_data := {
 				{"Function": "Membuka pintu setelah terkena cahaya"},
 				{"Reflection Side": "Hanya ada 1 sisi tombol yang dapat memantulkan cahaya."}
 			]
+		},
+		{
+			"title": "Door",
+			"description": [
+				{"Function": "Menghalangi cahaya agar tidak bisa lewat dengan leluasa."},
+				{"How to open": "Sinarilah tombol yang ada sesuai dengan aturan untuk dapat membuka pintu."}
+			]
+		}
+	],
+	"step_2": [
+		{
+			"title": "Map Drag",
+			"description": [
+				{"Function": "Menjelajahi peta lebih luas."}
+			]
+		}
+	],
+	"step_3": [
+		{
+			"title": "Button",
+			"description": [
+				{"AND Button": "Tombol yang dirancang untuk membuka pintu jika terdapat 2 tombol yang terkena cahaya."}
+			]
+		}
+	],
+	"step_4": [
+		{
+			"title": "Teleporter",
+			"description": [
+				{"Function": "Memungkinkan cahya untuk berpindah tempat dari teleporter satu ke lainnya."}
+			]
 		}
 	]
 }
-
 
 func _ready() -> void:
 	load_game()
@@ -104,13 +141,7 @@ func unlock_guide(step: String) -> void:
 		print("!!! MAAF, tidak ada key " + step + " !!!")
 		return
 
-	if not save_data.has(step):
-		save_data[step] = []
-
-	for guide in guide_data[step]:
-		if guide not in save_data[step]:
-			save_data[step].append(guide)
-
+	save_data[step] = guide_data[step].duplicate(true)
 	save_game()
 
 

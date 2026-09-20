@@ -1,5 +1,6 @@
 extends Camera2D
 
+@export var zoom_scale := 0.5
 @export var zoom_step := 0.1
 @export var min_zoom := 0.5
 @export var max_zoom := 2.0
@@ -24,9 +25,11 @@ var dragging := false
 var target_position := Vector2.ZERO
 var zoom_tween: Tween
 var wrapping_mouse := false
+var is_step_guide_active: bool = false
 
 
 func _ready():
+	zoom = Vector2(zoom_scale, zoom_scale)
 	limit_left -= int(expand_left)
 	limit_right += int(expand_right)
 	limit_top -= int(expand_top)
@@ -36,7 +39,7 @@ func _ready():
 
 
 func _process(delta):
-	if get_tree().paused:
+	if get_tree().paused or is_step_guide_active:
 		dragging = false
 		return
 
@@ -61,7 +64,7 @@ func _input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT or event.button_index == MOUSE_BUTTON_MIDDLE:
 			if event.pressed:
-				if is_mouse_on_mirror() or is_mouse_on_ui_button():
+				if is_mouse_on_mirror() or is_mouse_on_ui_button() or is_mouse_on_sensitivity_slider():
 					dragging = false
 					return
 
@@ -159,6 +162,7 @@ func is_mouse_on_mirror() -> bool:
 
 	return false
 
+
 func is_mouse_on_ui_button() -> bool:
 	var mouse_position = get_viewport().get_mouse_position()
 
@@ -169,3 +173,18 @@ func is_mouse_on_ui_button() -> bool:
 		return true
 
 	return false
+
+
+func is_mouse_on_sensitivity_slider() -> bool:
+	var sliders = get_tree().get_nodes_in_group("sensitivity_slider")
+
+	for slider in sliders:
+		if slider.has_method("is_mouse_over"):
+			if slider.is_mouse_over():
+				return true
+
+	return false
+
+
+func set_step_guide_status(value: bool) -> void:
+	is_step_guide_active = value

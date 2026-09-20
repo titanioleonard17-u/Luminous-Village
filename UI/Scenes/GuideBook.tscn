@@ -1,8 +1,9 @@
 [gd_scene format=3 uid="uid://cuv564nqlv6ho"]
 
-[ext_resource type="Script" uid="uid://dbm88no6drgmy" path="res://UI/Scripts/GuideBook.gd" id="1_w2pf2"]
+[ext_resource type="Script" uid="uid://dbm88no6drgmy" path="res://UI/Scripts/GuideBook.gd" id="1_5hyqq"]
 [ext_resource type="PackedScene" uid="uid://cip0gmnccnt8e" path="res://UI/Scenes/Button.tscn" id="2_1wuxd"]
-[ext_resource type="Texture2D" uid="uid://ceocyry1mbcaw" path="res://Asset/Art/Button  - Plain.png" id="3_rhsiw"]
+[ext_resource type="Texture2D" uid="uid://2oug2m1g78bk" path="res://Asset/Art/GuideBook/Guidebook - Button.png" id="3_5hyqq"]
+[ext_resource type="Texture2D" uid="uid://d22d1kl5au7gl" path="res://Asset/Art/Guidebook.png" id="4_5hyqq"]
 [ext_resource type="Texture2D" uid="uid://bhtnq3djaw0is" path="res://Asset/Art/Button - Back.png" id="4_xi8qn"]
 
 [node name="GuideBook" type="Control" unique_id=43743912]
@@ -12,9 +13,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_w2pf2")
+script = ExtResource("1_5hyqq")
 button_scene = ExtResource("2_1wuxd")
-title_button_costumes = Array[Texture2D]([ExtResource("3_rhsiw")])
+title_button_costumes = Array[Texture2D]([ExtResource("3_5hyqq")])
+list_font_size = 40
+list_color = Color(0.27058825, 0.10980392, 0.011764706, 1)
 
 [node name="BG" type="ColorRect" parent="." unique_id=594889546]
 layout_mode = 1
@@ -37,30 +40,35 @@ theme_override_constants/margin_top = 32
 theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 32
 
-[node name="ContainerBox" type="ColorRect" parent="MarginContainer" unique_id=451759476]
+[node name="ContainerBox" type="TextureRect" parent="MarginContainer" unique_id=1859967699]
 layout_mode = 2
-color = Color(0, 0, 0, 1)
+texture = ExtResource("4_5hyqq")
+expand_mode = 1
+stretch_mode = 6
 
-[node name="TitleBoxMargin" type="MarginContainer" parent="MarginContainer/ContainerBox" unique_id=106032486]
-layout_mode = 1
-anchors_preset = 9
-anchor_bottom = 1.0
-offset_right = 368.0
-grow_vertical = 2
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 16
+[node name="TitleList" type="MarginContainer" parent="MarginContainer/ContainerBox" unique_id=1119507668]
+layout_mode = 0
+offset_left = 60.0
+offset_top = 16.0
+offset_right = 350.0
+offset_bottom = 576.0
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 32
 theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 16
+theme_override_constants/margin_bottom = 32
 
-[node name="TitleBox" type="ColorRect" parent="MarginContainer/ContainerBox/TitleBoxMargin" unique_id=1935751595]
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/ContainerBox/TitleList" unique_id=1317592227]
 layout_mode = 2
-color = Color(1, 0.36, 0.36, 1)
 
-[node name="TitleMargin" type="MarginContainer" parent="MarginContainer/ContainerBox/TitleBoxMargin/TitleBox" unique_id=1623921547]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/ContainerBox/TitleList/ScrollContainer" unique_id=1878209197]
+layout_mode = 2
+
+[node name="Description" type="MarginContainer" parent="MarginContainer/ContainerBox" unique_id=1335135454]
+layout_mode = 0
+offset_left = 390.0
+offset_top = 64.0
+offset_right = 1000.0
+offset_bottom = 524.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 8
@@ -68,46 +76,10 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/ContainerBox/TitleBoxMargin/TitleBox/TitleMargin" unique_id=1230702465]
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/ContainerBox/Description" unique_id=1327410217]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/ContainerBox/TitleBoxMargin/TitleBox/TitleMargin/ScrollContainer" unique_id=1073981473]
-layout_mode = 2
-
-[node name="DescriptionBoxMargin" type="MarginContainer" parent="MarginContainer/ContainerBox" unique_id=1360946906]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -736.0
-offset_bottom = 584.0
-grow_horizontal = 0
-pivot_offset = Vector2(736, 0)
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 16
-
-[node name="DescriptionBox" type="ColorRect" parent="MarginContainer/ContainerBox/DescriptionBoxMargin" unique_id=325042520]
-layout_mode = 2
-color = Color(0.5765813, 0.6719816, 0, 1)
-
-[node name="TextMargin" type="MarginContainer" parent="MarginContainer/ContainerBox/DescriptionBoxMargin/DescriptionBox" unique_id=1335135454]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 8
-
-[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/ContainerBox/DescriptionBoxMargin/DescriptionBox/TextMargin" unique_id=1327410217]
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/ContainerBox/DescriptionBoxMargin/DescriptionBox/TextMargin/ScrollContainer" unique_id=1716417343]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/ContainerBox/Description/ScrollContainer" unique_id=1716417343]
 layout_mode = 2
 
 [node name="BackButton" parent="." unique_id=1699704292 instance=ExtResource("2_1wuxd")]

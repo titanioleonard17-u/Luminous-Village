@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://dnkya1u3tc0yu" path="res://Scene  - New/Script/LevelManager.gd" id="1_b8u4h"]
 [ext_resource type="PackedScene" uid="uid://c4b31tdsp28hd" path="res://UI/Scenes/NightModulate.tscn" id="2_y4yg7"]
 [ext_resource type="PackedScene" uid="uid://cen1rv6xnlc18" path="res://Scene  - New/Scene/MirrorCounter.tscn" id="3_bllwk"]
+[ext_resource type="PackedScene" uid="uid://43ol7ai1lse0" path="res://UI/Scenes/GuideStep.tscn" id="3_rx6y3"]
 [ext_resource type="PackedScene" uid="uid://cc81hm1d8jnxv" path="res://UI/Scenes/PauseTrigger.tscn" id="4_l5tja"]
 [ext_resource type="PackedScene" uid="uid://dtyuxbdbjf17x" path="res://UI/Scenes/NightModeSwitch.tscn" id="5_nsoiw"]
 [ext_resource type="PackedScene" uid="uid://ruuy6vksw05m" path="res://Scene  - New/Scene/LevelComplete.tscn" id="6_rx6y3"]
@@ -45,6 +46,10 @@ script = ExtResource("1_b8u4h")
 
 [node name="NightModulate" parent="." unique_id=1237042344 instance=ExtResource("2_y4yg7")]
 visible = false
+
+[node name="GuideStep" parent="." unique_id=1462140967 instance=ExtResource("3_rx6y3")]
+visible = false
+currentStep = 4
 
 [node name="MirrorCounter" parent="." unique_id=2086307742 instance=ExtResource("3_bllwk")]
 visible = false
@@ -190,4 +195,4 @@ shadow_filter_smooth = 3.0
 layer = 10
 
 [node name="SensitivityDragSlider" parent="CanvasLayer" unique_id=1977610212 instance=ExtResource("23_lsp0n")]
-mirror_target_path = NodePath("../../Mirror_Spawner")
+track_length = 300.0

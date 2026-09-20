@@ -28,10 +28,14 @@ var level_complete_path: NodePath
 
 
 func _ready() -> void:
-	if get_tree().current_scene.name.contains("TutorialLevel"):
-		set_step_guide_status(true)
-		$GuideStep.show_guide(1)
-		$GuideStep.guideFinished.connect(_on_guide_finished)
+	if has_node("GuideStep"):
+		var step := "step_" + str($GuideStep.currentStep)
+
+		if not GuideManager.has_step(step):
+			set_step_guide_status(true)
+			$GuideStep.guideFinished.connect(_on_guide_finished)
+		else:
+			GuideManager.unlock_guide(step)
 	
 	AudioManager.playRandomVibe()
 
@@ -367,4 +371,5 @@ func set_step_guide_status(value: bool) -> void:
 			mechanism.set_step_guide_status(value)
 
 func _on_guide_finished() -> void:
+	GuideManager.unlock_guide("step_" + str($GuideStep.currentStep))
 	set_step_guide_status(false)

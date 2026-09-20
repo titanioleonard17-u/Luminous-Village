@@ -1,22 +1,34 @@
 extends CanvasLayer
 
-var guideTextStep1 = [
-	"Sinari semua rumah dengan sinar yang ada.",
-	"Button mempunyai cara kerja yang sama dengan cermin, hanya saja dia juga berfungsi untuk membuka gate.",
-	"Ada sisi cermin yang dapat memantulkan, dan ada sisi yang tidak dapat memantulkan cahaya.",
-	"Cermin dapat diputar sebesar 360 derajat.",
-	"Cermin Prisma dapat memecah 1 arah cahaya menjadi 2 arah. (Hanya mempunya 1 sisi sisi input)",
-	"Cermin dapat di spawn dengan menekan angka 1. (Cermin akan muncul tepat pada posisi mouse saat ini)",
-	"Cermin dapat dihapus dengan menekan tombol 0. (Cermin dengan urutan terakhir yang terlebih dahulu dihapus)",
-	"Cermin tidak dapat di spawn jika berjarak sangat dekat dengan objek lain, atau jika kuota cermin sudah habis.",
-	"Ada batas pantulan teretentu dalam tiap level, jika batas tercapai, maka cahaya tidak dapat terpantul. Jadi kami harap kamu bisa menciptakan jalur efisien.",
-	"Baik! Sudah waktunya untuk menyinari desa!"
-]
-
-var guideTextStep2 = [
-	"Ini adalah panduan untuk tahap kedua.",
-	"Contoh teks tahap kedua.",
-	"Dan seterusnya..."
+var guideTexts = [
+	[
+		"Sinari semua rumah dengan sinar yang ada.",
+		"Button mempunyai cara kerja yang sama dengan cermin, hanya saja dia juga berfungsi untuk membuka gate.",
+		"Ada sisi cermin yang dapat memantulkan, dan ada sisi yang tidak dapat memantulkan cahaya.",
+		"Cermin dapat diputar sebesar 360 derajat.",
+		"Cermin Prisma dapat memecah 1 arah cahaya menjadi 2 arah. (Hanya mempunyai 1 sisi input)",
+		"Cermin dapat di-spawn dengan menekan angka 1. (Cermin akan muncul tepat pada posisi mouse saat ini)",
+		"Cermin dapat dihapus dengan menekan tombol 0. (Cermin dengan urutan terakhir yang terlebih dahulu dihapus)",
+		"Cermin tidak dapat di-spawn jika berjarak sangat dekat dengan objek lain, atau jika kuota cermin sudah habis.",
+		"Ada batas pantulan tertentu dalam tiap level, jika batas tercapai, maka cahaya tidak dapat terpantul. Jadi kami harap kamu bisa menciptakan jalur efisien.",
+		"Baik! Sudah waktunya untuk menyinari desa!"
+	],
+	[
+		"Hmm, sepertinya peta ini semakin membesar.",
+		"Mulai sekarang kamu bisa menggerakan kamera.",
+		"Cobalah menggesernya ke atas-bawah ataupun kiri-kanan.",
+		"Baiklah, selamat bersenang-senang!"
+	],
+	[
+		"Nah, muncul varian button baru.",
+		"Kamu harus menyinari 2 button untuk dapat membuka pintu.",
+		"Baiklah! Selamat mencoba."
+	],
+	[
+		"Tidak mungkin cahaya bisa menembus tebing begitu saja.",
+		"Kami baru saja menemukan teknologi canggih.",
+		"Cobalah!"
+	]
 ]
 
 @onready var label = $ParentContainer/Container/MarginContainer/Label
@@ -25,12 +37,15 @@ var guideTextStep2 = [
 signal guideFinished
 
 var currentText = 0
-var currentStep = 1
+@export var currentStep = 1
 var _tween: Tween
 
 
 func _ready() -> void:
-	show_guide(currentStep)
+	visible = false
+
+	if not GuideManager.has_step("step_" + str(currentStep)):
+		show_guide(currentStep)
 
 
 func show_guide(step: int) -> void:
@@ -40,17 +55,14 @@ func show_guide(step: int) -> void:
 
 	ChangeText(currentText)
 
-	GuideManager.unlock_guide("step_1")
-
 
 func get_current_texts() -> Array:
-	match currentStep:
-		1:
-			return guideTextStep1
-		2:
-			return guideTextStep2
-		_:
-			return guideTextStep1
+	var index = currentStep - 1
+
+	if index < 0 or index >= guideTexts.size():
+		return []
+
+	return guideTexts[index]
 
 
 func _input(event: InputEvent) -> void:
@@ -63,6 +75,9 @@ func _input(event: InputEvent) -> void:
 
 func ChangeText(id: int) -> void:
 	var texts = get_current_texts()
+
+	if texts.is_empty():
+		return
 
 	label.text = texts[currentText]
 	page.text = str(currentText + 1) + " / " + str(texts.size())
