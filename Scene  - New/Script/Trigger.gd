@@ -11,7 +11,7 @@ extends StaticBody2D
 @export var response_curve: float = 0.15
 @export var rotation_speed: float = 0.35
 
-var is_interact_locked: bool = false
+var is_step_guide_active: bool = false
 var is_dragging: bool = false
 var touch_index: int = -1
 var last_hit_frame: int = -10
@@ -58,7 +58,7 @@ func _physics_process(_delta: float) -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if is_interact_locked:
+	if is_step_guide_active:
 		return
 		
 	if get_tree().paused:
@@ -131,8 +131,8 @@ func _end_drag() -> void:
 	Input.warp_mouse(screen_pos)
 
 
-func set_interact_locked(value: bool) -> void:
-	is_interact_locked = value
+func set_step_guide_status(value: bool) -> void:
+	is_step_guide_active = value
 
 
 func _set_target(world_pos: Vector2) -> void:

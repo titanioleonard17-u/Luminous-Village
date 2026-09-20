@@ -12,7 +12,7 @@ extends StaticBody2D
 @export var response_curve: float = 0.15
 @export var rotation_speed: float = 0.35
 
-var is_interact_locked: bool = false
+var is_step_guide_active: bool = false
 var is_dragging: bool = false
 var touch_index: int = -1
 var target_rotation: float = 0.0
@@ -46,7 +46,7 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if is_interact_locked:
+	if is_step_guide_active:
 		return
 	
 	if get_tree().paused:
@@ -149,8 +149,8 @@ func _is_point_over(world_pos: Vector2) -> bool:
 
 	return false
 
-func set_interact_locked(value: bool) -> void:
-	is_interact_locked = value
+func set_step_guide_status(value: bool) -> void:
+	is_step_guide_active = value
 
 func set_sensitivity(raw_value: float, raw_max: float) -> void:
 	if raw_max <= 0.0:

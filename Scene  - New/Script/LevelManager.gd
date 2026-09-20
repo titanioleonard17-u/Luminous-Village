@@ -29,7 +29,7 @@ var level_complete_path: NodePath
 
 func _ready() -> void:
 	if get_tree().current_scene.name.contains("TutorialLevel"):
-		set_interact_locked(true)
+		set_step_guide_status(true)
 		$GuideStep.show_guide(1)
 		$GuideStep.guideFinished.connect(_on_guide_finished)
 
@@ -39,9 +39,10 @@ func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	level_complete = false
 
-	$LevelComplete.visible = false
-	$NightModeSwitch.visible = false
 	$NightModulate.visible = false
+	$NightModeSwitch.visible = false
+	$PauseTriger.visible = true
+	$LevelComplete.visible = false
 	
 	#_switch_to_night()
 
@@ -352,12 +353,17 @@ func _play_complete_sequence() -> void:
 
 		await tween_out.finished
 
-func set_interact_locked(value: bool) -> void:
+func set_step_guide_status(value: bool) -> void:
 	var objects = get_tree().get_nodes_in_group("mirror")
+	var mechanismConfig = get_tree().get_nodes_in_group("mechanismUIConf")
 
 	for object in objects:
-		if object.has_method("set_interact_locked"):
-			object.set_interact_locked(value)
+		if object.has_method("set_step_guide_status"):
+			object.set_step_guide_status(value)
+	
+	for mechanism in mechanismConfig:
+		if mechanism.has_method("set_step_guide_status"):
+			mechanism.set_step_guide_status(value)
 
 func _on_guide_finished() -> void:
-	set_interact_locked(false)
+	set_step_guide_status(false)

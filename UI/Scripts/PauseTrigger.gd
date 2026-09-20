@@ -1,6 +1,7 @@
 extends CanvasLayer
 
 var is_night_mode: bool = false
+var is_step_guide_active: bool = false
 
 @onready var pause_menu = $Container/PauseMenu
 @onready var guide_menu = $Container/GuideBook
@@ -14,7 +15,7 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if is_night_mode:
+	if is_night_mode or is_step_guide_active:
 		return
 
 	if event.is_action_pressed("Escape"):
@@ -75,3 +76,6 @@ func enable_night_mode() -> void:
 	guide_menu.visible = false
 
 	get_tree().paused = false
+
+func set_step_guide_status(value: bool) -> void:
+	is_step_guide_active = value

@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://c0u2u8mkfeax0" path="res://Asset/Art/Slider.png" id="1_s1k5j"]
 [ext_resource type="Texture2D" uid="uid://dw0wc2im32llu" path="res://Asset/Art/UI Rotate - Mini.png" id="2_8o6nk"]
 
-[node name="SensitivityDragSlider" type="Node2D" unique_id=1977610212]
+[node name="SensitivityDragSlider" type="Node2D" unique_id=1977610212 groups=["mechanismUIConf"]]
 position = Vector2(1099, 329)
 scale = Vector2(0.3600009, 0.3600009)
 script = ExtResource("1_8o6nk")

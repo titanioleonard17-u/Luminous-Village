@@ -7,6 +7,7 @@ extends Node2D
 var mirror_counter: CanvasLayer
 var sensitivity_slider: Node
 var spawned_mirrors: Array[Node2D] = []
+var is_step_guide_active: bool = false
 
 func _ready() -> void:
 	var scene_root := get_tree().current_scene
@@ -39,6 +40,9 @@ func _try_spawn_mirror() -> void:
 
 	if mirror_scene == null:
 		push_warning("Mirror Scene belum di-assign di Inspector!")
+		return
+		
+	if is_step_guide_active:
 		return
 
 	var spawn_pos: Vector2 = get_global_mouse_position()
@@ -105,3 +109,6 @@ func _update_counter() -> void:
 		remaining,
 		max_mirrors
 	)
+
+func set_step_guide_status(value: bool) -> void:
+	is_step_guide_active = value

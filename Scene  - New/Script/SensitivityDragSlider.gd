@@ -18,6 +18,7 @@ signal value_changed(value: float)
 @export var mirror_target_path: NodePath
 var mirror_target: Node = null
 
+var is_step_guide_active: bool = false
 var is_dragging: bool = false
 var touch_index: int = -1
 var current_value: float = 0.5
@@ -43,6 +44,9 @@ func _ready() -> void:
 	_apply_sensitivity_to_mirror.call_deferred()
 
 func _input(event: InputEvent) -> void:
+	if is_step_guide_active:
+		return
+	
 	if get_tree().paused:
 		return
 
@@ -158,3 +162,6 @@ func _load_saved_sensitivity() -> void:
 	if norm < 0.0 or norm > 1.0:
 		return # belum ada data valid, pakai default_value
 	current_value = lerp(min_value, max_value, norm)
+
+func set_step_guide_status(value: bool) -> void:
+	is_step_guide_active = value

@@ -19,7 +19,7 @@ extends StaticBody2D
 var is_dragging: bool = false
 var touch_index: int = -1
 var is_locked: bool = false
-var is_interact_locked: bool = false
+var is_step_guide_active: bool = false
 
 var joystick_ui: JoystickUI
 var touch_world_pos: Vector2 = Vector2.ZERO   # dipakai buat sumber posisi kalau drag via touch
@@ -47,10 +47,7 @@ func _ready() -> void:
 	_blank_cursor = ImageTexture.create_from_image(img)
 
 func _input(event: InputEvent) -> void:
-	if is_interact_locked:
-		return
-	
-	if is_locked:
+	if is_locked or is_step_guide_active:
 		return
 
 	if get_tree().paused:
@@ -166,8 +163,8 @@ func get_reflect_normal() -> Vector2:
 func set_locked(value: bool) -> void:
 	is_locked = value
 
-func set_interact_locked(value: bool) -> void:
-	is_interact_locked = value
+func set_step_guide_status(value: bool) -> void:
+	is_step_guide_active = value
 
 # Dipanggil dari SensitivityDragSlider. raw_value ada di rentang [0, max_value] slider,
 # di sini kita normalize ke rentang [0, 1] sebelum dipakai sebagai lerp weight.
