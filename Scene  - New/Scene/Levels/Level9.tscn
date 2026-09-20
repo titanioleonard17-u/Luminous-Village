@@ -47,8 +47,9 @@ script = ExtResource("1_b8u4h")
 visible = false
 
 [node name="MirrorCounter" parent="." unique_id=2086307742 instance=ExtResource("3_bllwk")]
+visible = false
 
-[node name="PauseTriger" parent="." unique_id=1158435896 instance=ExtResource("4_l5tja")]
+[node name="PauseTrigger" parent="." unique_id=1158435896 instance=ExtResource("4_l5tja")]
 visible = false
 metadata/_edit_use_anchors_ = true
 
@@ -143,7 +144,6 @@ limit_right = 774
 limit_bottom = 555
 expand_left = -200.0
 expand_right = -500.0
-expand_top = 0.0
 expand_bottom = -1000.0
 
 [node name="DoorToLeft3" parent="." unique_id=2010762358 instance=ExtResource("11_wk4yx")]

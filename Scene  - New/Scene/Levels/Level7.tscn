@@ -47,15 +47,19 @@ script = ExtResource("1_ypitd")
 visible = false
 
 [node name="MirrorCounter" parent="." unique_id=2086307742 instance=ExtResource("3_bjxya")]
+visible = false
 
-[node name="PauseTriger" parent="." unique_id=1158435896 instance=ExtResource("4_l2lts")]
+[node name="PauseTrigger" parent="." unique_id=1158435896 instance=ExtResource("4_l2lts")]
+visible = false
 metadata/_edit_use_anchors_ = true
 
 [node name="NightModeSwitch" parent="." unique_id=2070446548 instance=ExtResource("5_v472s")]
+visible = false
 max_opacity = 0.9
 max_opacity_speed = 0.4
 
 [node name="LevelComplete" parent="." unique_id=1876007679 instance=ExtResource("6_hnqa3")]
+visible = false
 scale = Vector2(1, 1.0031694)
 transform = Transform2D(1, 0, 0, 1.0031694, 0, 0)
 metadata/_edit_use_anchors_ = true

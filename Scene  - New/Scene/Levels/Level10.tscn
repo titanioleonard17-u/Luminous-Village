@@ -51,7 +51,7 @@ visible = false
 [node name="MirrorCounter" parent="." unique_id=2086307742 instance=ExtResource("3_bllwk")]
 visible = false
 
-[node name="PauseTriger" parent="." unique_id=1158435896 instance=ExtResource("4_l5tja")]
+[node name="PauseTrigger" parent="." unique_id=1158435896 instance=ExtResource("4_l5tja")]
 visible = false
 metadata/_edit_use_anchors_ = true
 
@@ -148,7 +148,6 @@ scale = Vector2(1.5, 1.5)
 [node name="Camera" parent="." unique_id=25551895 instance=ExtResource("19_bllwk")]
 expand_right = -1500.0
 expand_top = 400.0
-expand_bottom = 0.0
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="." unique_id=1025074470]
 position = Vector2(952, -833)

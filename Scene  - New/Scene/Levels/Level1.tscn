@@ -26,7 +26,7 @@ color = Color(0.11339714, 0.13111152, 0.22854048, 1)
 [node name="MirrorCounter" parent="." unique_id=2086307742 instance=ExtResource("7_ajkvu")]
 visible = false
 
-[node name="PauseTriger" parent="." unique_id=1158435896 instance=ExtResource("3_k2b07")]
+[node name="PauseTrigger" parent="." unique_id=1158435896 instance=ExtResource("3_k2b07")]
 visible = false
 metadata/_edit_use_anchors_ = true
 
@@ -61,7 +61,7 @@ position = Vector2(-160, 155)
 mirror_scene = ExtResource("12_uxah3")
 
 [node name="House" parent="." unique_id=1454567019 instance=ExtResource("8_5kjoa")]
-position = Vector2(965, 185.00002)
+position = Vector2(283, 451.99994)
 scale = Vector2(0.35, 0.35)
 
 [node name="SensitivityDragSlider" parent="." unique_id=67622892 instance=ExtResource("13_ut41e")]

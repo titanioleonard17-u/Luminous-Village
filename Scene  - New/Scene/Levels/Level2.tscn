@@ -18,25 +18,24 @@
 
 [node name="Level2" type="Node2D" unique_id=694264438]
 script = ExtResource("1_4anci")
-slide_in_offset_y = null
-sign_rise_offset = null
-hold_duration = null
-nightDelay = null
-winDelay = null
-transitionDuration = null
 
 [node name="NightModulate" parent="." unique_id=1237042344 instance=ExtResource("2_lymai")]
+visible = false
 
 [node name="MirrorCounter" parent="." unique_id=2086307742 instance=ExtResource("7_af3bf")]
+visible = false
 
-[node name="PauseTriger" parent="." unique_id=1158435896 instance=ExtResource("3_nhui6")]
+[node name="PauseTrigger" parent="." unique_id=1158435896 instance=ExtResource("3_nhui6")]
+visible = false
 metadata/_edit_use_anchors_ = true
 
 [node name="NightModeSwitch" parent="." unique_id=2070446548 instance=ExtResource("5_1q5d3")]
+visible = false
 max_opacity = 0.9
 max_opacity_speed = 0.4
 
 [node name="LevelComplete" parent="." unique_id=1876007679 instance=ExtResource("10_g2471")]
+visible = false
 scale = Vector2(1, 1.0031694)
 transform = Transform2D(1, 0, 0, 1.0031694, 0, 0)
 metadata/_edit_use_anchors_ = true

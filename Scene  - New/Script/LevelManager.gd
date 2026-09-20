@@ -247,7 +247,7 @@ func _switch_to_night() -> void:
 
 	await _show_night()
 
-	$PauseTriger.enable_night_mode()
+	$PauseTrigger.enable_night_mode()
 	$NightModeSwitch.visible = true
 
 
