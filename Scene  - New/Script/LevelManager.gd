@@ -38,7 +38,8 @@ func _ready() -> void:
 	level_complete_path = $LevelComplete.get_path()
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	level_complete = false
-
+	
+	$MirrorCounter.visible = true
 	$NightModulate.visible = false
 	$NightModeSwitch.visible = false
 	$PauseTrigger.visible = true
