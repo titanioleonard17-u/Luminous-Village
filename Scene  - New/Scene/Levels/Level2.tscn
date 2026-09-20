@@ -29,7 +29,7 @@ transitionDuration = null
 
 [node name="MirrorCounter" parent="." unique_id=2086307742 instance=ExtResource("7_af3bf")]
 
-[node name="PauseTriger" parent="." unique_id=1158435896 instance=ExtResource("3_nhui6")]
+[node name="PauseTrigger" parent="." unique_id=1158435896 instance=ExtResource("3_nhui6")]
 metadata/_edit_use_anchors_ = true
 
 [node name="NightModeSwitch" parent="." unique_id=2070446548 instance=ExtResource("5_1q5d3")]

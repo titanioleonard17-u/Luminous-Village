@@ -48,7 +48,7 @@ visible = false
 
 [node name="MirrorCounter" parent="." unique_id=2086307742 instance=ExtResource("3_bjxya")]
 
-[node name="PauseTriger" parent="." unique_id=1158435896 instance=ExtResource("4_l2lts")]
+[node name="PauseTrigger" parent="." unique_id=1158435896 instance=ExtResource("4_l2lts")]
 metadata/_edit_use_anchors_ = true
 
 [node name="NightModeSwitch" parent="." unique_id=2070446548 instance=ExtResource("5_v472s")]

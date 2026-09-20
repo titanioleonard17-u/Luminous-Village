@@ -1,5 +1,6 @@
 extends Camera2D
 
+@export var zoom_scale := 0.5
 @export var zoom_step := 0.1
 @export var min_zoom := 0.5
 @export var max_zoom := 2.0
@@ -27,6 +28,7 @@ var wrapping_mouse := false
 
 
 func _ready():
+	zoom = Vector2(zoom_scale, zoom_scale)
 	limit_left -= int(expand_left)
 	limit_right += int(expand_right)
 	limit_top -= int(expand_top)

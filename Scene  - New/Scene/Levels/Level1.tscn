@@ -26,7 +26,7 @@ color = Color(0.11339714, 0.13111152, 0.22854048, 1)
 [node name="MirrorCounter" parent="." unique_id=2086307742 instance=ExtResource("7_ajkvu")]
 visible = false
 
-[node name="PauseTriger" parent="." unique_id=1158435896 instance=ExtResource("3_k2b07")]
+[node name="PauseTrigger" parent="." unique_id=1158435896 instance=ExtResource("3_k2b07")]
 visible = false
 metadata/_edit_use_anchors_ = true
 
