@@ -1,18 +1,14 @@
 extends Node2D
-# Slider sensitivity versi UI (screen-space).
-# Taruh scene ini di dalam CanvasLayer supaya tidak ikut kamera dan tidak punya collision.
 
 signal value_changed(value: float)
 
 @export var track_length: float = 300.0
 @export var min_value: float = 1.0
-@export var max_value: float = 10.0
-@export var default_value: float = 5.0
+@export var max_value: float = 200.0
+@export var default_value: float = 100.0
 @export var invert: bool = true
 
-## Lebar area yang bisa diklik/disentuh (piksel). Besarkan supaya enak dipakai di HP.
 @export var hit_width: float = 80.0
-## Tambahan area klik di atas dan bawah ujung track.
 @export var hit_padding: float = 20.0
 
 @export var mirror_target_path: NodePath

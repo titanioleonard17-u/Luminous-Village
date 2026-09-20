@@ -32,7 +32,7 @@ func _ready() -> void:
 		set_step_guide_status(true)
 		$GuideStep.show_guide(1)
 		$GuideStep.guideFinished.connect(_on_guide_finished)
-
+	
 	AudioManager.playRandomVibe()
 
 	level_complete_path = $LevelComplete.get_path()
@@ -41,7 +41,7 @@ func _ready() -> void:
 
 	$NightModulate.visible = false
 	$NightModeSwitch.visible = false
-	$PauseTriger.visible = true
+	$PauseTrigger.visible = true
 	$LevelComplete.visible = false
 	
 	#_switch_to_night()

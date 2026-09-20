@@ -17,6 +17,9 @@ extends Camera2D
 @export_category("Drag Smooth")
 @export var drag_smooth := 12.0
 
+@onready var help_trigger = $"../PauseTrigger/Container/MarginContainer/PauseNavigation/HelpButton"
+@onready var pause_trigger = $"../PauseTrigger/Container/MarginContainer/PauseNavigation/PauseButton"
+
 var dragging := false
 var target_position := Vector2.ZERO
 var zoom_tween: Tween
@@ -33,6 +36,10 @@ func _ready():
 
 
 func _process(delta):
+	if get_tree().paused:
+		dragging = false
+		return
+
 	if dragging:
 		position = position.lerp(
 			target_position,
@@ -44,13 +51,17 @@ func _process(delta):
 
 
 func _input(event):
+	if get_tree().paused:
+		dragging = false
+		return
+
 	# =========================
 	# MOUSE BUTTON
 	# =========================
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT or event.button_index == MOUSE_BUTTON_MIDDLE:
 			if event.pressed:
-				if is_mouse_on_mirror():
+				if is_mouse_on_mirror() or is_mouse_on_ui_button():
 					dragging = false
 					return
 
@@ -145,5 +156,16 @@ func is_mouse_on_mirror() -> bool:
 
 		if collider.get_parent() and collider.get_parent().is_in_group("cermin"):
 			return true
+
+	return false
+
+func is_mouse_on_ui_button() -> bool:
+	var mouse_position = get_viewport().get_mouse_position()
+
+	if pause_trigger.get_global_rect().has_point(mouse_position):
+		return true
+
+	if help_trigger.get_global_rect().has_point(mouse_position):
+		return true
 
 	return false

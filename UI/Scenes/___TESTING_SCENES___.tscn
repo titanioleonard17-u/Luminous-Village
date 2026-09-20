@@ -41,7 +41,7 @@ script = ExtResource("1_jy4qx")
 
 [node name="MirrorCounter" parent="." unique_id=2086307742 instance=ExtResource("8_5ucdq")]
 
-[node name="PauseTriger" parent="." unique_id=556950568 instance=ExtResource("4_al7r5")]
+[node name="PauseTrigger" parent="." unique_id=556950568 instance=ExtResource("4_al7r5")]
 metadata/_edit_use_anchors_ = true
 
 [node name="NightModeSwitch" parent="." unique_id=2070446548 instance=ExtResource("4_jy4qx")]

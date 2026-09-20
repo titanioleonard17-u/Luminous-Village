@@ -6,7 +6,6 @@ var is_step_guide_active: bool = false
 @onready var pause_menu = $Container/PauseMenu
 @onready var guide_menu = $Container/GuideBook
 
-
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 
@@ -27,15 +26,13 @@ func _input(event: InputEvent) -> void:
 		if get_tree().paused:
 			close_pause()
 		else:
-			open_pause()
+			_on_pause_button_pressed()
 
 		get_viewport().set_input_as_handled()
 
-
 	if event.is_action_pressed("HelpTrigger"):
 		if not get_tree().paused:
-			guide_menu.visible = not guide_menu.visible
-			AudioManager.playAudio("ClickDefault", AudioManager.AudioType.SFX)
+			_on_help_button_pressed()
 			get_viewport().set_input_as_handled()
 
 
