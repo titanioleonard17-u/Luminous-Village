@@ -44,6 +44,7 @@ _bundled = {
 script = ExtResource("1_ypitd")
 
 [node name="NightModulate" parent="." unique_id=1237042344 instance=ExtResource("2_nqy4o")]
+visible = false
 
 [node name="MirrorCounter" parent="." unique_id=2086307742 instance=ExtResource("3_bjxya")]
 
