@@ -163,6 +163,14 @@ func get_reflect_normal() -> Vector2:
 func set_locked(value: bool) -> void:
 	is_locked = value
 
+	if is_locked:
+		if is_dragging:
+			_end_drag()
+		else:
+			joystick_ui.visible = false
+			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+			Input.set_custom_mouse_cursor(null)
+
 func set_step_guide_status(value: bool) -> void:
 	is_step_guide_active = value
 

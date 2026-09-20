@@ -53,13 +53,21 @@ func load_game() -> void:
 	var content := file.get_as_text()
 	file.close()
 
+	# Kalau file kosong
+	if content.strip_edges().is_empty():
+		print("Save game kosong, membuat save baru.")
+		save_data = {}
+		save_game()
+		return
+
 	var data = JSON.parse_string(content)
 
 	if data is Dictionary:
 		save_data = data
 	else:
-		print("Save game tidak valid.")
+		print("Save game tidak valid, membuat save baru.")
 		save_data = {}
+		save_game()
 
 
 func save_game() -> void:
