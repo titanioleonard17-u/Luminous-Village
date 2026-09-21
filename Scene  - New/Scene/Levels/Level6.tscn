@@ -23,6 +23,7 @@
 
 [node name="Level6" type="Node2D" unique_id=1314743367]
 script = ExtResource("1_5k81a")
+winDelay = 3.5
 
 [node name="NightModulate" parent="." unique_id=1237042344 instance=ExtResource("2_hkfdq")]
 visible = false
@@ -145,11 +146,7 @@ position = Vector2(1836, 732)
 scale = Vector2(2, 2)
 
 [node name="Camera" parent="." unique_id=25551895 instance=ExtResource("18_jm3y2")]
-position = Vector2(440.61673, 798.7805)
-expand_left = -500.0
-expand_right = 800.0
-expand_top = -200.0
-expand_bottom = -200.0
+position = Vector2(0, -100)
 max_expand_left = 100.0
 max_expand_right = 1100.0
 max_expand_top = 0.0

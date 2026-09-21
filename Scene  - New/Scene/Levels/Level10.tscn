@@ -44,6 +44,7 @@ _bundled = {
 
 [node name="Level10" type="Node2D" unique_id=1314743367]
 script = ExtResource("1_b8u4h")
+winDelay = 3.5
 
 [node name="NightModulate" parent="." unique_id=1237042344 instance=ExtResource("2_y4yg7")]
 visible = false
@@ -84,6 +85,7 @@ tile_map_data = PackedByteArray("AADe/+v/AAAAAAAAAADe/+z/AAAAAAEAAADf/+v/AAABAAA
 [node name="Laser" parent="." unique_id=932062609 instance=ExtResource("10_yns1l")]
 position = Vector2(-964.00006, -405)
 scale = Vector2(1.2, 1.2)
+max_bounces = 15
 
 [node name="Mirror_Spawner" parent="." unique_id=1378017199 instance=ExtResource("13_hcj3y")]
 mirror_scene = SubResource("PackedScene_yp8h2")
@@ -260,6 +262,7 @@ rotation = 4.716774
 door_path = NodePath("../DoorToLeft4")
 
 [node name="Camera" parent="." unique_id=25551895 instance=ExtResource("19_bllwk")]
+position = Vector2(0, -1000)
 expand_left = 200.0
 expand_right = -1400.0
 expand_top = 400.0

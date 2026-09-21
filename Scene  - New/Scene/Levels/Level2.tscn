@@ -18,6 +18,7 @@
 
 [node name="Level2" type="Node2D" unique_id=694264438]
 script = ExtResource("1_4anci")
+winDelay = 3.5
 
 [node name="NightModulate" parent="." unique_id=1237042344 instance=ExtResource("2_lymai")]
 visible = false
