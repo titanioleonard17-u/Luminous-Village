@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://da0qp4lcppid0"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sinmp"]
+bg_color = Color(0.9999803, 0.25518262, 0.3375578, 1)
+
+[node name="HSlider" type="HSlider" unique_id=631974121]
+custom_minimum_size = Vector2(200, 30)
+offset_left = 107.0
+offset_top = 31.0
+offset_right = 115.0
+offset_bottom = 47.0
+theme_override_styles/slider = SubResource("StyleBoxFlat_sinmp")
