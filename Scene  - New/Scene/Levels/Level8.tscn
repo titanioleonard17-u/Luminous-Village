@@ -170,6 +170,10 @@ scale = Vector2(1.5, 1.5)
 expand_right = -1300.0
 expand_top = 250.0
 expand_bottom = -500.0
+max_expand_left = 0.0
+max_expand_right = 1300.0
+max_expand_top = 0.0
+max_expand_bottom = 700.0
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="." unique_id=1025074470]
 position = Vector2(952, -833)

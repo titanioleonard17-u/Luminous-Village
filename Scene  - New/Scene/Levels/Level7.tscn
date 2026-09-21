@@ -123,9 +123,14 @@ position = Vector2(442, 726)
 
 [node name="Camera" parent="." unique_id=25551895 instance=ExtResource("18_nqy4o")]
 zoom_scale = 0.9
-expand_left = -500.0
+min_zoom = 0.9
+expand_left = -600.0
 expand_right = -500.0
-expand_top = -200.0
+expand_top = -300.0
+max_expand_left = 0.0
+max_expand_right = 100.0
+max_expand_top = 0.0
+max_expand_bottom = 0.0
 
 [node name="Rock-OBS" parent="." unique_id=568403434 instance=ExtResource("19_l2lts")]
 position = Vector2(869, 711)

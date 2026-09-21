@@ -175,8 +175,12 @@ limit_top = -93
 limit_right = 774
 limit_bottom = 555
 expand_left = -200.0
-expand_right = -500.0
+expand_right = -400.0
 expand_bottom = -1000.0
+max_expand_left = 0.0
+max_expand_right = 1100.0
+max_expand_top = 100.0
+max_expand_bottom = 600.0
 
 [node name="DoorToLeft3" parent="." unique_id=2010762358 instance=ExtResource("11_wk4yx")]
 position = Vector2(40, 485)
