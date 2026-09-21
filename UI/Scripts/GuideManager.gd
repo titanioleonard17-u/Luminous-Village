@@ -8,35 +8,52 @@ var save_data := {}
 var guide_data := {
 	"step_1": [
 		{
-			"title": "Laser",
+			"title": "House",
+			"font_size": "auto",
 			"description": [
-				{"Function": "Cahaya utama yang digunakan untuk menghidupkan rumah rumah yang ada di tiap level."},
+				{"Function": "Obyektif utama untuk menyelesaikan permainan."}
+			]
+		},
+		{
+			"title": "Laser",
+			"font_size": "auto",
+			"description": [
+				{"Function": "Cahaya utama yang digunakan untuk menghidupkan rumah-rumah yang ada di tiap level."},
 				{"How to use": "Pantulkan cahaya ini ke semua rumah."}
 			]
 		},
 		{
 			"title": "Mirror",
+			"font_size": "auto",
 			"description": [
 				{"Function": "Memantulkan cahaya."},
 				{"Reflection Side": "Ada sisi cermin yang dapat memantulkan, dan ada sisi yang tidak dapat memantulkan cahaya."},
-				{"Mirror Rotation": "Cermin dapat diputar sebesar 360 derajat."},
-				{"Mirror Spawner": "Cermin dapat di spawn dengan menekan angka 1."},
-				{"Mirror Remover": "Cermin dapat dihapus dengan menekan tombol 0."},
-				{"Prism Mirror": "Cermin Prisma dapat memecah 1 arah cahaya menjadi 2 arah. (Hanya mempunyai 1 sisi input)"},
-				{"Mirror Distance": "Cermin tidak dapat di-spawn terlalu dekat dengan objek lain atau ketika kuota cermin telah habis."},
-				{"Mirror Limit": "Ada batasan spawn cermin (kuota), setiap level dapat memiliki kuota yang berbeda-beda."},
-				{"Reflection Limit": "Ada batas pantulan tertentu dalam tiap level, jika batas tercapai, maka cahaya tidak dapat terpantul. Jadi kami harap kamu bisa menciptakan jalur efisien."}
+				{"Spawner": "Cermin dapat di spawn dengan menekan angka 1."},
+				{"Remover": "Cermin dapat dihapus dengan menekan tombol 0."},
+				{"Limit": "Ada batasan spawn cermin (kuota), setiap level dapat memiliki kuota yang berbeda-beda."},
+				{"Distance": "Cermin tidak dapat di-spawn terlalu dekat dengan objek lain atau ketika kuota cermin telah habis."},
+				{"Reflection Limit": "Ada batas pantulan tertentu dalam tiap level, jika batas tercapai, maka cahaya tidak dapat terpantul."}
+			]
+		},
+		{
+			"title": "Prism Mirror",
+			"font_size": 32,
+			"description": [
+				{"Function": "Memecah 1 arah cahaya menjadi 2 arah."},
+				{"Reflection Side": "Hanya ada 1 sisi input, sedangkan 2 sisi lainnya sebagai output."}
 			]
 		},
 		{
 			"title": "Button",
+			"font_size": "auto",
 			"description": [
-				{"Function": "Membuka pintu setelah terkena cahaya"},
+				{"Function": "Membuka pintu setelah terkena cahaya."},
 				{"Reflection Side": "Hanya ada 1 sisi tombol yang dapat memantulkan cahaya."}
 			]
 		},
 		{
 			"title": "Door",
+			"font_size": "auto",
 			"description": [
 				{"Function": "Menghalangi cahaya agar tidak bisa lewat dengan leluasa."},
 				{"How to open": "Sinarilah tombol yang ada sesuai dengan aturan untuk dapat membuka pintu."}
@@ -46,24 +63,29 @@ var guide_data := {
 	"step_2": [
 		{
 			"title": "Map Drag",
+			"font_size": "auto",
 			"description": [
-				{"Function": "Menjelajahi peta lebih luas."}
+				{"Function": "Menjelajahi peta lebih luas."},
+				{"How to use": "Geser ke kiri-kanan atau atas-bawah untuk menggeser kamera. Adapun mouse-wheel untuk zoom-in dan zoom-out."}
 			]
 		}
 	],
 	"step_3": [
 		{
 			"title": "&& Button",
+			"font_size": "auto",
 			"description": [
-				{"AND Button": "Tombol yang dirancang untuk membuka pintu jika terdapat 2 tombol yang terkena cahaya."}
+				{"Function": "Tombol yang dirancang dengan mekanisme tertentu untuk membuka pintu."},
+				{"How to use": "Sinari 2 buah '&& Button' secara bersamaan untuk membuka pintu."}
 			]
 		}
 	],
 	"step_4": [
 		{
 			"title": "Teleporter",
+			"font_size": "auto",
 			"description": [
-				{"Function": "Memungkinkan cahya untuk berpindah tempat dari teleporter satu ke lainnya."}
+				{"Function": "Memungkinkan cahya untuk berpindah tempat dari teleporter satu ke teleporter lainnya."}
 			]
 		}
 	]

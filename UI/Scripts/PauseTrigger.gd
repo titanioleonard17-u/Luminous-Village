@@ -8,6 +8,8 @@ var is_step_guide_active: bool = false
 
 
 func _ready() -> void:
+	$"Container/PauseMenu".signal_close_pause_menu.connect(close_pause)
+	$"Container/GuideBook".signal_close_guide_book.connect(_on_close_help_pressed)
 	process_mode = Node.PROCESS_MODE_ALWAYS
 
 	pause_menu.visible = false
@@ -21,6 +23,7 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("Escape"):
 		if guide_book.visible:
 			guide_book.visible = false
+			get_tree().paused = false
 
 			set_step_guide_status(false)
 
@@ -41,6 +44,7 @@ func _input(event: InputEvent) -> void:
 
 	if event.is_action_pressed("HelpTrigger"):
 		if not get_tree().paused:
+			set_step_guide_status(true)
 			_on_help_button_pressed()
 			get_viewport().set_input_as_handled()
 
@@ -80,6 +84,7 @@ func open_help() -> void:
 	guide_book.refresh_guide()
 
 	guide_book.visible = not guide_book.visible
+	get_tree().paused = true
 
 	# Help terbuka → lock
 	# Help tertutup → unlock
@@ -89,7 +94,12 @@ func open_help() -> void:
 		"ClickDefault",
 		AudioManager.AudioType.SFX
 	)
-
+	
+func _on_close_help_pressed() -> void:
+	if is_night_mode:
+		return
+	
+	set_step_guide_status(false)
 
 func _on_pause_button_pressed() -> void:
 	if is_night_mode:

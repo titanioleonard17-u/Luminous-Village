@@ -1,5 +1,6 @@
 extends Control
 
+signal signal_close_guide_book
 
 # =========================================================
 # BUTTON SCENE
@@ -219,8 +220,17 @@ func create_title_button(guide: Dictionary) -> void:
 	title_button.type_button = title_button.TypeBtn.RECTANGLE
 	title_button.size_button = title_button.SizeBtn.SMALL
 
-	title_button.font_size = list_font_size
-	
+
+	var font_size = guide.get("font_size", "auto")
+
+	if font_size is String and font_size == "auto":
+		title_button.font_size = list_font_size
+	elif font_size is int or font_size is float:
+		title_button.font_size = int(font_size)
+	else:
+		title_button.font_size = list_font_size
+
+
 	title_button.get_node("Label").add_theme_color_override(
 		"font_color",
 		list_color
@@ -448,5 +458,7 @@ func _create_guide(guide: Dictionary) -> void:
 # =========================================================
 
 func _on_back_button_pressed() -> void:
-
+	get_tree().paused = false
+	print(get_tree().paused)
 	visible = false
+	signal_close_guide_book.emit()

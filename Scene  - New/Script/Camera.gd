@@ -104,6 +104,7 @@ func _input(event):
 
 		elif event.button_index == MOUSE_BUTTON_WHEEL_UP:
 			if event.pressed:
+				print(get_tree().paused)
 				change_zoom(1.0)
 
 		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:

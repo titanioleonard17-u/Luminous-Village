@@ -1,9 +1,12 @@
 extends Control
 
+signal signal_close_pause_menu
+
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 
 func _on_resume_button_pressed() -> void:
+	signal_close_pause_menu.emit()
 	get_tree().paused = false
 	self.visible = false
 
