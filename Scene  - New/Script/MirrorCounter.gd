@@ -1,7 +1,7 @@
 extends CanvasLayer
 
-@onready var label: Label = $MarginContainer/HorizontalContainer/MirrorCount
-@onready var bounceLabel: Label = $MarginContainer/HorizontalContainer/BounceCount
+@onready var label: Label = $BG/MarginContainer/HorizontalContainer/MirrorCount
+@onready var bounceLabel: Label = $BG/MarginContainer/HorizontalContainer/BounceCount
 
 var _tween: Tween
 
