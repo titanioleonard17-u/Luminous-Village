@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://co2d8js0nkj26"]
 
-[ext_resource type="Texture2D" uid="uid://bxktms8uk0wnt" path="res://Asset/Art/Tilemap - 2D.png" id="1_weym8"]
+[ext_resource type="Texture2D" uid="uid://hs7log55nn2y" path="res://Asset/Art/Tilemap - 2D (Lake).png" id="1_aq4jm"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ef470"]
-texture = ExtResource("1_weym8")
+texture = ExtResource("1_aq4jm")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
