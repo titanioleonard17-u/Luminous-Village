@@ -6,7 +6,7 @@ extends CanvasLayer
 var _tween: Tween
 
 func setMirrorCount(remaining: int, max_count: int) -> void:
-	label.text = "MC: %d / %d" % [remaining, max_count]
+	label.text = "%d / %d" % [remaining, max_count]
 
 func setBounceCount(remaining: int, max_count: int) -> void:
 	bounceLabel.text = "BC: %d / %d" %[remaining, max_count]
