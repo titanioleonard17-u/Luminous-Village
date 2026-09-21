@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://43ol7ai1lse0"]
 
 [ext_resource type="Script" uid="uid://byrrdt4ekloft" path="res://UI/Scripts/GuideStep.gd" id="1_8osr1"]
+[ext_resource type="PackedScene" uid="uid://c1rrkpniqq5db" path="res://UI/Scenes/GuiderStep.tscn" id="2_knrug"]
 [ext_resource type="PackedScene" uid="uid://cip0gmnccnt8e" path="res://UI/Scenes/Button.tscn" id="2_yhj2o"]
 [ext_resource type="Texture2D" uid="uid://bhtnq3djaw0is" path="res://Asset/Art/Button - Back.png" id="3_knrug"]
 [ext_resource type="Texture2D" uid="uid://g5keom7unw3s" path="res://Asset/Art/Button - Next.png" id="4_5th6f"]
@@ -29,6 +30,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.4745098)
+
+[node name="GuiderStep" parent="ParentContainer" unique_id=935333547 instance=ExtResource("2_knrug")]
+visible = false
+layout_mode = 1
 
 [node name="Container" type="Control" parent="ParentContainer" unique_id=692238359]
 layout_mode = 1

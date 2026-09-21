@@ -2,32 +2,32 @@ extends CanvasLayer
 
 var guideTexts = [
 	[
-		"Sinari semua rumah dengan sinar yang ada.",
-		"Button mempunyai cara kerja yang sama dengan cermin, hanya saja dia juga berfungsi untuk membuka gate.",
-		"Ada sisi cermin yang dapat memantulkan, dan ada sisi yang tidak dapat memantulkan cahaya.",
-		"Cermin dapat diputar sebesar 360 derajat.",
-		"Cermin Prisma dapat memecah 1 arah cahaya menjadi 2 arah. (Hanya mempunyai 1 sisi input)",
-		"Cermin dapat di-spawn dengan menekan angka 1. (Cermin akan muncul tepat pada posisi mouse saat ini)",
-		"Cermin dapat dihapus dengan menekan tombol 0. (Cermin dengan urutan terakhir yang terlebih dahulu dihapus)",
-		"Cermin tidak dapat di-spawn jika berjarak sangat dekat dengan objek lain, atau jika kuota cermin sudah habis.",
-		"Ada batas pantulan tertentu dalam tiap level, jika batas tercapai, maka cahaya tidak dapat terpantul. Jadi kami harap kamu bisa menciptakan jalur efisien.",
-		"Baik! Sudah waktunya untuk menyinari desa!"
+		{"text": "Sinari semua rumah dengan sinar yang ada.", "action": ""},
+		{"text": "Button mempunyai cara kerja yang sama dengan cermin, hanya saja dia juga berfungsi untuk membuka gate.", "action": ""},
+		{"text": "Ada sisi cermin yang dapat memantulkan, dan ada sisi yang tidak dapat memantulkan cahaya.", "action": ""},
+		{"text": "Cermin dapat diputar sebesar 360 derajat.", "action": ""},
+		{"text": "Cermin Prisma dapat memecah 1 arah cahaya menjadi 2 arah. (Hanya mempunyai 1 sisi input)", "action": ""},
+		{"text": "Cermin dapat di-spawn dengan menekan angka 1. (Cermin akan muncul tepat pada posisi mouse saat ini)", "action": ""},
+		{"text": "Cermin dapat dihapus dengan menekan tombol 0. (Cermin dengan urutan terakhir yang terlebih dahulu dihapus)", "action": ""},
+		{"text": "Cermin tidak dapat di-spawn jika berjarak sangat dekat dengan objek lain, atau jika kuota cermin sudah habis.", "action": ""},
+		{"text": "Ada batas pantulan tertentu dalam tiap level, jika batas tercapai, maka cahaya tidak dapat terpantul. Jadi kami harap kamu bisa menciptakan jalur efisien.", "action": ""},
+		{"text": "Baik! Sudah waktunya untuk menyinari desa!", "action": ""}
 	],
 	[
-		"Hmm, sepertinya peta ini semakin membesar.",
-		"Mulai sekarang kamu bisa menggerakan kamera.",
-		"Cobalah menggesernya ke atas-bawah ataupun kiri-kanan.",
-		"Baiklah, selamat bersenang-senang!"
+		{"text": "Hmm, sepertinya peta ini semakin membesar.", "action": ""},
+		{"text": "Mulai sekarang kamu bisa menggerakan kamera.", "action": ""},
+		{"text": "Cobalah menggesernya ke atas-bawah ataupun kiri-kanan.", "action": ""},
+		{"text": "Baiklah, selamat bersenang-senang!", "action": ""}
 	],
 	[
-		"Nah, muncul varian button baru.",
-		"Kamu harus menyinari 2 button untuk dapat membuka pintu.",
-		"Baiklah! Selamat mencoba."
+		{"text": "Lihat, muncul varian button baru.", "action": ""},
+		{"text": "Kamu harus menyinari 2 button untuk dapat membuka pintu.", "action": ""},
+		{"text": "Baiklah! Selamat mencoba.", "action": ""}
 	],
 	[
-		"Tidak mungkin cahaya bisa menembus tebing begitu saja.",
-		"Kami baru saja menemukan teknologi canggih.",
-		"Cobalah!"
+		{"text": "Tidak mungkin cahaya bisa menembus tebing begitu saja.", "action": ""},
+		{"text": "Kami baru saja menemukan teknologi canggih.", "action": ""},
+		{"text": "Cobalah!", "action": ""}
 	]
 ]
 
