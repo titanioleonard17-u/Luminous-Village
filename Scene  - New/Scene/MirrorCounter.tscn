@@ -31,6 +31,8 @@ theme_override_constants/margin_bottom = 8
 
 [node name="HorizontalContainer" type="HBoxContainer" parent="MarginContainer" unique_id=387361111]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 theme_override_constants/separation = 32
 
 [node name="MirrorCount" type="Label" parent="MarginContainer/HorizontalContainer" unique_id=1617184773]
