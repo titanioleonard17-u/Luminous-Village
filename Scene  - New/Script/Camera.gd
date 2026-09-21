@@ -12,6 +12,12 @@ extends Camera2D
 @export var expand_top := 0.0
 @export var expand_bottom := 0.0
 
+@export_category("Zoom Limit Expansion")
+@export var max_expand_left: float = 300.0
+@export var max_expand_right: float = 800.0
+@export var max_expand_top: float = 300.0
+@export var max_expand_bottom: float = 300.0
+
 @export_category("Mouse Wrap")
 @export var wrap_margin := 2.0
 
@@ -27,13 +33,26 @@ var zoom_tween: Tween
 var wrapping_mouse := false
 var is_step_guide_active: bool = false
 
+var original_limit_left: int
+var original_limit_right: int
+var original_limit_top: int
+var original_limit_bottom: int
+
 
 func _ready():
 	zoom = Vector2(zoom_scale, zoom_scale)
+
+	# Terapkan expand dari Inspector
 	limit_left -= int(expand_left)
 	limit_right += int(expand_right)
 	limit_top -= int(expand_top)
 	limit_bottom += int(expand_bottom)
+
+	# Simpan limit default level
+	original_limit_left = limit_left
+	original_limit_right = limit_right
+	original_limit_top = limit_top
+	original_limit_bottom = limit_bottom
 
 	target_position = position
 
@@ -49,8 +68,17 @@ func _process(delta):
 			1.0 - exp(-drag_smooth * delta)
 		)
 
-	position.x = clamp(position.x, limit_left, limit_right)
-	position.y = clamp(position.y, limit_top, limit_bottom)
+	position.x = clamp(
+		position.x,
+		limit_left,
+		limit_right
+	)
+
+	position.y = clamp(
+		position.y,
+		limit_top,
+		limit_bottom
+	)
 
 
 func _input(event):
@@ -62,6 +90,7 @@ func _input(event):
 	# MOUSE BUTTON
 	# =========================
 	if event is InputEventMouseButton:
+
 		if event.button_index == MOUSE_BUTTON_LEFT or event.button_index == MOUSE_BUTTON_MIDDLE:
 			if event.pressed:
 				if is_mouse_on_mirror() or is_mouse_on_ui_button() or is_mouse_on_sensitivity_slider():
@@ -70,53 +99,45 @@ func _input(event):
 
 				dragging = true
 				target_position = position
-
 			else:
 				dragging = false
+
+		elif event.button_index == MOUSE_BUTTON_WHEEL_UP:
+			if event.pressed:
+				change_zoom(1.0)
+
+		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+			if event.pressed:
+				change_zoom(-1.0)
 
 	# =========================
 	# MOUSE DRAG
 	# =========================
-	if event is InputEventMouseMotion and dragging:
+	elif event is InputEventMouseMotion and dragging:
 
-		# Abaikan MouseMotion yang berasal
-		# dari Input.warp_mouse()
 		if wrapping_mouse:
 			wrapping_mouse = false
 			return
 
-		# Gunakan RELATIVE movement.
-		# Tidak menggunakan event.position - last_position
-		# supaya teleport cursor tidak ikut dihitung.
-		var movement = event.relative
-
+		var movement: Vector2 = event.relative
 		target_position -= movement / zoom.x
 
-		# =========================
-		# MOUSE WRAP
-		# =========================
-		var mouse_position = event.position
-		var viewport_size = get_viewport_rect().size
+		var mouse_position: Vector2 = event.position
+		var viewport_size: Vector2 = get_viewport_rect().size
 
-		var wrap_position = mouse_position
-		var should_wrap = false
+		var wrap_position: Vector2 = mouse_position
+		var should_wrap: bool = false
 
-		# Kiri -> kanan
 		if mouse_position.x <= wrap_margin:
 			wrap_position.x = viewport_size.x - wrap_margin
 			should_wrap = true
-
-		# Kanan -> kiri
 		elif mouse_position.x >= viewport_size.x - wrap_margin:
 			wrap_position.x = wrap_margin
 			should_wrap = true
 
-		# Atas -> bawah
 		if mouse_position.y <= wrap_margin:
 			wrap_position.y = viewport_size.y - wrap_margin
 			should_wrap = true
-
-		# Bawah -> atas
 		elif mouse_position.y >= viewport_size.y - wrap_margin:
 			wrap_position.y = wrap_margin
 			should_wrap = true
@@ -125,9 +146,6 @@ func _input(event):
 			wrapping_mouse = true
 			Input.warp_mouse(wrap_position)
 
-		# =========================
-		# CAMERA LIMIT
-		# =========================
 		target_position.x = clamp(
 			target_position.x,
 			limit_left,
@@ -139,6 +157,58 @@ func _input(event):
 			limit_top,
 			limit_bottom
 		)
+
+
+func change_zoom(direction: float) -> void:
+	var old_zoom: float = zoom.x
+
+	var new_zoom: float = clampf(
+		old_zoom + direction * zoom_step,
+		min_zoom,
+		max_zoom
+	)
+
+	if is_equal_approx(new_zoom, old_zoom):
+		return
+
+	# =========================
+	# HITUNG PROGRESS ZOOM
+	# =========================
+	var zoom_range: float = max_zoom - min_zoom
+	var zoom_progress: float = 0.0
+
+	if zoom_range > 0.0:
+		zoom_progress = (new_zoom - min_zoom) / zoom_range
+
+	zoom_progress = clampf(
+		zoom_progress,
+		0.0,
+		1.0
+	)
+
+	# =========================
+	# HITUNG TAMBAHAN LIMIT
+	# SAAT ZOOM
+	# =========================
+	var current_expand_left: float = max_expand_left * zoom_progress
+	var current_expand_right: float = max_expand_right * zoom_progress
+	var current_expand_top: float = max_expand_top * zoom_progress
+	var current_expand_bottom: float = max_expand_bottom * zoom_progress
+
+	# =========================
+	# TERAPKAN LIMIT ZOOM
+	# =========================
+	limit_left = original_limit_left - int(current_expand_left)
+	limit_right = original_limit_right + int(current_expand_right)
+	limit_top = original_limit_top - int(current_expand_top)
+	limit_bottom = original_limit_bottom + int(current_expand_bottom)
+
+	# =========================
+	# ZOOM
+	# =========================
+	zoom = Vector2(new_zoom, new_zoom)
+
+	target_position = position
 
 
 func is_mouse_on_mirror() -> bool:

@@ -53,7 +53,7 @@ var guide_data := {
 	],
 	"step_3": [
 		{
-			"title": "Button",
+			"title": "&& Button",
 			"description": [
 				{"AND Button": "Tombol yang dirancang untuk membuka pintu jika terdapat 2 tombol yang terkena cahaya."}
 			]
