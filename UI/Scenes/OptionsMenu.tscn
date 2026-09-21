@@ -7,6 +7,8 @@
 [ext_resource type="Script" uid="uid://cii3ggecrmep4" path="res://UI/Scripts/VolumeOptions.gd" id="3_a8xds"]
 [ext_resource type="Texture2D" uid="uid://n2ngtinar1tu" path="res://Asset/Art/OptionsMenu/Button - Sound.png" id="4_eec4q"]
 [ext_resource type="Texture2D" uid="uid://dlkuuwuxef83a" path="res://Asset/Art/OptionsMenu/Button - Sound Dis.png" id="5_40io0"]
+[ext_resource type="Texture2D" uid="uid://p3iyr7jm106y" path="res://Asset/Art/Grabber_32.png" id="8_6vp8d"]
+[ext_resource type="Texture2D" uid="uid://dsxwn8q83uaa" path="res://Asset/Art/Sliderx.png" id="8_a8lff"]
 [ext_resource type="Texture2D" uid="uid://bhtnq3djaw0is" path="res://Asset/Art/Button - Back.png" id="8_a8xds"]
 
 [sub_resource type="GDScript" id="GDScript_gjaal"]
@@ -43,6 +45,18 @@ func _on_volume_slider_value_changed(value: float):
 	# Update angka
 	volume_label.text = str(roundi(value)) + \"%\"
 "
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4nk1g"]
+content_margin_left = 0.0
+content_margin_top = 100.0
+content_margin_right = 0.0
+content_margin_bottom = 100.0
+texture = ExtResource("8_a8lff")
+texture_margin_top = 10.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_a8lff"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6vp8d"]
 
 [sub_resource type="SystemFont" id="SystemFont_40io0"]
 font_names = PackedStringArray("Berlin Sans FB")
@@ -88,10 +102,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -150.0
-offset_top = -93.5
-offset_right = 200.0
-offset_bottom = 93.5
+offset_left = -157.0
+offset_top = -85.0
+offset_right = 193.0
+offset_bottom = 257.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("3_a8xds")
@@ -108,6 +122,8 @@ isChecked = true
 
 [node name="MasterVolume" type="HBoxContainer" parent="VolumeOptions" unique_id=358421420]
 layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, -50)
 theme_override_constants/separation = 16
 script = SubResource("GDScript_gjaal")
 
@@ -125,7 +141,12 @@ font_size = 64
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
-value = 100.0
+theme_override_icons/grabber = ExtResource("8_6vp8d")
+theme_override_icons/grabber_highlight = ExtResource("8_6vp8d")
+theme_override_styles/slider = SubResource("StyleBoxTexture_4nk1g")
+theme_override_styles/grabber_area = SubResource("StyleBoxEmpty_a8lff")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_6vp8d")
+value = 50.0
 
 [node name="Label" type="Label" parent="VolumeOptions/MasterVolume" unique_id=592688556]
 layout_mode = 2
