@@ -79,7 +79,7 @@ func ChangeText(id: int) -> void:
 	if texts.is_empty():
 		return
 
-	label.text = texts[currentText]
+	label.text = texts[currentText].text
 	page.text = str(currentText + 1) + " / " + str(texts.size())
 
 
