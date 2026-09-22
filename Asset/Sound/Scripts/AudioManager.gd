@@ -261,3 +261,5 @@ func get_sound_volume(path: String) -> float:
 func _on_bgm_finished() -> void:
 	if is_vibe_playing:
 		playRandomVibe()
+	else:
+		bgm_player.play()
