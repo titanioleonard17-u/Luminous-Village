@@ -94,10 +94,7 @@ func stop_lights() -> void:
 func _spawn_lights_one_by_one() -> void:
 	for light: PointLight2D in lights:
 		light.visible = false
-
 		light.set_meta("fading_in", true)
-
-		var target_opacity: float = light.get_meta("opacity")
 
 		var color: Color = light.color
 		color.a = 0.0
@@ -106,7 +103,6 @@ func _spawn_lights_one_by_one() -> void:
 	for i in range(lights.size()):
 		var light: PointLight2D = lights[i]
 
-		# Jeda sebelum light berikutnya muncul
 		if i > 0:
 			await get_tree().create_timer(spawn_delay).timeout
 
@@ -123,9 +119,10 @@ func _spawn_lights_one_by_one() -> void:
 			fade_in_duration
 		).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 
-		await tween.finished
-
-		light.set_meta("fading_in", false)
+		tween.finished.connect(
+			func():
+				light.set_meta("fading_in", false)
+		)
 
 	is_spawning = false
 

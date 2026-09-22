@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dbm88no6drgmy" path="res://UI/Scripts/GuideBook.gd" id="1_5hyqq"]
 [ext_resource type="PackedScene" uid="uid://cip0gmnccnt8e" path="res://UI/Scenes/Button.tscn" id="2_1wuxd"]
-[ext_resource type="Texture2D" uid="uid://2oug2m1g78bk" path="res://Asset/Art/GuideBook/Guidebook - Button.png" id="3_5hyqq"]
+[ext_resource type="Texture2D" uid="uid://ck8mo8hxwvkn0" path="res://Asset/Art/GuideBook/Guidebook - Button.png" id="3_5hyqq"]
 [ext_resource type="Texture2D" uid="uid://d22d1kl5au7gl" path="res://Asset/Art/Guidebook.png" id="4_5hyqq"]
 [ext_resource type="Texture2D" uid="uid://bhtnq3djaw0is" path="res://Asset/Art/Button - Back.png" id="4_xi8qn"]
 
@@ -16,8 +16,18 @@ grow_vertical = 2
 script = ExtResource("1_5hyqq")
 button_scene = ExtResource("2_1wuxd")
 title_button_costumes = Array[Texture2D]([ExtResource("3_5hyqq")])
+title_button_costumes_disabled = null
+title_button_costume_index = null
 list_font_size = 40
+title_font_size = null
+subtitle_font_size = null
+text_font_size = null
 list_color = Color(0.27058825, 0.10980392, 0.011764706, 1)
+description_color = null
+list_spacing = null
+title_to_subtitle_spacing = null
+subtitle_to_text_spacing = null
+text_to_subtitle_spacing = null
 
 [node name="BG" type="ColorRect" parent="." unique_id=594889546]
 layout_mode = 1

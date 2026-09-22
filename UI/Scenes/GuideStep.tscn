@@ -1,10 +1,11 @@
 [gd_scene format=3 uid="uid://43ol7ai1lse0"]
 
 [ext_resource type="Script" uid="uid://byrrdt4ekloft" path="res://UI/Scripts/GuideStep.gd" id="1_8osr1"]
-[ext_resource type="PackedScene" uid="uid://c1rrkpniqq5db" path="res://UI/Scenes/GuiderStep.tscn" id="2_knrug"]
+[ext_resource type="PackedScene" uid="uid://c1rrkpniqq5db" path="res://UI/Scenes/StepGuider.tscn" id="2_knrug"]
 [ext_resource type="PackedScene" uid="uid://cip0gmnccnt8e" path="res://UI/Scenes/Button.tscn" id="2_yhj2o"]
 [ext_resource type="Texture2D" uid="uid://bhtnq3djaw0is" path="res://Asset/Art/Button - Back.png" id="3_knrug"]
 [ext_resource type="Texture2D" uid="uid://g5keom7unw3s" path="res://Asset/Art/Button - Next.png" id="4_5th6f"]
+[ext_resource type="FontFile" uid="uid://cwkmbgp8808wp" path="res://Asset/Fonts/BRLNSR.TTF" id="6_knrug"]
 
 [sub_resource type="SystemFont" id="SystemFont_si1bi"]
 font_names = PackedStringArray("Berlin Sans FB")
@@ -125,7 +126,7 @@ offset_right = 576.0
 offset_bottom = 35.5
 grow_horizontal = 2
 size_flags_vertical = 1
-theme_override_fonts/font = SubResource("SystemFont_si1bi")
+theme_override_fonts/font = ExtResource("6_knrug")
 theme_override_font_sizes/font_size = 32
 horizontal_alignment = 1
 autowrap_mode = 2

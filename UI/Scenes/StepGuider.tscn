@@ -1,17 +1,17 @@
 [gd_scene format=3 uid="uid://c1rrkpniqq5db"]
 
-[ext_resource type="Script" uid="uid://blr4io2ay1bfc" path="res://UI/Scripts/GuiderStep.gd" id="1_igrn1"]
-[ext_resource type="Texture2D" uid="uid://4q335xxs2p" path="res://icon.svg" id="1_qx2yx"]
-[ext_resource type="Texture2D" uid="uid://b08sc6vir8qxw" path="res://Asset/Art/Decor/Bush.png" id="3_ymxbx"]
-[ext_resource type="Texture2D" uid="uid://biwo1xnrgwu6j" path="res://Asset/Art/House.png" id="4_8f1ox"]
+[ext_resource type="Script" uid="uid://blr4io2ay1bfc" path="res://UI/Scripts/StepGuider.gd" id="1_ebxds"]
+[ext_resource type="Texture2D" uid="uid://4q335xxs2p" path="res://icon.svg" id="2_4eb4u"]
+[ext_resource type="Texture2D" uid="uid://b08sc6vir8qxw" path="res://Asset/Art/Decor/Bush.png" id="3_jqurs"]
+[ext_resource type="Texture2D" uid="uid://biwo1xnrgwu6j" path="res://Asset/Art/House.png" id="4_okgp7"]
 
 [sub_resource type="AnimatedTexture" id="AnimatedTexture_igrn1"]
 frames = 3
 pause = true
-frame_0/texture = ExtResource("1_qx2yx")
-frame_1/texture = ExtResource("3_ymxbx")
+frame_0/texture = ExtResource("2_4eb4u")
+frame_1/texture = ExtResource("3_jqurs")
 frame_1/duration = 1.0
-frame_2/texture = ExtResource("4_8f1ox")
+frame_2/texture = ExtResource("4_okgp7")
 frame_2/duration = 1.0
 
 [node name="GuiderStep" type="Control" unique_id=935333547]
@@ -21,7 +21,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_igrn1")
+script = ExtResource("1_ebxds")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1315151161]
 layout_mode = 1

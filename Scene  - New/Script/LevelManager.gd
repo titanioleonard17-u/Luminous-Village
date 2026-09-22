@@ -7,7 +7,7 @@ extends Node2D
 
 @export_category("Win Delay")
 @export var nightDelay: float = 0.5
-@export var winDelay: float = 0.6
+@export var winDelay: float = 2.5
 @export var transitionDuration: float = 0.5
 
 var level_complete: bool = false

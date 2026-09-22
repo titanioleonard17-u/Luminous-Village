@@ -39,9 +39,11 @@ signal guideFinished
 var currentText = 0
 @export var currentStep = 1
 var _tween: Tween
+const GUIDE_FONT: FontFile = preload("res://Asset/Fonts/BRLNSR.TTF")
 
 
 func _ready() -> void:
+	label.add_theme_font_override("font", GUIDE_FONT)
 	visible = false
 
 	if not GuideManager.has_step("step_" + str(currentStep)):

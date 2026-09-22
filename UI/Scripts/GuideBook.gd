@@ -26,6 +26,11 @@ signal signal_close_guide_book
 
 var guideBook = {}
 
+# =========================================================
+# FONT
+# =========================================================
+
+const GUIDE_FONT: FontFile = preload("res://Asset/Fonts/BRLNSR.TTF")
 
 # =========================================================
 # NODE REFERENCES
@@ -38,14 +43,6 @@ var guideBook = {}
 @onready var description_scroll: ScrollContainer = $MarginContainer/ContainerBox/Description/ScrollContainer
 
 @onready var description_container: VBoxContainer = $MarginContainer/ContainerBox/Description/ScrollContainer/VBoxContainer
-
-
-# =========================================================
-# FONT
-# =========================================================
-
-var guide_font := SystemFont.new()
-
 
 # =========================================================
 # FONT SIZE
@@ -109,12 +106,8 @@ var selected_title := ""
 # =========================================================
 
 func _ready() -> void:
-
-	guide_font.font_names = PackedStringArray([
-		"Berlin Sans FB"
-	])
-
-	guide_font.subpixel_positioning = 0
+	title_scroll_container.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	title_scroll_container.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO
 
 
 	# =====================================================
@@ -235,7 +228,11 @@ func create_title_button(guide: Dictionary) -> void:
 		"font_color",
 		list_color
 	)
-
+	
+	title_button.get_node("Label").add_theme_font_override(
+	"font",
+	GUIDE_FONT
+)
 
 	# =====================================================
 	# BUTTON COSTUME
@@ -326,7 +323,7 @@ func _create_guide(guide: Dictionary) -> void:
 
 	title_label.add_theme_font_override(
 		"font",
-		guide_font
+		GUIDE_FONT
 	)
 
 	title_label.add_theme_font_size_override(
@@ -392,7 +389,7 @@ func _create_guide(guide: Dictionary) -> void:
 
 			subtitle_label.add_theme_font_override(
 				"font",
-				guide_font
+				GUIDE_FONT
 			)
 
 			subtitle_label.add_theme_font_size_override(
@@ -433,7 +430,7 @@ func _create_guide(guide: Dictionary) -> void:
 
 			description_label.add_theme_font_override(
 				"font",
-				guide_font
+				GUIDE_FONT
 			)
 
 			description_label.add_theme_font_size_override(

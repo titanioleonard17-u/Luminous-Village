@@ -26,10 +26,10 @@ script = ExtResource("1_l88e2")
 visible = false
 color = Color(0.11339714, 0.13111152, 0.22854048, 1)
 
-[node name="GuideStep" parent="." unique_id=1462140967 instance=ExtResource("3_68bjc")]
-
 [node name="MirrorCounter" parent="." unique_id=2086307742 instance=ExtResource("16_4i7o2")]
 visible = false
+
+[node name="GuideStep" parent="." unique_id=1462140967 instance=ExtResource("3_68bjc")]
 
 [node name="PauseTrigger" parent="." unique_id=1158435896 instance=ExtResource("3_4i7o2")]
 visible = false
@@ -40,6 +40,7 @@ visible = false
 light_color = Color(1, 0.8509804, 0.3019608, 0.8156863)
 max_opacity = 0.9
 max_opacity_speed = 0.4
+spawn_delay = 0.2
 
 [node name="LevelComplete" parent="." unique_id=1876007679 instance=ExtResource("2_5qj7r")]
 visible = false
@@ -88,6 +89,20 @@ scale = Vector2(0.35, 0.35)
 
 [node name="Prism" parent="." unique_id=69888643 instance=ExtResource("14_hxsrk")]
 position = Vector2(921, 322)
+scale = Vector2(0.75, 0.75)
 
-[node name="SensitivityDragSlider" parent="." unique_id=1977610212 instance=ExtResource("18_qu5r7")]
-track_length = 300.0
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="." unique_id=172913748]
+position = Vector2(952, -833)
+rotation = -0.43645662
+color = Color(0.9651156, 0.650096, 0.18274704, 1)
+energy = 0.5
+shadow_enabled = true
+shadow_color = Color(0.10042808, 0.02194607, 0.22873667, 1)
+shadow_filter = 1
+shadow_filter_smooth = 3.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=160219614]
+layer = 10
+
+[node name="SensitivityDragSlider" parent="CanvasLayer" unique_id=1977610212 instance=ExtResource("18_qu5r7")]
+mirror_target_path = NodePath("../../Mirror_Spawner")
