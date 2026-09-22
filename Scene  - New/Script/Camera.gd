@@ -1,5 +1,6 @@
 extends Camera2D
 
+
 @export var zoom_scale := 0.5
 @export var zoom_step := 0.1
 @export var min_zoom := 0.5
@@ -24,8 +25,10 @@ extends Camera2D
 @export_category("Drag Smooth")
 @export var drag_smooth := 12.0
 
+
 @onready var help_trigger = $"../PauseTrigger/Container/MarginContainer/PauseNavigation/HelpButton"
 @onready var pause_trigger = $"../PauseTrigger/Container/MarginContainer/PauseNavigation/PauseButton"
+
 
 var dragging := false
 var target_position := Vector2.ZERO
@@ -38,8 +41,11 @@ var original_limit_right: int
 var original_limit_top: int
 var original_limit_bottom: int
 
+# Posisi virtual mouse untuk Web
+var virtual_mouse_position := Vector2.ZERO
 
-func _ready():
+
+func _ready() -> void:
 	zoom = Vector2(zoom_scale, zoom_scale)
 
 	# Terapkan expand dari Inspector
@@ -56,8 +62,10 @@ func _ready():
 
 	target_position = position
 
+	virtual_mouse_position = get_viewport().get_mouse_position()
 
-func _process(delta):
+
+func _process(delta: float) -> void:
 	if get_tree().paused or is_step_guide_active:
 		dragging = false
 		return
@@ -81,7 +89,7 @@ func _process(delta):
 	)
 
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if get_tree().paused:
 		dragging = false
 		return
@@ -92,6 +100,7 @@ func _input(event):
 	if event is InputEventMouseButton:
 
 		if event.button_index == MOUSE_BUTTON_LEFT or event.button_index == MOUSE_BUTTON_MIDDLE:
+
 			if event.pressed:
 				if is_mouse_on_mirror() or is_mouse_on_ui_button() or is_mouse_on_sensitivity_slider():
 					dragging = false
@@ -99,17 +108,21 @@ func _input(event):
 
 				dragging = true
 				target_position = position
+
+				if is_web():
+					virtual_mouse_position = event.position
+
 			else:
 				dragging = false
 
 		elif event.button_index == MOUSE_BUTTON_WHEEL_UP:
 			if event.pressed:
-				print(get_tree().paused)
 				change_zoom(1.0)
 
 		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 			if event.pressed:
 				change_zoom(-1.0)
+
 
 	# =========================
 	# MOUSE DRAG
@@ -121,32 +134,77 @@ func _input(event):
 			return
 
 		var movement: Vector2 = event.relative
+
+		# Kamera tetap bergerak berdasarkan relative movement
 		target_position -= movement / zoom.x
 
-		var mouse_position: Vector2 = event.position
-		var viewport_size: Vector2 = get_viewport_rect().size
 
-		var wrap_position: Vector2 = mouse_position
-		var should_wrap: bool = false
+		# =========================
+		# DESKTOP MOUSE WRAP
+		# =========================
+		if not is_web():
 
-		if mouse_position.x <= wrap_margin:
-			wrap_position.x = viewport_size.x - wrap_margin
-			should_wrap = true
-		elif mouse_position.x >= viewport_size.x - wrap_margin:
-			wrap_position.x = wrap_margin
-			should_wrap = true
+			var mouse_position: Vector2 = event.position
+			var viewport_size: Vector2 = get_viewport_rect().size
 
-		if mouse_position.y <= wrap_margin:
-			wrap_position.y = viewport_size.y - wrap_margin
-			should_wrap = true
-		elif mouse_position.y >= viewport_size.y - wrap_margin:
-			wrap_position.y = wrap_margin
-			should_wrap = true
+			var wrap_position: Vector2 = mouse_position
+			var should_wrap: bool = false
 
-		if should_wrap:
-			wrapping_mouse = true
-			Input.warp_mouse(wrap_position)
 
+			if mouse_position.x <= wrap_margin:
+				wrap_position.x = viewport_size.x - wrap_margin
+				should_wrap = true
+
+			elif mouse_position.x >= viewport_size.x - wrap_margin:
+				wrap_position.x = wrap_margin
+				should_wrap = true
+
+
+			if mouse_position.y <= wrap_margin:
+				wrap_position.y = viewport_size.y - wrap_margin
+				should_wrap = true
+
+			elif mouse_position.y >= viewport_size.y - wrap_margin:
+				wrap_position.y = wrap_margin
+				should_wrap = true
+
+
+			if should_wrap:
+				wrapping_mouse = true
+				Input.warp_mouse(wrap_position)
+
+
+		# =========================
+		# WEB VIRTUAL WRAP
+		# =========================
+		else:
+
+			virtual_mouse_position += movement
+
+			var viewport_size: Vector2 = get_viewport_rect().size
+
+
+			# KANAN → KIRI
+			if virtual_mouse_position.x >= viewport_size.x - wrap_margin:
+				virtual_mouse_position.x = wrap_margin
+
+			# KIRI → KANAN
+			elif virtual_mouse_position.x <= wrap_margin:
+				virtual_mouse_position.x = viewport_size.x - wrap_margin
+
+
+			# BAWAH → ATAS
+			if virtual_mouse_position.y >= viewport_size.y - wrap_margin:
+				virtual_mouse_position.y = wrap_margin
+
+			# ATAS → BAWAH
+			elif virtual_mouse_position.y <= wrap_margin:
+				virtual_mouse_position.y = viewport_size.y - wrap_margin
+
+
+		# =========================
+		# CLAMP TARGET
+		# =========================
 		target_position.x = clamp(
 			target_position.x,
 			limit_left,
@@ -259,3 +317,7 @@ func is_mouse_on_sensitivity_slider() -> bool:
 
 func set_step_guide_status(value: bool) -> void:
 	is_step_guide_active = value
+
+
+func is_web() -> bool:
+	return OS.has_feature("web")
