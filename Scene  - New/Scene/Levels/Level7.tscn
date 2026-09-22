@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dnkya1u3tc0yu" path="res://Scene  - New/Script/LevelManager.gd" id="1_ypitd"]
 [ext_resource type="PackedScene" uid="uid://c4b31tdsp28hd" path="res://UI/Scenes/NightModulate.tscn" id="2_nqy4o"]
+[ext_resource type="PackedScene" uid="uid://dqph1yyk6swc8" path="res://UI/Scenes/Leaf.tscn" id="2_pputy"]
 [ext_resource type="PackedScene" uid="uid://cen1rv6xnlc18" path="res://Scene  - New/Scene/MirrorCounter.tscn" id="3_bjxya"]
 [ext_resource type="PackedScene" uid="uid://43ol7ai1lse0" path="res://UI/Scenes/GuideStep.tscn" id="3_lu7gn"]
 [ext_resource type="PackedScene" uid="uid://cc81hm1d8jnxv" path="res://UI/Scenes/PauseTrigger.tscn" id="4_l2lts"]
@@ -45,6 +46,8 @@ _bundled = {
 [node name="Level7" type="Node2D" unique_id=1314743367]
 script = ExtResource("1_ypitd")
 winDelay = 3.5
+
+[node name="Leaf" parent="." unique_id=1745781844 instance=ExtResource("2_pputy")]
 
 [node name="NightModulate" parent="." unique_id=1237042344 instance=ExtResource("2_nqy4o")]
 visible = false

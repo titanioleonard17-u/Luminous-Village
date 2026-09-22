@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dnkya1u3tc0yu" path="res://Scene  - New/Script/LevelManager.gd" id="1_hdyv3"]
 [ext_resource type="PackedScene" uid="uid://co2d8js0nkj26" path="res://Scene  - New/Scene/TileMapLayerGround.tscn" id="1_w5ab2"]
+[ext_resource type="PackedScene" uid="uid://dqph1yyk6swc8" path="res://UI/Scenes/Leaf.tscn" id="2_2ivhy"]
 [ext_resource type="PackedScene" uid="uid://ruuy6vksw05m" path="res://Scene  - New/Scene/LevelComplete.tscn" id="2_7fxvy"]
 [ext_resource type="PackedScene" uid="uid://p3itxxvyp673" path="res://Scene  - New/Scene/Laser.tscn" id="2_hdyv3"]
 [ext_resource type="PackedScene" uid="uid://v723peurkr7k" path="res://Scene  - New/Scene/TileMaLayerCollision.tscn" id="2_ppncw"]
@@ -19,6 +20,8 @@
 [node name="Level1" type="Node2D" unique_id=1214213121]
 script = ExtResource("1_hdyv3")
 winDelay = 3.5
+
+[node name="Leaf" parent="." unique_id=1745781844 instance=ExtResource("2_2ivhy")]
 
 [node name="NightModulate" parent="." unique_id=1237042344 instance=ExtResource("2_uhhut")]
 color = Color(0.11339714, 0.13111152, 0.22854048, 1)

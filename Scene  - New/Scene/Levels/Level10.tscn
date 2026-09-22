@@ -1,6 +1,7 @@
 [gd_scene format=4 uid="uid://bxgbhyllewbd6"]
 
 [ext_resource type="Script" uid="uid://dnkya1u3tc0yu" path="res://Scene  - New/Script/LevelManager.gd" id="1_b8u4h"]
+[ext_resource type="PackedScene" uid="uid://dqph1yyk6swc8" path="res://UI/Scenes/Leaf.tscn" id="2_lao7y"]
 [ext_resource type="PackedScene" uid="uid://c4b31tdsp28hd" path="res://UI/Scenes/NightModulate.tscn" id="2_y4yg7"]
 [ext_resource type="PackedScene" uid="uid://cen1rv6xnlc18" path="res://Scene  - New/Scene/MirrorCounter.tscn" id="3_bllwk"]
 [ext_resource type="PackedScene" uid="uid://cc81hm1d8jnxv" path="res://UI/Scenes/PauseTrigger.tscn" id="4_l5tja"]
@@ -45,6 +46,8 @@ _bundled = {
 [node name="Level10" type="Node2D" unique_id=1314743367]
 script = ExtResource("1_b8u4h")
 winDelay = 3.5
+
+[node name="Leaf" parent="." unique_id=1745781844 instance=ExtResource("2_lao7y")]
 
 [node name="NightModulate" parent="." unique_id=1237042344 instance=ExtResource("2_y4yg7")]
 
