@@ -24,22 +24,17 @@ script = ExtResource("1_nfdql")
 winDelay = 3.5
 
 [node name="NightModulate" parent="." unique_id=1237042344 instance=ExtResource("2_euqlt")]
-visible = false
 
 [node name="MirrorCounter" parent="." unique_id=2086307742 instance=ExtResource("7_hp15k")]
-visible = false
 
 [node name="PauseTrigger" parent="." unique_id=1158435896 instance=ExtResource("3_4sx61")]
-visible = false
 metadata/_edit_use_anchors_ = true
 
 [node name="NightModeSwitch" parent="." unique_id=2070446548 instance=ExtResource("5_afspi")]
-visible = false
 max_opacity = 0.9
 max_opacity_speed = 0.4
 
 [node name="LevelComplete" parent="." unique_id=1876007679 instance=ExtResource("10_4sx61")]
-visible = false
 scale = Vector2(1, 1.0031694)
 transform = Transform2D(1, 0, 0, 1.0031694, 0, 0)
 metadata/_edit_use_anchors_ = true
