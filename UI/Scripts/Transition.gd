@@ -2,6 +2,9 @@ extends CanvasLayer
 
 var is_transitioning := false
 
+func _ready():
+	visible = false
+
 func play(location: String) -> void:
 	if is_transitioning:
 		return

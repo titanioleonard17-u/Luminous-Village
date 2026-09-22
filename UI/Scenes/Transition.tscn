@@ -4,7 +4,6 @@
 [ext_resource type="Script" uid="uid://brmbrv68snlhw" path="res://UI/Scripts/Transition.gd" id="1_s5qj0"]
 
 [sub_resource type="Animation" id="Animation_5gfbr"]
-length = 1.0666667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -124,6 +123,78 @@ tracks/9/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(599, 503)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Kiri6:position")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-409, 559)]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Kanan6:position")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(976, 506)]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("Kiri7:position")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-183.00003, 648)]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("Kanan7:position")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(359, 573)]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("Kanan8:position")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1227, 169)]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("Kanan9:position")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1363, 349)]
 }
 
 [sub_resource type="Animation" id="Animation_s5qj0"]
@@ -248,6 +319,78 @@ tracks/9/keys = {
 "update": 0,
 "values": [Vector2(1152, 503), Vector2(599, 503)]
 }
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Kiri6:position")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-692, 559), Vector2(-409, 559)]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Kanan6:position")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1152, 506), Vector2(976, 506)]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("Kiri7:position")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-691, 648), Vector2(-183.00003, 648)]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("Kanan7:position")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1153, 573), Vector2(359, 573)]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("Kanan8:position")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1227, 169), Vector2(1032, 169)]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("Kanan9:position")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1363, 349), Vector2(1169, 349)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_b0f6i"]
 _data = {
@@ -257,7 +400,6 @@ _data = {
 
 [node name="Transition" type="CanvasLayer" unique_id=1483636045]
 layer = 1000
-visible = false
 script = ExtResource("1_s5qj0")
 
 [node name="Blocker" type="ColorRect" parent="." unique_id=1010469816]
@@ -270,6 +412,7 @@ color = Color(1, 1, 1, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=110703503]
 libraries/ = SubResource("AnimationLibrary_b0f6i")
+autoplay = &"RESET"
 
 [node name="Kiri" type="TextureRect" parent="." unique_id=1219289867]
 offset_left = -77.0
@@ -282,7 +425,7 @@ texture = ExtResource("1_qxecj")
 [node name="Kanan" type="TextureRect" parent="." unique_id=359132816]
 offset_left = 386.0
 offset_top = -146.0
-offset_right = 1538.002
+offset_right = 1538.0034
 offset_bottom = 502.0
 texture = ExtResource("1_qxecj")
 
@@ -297,7 +440,7 @@ texture = ExtResource("1_qxecj")
 [node name="Kanan2" type="TextureRect" parent="." unique_id=610712834]
 offset_left = 708.0
 offset_top = 241.0
-offset_right = 1860.002
+offset_right = 1860.0054
 offset_bottom = 889.0
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_qxecj")
@@ -313,7 +456,7 @@ texture = ExtResource("1_qxecj")
 [node name="Kanan3" type="TextureRect" parent="." unique_id=13005400]
 offset_left = 202.0
 offset_top = 352.0
-offset_right = 1354.0
+offset_right = 1354.0037
 offset_bottom = 1000.0
 scale = Vector2(0.65, 0.65)
 texture = ExtResource("1_qxecj")
@@ -345,7 +488,55 @@ texture = ExtResource("1_qxecj")
 [node name="Kanan5" type="TextureRect" parent="." unique_id=939564157]
 offset_left = 599.0
 offset_top = 503.0
-offset_right = 1751.0039
+offset_right = 1751.0015
 offset_bottom = 1151.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_qxecj")
+
+[node name="Kiri6" type="TextureRect" parent="." unique_id=465387207]
+offset_left = -409.0
+offset_top = 559.0
+offset_right = 743.00024
+offset_bottom = 1207.0
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("1_qxecj")
+
+[node name="Kanan6" type="TextureRect" parent="." unique_id=351077645]
+offset_left = 976.0
+offset_top = 506.0
+offset_right = 2128.0063
+offset_bottom = 1154.0
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("1_qxecj")
+
+[node name="Kiri7" type="TextureRect" parent="." unique_id=378470562]
+offset_left = -183.00003
+offset_top = 648.0
+offset_right = 969.00024
+offset_bottom = 1296.0
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("1_qxecj")
+
+[node name="Kanan7" type="TextureRect" parent="." unique_id=1423513030]
+offset_left = 359.0
+offset_top = 573.0
+offset_right = 1511.0054
+offset_bottom = 1221.0
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("1_qxecj")
+
+[node name="Kanan8" type="TextureRect" parent="." unique_id=1167870923]
+offset_left = 1227.0
+offset_top = 169.0
+offset_right = 2379.0044
+offset_bottom = 817.0
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("1_qxecj")
+
+[node name="Kanan9" type="TextureRect" parent="." unique_id=1586790061]
+offset_left = 1363.0
+offset_top = 349.0
+offset_right = 2515.0044
+offset_bottom = 997.0
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_qxecj")
