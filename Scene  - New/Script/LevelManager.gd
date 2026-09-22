@@ -199,10 +199,9 @@ func _trigger_win() -> void:
 	else:
 		SaveManager.complete_level(get_tree().current_scene.name)
 
-	AudioManager.playImportantSFX("LevelComplete")
-
 	await get_tree().create_timer(2.0, true).timeout
 
+	AudioManager.playImportantSFX("LevelComplete")
 	$LevelComplete.visible = true
 	_play_complete_sequence()
 

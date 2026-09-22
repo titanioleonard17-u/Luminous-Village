@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bep24nohftir0" path="res://Scene  - New/Script/MirrorCounter.gd" id="1_3eyo3"]
 [ext_resource type="Texture2D" uid="uid://b00fv48kauqnk" path="res://Asset/Art/Place Mirror.png" id="2_q0532"]
+[ext_resource type="FontFile" uid="uid://cwkmbgp8808wp" path="res://Asset/Fonts/BRLNSR.TTF" id="3_ufeja"]
 
 [sub_resource type="SystemFont" id="SystemFont_b5iei"]
 font_names = PackedStringArray("Berlin Sans FB")
@@ -39,7 +40,7 @@ theme_override_constants/separation = 32
 
 [node name="MirrorCount" type="Label" parent="BG/MarginContainer/HorizontalContainer" unique_id=1617184773]
 layout_mode = 2
-theme_override_fonts/font = SubResource("SystemFont_b5iei")
+theme_override_fonts/font = ExtResource("3_ufeja")
 theme_override_font_sizes/font_size = 50
 text = "18 / 18"
 
