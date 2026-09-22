@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://dqph1yyk6swc8"]
+
+[ext_resource type="Texture2D" uid="uid://djmrrhlpymaga" path="res://Asset/Art/Leaf - Brown.png" id="1_7hkde"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ro57l"]
+particles_animation = true
+particles_anim_h_frames = 5
+particles_anim_v_frames = 3
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_hx1ku"]
+offsets = PackedFloat32Array(0, 0.1, 0.9, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+metadata/_snap_enabled = true
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_7hkde"]
+gradient = SubResource("Gradient_hx1ku")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ro57l"]
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(576, 324, 0)
+emission_shape = 3
+emission_box_extents = Vector3(650, 400, 1)
+direction = Vector3(3, 3, 0)
+spread = 20.0
+initial_velocity_min = 45.0
+initial_velocity_max = 80.0
+angular_velocity_min = -90.000015
+angular_velocity_max = 89.999985
+gravity = Vector3(0, 0, 0)
+scale_min = 2.0
+scale_max = 3.0
+color_ramp = SubResource("GradientTexture1D_7hkde")
+anim_offset_max = 1.0
+
+[node name="Leaf" type="Node2D" unique_id=1908560639]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=59058660]
+material = SubResource("CanvasItemMaterial_ro57l")
+amount = 10
+texture = ExtResource("1_7hkde")
+lifetime = 2.0
+process_material = SubResource("ParticleProcessMaterial_ro57l")

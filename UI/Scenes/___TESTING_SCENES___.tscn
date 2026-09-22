@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dtyuxbdbjf17x" path="res://UI/Scenes/NightModeSwitch.tscn" id="4_jy4qx"]
 [ext_resource type="PackedScene" uid="uid://co2d8js0nkj26" path="res://Scene  - New/Scene/TileMapLayerGround.tscn" id="5_27x76"]
 [ext_resource type="PackedScene" uid="uid://v723peurkr7k" path="res://Scene  - New/Scene/TileMaLayerCollision.tscn" id="6_0dp71"]
+[ext_resource type="PackedScene" uid="uid://dqph1yyk6swc8" path="res://UI/Scenes/Leaf.tscn" id="7_mxdcr"]
 [ext_resource type="PackedScene" uid="uid://og8kwyfuk7te" path="res://Scene  - New/Scene/decor.tscn" id="7_w0ptq"]
 [ext_resource type="PackedScene" uid="uid://cen1rv6xnlc18" path="res://Scene  - New/Scene/MirrorCounter.tscn" id="8_5ucdq"]
 [ext_resource type="PackedScene" uid="uid://cb6aq3j22ow6i" path="res://Scene  - New/Scene/TileMapLayerCounterLight.tscn" id="9_hcrvv"]
@@ -47,6 +48,11 @@ script = ExtResource("1_jy4qx")
 
 [node name="NightModulate" parent="." unique_id=1237042344 instance=ExtResource("2_2ulkr")]
 visible = false
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="." unique_id=654362092]
+layer = 500
+
+[node name="Leaf" parent="CanvasLayer2" unique_id=1908560639 instance=ExtResource("7_mxdcr")]
 
 [node name="MirrorCounter" parent="." unique_id=2086307742 instance=ExtResource("8_5ucdq")]
 visible = false
@@ -146,7 +152,6 @@ position = Vector2(457, 195)
 scale = Vector2(1.5, 1.5)
 
 [node name="Camera" parent="." unique_id=25551895 instance=ExtResource("15_66txm")]
-max_zoom = 1.0
 expand_left = 200.0
 expand_right = -1400.0
 expand_top = 300.0
