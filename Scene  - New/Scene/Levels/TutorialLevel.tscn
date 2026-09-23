@@ -77,9 +77,6 @@ impact_glow_softness = null
 position = Vector2(416, 228)
 rotation = 4.712389
 
-[node name="Mirror" parent="." unique_id=1943216660 instance=ExtResource("7_5qj7r")]
-position = Vector2(279, 304)
-
 [node name="Trigger" parent="." unique_id=1183924401 instance=ExtResource("9_abcr3")]
 position = Vector2(545, 304)
 door_path = NodePath("../DoorToLeft")
@@ -111,3 +108,6 @@ layer = 10
 
 [node name="SensitivityDragSlider" parent="CanvasLayer" unique_id=1977610212 instance=ExtResource("18_qu5r7")]
 mirror_target_path = NodePath("../../Mirror_Spawner")
+
+[node name="Mirror" parent="." unique_id=1943216660 instance=ExtResource("7_5qj7r")]
+position = Vector2(307, 308)

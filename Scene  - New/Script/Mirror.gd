@@ -24,6 +24,8 @@ var active_sensitivity: float = -1.0
 var _blank_cursor: ImageTexture
 
 func _ready() -> void:
+	add_to_group("sensitivity_target")   # <-- FIX: daftar ke group biar kena call_group() dari slider
+
 	joystick_ui = JoystickUI.new()
 	joystick_ui.ring_texture = preload("res://Asset/Art/UI Rotate.png")
 	joystick_ui.top_level = true
