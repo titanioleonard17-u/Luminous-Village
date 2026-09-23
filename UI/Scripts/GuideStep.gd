@@ -3,13 +3,13 @@ extends CanvasLayer
 var guideTexts = [
 	[
 		{"text": "Sinari semua rumah dengan sinar yang ada.", "action": ""},
-		{"text": "Button mempunyai cara kerja yang sama dengan cermin, hanya saja dia juga berfungsi untuk membuka gate.", "action": ""},
-		{"text": "Ada sisi cermin yang dapat memantulkan, dan ada sisi yang tidak dapat memantulkan cahaya.", "action": ""},
-		{"text": "Cermin dapat diputar sebesar 360 derajat.", "action": ""},
-		{"text": "Cermin Prisma dapat memecah 1 arah cahaya menjadi 2 arah. (Hanya mempunyai 1 sisi input)", "action": ""},
 		{"text": "Cermin dapat di-spawn dengan menekan angka 1. (Cermin akan muncul tepat pada posisi mouse saat ini)", "action": ""},
 		{"text": "Cermin dapat dihapus dengan menekan tombol 0. (Cermin dengan urutan terakhir yang terlebih dahulu dihapus)", "action": ""},
+		{"text": "Hanya ada 1 sisi cermin yang dapat memantulkan cahaya.", "action": ""},
+		{"text": "Button berfungsi untuk membuka door, dan juga dapat memantulkan cahaya.", "action": ""},
 		{"text": "Cermin tidak dapat di-spawn jika berjarak sangat dekat dengan objek lain, atau jika kuota cermin sudah habis.", "action": ""},
+		{"text": "Cermin Prisma dapat memecah 1 arah cahaya menjadi 2 arah. (Hanya mempunyai 1 sisi input)", "action": ""},
+		{"text": "Gunakan slider yang ada di kanan layar untuk mengatur sensitivitas rotasi.", "action": ""},
 		{"text": "Ada batas pantulan tertentu dalam tiap level, jika batas tercapai, maka cahaya tidak dapat terpantul. Jadi kami harap kamu bisa menciptakan jalur efisien.", "action": ""},
 		{"text": "Baik! Sudah waktunya untuk menyinari desa!", "action": ""}
 	],
