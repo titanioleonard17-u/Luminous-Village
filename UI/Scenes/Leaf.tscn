@@ -28,8 +28,7 @@ initial_velocity_max = 80.0
 angular_velocity_min = -90.000015
 angular_velocity_max = 89.999985
 gravity = Vector3(0, 0, 0)
-scale_min = 2.0
-scale_max = 3.0
+scale_max = 2.0
 color_ramp = SubResource("GradientTexture1D_7hkde")
 anim_offset_max = 1.0
 
@@ -37,7 +36,7 @@ anim_offset_max = 1.0
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=59058660]
 material = SubResource("CanvasItemMaterial_ro57l")
-amount = 10
+amount = 18
 texture = ExtResource("1_7hkde")
 lifetime = 2.0
 process_material = SubResource("ParticleProcessMaterial_ro57l")
