@@ -6,7 +6,7 @@ var guideTexts = [
 		{"text": "Cermin dapat di-spawn dengan menekan angka 1. (Cermin akan muncul tepat pada posisi mouse saat ini)", "action": ""},
 		{"text": "Cermin dapat dihapus dengan menekan tombol 0. (Cermin dengan urutan terakhir yang terlebih dahulu dihapus)", "action": ""},
 		{"text": "Hanya ada 1 sisi cermin yang dapat memantulkan cahaya.", "action": ""},
-		{"text": "Button berfungsi untuk membuka door, dan juga dapat memantulkan cahaya.", "action": ""},
+		{"text": "Button berfungsi untuk membuka door. Dapat dirotasi dan dapat memantulkan cahaya.", "action": ""},
 		{"text": "Cermin tidak dapat di-spawn jika berjarak sangat dekat dengan objek lain, atau jika kuota cermin sudah habis.", "action": ""},
 		{"text": "Cermin Prisma dapat memecah 1 arah cahaya menjadi 2 arah. (Hanya mempunyai 1 sisi input)", "action": ""},
 		{"text": "Gunakan slider yang ada di kanan layar untuk mengatur sensitivitas rotasi.", "action": ""},

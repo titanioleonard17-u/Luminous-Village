@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dnkya1u3tc0yu" path="res://Scene  - New/Script/LevelManager.gd" id="1_l88e2"]
 [ext_resource type="PackedScene" uid="uid://ruuy6vksw05m" path="res://Scene  - New/Scene/LevelComplete.tscn" id="2_5qj7r"]
+[ext_resource type="PackedScene" uid="uid://dqph1yyk6swc8" path="res://UI/Scenes/Leaf.tscn" id="2_ewcyd"]
 [ext_resource type="PackedScene" uid="uid://c4b31tdsp28hd" path="res://UI/Scenes/NightModulate.tscn" id="2_qu5r7"]
 [ext_resource type="PackedScene" uid="uid://cc81hm1d8jnxv" path="res://UI/Scenes/PauseTrigger.tscn" id="3_4i7o2"]
 [ext_resource type="PackedScene" uid="uid://43ol7ai1lse0" path="res://UI/Scenes/GuideStep.tscn" id="3_68bjc"]
@@ -22,6 +23,8 @@
 
 [node name="TutorialLevel" type="Node2D" unique_id=1214213121]
 script = ExtResource("1_l88e2")
+
+[node name="Leaf" parent="." unique_id=1745781844 instance=ExtResource("2_ewcyd")]
 
 [node name="NightModulate" parent="." unique_id=1237042344 instance=ExtResource("2_qu5r7")]
 visible = false

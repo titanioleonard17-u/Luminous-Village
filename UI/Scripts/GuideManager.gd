@@ -48,6 +48,7 @@ var guide_data := {
 			"font_size": "auto",
 			"description": [
 				{"Function": "Membuka pintu setelah terkena cahaya."},
+				{"How to use": "Dapat dirotasikan, dan dapat memantulkan cahaya."},
 				{"Reflection Side": "Hanya ada 1 sisi tombol yang dapat memantulkan cahaya."}
 			]
 		},

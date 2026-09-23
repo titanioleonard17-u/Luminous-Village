@@ -3,18 +3,18 @@ extends StaticBody2D
 @export var interact_radius: float = 100.0
 @export var ball_ratio: float = 0.18
 @export var facing_offset_degrees: float = 90.0
-@export var rotation_speed: float = 0.35       # lerp weight per detik (0..1), makin gede makin responsif
-@export var min_drag_distance: float = 20.0    # dead zone anti-blink pas mouse deket pivot
+@export var rotation_speed: float = 0.35       # fallback t kalau sensitivity belum di-set
 
-# --- Tuning kecepatan rotasi berdasarkan sensitivitas ---
-@export var min_tau: float = 0.05      # waktu respon (detik) di sensitivitas MAKSIMUM (paling gesit)
-@export var max_tau: float = 2.5       # waktu respon (detik) di sensitivitas MINIMUM (paling berat)
-@export var response_curve: float = 0.5
+# --- Tuning kecepatan rotasi berdasarkan sensitivitas (disamain dengan prism.gd) ---
+@export var min_tau: float = 0.05      # waktu respon (detik) di sensitivitas MAKSIMUM
+@export var max_tau: float = 0.8       # waktu respon (detik) di sensitivitas MINIMUM (dulu 2.5, kegedean -> berat)
+@export var response_curve: float = 0.15
 
 var is_dragging: bool = false
 var touch_index: int = -1
 var is_locked: bool = false
 var is_step_guide_active: bool = false
+var target_rotation: float = 0.0
 
 var joystick_ui: JoystickUI
 var touch_world_pos: Vector2 = Vector2.ZERO
@@ -24,7 +24,8 @@ var active_sensitivity: float = -1.0
 var _blank_cursor: ImageTexture
 
 func _ready() -> void:
-	add_to_group("sensitivity_target")   # <-- FIX: daftar ke group biar kena call_group() dari slider
+	add_to_group("sensitivity_target")   # biar kena broadcast dari SensitivityDragSlider
+	target_rotation = rotation
 
 	joystick_ui = JoystickUI.new()
 	joystick_ui.ring_texture = preload("res://Asset/Art/UI Rotate.png")
@@ -82,7 +83,8 @@ func _process(delta: float) -> void:
 	else:
 		world_pos = get_global_mouse_position()
 
-	_rotate_towards(world_pos, delta)
+	_set_target(world_pos)
+	_apply_rotation(delta)
 
 func _start_drag() -> void:
 	is_dragging = true
@@ -98,26 +100,19 @@ func _end_drag() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	Input.set_custom_mouse_cursor(null)   # balikin cursor normal
 
-	# FIX: world -> viewport coords dulu (canvas_transform handle posisi/zoom
-	# Camera2D), baru viewport -> window/OS coords (get_screen_transform()
-	# handle stretch mode/scale). Sebelumnya cuma pakai get_screen_transform()
-	# doang jadi transform kamera ke-skip -> mouse lempar jauh di level
-	# yang punya Camera2D. Di level tanpa camera, canvas_transform ≈ identity,
-	# jadi kebetulan hasilnya kelihatan "benar".
+	# world -> viewport coords dulu (canvas_transform handle posisi/zoom Camera2D),
+	# baru viewport -> window/OS coords (get_screen_transform() handle stretch/scale).
 	var viewport := get_viewport()
 	var viewport_pos: Vector2 = viewport.canvas_transform * global_position
 	var screen_pos: Vector2 = viewport.get_screen_transform() * viewport_pos
 	Input.warp_mouse(screen_pos)
 
-func _rotate_towards(world_pos: Vector2, delta: float) -> void:
+func _set_target(world_pos: Vector2) -> void:
 	var direction: Vector2 = world_pos - global_position
-
-	if direction.length() < min_drag_distance:
-		return
-
 	var mouse_angle: float = direction.angle()
-	var target_rotation: float = mouse_angle - deg_to_rad(facing_offset_degrees)
+	target_rotation = mouse_angle - deg_to_rad(facing_offset_degrees)
 
+func _apply_rotation(delta: float) -> void:
 	var t: float = rotation_speed
 	if active_sensitivity >= 0.0:
 		t = active_sensitivity
@@ -126,10 +121,15 @@ func _rotate_towards(world_pos: Vector2, delta: float) -> void:
 	if t <= 0.0:
 		return
 
-	var tau: float = lerp(max_tau, min_tau, t)
+	var t_curved: float = pow(t, response_curve)
+	var tau: float = lerp(max_tau, min_tau, t_curved)
 
 	var weight: float = 1.0 - exp(-delta / tau)
 	rotation = lerp_angle(rotation, target_rotation, weight)
+
+	var remaining: float = abs(wrapf(target_rotation - rotation, -PI, PI))
+	if remaining < deg_to_rad(1.0):
+		rotation = target_rotation
 
 	joystick_ui.set_angle(rotation + deg_to_rad(facing_offset_degrees))
 
