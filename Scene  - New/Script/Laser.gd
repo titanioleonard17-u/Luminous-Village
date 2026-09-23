@@ -26,7 +26,7 @@ extends Node2D
 @export var impact_glow_enabled: bool = true
 @export_range(0.5, 6.0, 0.1) var impact_glow_radius_multiplier: float = 1.8
 @export_range(0.0, 1.0, 0.01) var impact_glow_alpha: float = 0.6
-@export_range(2, 15, 1) var impact_glow_layers: int = 8
+@export_range(2, 15, 1) var impact_glow_layers: int = 5
 @export_range(0.5, 4.0, 0.1) var impact_glow_softness: float = 2.2
 
 var start_position: Vector2

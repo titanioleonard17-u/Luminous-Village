@@ -124,8 +124,7 @@ func _rotate_towards(world_pos: Vector2, delta: float) -> void:
 	if t <= 0.0:
 		return
 
-	var t_curved: float = pow(t, response_curve)
-	var tau: float = lerp(max_tau, min_tau, t_curved)
+	var tau: float = lerp(max_tau, min_tau, t)
 
 	var weight: float = 1.0 - exp(-delta / tau)
 	rotation = lerp_angle(rotation, target_rotation, weight)
