@@ -15,7 +15,7 @@ var guide_data := {
 			]
 		},
 		{
-			"title": "Laser",
+			"title": "Cahaya",
 			"font_size": "auto",
 			"description": [
 				{"Function": "Cahaya utama yang digunakan untuk menghidupkan rumah-rumah yang ada di tiap level."},
