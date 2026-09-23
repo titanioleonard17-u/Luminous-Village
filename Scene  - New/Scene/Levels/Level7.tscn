@@ -45,7 +45,6 @@ _bundled = {
 
 [node name="Level7" type="Node2D" unique_id=1314743367]
 script = ExtResource("1_ypitd")
-winDelay = 3.5
 
 [node name="Leaf" parent="." unique_id=1745781844 instance=ExtResource("2_pputy")]
 
@@ -76,10 +75,8 @@ metadata/_edit_use_anchors_ = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=551382691]
 layer = 10
-visible = false
 
 [node name="SensitivityDragSlider" parent="CanvasLayer" unique_id=1977610212 instance=ExtResource("7_hnqa3")]
-track_length = 300.0
 mirror_target_path = NodePath("../../Mirror_Spawner")
 
 [node name="Ground_Tile" parent="." unique_id=240078724 instance=ExtResource("7_lu7gn")]
@@ -115,6 +112,8 @@ required_triggers = 2
 position = Vector2(327, 1084)
 rotation = -1.5707964
 scale = Vector2(1.2, 1.2)
+max_bounces = 30
+laser_length_fallback = 20000.0
 
 [node name="Mirror_Spawner" parent="." unique_id=1378017199 instance=ExtResource("13_783fy")]
 mirror_scene = SubResource("PackedScene_yp8h2")

@@ -22,7 +22,6 @@
 
 [node name="Level4" type="Node2D" unique_id=1451308095]
 script = ExtResource("1_nfdql")
-winDelay = 3.5
 
 [node name="Leaf" parent="." unique_id=1745781844 instance=ExtResource("2_3gffs")]
 
@@ -57,6 +56,7 @@ tile_map_data = PackedByteArray("AAAPAAQAAAAAAAAAAAAPAAUAAAAAAAEAAAAQAAQAAAABAAA
 [node name="Laser" parent="." unique_id=932062609 instance=ExtResource("2_eyogd")]
 position = Vector2(-160, 116)
 max_bounces = 15
+laser_length_fallback = 10000.0
 
 [node name="DoorToLeft" parent="." unique_id=2099982022 instance=ExtResource("8_ehms3")]
 position = Vector2(197, 449.00003)

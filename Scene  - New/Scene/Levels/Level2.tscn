@@ -19,7 +19,6 @@
 
 [node name="Level2" type="Node2D" unique_id=694264438]
 script = ExtResource("1_4anci")
-winDelay = 3.5
 
 [node name="Leaf" parent="." unique_id=1745781844 instance=ExtResource("2_c2eo5")]
 
@@ -64,7 +63,8 @@ shadow_filter_smooth = 3.0
 [node name="Laser" parent="." unique_id=932062609 instance=ExtResource("2_b3hpt")]
 position = Vector2(1312, 153)
 rotation = 3.1415927
-max_bounces = null
+max_bounces = 15
+laser_length_fallback = 10000.0
 start_direction = null
 round_joints = null
 impact_glow_enabled = null

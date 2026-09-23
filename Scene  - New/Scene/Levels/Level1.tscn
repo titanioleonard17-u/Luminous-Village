@@ -19,7 +19,6 @@
 
 [node name="Level1" type="Node2D" unique_id=1214213121]
 script = ExtResource("1_hdyv3")
-winDelay = 3.5
 
 [node name="Leaf" parent="." unique_id=1745781844 instance=ExtResource("2_2ivhy")]
 
@@ -55,6 +54,7 @@ tile_map_data = PackedByteArray("AAAeABIAAAAAAAAAAAAeABMAAAAAAAEAAAAVABcAAAACAAA
 
 [node name="Laser" parent="." unique_id=932062609 instance=ExtResource("2_hdyv3")]
 position = Vector2(-160, 155)
+laser_length_fallback = 10000.0
 
 [node name="Mirror_Spawner" parent="." unique_id=1378017199 instance=ExtResource("4_885hd")]
 mirror_scene = ExtResource("12_uxah3")
