@@ -148,4 +148,4 @@ shadow_filter_smooth = 3.0
 
 [node name="Mirror_Spawner" parent="." unique_id=1378017199 instance=ExtResource("13_783fy")]
 mirror_scene = ExtResource("23_lu7gn")
-max_mirrors = 4
+max_mirrors = 7

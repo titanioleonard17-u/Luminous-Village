@@ -218,4 +218,4 @@ layer = 10
 
 [node name="Mirror_Spawner" parent="." unique_id=1378017199 instance=ExtResource("13_hcj3y")]
 mirror_scene = ExtResource("24_dleon")
-max_mirrors = 4
+max_mirrors = 15

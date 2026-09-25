@@ -247,4 +247,4 @@ max_expand_bottom = 700.0
 
 [node name="Mirror_Spawner" parent="." unique_id=1378017199 instance=ExtResource("13_hcj3y")]
 mirror_scene = ExtResource("23_37rjs")
-max_mirrors = 4
+max_mirrors = 15

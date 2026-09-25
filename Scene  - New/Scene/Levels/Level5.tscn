@@ -81,6 +81,7 @@ door_path = NodePath("../DoorToLeft2")
 
 [node name="Mirror_Spawner" parent="." unique_id=1378017199 instance=ExtResource("7_ph1hf")]
 mirror_scene = ExtResource("14_v6x8r")
+max_mirrors = 4
 
 [node name="House" parent="." unique_id=1454567019 instance=ExtResource("9_0rl5c")]
 position = Vector2(554, 507)
